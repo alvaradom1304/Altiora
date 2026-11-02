@@ -90,6 +90,17 @@
       ],
       "why": "Proceso comercial (etapas, enrutamiento, traspaso a ventas) para el primer cliente de Altiora.",
       "caution": "cold-email y sales-enablement de la misma revisión ya estaban en el catálogo (importadas el 2026-10-31); se conservan esas versiones. Revisión: docs/security/reviews/ventas-skills-2026-11-01.md."
+    },
+    {
+      "repo": "n8n-io/skills",
+      "revision": "27b6b9f429ac0be90cae764512dbc579d7107e95",
+      "license": "Apache-2.0",
+      "skills": [
+        "n8n-expressions-official",
+        "n8n-error-handling-official"
+      ],
+      "why": "Skills oficiales de n8n para expresiones y manejo de errores en flujos (automatizaciones de WhatsApp y pedidos de clientes pyme).",
+      "caution": "Sin hooks, .mcp.json ni plugin. error-handling adaptado: el dueño crea la credencial en n8n y el agente nunca la crea, lee ni pega (ver SOURCE.md). SkillSpector --no-llm: SAFE 7 y SAFE 0 (2026-11-02)."
     }
   ],
   "considered_not_imported": [
