@@ -64,7 +64,7 @@ Punto de entrada rápido para **Claude Code**, **Codex**, **Antigravity** y **Or
 ---
 
 ## 4. Conectores MCP y Verificación (`npm run check`)
-- **Servidores MCP declarados en proyecto:** [`.mcp.json`](../../.mcp.json) (`altiora-shared`, `chrome-devtools`, `playwright`, `dak-data-agent-kit`, `dak-notebook`, `dak-gcs`, `dak-bigquery`, `dak-cloudsql`, `dak-firestore`)
+- **Servidores MCP declarados en proyecto:** [`.mcp.json`](../../.mcp.json) (`altiora-after-effects`, `chrome-devtools`, `playwright`, `dak-data-agent-kit`, `dak-notebook`, `dak-gcs`, `dak-bigquery`, `dak-cloudsql`, `dak-firestore`, `metricool`). `altiora-shared` vive en la configuración de usuario de cada IA ([verificación 02/11](../operations/VERIFICACION-CONEXIONES-2026-11-02.md)).
 - **Verificación integral desde la raíz:**
   ```sh
   npm run check

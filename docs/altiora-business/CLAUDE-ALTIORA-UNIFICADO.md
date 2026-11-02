@@ -59,9 +59,10 @@ Estado de cada línea (31/10/2026): **V** = verificado en una sesión de Claude 
 | Piloto (La Central del Queso) | V: pedido por API implementado en `web` (main sobre `73519f0`), **sin commit**. 12/12 pruebas, `tsc` y `next build` PASS; manifiesto PASS | NO VERIFICADO: navegador, n8n real y destino durable en producción (en Vercel responde 503 a propósito) |
 | Skills en Claude | V: descubiertas en sesión las 27 importadas de GitHub (incluye Superpowers y la librería creativa), las de Meta Ads, los directores y el analista creativo. Catálogo: 277 entradas, METADATA_CURRENT. Verificador de runtimes: 0 errores y 10 avisos (4 duplicados en Codex y 6 finales de línea mezclados en skills personales) | Agentes cargados pero no lanzados: ejecución NO VERIFICADA |
 | Kit Altiora Agent System | V: 1.3.0 (verificador de runtimes y rol de analista creativo); `doctor` PASSED; bloque de versión actualizado en CLAUDE, AGENTS y GEMINI | Comprobación estructural; el descubrimiento real se ve en una sesión |
-| MCP `altiora-shared` | V: conectado, 14 herramientas; consulta respondida | Expone el laboratorio del **29/10**, no el activo del 30/10 |
+| MCP `altiora-shared` | V (02/11): una sola definición, `fixed-shared.mjs` sobre la carpeta `shared/`, igual en Claude (`~/.claude.json`), Codex y Antigravity; `claude mcp get altiora-shared` → Connected. Se quitó la entrada de `.mcp.json`, que exponía las carpetas de la sesión en vez de `shared/` | Es la carpeta de coordinación, no el repo: cada IA lee el repo canónico directamente. Detalle: `docs/operations/VERIFICACION-CONEXIONES-2026-11-02.md` |
+| Graphify | V (02/11): por CLI con `GRAPHIFY_BACKEND=none` en las tres IAs; grafo regenerado desde la copia canónica | Sin servidor MCP: el de `.mcp.json` fallaba al arrancar (faltaba el módulo `mcp`) y se retiró |
 | Conectores claude.ai | V: Gmail, Slack, Notion, HubSpot, Canva, Figma, Vercel, Ahrefs, Supermetrics y Claude Docs conectados | Conectado ≠ autorizado para usarlo. Los 13 servidores de plugins sin autenticar requieren `/mcp`; marketing/gmail y calendar fallan por falta de URL |
-| Máquina | R: Node, Python, Blender, FFmpeg y FFprobe detectados; aerender no | V: `claude` no está en el PATH de la terminal |
+| Máquina | R: Node, Python, Blender, FFmpeg y FFprobe detectados; aerender no | V (02/11): `claude`, `codex` y `agy` están en el PATH |
 | Informe de calculadora | R: `context/CLAUDE-CALCULATOR-REVIEW.md` en la carpeta privada compartida | Esta sesión no tiene acceso a esa carpeta: NO VERIFICADO |
 
 ## Pendientes materiales
@@ -70,7 +71,6 @@ Estado de cada línea (31/10/2026): **V** = verificado en una sesión de Claude 
 2. **Codex:**
    - dejar una sola `altiora-project-director` (hoy hay versiones distintas en `~/.codex/skills` y `.agents/skills`);
    - pasar a 75 h `ALTIORA-MAESTRO-PROYECTOS.md` y la calculadora;
-   - apuntar `altiora-shared` al laboratorio del 30/10;
    - reevaluar `PRUEBA-PILOTO.md` frente al código nuevo.
 3. **Negocio, la prioridad:** preparar entrevistas con compradores reales. Ninguna herramienta sustituye esa evidencia.
 

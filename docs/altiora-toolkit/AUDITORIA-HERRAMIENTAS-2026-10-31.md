@@ -102,7 +102,7 @@ Fuente: `C:/Users/Usuario/Documents/Codex/2026-10-18/cr/outputs/altiora-agent-sy
 
 1. **Resuelto:** generador del kit corregido; ver §5 bis. Falta que Codex actualice la línea de versión del bloque del kit en `CLAUDE.md`, `AGENTS.md` y `GEMINI.md` (dice 1.0.0; no se tocó porque son archivos del coordinador; `doctor` no lo exige).
 2. **`.agents/skills` para Antigravity:** completar las 105 skills que faltan, decidir qué hacer con las carpetas de categoría anidadas y propagar las descripciones nuevas.
-3. **MCP `altiora-shared`:** exponer el laboratorio de `2026-10-30` en lugar del de `2026-10-29` y la carpeta de coordinación `…/2026-10-18/…/altiora-connection/shared`.
+3. **Resuelto el 02/11/2026:** `altiora-shared` expone solo la carpeta de coordinación `…/2026-10-18/…/altiora-connection/shared`, con la misma definición en las tres IAs; el laboratorio se lee directamente desde la copia canónica. Ver `docs/operations/VERIFICACION-CONEXIONES-2026-11-02.md`.
 4. **`FINANZAS.md:76-79`** cita `altiora-os-coordinate`, `altiora-research` y `altiora-review`: siguen siendo válidas en Codex; en Claude, consultar el mapa.
 5. Llevar al laboratorio los directores, el caso de estudio y las importaciones, para que la fuente de verdad los contenga y una reinstalación no los pierda.
 
