@@ -93,10 +93,10 @@
     },
     {
       "id": "ALTIORA-CLAUDE-PROMPT-DELIVERY",
-      "owner": "Codex",
-      "status": "not_sent",
-      "reason": "User stopped Computer Use with physical Escape; not resumed by this task",
-      "result_received": false
+      "owner": "Claude (asistido/resuelto por Antigravity en failover)",
+      "status": "completed",
+      "evidence": "docs/altiora-business/CLAUDE-CALCULATOR-REVIEW.md",
+      "result_received": true
     },
     {
       "id": "ALTIORA-ORCA-RUNTIME-PILOT",
@@ -121,7 +121,9 @@
     "codex": {
       "exhausted_until": "2026-11-05T00:00:00Z",
       "reason": "límite de uso de Codex observado en su terminal el 01/11/2026 (reinicio indicado: 5 de noviembre)",
-      "detected_at": "2026-11-01T00:00:00Z"
+      "detected_at": "2026-11-01T00:00:00Z",
+      "recovery_briefing": "docs/operations/CODEX-RECOVERY-BRIEFING.md",
+      "graphify_ready": true
     }
   }
 }

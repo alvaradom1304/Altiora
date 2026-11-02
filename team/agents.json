@@ -297,6 +297,25 @@
         "creative-quality-assurance",
         "altiora-quality-review"
       ]
+    },
+    {
+      "id": "ai-economist",
+      "when": "Usar al iniciar una tarea grande, antes de lanzar subagentes o pasar trabajo a otra IA, cuando la sesión se alarga o el consumo de tokens sube, o para decidir conectores, modelo y esfuerzo sin bajar la calidad.",
+      "milestones": [
+        "M0",
+        "M1",
+        "M2",
+        "M3",
+        "M4"
+      ],
+      "tools": "Read, Grep, Glob, Bash",
+      "skills": [
+        "altiora-ai-economy",
+        "smart-model-router",
+        "altiora-bibliotecario",
+        "graphify",
+        "altiora-session-handoff"
+      ]
     }
   ]
 }

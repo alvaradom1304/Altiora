@@ -218,13 +218,17 @@
       "name": "altiora-ai-economy",
       "source": "skills/altiora-ai-economy/SKILL.md",
       "model_invocable": false,
-      "assigned_agents": []
+      "assigned_agents": [
+        "ai-economist"
+      ]
     },
     {
       "name": "altiora-bibliotecario",
       "source": "skills/altiora-bibliotecario/SKILL.md",
       "model_invocable": true,
-      "assigned_agents": []
+      "assigned_agents": [
+        "ai-economist"
+      ]
     },
     {
       "name": "altiora-case-study",
@@ -326,7 +330,9 @@
       "name": "altiora-session-handoff",
       "source": "skills/altiora-session-handoff/SKILL.md",
       "model_invocable": false,
-      "assigned_agents": []
+      "assigned_agents": [
+        "ai-economist"
+      ]
     },
     {
       "name": "analytics",
@@ -1226,7 +1232,9 @@
       "name": "graphify",
       "source": "skills/graphify/SKILL.md",
       "model_invocable": true,
-      "assigned_agents": []
+      "assigned_agents": [
+        "ai-economist"
+      ]
     },
     {
       "name": "growth-experiment-analysis",
@@ -2023,7 +2031,9 @@
       "name": "smart-model-router",
       "source": "skills/smart-model-router/SKILL.md",
       "model_invocable": false,
-      "assigned_agents": []
+      "assigned_agents": [
+        "ai-economist"
+      ]
     },
     {
       "name": "social",
@@ -2450,6 +2460,12 @@
       "antigravity": ".agents/agents/audio-specialist.md"
     },
     {
+      "id": "ai-economist",
+      "source": "team/roles/ai-economist.md",
+      "claude": ".claude/agents/ai-economist.md",
+      "antigravity": ".agents/agents/ai-economist.md"
+    },
+    {
       "id": "altiora-engineering",
       "source": "team/local-sources/codex/altiora-engineering.toml",
       "claude": ".claude/agents/altiora-engineering.md",
@@ -2492,6 +2508,7 @@
     "chat-market-intelligence-director",
     "chat-creative-ads-director",
     "chat-audio-specialist",
+    "chat-ai-economist",
     "chat-altiora-engineering",
     "chat-altiora-experience",
     "chat-altiora-research",

@@ -87,6 +87,18 @@
     "metricool": {
       "type": "http",
       "url": "https://ai.metricool.com/mcp"
+    },
+    "altiora-graphify": {
+      "command": "C:/Users/Usuario/.altiora-tools/graphify/Scripts/graphify-mcp.exe",
+      "args": [
+        "C:/Users/Usuario/.altiora-tools/graphs/altiora/graphify-out/graph.json",
+        "--transport",
+        "stdio"
+      ],
+      "env": {
+        "GRAPHIFY_BACKEND": "none",
+        "GRAPHIFY_NO_AUTO_REFRESH": "1"
+      }
     }
   }
 }

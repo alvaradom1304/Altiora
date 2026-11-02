@@ -15,7 +15,7 @@ Mapa de agentes, chats, skills y repositorios disponibles en Claude Code y en el
 
 Otras IAs (Codex, Gemini, ChatGPT): prompts en [team/agents/](team/agents/experience-director.md) y el mismo chat (`npm run chat`), ver [team/chat/README.md](team/chat/README.md).
 
-## Agentes (21)
+## Agentes (22)
 
 | Agente | Chat | Milestones | Skills asignadas |
 |---|---|---|---|
@@ -36,6 +36,7 @@ Otras IAs (Codex, Gemini, ChatGPT): prompts en [team/agents/](team/agents/experi
 | [Director de inteligencia de mercado](.claude/agents/market-intelligence-director.md) | `/chat-market-intelligence-director` | M0, M1 | `top10-video-research`, `product-winner-scorecard`, `creative-deconstruction-originality`, `marketing-psychology`, `market-research` |
 | [Director de anuncios audiovisuales](.claude/agents/creative-ads-director.md) | `/chat-creative-ads-director` | M1, M3, M6 | `emotional-brand-activation`, `creative-deconstruction-originality`, `organic-social-distribution`, `advertising-concept`, `storyboarding`, `ai-video-direction`, `creative-quality-assurance` |
 | [Especialista en sonido y audio](.claude/agents/audio-specialist.md) | `/chat-audio-specialist` | M1, M3, M4 | `audio-production`, `creative-quality-assurance`, `altiora-quality-review` |
+| [Director de economía de IA](.claude/agents/ai-economist.md) | `/chat-ai-economist` | M0, M1, M2, M3, M4 | `altiora-ai-economy`, `smart-model-router`, `altiora-bibliotecario`, `graphify`, `altiora-session-handoff` |
 | [altiora-engineering](.claude/agents/altiora-engineering.md) | `/chat-altiora-engineering` |  |  |
 | [altiora-experience](.claude/agents/altiora-experience.md) | `/chat-altiora-experience` |  |  |
 | [altiora-research](.claude/agents/altiora-research.md) | `/chat-altiora-research` |  | `altiora-repository-research` |
@@ -80,8 +81,8 @@ Otras IAs (Codex, Gemini, ChatGPT): prompts en [team/agents/](team/agents/experi
 | [ai-video-direction](skills/ai-video-direction/SKILL.md) | sí | audiovisual-experience-director, visual-producer, creative-ads-director |  | ai-video-direction: Creative Intelligence. Usar para producir video_brief, prompts, continuity_checks a partir de guion, duración, refere… |
 | [algorithmic-art](skills/algorithmic-art/SKILL.md) | — | — |  | Crea arte generativo con p5.js (aleatoriedad con semilla, campos de flujo, partículas) y un visor interactivo para explorar parámetros. U… |
 | [altiora-agent-orchestrator](skills/altiora-agent-orchestrator/SKILL.md) | sí | experience-director |  | Coordina proyectos de Altiora que combinan investigación de repositorios, diseño, implementación y revisión mediante agentes y skills. Se… |
-| [altiora-ai-economy](skills/altiora-ai-economy/SKILL.md) | — | — |  | Selecciona un flujo de IA para Altiora que reduzca coste y contexto repetido preservando la calidad final. Se usa al comparar proveedores… |
-| [altiora-bibliotecario](skills/altiora-bibliotecario/SKILL.md) | sí | — |  | Selecciona skills, herramientas y roles con contexto mínimo en Altiora. Usar al enrutar una petición nueva, retomar una tarea o resolver … |
+| [altiora-ai-economy](skills/altiora-ai-economy/SKILL.md) | — | ai-economist |  | Selecciona un flujo de IA para Altiora que reduzca coste y contexto repetido preservando la calidad final. Se usa al comparar proveedores… |
+| [altiora-bibliotecario](skills/altiora-bibliotecario/SKILL.md) | sí | ai-economist |  | Selecciona skills, herramientas y roles con contexto mínimo en Altiora. Usar al enrutar una petición nueva, retomar una tarea o resolver … |
 | [altiora-case-study](skills/altiora-case-study/SKILL.md) | — | — |  | Convierte un proyecto o piloto de Altiora en un caso de estudio verificable (problema, intervención, evidencia, límites y permiso del cli… |
 | [altiora-commercial-director](skills/altiora-commercial-director/SKILL.md) | — | — |  | Coordinador comercial de Altiora: lleva un prospecto o segmento desde la hipótesis de problema hasta una propuesta de US$10.000 lista par… |
 | [altiora-creative-analyst](skills/altiora-creative-analyst/SKILL.md) | — | — |  | Analista creativo de Altiora: encuentra lo que hace único a cada proyecto (verdad propia del cliente, tensión del consumidor y hueco de l… |
@@ -97,7 +98,7 @@ Otras IAs (Codex, Gemini, ChatGPT): prompts en [team/agents/](team/agents/experi
 | [altiora-quality-review](skills/altiora-quality-review/SKILL.md) | sí | qa-reviewer, audio-specialist, altiora-review |  | Revisa cambios de Altiora contra el encargo, las funciones afectadas y su evidencia de prueba. Se usa para comprobar una entrega o una ta… |
 | [altiora-repository-research](skills/altiora-repository-research/SKILL.md) | sí | altiora-research |  | Selecciona y compara repositorios o skills para un proyecto de Altiora según utilidad, compatibilidad, mantenimiento, licencia y coste to… |
 | [altiora-runtime-bridge](skills/altiora-runtime-bridge/SKILL.md) | — | — |  | Prepara o verifica la portabilidad de un proyecto Altiora entre Codex, Claude Code y Antigravity cuando se configura o cambia el entorno … |
-| [altiora-session-handoff](skills/altiora-session-handoff/SKILL.md) | — | — |  | Guarda o retoma el estado verificable de una tarea Altiora en .altiora/handoff.json. Usar al cambiar entre Antigravity, Codex y Claude Co… |
+| [altiora-session-handoff](skills/altiora-session-handoff/SKILL.md) | — | ai-economist |  | Guarda o retoma el estado verificable de una tarea Altiora en .altiora/handoff.json. Usar al cambiar entre Antigravity, Codex y Claude Co… |
 | [analytics](skills/analytics/SKILL.md) | sí | growth-analyst | coreyhaines31/marketingskills | When the user wants to set up, improve, or audit analytics tracking and measurement. Also use when the user mentions "set up tracking," "… |
 | [api-integration](skills/api-integration/SKILL.md) | — | — |  | api-integration: AI & Automation. Usar para producir integration_code, error_handling, tests a partir de API oficial, contrato, entorno, … |
 | [api-security](skills/api-security/SKILL.md) | — | — |  | api-security: Cybersecurity. Usar para producir api_risks, controls, verification a partir de endpoints, contrato, auth, datos, límites; … |
@@ -235,7 +236,7 @@ Otras IAs (Codex, Gemini, ChatGPT): prompts en [team/agents/](team/agents/experi
 | [google-cloud-storage-basics](skills/google-cloud-storage-basics/SKILL.md) | — | — |  | Stores, retrieves, and manages data as objects in Cloud Storage on Google Cloud (also known colloquially as GCS) buckets. Use when you ne… |
 | [google-cloud-storage-bucket-architect](skills/google-cloud-storage-bucket-architect/SKILL.md) | — | — |  | Creates Cloud Storage (Google Cloud Storage, or GCS) buckets. Analyzes the workload (sensitive data, media hosting, ingestion, web hostin… |
 | [google-cloud-storage-fuse](skills/google-cloud-storage-fuse/SKILL.md) | — | — |  | Mounts Cloud Storage buckets as a POSIX file system with Cloud Storage FUSE (gcsfuse). Use when you need to interact with gcsfuse — decid… |
-| [graphify](skills/graphify/SKILL.md) | sí | — |  | Consulta un grafo de conocimiento del repositorio (código, y documentos solo con permiso) generado con Graphify para responder preguntas … |
+| [graphify](skills/graphify/SKILL.md) | sí | ai-economist |  | Consulta un grafo de conocimiento del repositorio (código, y documentos solo con permiso) generado con Graphify para responder preguntas … |
 | [growth-experiment-analysis](skills/growth-experiment-analysis/SKILL.md) | sí | commerce-growth-director |  | Usar al evaluar si campañas de branding, videos orgánicos, anuncios o embudos a WhatsApp generan mejores consultas y ventas con pruebas m… |
 | [growth-experimentation](skills/growth-experimentation/SKILL.md) | sí | growth-analyst |  | growth-experimentation: Marketing Intelligence. Usar para producir experiment_design, results, learning a partir de hipótesis, funnel, ba… |
 | [growth-strategy](skills/growth-strategy/SKILL.md) | — | — |  | growth-strategy: Growth & Scaling. Usar para producir growth_levers, priorities, safeguards a partir de demanda, economía, capacidad, fun… |
@@ -356,7 +357,7 @@ Otras IAs (Codex, Gemini, ChatGPT): prompts en [team/agents/](team/agents/experi
 | [seo-audit](skills/seo-audit/SKILL.md) | — | — |  | seo-audit: Marketing Intelligence. Usar para producir audit_findings, evidence, remediation a partir de dominio, páginas, acceso/alcance,… |
 | [site-architecture](skills/site-architecture/SKILL.md) | — | — |  | Planifica la arquitectura y la estructura de la web de un cliente: jerarquía de páginas, navegación, URLs, sitemap (mapa del sitio) y enl… |
 | [skill-creator](skills/skill-creator/SKILL.md) | — | — | anthropics/skills | Create new skills, modify and improve existing skills, and measure skill performance. Use when users want to create a skill from scratch,… |
-| [smart-model-router](skills/smart-model-router/SKILL.md) | — | — |  | Intelligent AI model routing, token cost optimization, and multi-tier task delegation based on complexity (inspired by RouteLLM, FrugalGP… |
+| [smart-model-router](skills/smart-model-router/SKILL.md) | — | ai-economist |  | Intelligent AI model routing, token cost optimization, and multi-tier task delegation based on complexity (inspired by RouteLLM, FrugalGP… |
 | [social](skills/social/SKILL.md) | — | — |  | Crea y optimiza contenido para redes (LinkedIn, Instagram, TikTok, Facebook, X): pilares, formatos, ganchos, calendario y revisión de res… |
 | [social-creative](skills/social-creative/SKILL.md) | — | — |  | social-creative: Creative Intelligence. Usar para producir social_variants, platform_fit, tests a partir de canal, audiencia, marca, mens… |
 | [social-media-strategy](skills/social-media-strategy/SKILL.md) | — | — |  | social-media-strategy: Marketing Intelligence. Usar para producir channel_roles, content_system, measurement a partir de audiencia, marca… |

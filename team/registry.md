@@ -6,6 +6,7 @@ Roles operativos; no representan personal contratado ni agentes ya ejecutándose
 |---|---|---|---|
 | Director de experiencia | Integrar estrategia, alcance y calidad | Plan, gates, decisiones y resolución de conflictos | QA |
 | **Director de Experiencia Audiovisual** | Seleccionar sin pedir indicaciones la tecnología, los especialistas y el pipeline para toda pieza visual, motion, cine, 3D, VFX, Adobe o web inmersiva; evaluar Tech Scout | Decisión de herramienta, creative treatment, delegación y quality gates | Director de experiencia + QA |
+| **Director de economía de IA** | Decidir por tarea conectores, IA, modelo, esfuerzo y cierre de sesión con el menor consumo sin bajar la calidad | Plan de economía con lo medido frente a lo estimado | Director de experiencia |
 | Estratega de negocio | Definir problema, oferta, audiencia y KPIs | Charter, objetivos e hipótesis priorizadas | Director de experiencia |
 | Estratega de marca | Traducir posicionamiento a identidad y tono | Atributos, voz y reglas de marca | Cliente + Dirección creativa |
 | Director creativo | Definir concepto y coherencia artística | Rutas, moodboard y guion visual | Branding + UX |

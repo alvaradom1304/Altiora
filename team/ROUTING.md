@@ -12,7 +12,7 @@ Lo que lo garantiza no es la IA, sino que todas compartan:
 1. **Entender:** objetivo, entregable, criterio de aceptación, proyecto y riesgo. Si falta algo que cambia el resultado, preguntarlo **una vez** y no avanzar en lo que dependa de eso.
 2. **Clasificar:** dominios que toca (sección 3), tamaño y riesgo.
 3. **Decidir** con el árbol de la sección 2.
-4. **Ejecutar** con el rol, las skills y el esfuerzo de la sección 3. Para orientarse en el código (dónde se usa algo, qué depende de qué), consultar primero el grafo con la skill [graphify](../skills/graphify/SKILL.md) y confirmar en el archivo real; siempre con `GRAPHIFY_BACKEND=none`.
+4. **Ejecutar** con el rol, las skills y el esfuerzo de la sección 3. Para orientarse en el código (dónde se usa algo, qué depende de qué), consultar primero el grafo con la skill [graphify](../skills/graphify/SKILL.md) y confirmar en el archivo real; siempre con `GRAPHIFY_BACKEND=none`. Conectores pesados (Vercel, Ahrefs, Notion, Canva, Figma, Gmail, HubSpot, Slack, Supermetrics) apagados por defecto: activar solo el que la tarea pida y apagarlo al terminar ([conectores y ahorro](../docs/operations/CONECTORES-Y-AHORRO.md)). Una sesión por tarea. Antes de una tarea grande, de lanzar subagentes u otra IA, o cuando la sesión se alarga, consultar al rol [ai-economist](roles/ai-economist.md) (conectores, IA, modelo, esfuerzo y cierre de sesión sin bajar la calidad).
 5. **Entregar** con el formato de la sección 5. Nada se da por terminado sin evidencia.
 
 ## 2. Árbol de decisión

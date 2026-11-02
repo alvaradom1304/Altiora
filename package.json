@@ -16,6 +16,7 @@
     "antigravity:build": "node scripts/build-antigravity.mjs",
     "security:scan": "node scripts/skill-security-gate.mjs",
     "resume": "node scripts/continuity.mjs",
+    "usage:report": "python scripts/session-usage.py",
     "continuity:check": "node scripts/continuity.mjs --check && node --test scripts/continuity.test.mjs",
     "visual:preflight": "node scripts/visual-preflight.mjs",
     "visual:preflight:test": "node --test scripts/visual-preflight.test.mjs",

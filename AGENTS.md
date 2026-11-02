@@ -3,6 +3,13 @@
 ## Objetivo
 Crear experiencias originales, fluidas y comerciales. El primer caso es La Central del Queso. Usar referencias para resolver problemas concretos de dirección, cámara, materiales y navegación.
 
+## Evidencia antes que opinión (todas las IAs)
+- Antes de opinar sobre Altiora o un cliente, leer las fuentes: `docs/altiora-business/` (INICIO.md, OFERTA.md, FINANZAS.md, DIAGNOSTICO.json, pipeline.json, RONDA-ENTREVISTAS-01.md), `docs/strategy/` y `projects/<cliente>/`. Si no se pudieron leer, decirlo y no responder como si se conocieran.
+- Cada afirmación lleva su fuente (archivo o comando) o la etiqueta SUPUESTO. Separar VERIFICADO, OPINIÓN y NO SÉ. No rellenar huecos con ideas genéricas sobre agencias o pymes.
+- Ante un error: reconocerlo en una frase, corregirlo con la fuente y seguir.
+- Priorizar lo que acerca a un cliente que paga sobre la infraestructura.
+- Ante cada idea o encargo, decir en una línea si **aporta valor** o **entorpece** (distrae de vender, infla métricas, añade coste o complejidad sin cliente que lo pida), con el motivo. Si entorpece, proponer la alternativa más corta; la decisión sigue siendo del usuario.
+
 ## Delegación: punto de entrada único
 **Todas las IAs (Claude Code, Codex, Antigravity), también desde Orca:** ante cualquier encargo, aplicar [team/ROUTING.md](team/ROUTING.md) antes de empezar. Decide si la IA actual lo hace, lo delega a un subagente o propone pasarlo a otra IA, con qué rol, skills y esfuerzo, y fija el formato de entrega y la puerta de calidad comunes para que el resultado sea el mismo con cualquier IA.
 
