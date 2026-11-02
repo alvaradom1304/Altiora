@@ -19,7 +19,12 @@ function scan(base,prefix=''){
     if(stat.isSymbolicLink()){bad.push('Symlink inesperado: skills/'+rel);continue}
     if(stat.isDirectory()){
       const sub=scan(base,rel);found.push(...sub.files);bad.push(...sub.errors);
-    }else if(stat.isFile())found.push(rel);
+    }else if(stat.isFile()){
+      // Python crea bytecode al ejecutar las suites; no forma parte de una skill fuente.
+      // Ignorar únicamente archivos .pyc dentro de __pycache__; otros archivos nuevos siguen bloqueados.
+      if(rel.split('/').includes('__pycache__') && rel.endsWith('.pyc'))continue;
+      found.push(rel);
+    }
     else bad.push('Tipo no permitido: skills/'+rel);
   }
   return {files:found,errors:bad};
