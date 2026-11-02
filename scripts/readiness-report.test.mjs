@@ -7,6 +7,8 @@ const root=fileURLToPath(new URL('../',import.meta.url));
 test('el informe no equipara skills con madurez empresarial ni conecta MCP ficticiamente',()=>{
   const r=assessAltiora(root);
   assert.equal(r.repository.protected_capabilities,'PASS');
+  assert.equal(r.repository.skill_content_integrity,'PASS');
+  assert.equal(r.repository.skill_files_checked,2757);
   assert.equal(r.skill_report.type,'DOCUMENT_STRUCTURE_NOT_BUSINESS_READINESS');
   assert.equal(r.ai_connectors.status,'CONFIGURED_NOT_LIVE_TESTED');
   assert.equal(r.commercial.pricing_validated,false);
