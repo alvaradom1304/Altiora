@@ -4,6 +4,7 @@ import {readFileSync,existsSync} from 'node:fs';
 import {resolve} from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {verifyCapabilityBaseline} from './verify-capability-baseline.mjs';
+import {verifySkillContents} from './verify-skill-content.mjs';
 
 const ROOT=fileURLToPath(new URL('../',import.meta.url));
 const load=(root,p)=>readFileSync(resolve(root,p),'utf8');
@@ -12,6 +13,8 @@ const json=(root,p)=>JSON.parse(load(root,p));
 export function assessAltiora(root){
   const manifest=json(root,'references/capability-protection-baseline-2026.json');
   const protectedState=verifyCapabilityBaseline(root,manifest);
+  const contentManifest=json(root,'references/protected-skill-content-baseline-2026.json');
+  const contentState=verifySkillContents(root,contentManifest);
   const pipeline=json(root,'docs/altiora-business/pipeline.json');
   const score=load(root,'quality/skills-report.md');
   const match=score.match(/(\d+) skills; media \*\*([\d.,]+)\/100\*\*/i);
@@ -23,11 +26,11 @@ export function assessAltiora(root){
     schema_version:1,
     generated_at:new Date().toISOString(),
     source:'LOCAL_FILES_READ_ONLY',
-    repository:{canonical:'alvaradom1304/Altiora',protected_capabilities:protectedState.status,protected_counts:protectedState.verified,baseline:manifest.baseline_commit,errors:protectedState.errors},
+    repository:{canonical:'alvaradom1304/Altiora',protected_capabilities:protectedState.status,protected_counts:protectedState.verified,skill_content_integrity:contentState.status,skill_files_checked:contentState.counts.checked,baseline:manifest.baseline_commit,errors:[...protectedState.errors,...contentState.errors]},
     skill_report:scoreInfo,
     ai_connectors:{configuration_files_present:existsSync(resolve(root,'.mcp.json')),status:'CONFIGURED_NOT_LIVE_TESTED',reason:'Los archivos, la CI y los simuladores no acreditan una sesión autenticada de Claude/Codex/Antigravity ni acceso a apps locales.'},
     commercial:{paying_clients_reported:clients,pipeline_opportunities_reported:pipelineDeals,status,pricing_target_usd:pipeline.target_project_price?.amount??null,pricing_validated:false,note:'El pipeline es un registro interno: ingresos, contratos y cobros deben verificarse con evidencia apropiada.'},
-    scaling_gate:protectedState.status==='PASS'&&clients>0?'MANUAL_REVIEW_REQUIRED':'HOLD',
+    scaling_gate:protectedState.status==='PASS'&&contentState.status==='PASS'&&clients>0?'MANUAL_REVIEW_REQUIRED':'HOLD',
     follow_up:[
       'Ejecutar npm run check y revisar resultados de CI en el mismo commit.',
       'Verificar conectores necesarios en sesiones nativas con permisos reales.',
@@ -37,6 +40,6 @@ export function assessAltiora(root){
   };
 }
 if(process.argv[1]&&resolve(process.argv[1])===fileURLToPath(import.meta.url)){
-  try{const report=assessAltiora(ROOT);process.stdout.write(JSON.stringify(report,null,2)+'\n');if(report.repository.protected_capabilities!=='PASS')process.exitCode=1}
+  try{const report=assessAltiora(ROOT);process.stdout.write(JSON.stringify(report,null,2)+'\n');if(report.repository.protected_capabilities!=='PASS'||report.repository.skill_content_integrity!=='PASS')process.exitCode=1}
   catch(e){process.stderr.write('Readiness NO_VERIFICADO: '+e.message+'\n');process.exitCode=1}
 }
