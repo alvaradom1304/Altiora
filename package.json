@@ -12,7 +12,7 @@
     "chat": "node scripts/team-chat.mjs",
     "skills:audit": "node scripts/audit-skills.mjs",
     "readiness:report": "node scripts/readiness-report.mjs",
-    "capabilities:protect": "node scripts/verify-capability-baseline.mjs",
+    "capabilities:protect": "node scripts/verify-capability-baseline.mjs && node scripts/verify-skill-content.mjs",
     "skills:integrity": "node scripts/verify-skill-content.mjs",
     "skills:baseline": "node scripts/audit-skills.mjs --write",
     "reference": "node scripts/fetch-reference.mjs",
