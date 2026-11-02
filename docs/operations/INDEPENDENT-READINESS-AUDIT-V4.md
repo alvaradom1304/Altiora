@@ -37,6 +37,18 @@ Calificar cada eje de 0 a 5: `0=sin evidencia`, `1=diseñado`, `2=implementació
 
 La nota documental de 98,3/100 reportada para las skills **no** es una nota de madurez de empresa ni establece la nota de estos ejes.
 
+**Cálculo único para todas las IAs:** `npm run readiness:report` aplica esta tabla sobre [`quality/readiness-evidence.json`](../../quality/readiness-evidence.json) y `--resumen` imprime la línea que se cita. Cada evidencia declara su tipo: `design` sostiene hasta 1, `partial` hasta 2, `test` hasta 3 y `real` hasta 4. Un 5 exige dos evidencias `real` con fechas distintas, y una fuente inexistente no cuenta. Además, el script aplica topes calculados:
+- **Demanda y ventas:** según `pipeline.json`. Sin contactos enviados el tope es 1; con contactos, 2; con entrevistas u oportunidades, 3; con un cliente de pago, 4; con dos o más, 5.
+- **Integridad:** el tope es 1 si falla la protección de capacidades.
+- **Calidad de entregables:** el tope es 2 mientras haya un P0 abierto.
+
+**Decisión:**
+- `HOLD_SCALE` si hay un P0 abierto o la demanda está por debajo de 2.
+- `READY_FOR_PILOT` si la demanda llega a 2 y los entregables a 3.
+- `READY_FOR_REPEATABLE_DELIVERY` si la demanda y los entregables llegan a 4 y la economía a 3.
+
+Para subir un eje se añade la evidencia al registro. La nota no se edita a mano.
+
 ## Pruebas de no regresión
 - Confirmar que siguen presentes las 355 skills protegidas, 22 roles, 5 workflows y ficheros críticos enumerados en el inventario base.
 - Verificar que los adaptadores generados reflejan sus fuentes canónicas sin ejecutar modificaciones en la revisión.
