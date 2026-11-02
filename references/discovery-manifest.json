@@ -1562,6 +1562,18 @@
       ]
     },
     {
+      "name": "n8n-error-handling-official",
+      "source": "skills/n8n-error-handling-official/SKILL.md",
+      "model_invocable": false,
+      "assigned_agents": []
+    },
+    {
+      "name": "n8n-expressions-official",
+      "source": "skills/n8n-expressions-official/SKILL.md",
+      "model_invocable": false,
+      "assigned_agents": []
+    },
+    {
       "name": "n8n-webhook-architect",
       "source": "skills/n8n-webhook-architect/SKILL.md",
       "model_invocable": false,
@@ -2504,6 +2516,6 @@
     "equipo",
     "repos"
   ],
-  "listing_budget_characters": 209589,
+  "listing_budget_characters": 210912,
   "runtime_discovery": "NOT_RUN"
 }

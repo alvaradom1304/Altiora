@@ -42,7 +42,7 @@ Otras IAs (Codex, Gemini, ChatGPT): prompts en [team/agents/](team/agents/experi
 | [altiora-research](.claude/agents/altiora-research.md) | `/chat-altiora-research` |  | `altiora-repository-research` |
 | [altiora-review](.claude/agents/altiora-review.md) | `/chat-altiora-review` |  | `altiora-quality-review` |
 
-## Skills (353)
+## Skills (355)
 
 **Auto** = el adaptador permite invocación por el modelo; no prueba carga en una sesión. La asignación a agentes no restringe el descubrimiento. Origen vacío = sin fuente externa registrada; no certifica autoría.
 
@@ -286,6 +286,8 @@ Otras IAs (Codex, Gemini, ChatGPT): prompts en [team/agents/](team/agents/experi
 | [modular-docs-architect](skills/modular-docs-architect/SKILL.md) | — | — |  | Divide documentación Markdown monolítica en módulos ligeros con divulgación progresiva (índice, módulos y anexos bajo demanda) para reduc… |
 | [mom-test-interviewing](skills/mom-test-interviewing/SKILL.md) | — | — |  | mom-test-interviewing: Sales Intelligence. Usar para producir interview_questions, past_behavior, commitments a partir de hipótesis, acce… |
 | [motion-design](skills/motion-design/SKILL.md) | sí | audiovisual-experience-director, motion-designer |  | motion-design: Premium Web Experience. Usar para producir motion_spec, states, alternatives a partir de tarea, UI/escena, ritmo, marca; n… |
+| [n8n-error-handling-official](skills/n8n-error-handling-official/SKILL.md) | — | — | n8n-io/skills | Use when building any webhook-triggered workflow, scheduled/production-bound workflow, wiring a per-node error output, or any workflow wh… |
+| [n8n-expressions-official](skills/n8n-expressions-official/SKILL.md) | — | — | n8n-io/skills | Use when writing or reviewing n8n expressions (`{{...}}` syntax), `$json` / `$node` references, Luxon date code, or expression errors. Tr… |
 | [n8n-webhook-architect](skills/n8n-webhook-architect/SKILL.md) | — | — |  | Diseña y documenta el flujo CRM Web → n8n → WhatsApp con validación, idempotencia, consentimiento, reintentos, observabilidad y plan de p… |
 | [negotiation](skills/negotiation/SKILL.md) | — | — |  | negotiation: Sales Intelligence. Usar para producir negotiation_plan, concessions, approval_points a partir de intereses, alternativas, l… |
 | [nextjs-architecture](skills/nextjs-architecture/SKILL.md) | — | web-engineer |  | nextjs-architecture: Premium Web Experience. Usar para producir architecture, boundaries, implementation_plan a partir de repo/versiones,… |
