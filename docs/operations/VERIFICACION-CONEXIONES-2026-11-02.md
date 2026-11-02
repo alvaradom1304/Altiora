@@ -39,3 +39,9 @@ Dentro de una sesión de cualquier IA, la herramienta `list_allowed_directories`
 - **Usuario, Claude Desktop:** los presets `altiora` y `altiora2` abren `C:\Users\Usuario\OneDrive\Desktop\altiora`, que es el repo `alvaradom1304/la-central-del-queso`. Hay que apuntarlos a `C:\Users\Usuario\orca\workspaces\Altiora-Immersive-Web-Lab\altiora-unificado`.
 - **Sin probar en sesión real:** Codex hasta que vuelva la cuota y Antigravity cuando se decida gastar créditos. La prueba es la misma llamada a `list_allowed_directories`.
 - **Observado, fuera de este alcance:** en Claude, `chrome-devtools` y `playwright` (`npx …@latest`) superan el límite de 30 s al arrancar; los `dak-*` de Google Cloud necesitan `gcloud auth application-default login`.
+
+## Anexo: MCP de navegador (02/11/2026)
+
+`chrome-devtools` y `playwright` no llegaban a conectar en Claude en el límite de 30 s. Los servidores arrancan en 2–4 s, pero `npx …@latest` añadía entre 19 y 85 s en cada arranque, aunque el paquete estuviera en caché. Ahora se arrancan con `node` desde `C:/Users/Usuario/.altiora-tools/mcp-browser`, con versiones fijadas y lockfile: `chrome-devtools-mcp` 1.12.0 y `@playwright/mcp` 0.0.84, ambos con licencia Apache-2.0. Se instalaron con `--ignore-scripts` desde la caché. Sonda en vivo: `chrome-devtools` responde con 32 herramientas en 4,6 s y `playwright` con 25 herramientas en 1,9 s.
+
+Para recrear la carpeta en otra PC: crear `package.json` con esas dos dependencias exactas y ejecutar `npm install --ignore-scripts --no-audit --no-fund`. Las actualizaciones de versión pasan por Visual Tech Scout, nunca por `@latest`.
