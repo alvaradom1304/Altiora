@@ -75,3 +75,5 @@ Para entregas entre IAs, usar el JSON del [protocolo](../altiora-os/docs/protoco
 - Revisión independiente con `qa-reviewer` (o `altiora-quality-review`) para todo lo que vea un cliente; si solo hay una IA, declarar que la revisión fue secuencial.
 - Sin hechos comerciales inventados, sin secretos y sin afirmar conexiones o ejecuciones no comprobadas.
 - Apuntar a la mejor calidad posible dentro del alcance acordado: no ampliar el alcance ni entrar en bucles de mejora sin fin.
+
+**Nota de Altiora (la misma en todas las IAs):** si piden evaluar, puntuar o dar un porcentaje de Altiora o de su sistema, ejecutar `npm run readiness:report -- --resumen` y citar esa línea tal cual, con la fecha. El script calcula la nota con la rúbrica V4 a partir de `quality/readiness-evidence.json`; no se estima a ojo. El 98,3/100 de `quality/skills-report.md` es la nota documental de las skills: se cita aparte y con esa etiqueta, nunca como nota de la empresa. Para subir la nota se añade evidencia al registro (la CI comprueba los topes); el número no se edita a mano.
