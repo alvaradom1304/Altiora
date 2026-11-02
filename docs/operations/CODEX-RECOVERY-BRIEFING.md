@@ -13,10 +13,10 @@
 ## 2. Grafo de conocimiento (Graphify)
 
 - Skill válida: `skills/graphify/SKILL.md` del repo (en `main` desde el PR #45). **No instalar** `graphify install` ni ninguna skill con ese nombre en inglés: es la versión original, calificada DO_NOT_INSTALL, y se retiró de Claude, Gemini y Codex.
-- Grafo vigente, fuera del repo: `C:/Users/Usuario/.altiora-tools/graphs/altiora/graphify-out/` — 21.281 nodos, 24.105 aristas, 780 comunidades sin nombrar. Generado desde el commit `31435a1`; puede estar desactualizado.
+- Grafo vigente, fuera del repo: `C:/Users/Usuario/.altiora-tools/graphs/altiora/graphify-out/` — 21.353 nodos, 24.193 aristas, 782 comunidades sin nombrar. Regenerado el 02/11/2026 desde el commit `83853a4` (solo código, sin modelo); comparar con `GRAPH_REPORT.md` antes de fiarse.
 - **Siempre** con `GRAPHIFY_BACKEND=none`. Sin esa variable, Graphify puede llamar en silencio a `claude -p` y consumir la suscripción (ya ocurrió: ~1,1 M de tokens).
 - Usar `query`, `path` y `explain` antes de releer código; confirmar siempre en el archivo real.
-- Servidor MCP `altiora-graphify` en `.mcp.json`: solo si ese archivo está en `main`. Verificarlo antes de asumir que existe.
+- No hay servidor MCP de Graphify: se retiró de `.mcp.json` el 02/11/2026 porque fallaba al arrancar (faltaba el módulo `mcp`). Usar el CLI, igual en Claude, Codex y Antigravity.
 
 ## 3. Estado verificado al 2026-11-01
 
