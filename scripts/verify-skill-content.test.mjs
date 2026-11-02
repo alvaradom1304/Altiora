@@ -30,9 +30,11 @@ test('detecta recorte, pérdida y ampliación no revisada de archivos',()=>{
     assert.equal(first.counts.missing,1);
     writeFileSync(join(dir,'skills','example','SKILL.md'),'# recortado');
     writeFileSync(join(dir,'skills','example','NEW.md'),'nuevo');
+    mkdirSync(join(dir,'skills','example','__pycache__'),{recursive:true});
+    writeFileSync(join(dir,'skills','example','__pycache__','generated.cpython-312.pyc'),'generated cache');
     const second=verifySkillContents(dir,data);
     assert.equal(second.counts.modified,1);
-    assert.equal(second.counts.new,1);
+    assert.equal(second.counts.new,1,'solo archivos fuente nuevos deben bloquear; bytecode transitorio se ignora');
   }finally{rmSync(dir,{recursive:true,force:true})}
 });
 
