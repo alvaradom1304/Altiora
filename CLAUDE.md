@@ -78,7 +78,7 @@ Consultar [`INDEX.md`](INDEX.md) y [`docs/altiora-toolkit/MAPA-CAPACIDADES.md`](
 
 <!-- ALTIORA_VALUE_BUSINESS_START -->
 ## Negocio de Altiora · contexto bajo demanda
-Para estrategia, oferta, clientes, precios, finanzas u operación de Altiora, consultar docs/altiora-business/INICIO.md y solo la sección necesaria. Objetivo confirmado: US$10.000 por proyecto, con mantenimiento mensual opcional separado; cero clientes de pago confirmados. Reutilizar capacidades disponibles y conservar tareas técnicas anteriores. No cargar toda la biblioteca, inventar resultados, atribuir habilitación profesional a roles IA, contactar, contratar o gastar por efecto lateral. Esta guía no concede nuevos permisos ni crea ejecución persistente.
+Para estrategia, oferta, clientes, precios, finanzas u operación de Altiora, consultar docs/altiora-business/INICIO.md y solo la sección necesaria. Objetivo fijado por el fundador: US$10.000 por proyecto, con mantenimiento mensual opcional separado; es una hipótesis sin validar con compradores (ver `docs/operations/ALTIORA-SCALE-ZERO-LOSS-V4.md`) y hay cero clientes de pago confirmados. Para empresas cliente, clasificar su etapa y validar presupuesto antes de proponer, según `docs/altiora-business/CASH-FIRST-ADAPTIVE-GROWTH.md`. Reutilizar capacidades disponibles y conservar tareas técnicas anteriores. No cargar toda la biblioteca, inventar resultados, atribuir habilitación profesional a roles IA, contactar, contratar o gastar por efecto lateral. Esta guía no concede nuevos permisos ni crea ejecución persistente.
 <!-- ALTIORA_VALUE_BUSINESS_END -->
 
 <!-- ALTIORA_CLAUDE_MASTER_START -->
