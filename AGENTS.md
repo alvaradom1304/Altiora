@@ -125,7 +125,7 @@ Para diagnóstico de herramientas, evaluación del Bibliotecario o entrega audio
 
 # Altiora Enterprise OS — entrada bajo demanda
 
-**Protección Zero-Loss:** el original completo de este archivo, sin compresión ni omisiones, está preservado en [AGENTS-FULL-ARCHIVE-2026-11-02.md](docs/operations/AGENTS-FULL-ARCHIVE-2026-11-02.md) (blob Git original `6a9be69879b2b87a25ca154aff80d72a012859b6`). Las secciones de Enterprise OS se cargan **solo si resultan pertinentes**: no se pierden ni se sustituyen por resúmenes.
+**Protección Zero-Loss:** el original completo de este archivo, sin compresión ni omisiones, está preservado en [AGENTS-FULL-ARCHIVE-2026-11-02.md](AGENTS-FULL-ARCHIVE-2026-11-02.md) (blob Git original `6a9be69879b2b87a25ca154aff80d72a012859b6`). Las secciones de Enterprise OS se cargan **solo si resultan pertinentes**: no se pierden ni se sustituyen por resúmenes.
 
 - **Toda tarea**: seguir [team/ROUTING.md](team/ROUTING.md) y la [política de conservación V4](docs/operations/ALTIORA-SCALE-ZERO-LOSS-V4.md). Ejecutar pruebas; no afirmar sesiones activas sin verificación nativa.
 - **Proyecto empresarial/comercial**: leer [ALTIORA-MAESTRO-PROYECTOS.md](docs/altiora-business/ALTIORA-MAESTRO-PROYECTOS.md), [Revenue Sprint 30/60/90](docs/altiora-business/REVENUE-SPRINT-30-60-90.md), [OFERTA.md](docs/altiora-business/OFERTA.md), [FINANZAS.md](docs/altiora-business/FINANZAS.md) y los apartados de negocio del archivo original completo según necesidad.
