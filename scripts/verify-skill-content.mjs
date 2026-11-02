@@ -14,6 +14,9 @@ export function gitBlobSha1(bytes){
 function scan(base,prefix=''){
   const found=[],bad=[];
   for(const item of readdirSync(resolve(base,prefix),{withFileTypes:true})){
+    // Ignorar exclusivamente resultados de ejecución, nunca documentación o skills nuevas.
+    if(item.isDirectory() && ['__pycache__','.pytest_cache','.mypy_cache','.ruff_cache','.venv','node_modules'].includes(item.name))continue;
+    if(item.isFile() && /\\.(pyc|pyo)$/.test(item.name))continue;
     const rel=prefix?prefix+'/'+item.name:item.name;
     const stat=lstatSync(resolve(base,rel));
     if(stat.isSymbolicLink()){bad.push('Symlink inesperado: skills/'+rel);continue}
