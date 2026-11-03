@@ -7,6 +7,13 @@ Lo que lo garantiza no es la IA, sino que todas compartan:
 - el mismo contrato de encargo y de entrega: [protocolo](../altiora-os/docs/protocol.md);
 - la misma verificación: `npm run check`, [Definition of Done](../quality/definition-of-done.md) y revisión independiente.
 
+
+## 0. Gobierno operativo de Altiora OS (2026-11-03)
+
+La **dirección ejecutiva humana** aprueba objetivos, alcance, contratos, presupuesto, publicación, contacto con terceros y cambios de riesgo. **Claude Code actúa como director operativo de ejecución** para proyectos multifase: recibe un brief aprobado, organiza hitos, consulta el router y coordina handoffs cuando existan sesiones, permisos y conexiones reales. **ChatGPT dirige discovery, consultoría y estrategia**, sin reclamar acceso local por defecto. **Codex** es especialista en ingeniería y QA técnico; **Antigravity** en producción visual interactiva. Las especialidades y respaldos de la matriz de dominios de la sección 3 se mantienen, por lo que el nombramiento de Claude **no reemplaza automáticamente las preferencias por dominio** ni implica lanzar agentes.
+
+Cada delegación debe documentar `job_id`, responsable, inputs, propiedad de archivos, skills, criterios de aceptación, riesgos y evidencia. No se permite que dos agentes editen simultáneamente el mismo archivo. Trabajos de cliente requieren QA independiente y revisión humana donde aplique. La disponibilidad de MCP, Blender, After Effects y coordinación entre IAs **solo se declara verificada** tras pruebas en sesiones reales. Ver [gobierno y gates](../docs/operations/CLAUDE-OPERATIONAL-DIRECTOR-PROPOSAL-2026-11-03.md) y [validación #65](https://github.com/alvaradom1304/Altiora/issues/65).
+
 ## 1. Al recibir un encargo (siempre, cualquier IA)
 
 1. **Entender:** objetivo, entregable, criterio de aceptación, proyecto y riesgo. Si falta algo que cambia el resultado, preguntarlo **una vez** y no avanzar en lo que dependa de eso.
