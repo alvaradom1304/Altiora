@@ -31,7 +31,7 @@
         "financial_model": "Supuestos, no costes reales",
         "pilot_source_review": "Source reviewed; runtime/receipt NOT_RUN",
         "desk_research": {
-          "candidates": 8,
+          "candidates": 20,
           "interviews": 0,
           "qualified_in_sample": 0,
           "need_verified": false

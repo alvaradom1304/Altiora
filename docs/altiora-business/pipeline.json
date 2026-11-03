@@ -105,11 +105,119 @@
       "evidence_file": "research-candidates.json#CRLOG-08",
       "contacted": false,
       "qualified_opportunity": false
+    },
+    {
+      "id": "CRLOG-09",
+      "organization_display_name": "HTS Logística Internacional",
+      "source_url": "https://www.htslogisticacr.com/",
+      "status": "DESK_RESEARCH_ONLY",
+      "evidence_file": "research-candidates.json#CRLOG-09",
+      "contacted": false,
+      "qualified_opportunity": false
+    },
+    {
+      "id": "CRLOG-10",
+      "organization_display_name": "VS Logistics",
+      "source_url": "https://vslogistics.cr/en/",
+      "status": "DESK_RESEARCH_ONLY",
+      "evidence_file": "research-candidates.json#CRLOG-10",
+      "contacted": false,
+      "qualified_opportunity": false
+    },
+    {
+      "id": "CRLOG-11",
+      "organization_display_name": "Global CR Logistics",
+      "source_url": "https://globalcrlogistics.com/",
+      "status": "DESK_RESEARCH_ONLY",
+      "evidence_file": "research-candidates.json#CRLOG-11",
+      "contacted": false,
+      "qualified_opportunity": false
+    },
+    {
+      "id": "CRLOG-12",
+      "organization_display_name": "Transportes Movilí",
+      "source_url": "https://transportesmovili.com/",
+      "status": "DESK_RESEARCH_ONLY",
+      "evidence_file": "research-candidates.json#CRLOG-12",
+      "contacted": false,
+      "qualified_opportunity": false
+    },
+    {
+      "id": "CRLOG-13",
+      "organization_display_name": "Grupo Linc",
+      "source_url": "https://linc-ca.com/",
+      "status": "DESK_RESEARCH_ONLY",
+      "evidence_file": "research-candidates.json#CRLOG-13",
+      "contacted": false,
+      "qualified_opportunity": false
+    },
+    {
+      "id": "CRLOG-14",
+      "organization_display_name": "EBBA",
+      "source_url": "https://www.ebba.cr/",
+      "status": "DESK_RESEARCH_ONLY",
+      "evidence_file": "research-candidates.json#CRLOG-14",
+      "contacted": false,
+      "qualified_opportunity": false
+    },
+    {
+      "id": "CRLOG-15",
+      "organization_display_name": "Tecnodepósitos",
+      "source_url": "https://www.tecnodepositos.com/",
+      "status": "DESK_RESEARCH_ONLY",
+      "evidence_file": "research-candidates.json#CRLOG-15",
+      "contacted": false,
+      "qualified_opportunity": false
+    },
+    {
+      "id": "CRLOG-16",
+      "organization_display_name": "La Terminal Express (LTEntregas)",
+      "source_url": "https://ultimamilla.laterminalexpress.com/",
+      "status": "DESK_RESEARCH_ONLY",
+      "evidence_file": "research-candidates.json#CRLOG-16",
+      "contacted": false,
+      "qualified_opportunity": false
+    },
+    {
+      "id": "CRLOG-17",
+      "organization_display_name": "SANDAL",
+      "source_url": "https://www.sandalcr.com/quienes-somos",
+      "status": "DESK_RESEARCH_ONLY",
+      "evidence_file": "research-candidates.json#CRLOG-17",
+      "contacted": false,
+      "qualified_opportunity": false
+    },
+    {
+      "id": "CRLOG-18",
+      "organization_display_name": "DSV Costa Rica",
+      "source_url": "https://www.dsv.com/es-mx/sobre-dsv/latam/dsv-costa-rica",
+      "status": "DESK_RESEARCH_ONLY",
+      "evidence_file": "research-candidates.json#CRLOG-18",
+      "contacted": false,
+      "qualified_opportunity": false
+    },
+    {
+      "id": "CRLOG-19",
+      "organization_display_name": "Corporación Aeromar",
+      "source_url": "https://www.aeromar.co.cr/almacenamiento/",
+      "status": "DESK_RESEARCH_ONLY",
+      "evidence_file": "research-candidates.json#CRLOG-19",
+      "contacted": false,
+      "qualified_opportunity": false
+    },
+    {
+      "id": "CRLOG-20",
+      "organization_display_name": "Transportes Silver",
+      "source_url": "https://www.transportessilver.com/",
+      "status": "DESK_RESEARCH_ONLY",
+      "evidence_file": "research-candidates.json#CRLOG-20",
+      "contacted": false,
+      "qualified_opportunity": false
     }
   ],
   "research_status": {
     "sample_id": "CRLOG-20261031",
-    "candidate_count": 8,
+    "candidate_count": 20,
     "interviews_completed": 0,
     "qualified_in_sample": 0,
     "contacts_sent": 0,
