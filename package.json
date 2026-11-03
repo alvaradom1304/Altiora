@@ -7,7 +7,7 @@
     "node": ">=20"
   },
   "scripts": {
-    "check": "npm run check:base && npm run operations:test && npm run toolkit:test && npm run runtime:test && npm run librarian:test && npm run routing:eval && npm run audio:test && npm run check:enterprise",
+    "check": "npm run check:base && npm run operations:test && npm run toolkit:test && npm run runtime:test && npm run librarian:test && npm run routing:eval && npm run audio:test && npm run bscg:test && npm run check:enterprise",
     "agents:build": "node scripts/build-agents.mjs && node scripts/build-antigravity.mjs",
     "chat": "node scripts/team-chat.mjs",
     "skills:audit": "node scripts/audit-skills.mjs",
@@ -37,6 +37,7 @@
     "after-effects:setup": "node scripts/setup-after-effects-access.mjs",
     "capability:doctor": "node scripts/capability-doctor.mjs",
     "operations:test": "node --test scripts/capability-doctor.test.mjs scripts/production-qa.test.mjs",
+    "bscg:test": "python -m unittest discover -s docs/altiora-business/entrega/scripts -p \"test_bscg.py\"",
     "routing:eval": "python skills/altiora-bibliotecario/scripts/evaluate_routes.py",
     "production:qa": "node scripts/production-qa.mjs",
     "skills:compact": "node scripts/compact-skills.mjs",
