@@ -284,3 +284,13 @@ Un PR fusionado no certifica todas las capacidades de Altiora.
 - **Acción pendiente del fundador (credenciales, no ejecutada):** decidir cómo persistir la clave (por ejemplo, desde su respaldo en `~/.altiora-backups/omniroute-2026-11-03_pre-intervencion/`; NO VERIFICADO que contenga la clave) o aceptar una base nueva (hoy hay 0 proveedores configurados). Ninguna de las dos se hizo. No se leyeron valores de claves.
 - **MCP:** `claude mcp list` muestra `playwright`, `chrome-devtools` y los `dak-*` en *Pending approval*, lo que explica el `CONNECT_TIMEOUT` en sesión. Alternativa vigente: Playwright CLI 1.64.1 (`npx playwright`) y `tests/triad/mockup/playwright-check.mjs`. No bloquea.
 
+### 15.7 Corrección de 15.6 y opciones para OmniRoute (misma fecha, tarde)
+- **Corrige 15.6:** OmniRoute **no** falla al iniciar por la clave. Ejecutado a mano con el script aprobado, arrancó (PID 6188, 13:16:42) y quedó solo en `127.0.0.1:20128`: salud 200; `/api/providers`, `/api/keys`, `/api/settings` y `/v1/models` sin credencial → 401; la IP de la red sin respuesta. El aviso de la clave es solo una advertencia. El FAIL del script fue falso: sondeó antes de que el servidor estuviera listo (tarda ~70 s).
+- **Estado actual:** OmniRoute está corriendo por esa ejecución manual, no por la tarea. El 267014 del reinicio queda **indeterminado**; hipótesis sin probar: el límite de 5 min de la tarea termina el árbol de procesos que incluye al demonio.
+- **Clave:** ausente de las cuatro ubicaciones revisadas (solo longitud, sin imprimir valores). La copia de respaldo de la base, abierta de solo lectura, tiene 0 conexiones de proveedor y ningún campo cifrado de proveedor con contenido.
+- **Opciones, de menor a mayor intervención (ninguna aplicada):**
+  1. **No hacer nada** mientras no haya proveedor autorizado. Riesgo: ninguno comercial. Reversión: no aplica.
+  2. **Arreglar el arranque, sin tocar secretos:** que el script espere `/api/health` hasta 120 s y que la tarea use límite de ejecución ilimitado y sin «detener en batería». Es un cambio de código y de configuración de la tarea; reversible restaurando el XML respaldado en `.altiora-backups`.
+  3. **Persistir una clave** solo si aparece la original (por ejemplo en un gestor del fundador): guardarla en `%USERPROFILE%\.omniroute\.env` con permisos solo para el usuario, tras respaldar la base. Reversión: borrar ese archivo; la base no se toca.
+  4. **Base nueva con clave nueva:** solo si el fundador acepta perder la clave API local; implica mover (no borrar) la base actual a respaldo. Es la única opción que toca la base y **no se hará sin aprobación expresa**. Debe hacerse antes de activar cualquier proveedor.
+
