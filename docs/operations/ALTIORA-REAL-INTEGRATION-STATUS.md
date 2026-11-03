@@ -148,3 +148,50 @@ El PNG queda **solo local** en el scratchpad de la sesión; no está en el repos
 | **FAIL abierto** | EEVEE headless en esta GPU; `visual:preflight` vía npm informa `npm: NOT_FOUND`/`Python 3: ERROR` (falso negativo no corregido) |
 | **BLOCKED** | Codex (sin créditos): QA independiente; Supermetrics/Klaviyo/Windsor (auth); plugin marketing duplicado |
 | **PENDIENTE** | Aprobar MCP playwright/chrome-devtools; proveedor aprobado para inferencia en OmniRoute; identidad de Palacio Mental y Claude Red; Headroom; firewall Public; `altiora-shared` apunta a carpeta antigua; ciclo con cliente real |
+
+## 12. Rev. 4 — 2026-11-03: directiva de certificación y preparación comercial
+
+### 12.1 OmniRoute (Fase 1)
+- **PASS (re-verificado):** escucha solo en `127.0.0.1:20128` (PID 24652); `/api/health` 200; `/api/providers`, `/api/keys`, `/api/settings` y `/v1/models` sin credencial → 401; `192.168.1.113:20128` sin respuesta. Datos, clave de cifrado y respaldos intactos; sin reinstalar.
+- **Arranque seguro tras reinicio (preparado, NO instalado):** `scripts/omniroute-safe-start.ps1` (`-CheckOnly` solo verifica; probado: PASS, exit 0). Fija loopback, usa `%USERPROFILE%\.altiora\omniroute-cwd` sin `.env`, aborta si hay escucha fuera de loopback, no usa `omniroute stop`. No hay tarea programada: crearla requiere autorización específica.
+- **Firewall (propuesta, NO aplicada):** las reglas existentes son `TCP/UDP Query User{…}C:\program files\nodejs\node.exe`, perfil **Public**, Allow, entrada. El tráfico a 127.0.0.1 no pasa por ese filtro, así que deshabilitarlas no afecta a OmniRoute; solo impide que cualquier servidor Node ligado a `0.0.0.0` sea alcanzable desde redes públicas. Propuesta mínima (PowerShell de administrador, reversible): `Set-NetFirewallRule -Name '<Name de cada regla>' -Enabled False` (revertir con `-Enabled True`). Alternativa menos invasiva: cambiar el perfil de la red a Privada. Requiere autorización.
+
+### 12.2 ALT-TRIAD-001 (Fase 2)
+- Codex: `.altiora/orchestration.json` lo marca agotado hasta 2026-11-05 → no asignable.
+- Revisor disponible: instancia Claude aislada (`altiora-os-qa`), **independencia PARCIAL** (mismo modelo que el autor del brief). Informe: `tests/triad/ALT-TRIAD-001-qa.md`.
+- Resultado: V1 brief PASS · V2 contraste PASS (11/11; 8 pares recalculados de forma independiente coinciden) · V3 sin scroll 360×640 NOT_RUN (falta medir en navegador) · V4 un escritor por archivo CONDITIONAL (ui.md tocado por Claude; git no distingue IAs) · V5 claridad CONDITIONAL (10 ambigüedades; media: href `#pedido?planta=` no preselecciona, aria-label no contiene el texto visible [WCAG 2.5.3], faltan pares de contraste de enlace/placeholder/FAQ).
+- **Estado de la triada: CONDITIONAL. No PASS. Issue #65 no debe cerrarse como PASS** hasta revisión por otro modelo/humano y resolver V3–V5.
+
+### 12.3 MCP (Fase 3) — `claude mcp list`
+| MCP | Estado |
+|---|---|
+| playwright, chrome-devtools | configurados, **Pending approval** (aprobar en `claude`; respondieron por stdio en rev. 2) |
+| altiora-shared | Connected, pero apunta a la carpeta del 2026-10-18 |
+| claude.ai Vercel, Figma | Connected (conectado ≠ autorizado; usar solo bajo demanda) |
+| dak-notebook, dak-data-agent-kit, dak-gcs/bigquery/cloudsql/firestore | Pending approval; los dak-* de nube fallan por falta de ADC → mantener sin aprobar |
+| GitHub MCP, Blender MCP | no configurados (se usan `gh` y Blender CLI) |
+No se aprobó ninguno automáticamente.
+
+### 12.4 Blender / preflight (Fase 4)
+- Cycles CPU sigue siendo la configuración válida; EEVEE headless no se usa en la Radeon Vega 3.
+- **Falsos negativos corregidos:** `npm` es `npm.cmd` en Windows (spawn sin shell → ENOENT) → se lanza vía `cmd.exe /c npm --version`; `python3` es un atajo de Microsoft Store (exit 9009) → se prueban `python3`, `python`, `py`. Resultado real: npm 11.19.0 AVAILABLE, Python 3.12.10 AVAILABLE. Pruebas `visual-preflight.test.mjs` 12/12.
+
+### 12.5 OmniRoute y tokens (Fase 5)
+Generación **NOT_TESTED / BLOCKED**: no hay proveedor autorizado identificado (0 configurados, y listarlos requiere sesión autenticada que no se usó). Sin proveedor no hay medición de tokens, latencia, costo ni ahorro; ahorro real = NOT_MEASURED. Headroom, Palacio Mental y Claude Red: no instalados (los dos últimos siguen sin identidad).
+
+### 12.6 Pruebas (Fase 8)
+| Prueba | Resultado |
+|---|---|
+| `skills:audit` | PASS: 355 skills, media 98.3 (= línea base) |
+| `routing:eval` | PASS 17/17 (ahorro de tokens NOT_MEASURED) |
+| `capability:doctor` | PASS exit 0; `antigravity: MISSING` en adaptadores del repo (por revisar), conexiones NOT_VERIFIED |
+| `visual:preflight` | PASS exit 0 (npm y Python ya correctos) |
+| manifiesto (entrega/) | 4/4 |
+| `npm run check` | ver commit/CI de PR #71 |
+
+### 12.7 Fases 6–7 (alcance no ejecutado)
+- Fase 6: solo auditoría automática anterior; no se revisaron duplicados exactos, referencias rotas ni adaptadores a fondo. NOT_RUN.
+- Fase 7: prueba interna G1–G8 con caso ficticio **NOT_RUN** (G1/G2 exigen comprador y anticipo). El Tilichero: existe `projects/tilicheros/` (dirección creativa, ads, captación) pero sin ficha de encaje ni cifras validadas; no se inventan resultados.
+
+### 12.8 Recomendación
+**CONDITIONAL GO** solo para un primer cliente con proceso humano supervisado (diagnóstico → propuesta → desarrollo web → QA con Playwright/Blender local). **HOLD** para prometer: revisión independiente real, inferencia vía OmniRoute, ahorro de tokens. Bloqueos humanos: aprobar MCP playwright/chrome-devtools; decidir firewall y tarea de arranque; proveedor con tope de gasto 0; recarga de Codex (05/11); identidad de Palacio Mental/Claude Red.
