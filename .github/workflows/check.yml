@@ -31,6 +31,13 @@ jobs:
       - name: Verify catalog, adapters, toolkit, routing and audio
         run: npm run check
 
+      # Evidencia estructural independiente del modelo. No certifica conexiones locales.
+      - name: Produce read-only readiness and skill-integrity evidence
+        run: |
+          npm run capabilities:protect
+          npm run skills:integrity
+          npm run readiness:report
+
       - name: Generate and show drift on failure
         if: failure()
         run: |

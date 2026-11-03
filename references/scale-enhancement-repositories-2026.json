@@ -1,0 +1,185 @@
+{
+  "schema_version": 1,
+  "created_on": "2026-11-02",
+  "purpose": "Complementary candidate shortlist for Altiora; not an installation or compatibility certification",
+  "source_of_truth": [
+    "references/repositories.json",
+    "references/visual-libraries-2026.json",
+    "skills/",
+    "docs/research/"
+  ],
+  "required_gates": [
+    "license",
+    "security",
+    "release",
+    "compatibility",
+    "need",
+    "cost",
+    "sandbox_test",
+    "human_approval"
+  ],
+  "repositories": [
+    {
+      "id": "anthropics/skills",
+      "url": "https://github.com/anthropics/skills",
+      "category": "consulting",
+      "state": "DISCOVERED_NOT_INSTALLED",
+      "verification": "PENDING_LICENSE_SECURITY_VERSION_COMPATIBILITY",
+      "action": "compare_existing_catalog_first",
+      "notes": "Candidate: inspect overlap with existing skills and visual catalogs"
+    },
+    {
+      "id": "microsoft/markitdown",
+      "url": "https://github.com/microsoft/markitdown",
+      "category": "consulting",
+      "state": "DISCOVERED_NOT_INSTALLED",
+      "verification": "PENDING_LICENSE_SECURITY_VERSION_COMPATIBILITY",
+      "action": "compare_existing_catalog_first",
+      "notes": "Candidate: inspect overlap with existing skills and visual catalogs"
+    },
+    {
+      "id": "mermaid-js/mermaid",
+      "url": "https://github.com/mermaid-js/mermaid",
+      "category": "consulting",
+      "state": "DISCOVERED_NOT_INSTALLED",
+      "verification": "PENDING_LICENSE_SECURITY_VERSION_COMPATIBILITY",
+      "action": "compare_existing_catalog_first",
+      "notes": "Candidate: inspect overlap with existing skills and visual catalogs"
+    },
+    {
+      "id": "architecture-decision-record/architecture-decision-record",
+      "url": "https://github.com/architecture-decision-record/architecture-decision-record",
+      "category": "consulting",
+      "state": "DISCOVERED_NOT_INSTALLED",
+      "verification": "PENDING_LICENSE_SECURITY_VERSION_COMPATIBILITY",
+      "action": "compare_existing_catalog_first",
+      "notes": "Candidate: inspect overlap with existing skills and visual catalogs"
+    },
+    {
+      "id": "gitroomhq/postiz-app",
+      "url": "https://github.com/gitroomhq/postiz-app",
+      "category": "growth",
+      "state": "DISCOVERED_NOT_INSTALLED",
+      "verification": "PENDING_LICENSE_SECURITY_VERSION_COMPATIBILITY",
+      "action": "compare_existing_catalog_first",
+      "notes": "Candidate: inspect overlap with existing skills and visual catalogs"
+    },
+    {
+      "id": "chatwoot/chatwoot",
+      "url": "https://github.com/chatwoot/chatwoot",
+      "category": "growth",
+      "state": "DISCOVERED_NOT_INSTALLED",
+      "verification": "PENDING_LICENSE_SECURITY_VERSION_COMPATIBILITY",
+      "action": "compare_existing_catalog_first",
+      "notes": "Candidate: inspect overlap with existing skills and visual catalogs"
+    },
+    {
+      "id": "twentyhq/twenty",
+      "url": "https://github.com/twentyhq/twenty",
+      "category": "growth",
+      "state": "DISCOVERED_NOT_INSTALLED",
+      "verification": "PENDING_LICENSE_SECURITY_VERSION_COMPATIBILITY",
+      "action": "compare_existing_catalog_first",
+      "notes": "Candidate: inspect overlap with existing skills and visual catalogs"
+    },
+    {
+      "id": "activepieces/activepieces",
+      "url": "https://github.com/activepieces/activepieces",
+      "category": "growth",
+      "state": "DISCOVERED_NOT_INSTALLED",
+      "verification": "PENDING_LICENSE_SECURITY_VERSION_COMPATIBILITY",
+      "action": "compare_existing_catalog_first",
+      "notes": "Candidate: inspect overlap with existing skills and visual catalogs"
+    },
+    {
+      "id": "n8n-io/n8n",
+      "url": "https://github.com/n8n-io/n8n",
+      "category": "growth",
+      "state": "DISCOVERED_NOT_INSTALLED",
+      "verification": "PENDING_LICENSE_SECURITY_VERSION_COMPATIBILITY",
+      "action": "compare_existing_catalog_first",
+      "notes": "Candidate: inspect overlap with existing skills and visual catalogs"
+    },
+    {
+      "id": "PostHog/posthog",
+      "url": "https://github.com/PostHog/posthog",
+      "category": "growth",
+      "state": "DISCOVERED_NOT_INSTALLED",
+      "verification": "PENDING_LICENSE_SECURITY_VERSION_COMPATIBILITY",
+      "action": "compare_existing_catalog_first",
+      "notes": "Candidate: inspect overlap with existing skills and visual catalogs"
+    },
+    {
+      "id": "remotion-dev/remotion",
+      "url": "https://github.com/remotion-dev/remotion",
+      "category": "audiovisual",
+      "state": "DISCOVERED_NOT_INSTALLED",
+      "verification": "PENDING_LICENSE_SECURITY_VERSION_COMPATIBILITY",
+      "action": "compare_existing_catalog_first",
+      "notes": "Candidate: inspect overlap with existing skills and visual catalogs"
+    },
+    {
+      "id": "FFmpeg/FFmpeg",
+      "url": "https://github.com/FFmpeg/FFmpeg",
+      "category": "audiovisual",
+      "state": "DISCOVERED_NOT_INSTALLED",
+      "verification": "PENDING_LICENSE_SECURITY_VERSION_COMPATIBILITY",
+      "action": "compare_existing_catalog_first",
+      "notes": "Candidate: inspect overlap with existing skills and visual catalogs"
+    },
+    {
+      "id": "ahujasid/mcp-for-blender",
+      "url": "https://github.com/ahujasid/mcp-for-blender",
+      "category": "audiovisual",
+      "state": "DISCOVERED_NOT_INSTALLED",
+      "verification": "PENDING_LICENSE_SECURITY_VERSION_COMPATIBILITY",
+      "action": "compare_existing_catalog_first",
+      "notes": "Candidate: inspect overlap with existing skills and visual catalogs"
+    },
+    {
+      "id": "shadcn-ui/ui",
+      "url": "https://github.com/shadcn-ui/ui",
+      "category": "audiovisual",
+      "state": "DISCOVERED_NOT_INSTALLED",
+      "verification": "PENDING_LICENSE_SECURITY_VERSION_COMPATIBILITY",
+      "action": "compare_existing_catalog_first",
+      "notes": "Candidate: inspect overlap with existing skills and visual catalogs"
+    },
+    {
+      "id": "pmndrs/react-three-fiber",
+      "url": "https://github.com/pmndrs/react-three-fiber",
+      "category": "audiovisual",
+      "state": "DISCOVERED_NOT_INSTALLED",
+      "verification": "PENDING_LICENSE_SECURITY_VERSION_COMPATIBILITY",
+      "action": "compare_existing_catalog_first",
+      "notes": "Already referenced in references/repositories.json; do not duplicate"
+    },
+    {
+      "id": "microsoft/playwright",
+      "url": "https://github.com/microsoft/playwright",
+      "category": "quality",
+      "state": "DISCOVERED_NOT_INSTALLED",
+      "verification": "PENDING_LICENSE_SECURITY_VERSION_COMPATIBILITY",
+      "action": "compare_existing_catalog_first",
+      "notes": "Already referenced in references/repositories.json; do not duplicate"
+    },
+    {
+      "id": "GoogleChrome/lighthouse-ci",
+      "url": "https://github.com/GoogleChrome/lighthouse-ci",
+      "category": "quality",
+      "state": "DISCOVERED_NOT_INSTALLED",
+      "verification": "PENDING_LICENSE_SECURITY_VERSION_COMPATIBILITY",
+      "action": "compare_existing_catalog_first",
+      "notes": "Already referenced in references/repositories.json; do not duplicate"
+    },
+    {
+      "id": "dequelabs/axe-core",
+      "url": "https://github.com/dequelabs/axe-core",
+      "category": "quality",
+      "state": "DISCOVERED_NOT_INSTALLED",
+      "verification": "PENDING_LICENSE_SECURITY_VERSION_COMPATIBILITY",
+      "action": "compare_existing_catalog_first",
+      "notes": "Already referenced in references/repositories.json; do not duplicate"
+    }
+  ]
+}
