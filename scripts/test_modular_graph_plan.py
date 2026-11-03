@@ -30,9 +30,25 @@ class ModularGraphTests(unittest.TestCase):
         m["nodes"]["headroom"]["enabled"] = True
         m["nodes"]["omniroute"]["enabled"] = True
         a = dict(BASE, authorized_tools=["models:route", "compress:context"], large_payload=True)
-        result = module.plan(a, m)
+        result = module.plan(a, m, gateway_healthy=True)
         self.assertEqual(result["model_gateway"], "omniroute")
         self.assertEqual(result["compressor"], "existing")
+    def test_omniroute_armed_but_fails_closed(self):
+        a = dict(BASE, authorized_tools=["models:route"])
+        result = module.plan(a, MANIFEST)
+        self.assertEqual(result["model_gateway"], "existing")
+        self.assertTrue(any("no verified local gateway" in x for x in result["not_executed"]))
+
+    def test_omniroute_routes_when_healthy_and_authorized(self):
+        a = dict(BASE, authorized_tools=["models:route"])
+        self.assertEqual(module.plan(a, MANIFEST, gateway_healthy=True)["model_gateway"], "omniroute")
+
+    def test_gateway_requires_permission(self):
+        self.assertEqual(module.plan(BASE, MANIFEST, gateway_healthy=True)["model_gateway"], "existing")
+
+    def test_probe_blocks_non_loopback(self):
+        self.assertFalse(module.probe_omniroute("https://example.org/v1/models"))
+
     def test_missing_scope_rejected(self):
         with self.assertRaises(ValueError):
             module.plan({"job_id": "X", "intent": "UI"}, MANIFEST)
