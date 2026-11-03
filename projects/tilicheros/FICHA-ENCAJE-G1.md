@@ -3,7 +3,7 @@
 Borrador preparado por Claude Code (director operativo). Solo hechos ya documentados en `DIRECCION_DEL_PROYECTO.md` (2026-10-29) y `ads/`. Todo lo demás es «desconocido». No contiene cifras de ventas, márgenes ni ingresos. No se contactó al comprador.
 
 ## Comprador y decisión
-- Empresa, sector y fuente pública con fecha: El Tilichero, gaming y tecnología, cobertura pública declarada GAM y alrededores. Fuente: `DIRECCION_DEL_PROYECTO.md` (29/10/2026) y `ads/AUDITORIA_INSTAGRAM_PUBLICO_2026-10-29.md`. Tecnogau es proveedor/espacio de exhibición, no anunciante.
+- Empresa, sector y fuente pública con fecha: El Tilichero; gaming y tecnología son el foco del piloto, no el alcance de la empresa (el fundador indica también bebés y anime; ver [CONTEXTO-NEGOCIO.md](CONTEXTO-NEGOCIO.md)), cobertura pública declarada GAM y alrededores. Fuente: `DIRECCION_DEL_PROYECTO.md` (29/10/2026) y `ads/AUDITORIA_INSTAGRAM_PUBLICO_2026-10-29.md`. Tecnogau es proveedor/espacio de exhibición, no anunciante.
 - Interlocutor y cargo · ¿decide la compra?: desconocido. «Responsable comercial de El Tilichero: persona por designar».
 - Cómo compran (quién aprueba, plazo, proceso): desconocido.
 - Presupuesto declarado por el comprador (cita textual): desconocido. No existe cita.
