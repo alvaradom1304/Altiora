@@ -7,7 +7,8 @@ def lum(h):
     return .2126 * c[0] + .7152 * c[1] + .0722 * c[2]
 def ratio(a, b):
     hi, lo = sorted([lum(a), lum(b)], reverse=True); return round((hi + .05) / (lo + .05), 2)
-# (primer plano, fondo, declarado en ui.md, mínimo AA)
+# (primer plano, fondo, declarado ORIGINAL en ui.md @ e1d774f, mínimo AA). ui.md ya fue corregido con los valores "real";
+# el revisor debe comprobar que los números vigentes de ui.md coinciden con la columna real de esta salida.
 PAIRS = [("#132E1B","#F8FAF6",13.8,4.5),("#132E1B","#FFFFFF",14.7,4.5),("#2D5438","#F8FAF6",6.8,4.5),
  ("#2D5438","#FFFFFF",7.3,4.5),("#1E5E3A","#F8FAF6",4.8,3.0),("#FFFFFF","#1E5E3A",5.7,4.5),
  ("#144428","#FFFFFF",7.6,4.5),("#0E5E35","#F8FAF6",4.8,3.0),("#0E5E35","#FFFFFF",5.7,3.0),

@@ -12,7 +12,7 @@
 ## Revisión SUSTITUTA (Claude, no es la de Codex ni independiente de Claude)
 Comandos: cálculo WCAG propio en Python; `git log --name-only -- tests/triad`.
 - **Solape de rutas:** ninguno. Cada archivo tiene un único commit/autor-rol.
-- **Contraste:** todos los pares de texto/UI cumplen AA. Pero la tabla declarada de Antigravity es inexacta en 9 de 13 filas (valores reales más altos, p. ej. #2D5438/#F8FAF6 declarado 6.8, real 8.21; CTA #1E5E3A/#F8FAF6 declarado 4.8, real 7.36). Error conservador, no de cumplimiento.
+- **Contraste:** todos los pares de texto/UI cumplen AA. Pero la tabla declarada de Antigravity era inexacta en 9 de 11 pares texto/UI (más 2 filas no textuales); corregida después en ui.md (valores reales más altos, p. ej. #2D5438/#F8FAF6 declarado 6.8, real 8.21; CTA #1E5E3A/#F8FAF6 declarado 4.8, real 7.36). Error conservador, no de cumplimiento.
 - **Hallazgo menor:** botón deshabilitado #FFFFFF/#7D9C86 real 3.01, declarado 3.2 (WCAG exime a los controles deshabilitados).
 - **Criterios del brief 1–4:** el esquema los cubre sobre el papel. NO se probó en navegador (es un esquema, no una página).
 - La afirmación de «~304 px < 580 px» es estimación de Antigravity, NOT_RUN.

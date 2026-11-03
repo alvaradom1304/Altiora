@@ -9,6 +9,9 @@
 > - **Fecha**: 2026-11-03
 > - **Aviso**: Ejercicio puramente FICTICIO. Marca, productos, precios, testimonios y servicios son ficticios para prueba de triada.
 
+
+> **Nota de revisión (2026-11-03, Claude Code como director operativo):** los ratios de la sección 2 y menciones asociadas se recalcularon con `tests/triad/contrast-check.py` (fórmula WCAG 2.x). 9 de 11 valores originales eran inexactos (siempre por debajo del real, sin cambiar el veredicto AA). El botón deshabilitado pasa de 3.2:1 a 3.01:1 (exento de AA). Versión original: commit `e1d774f` (Antigravity). **Este archivo debe ser revisado por un revisor independiente; la corrección no equivale a aprobación.**
+
 ---
 
 ## 1. Resumen Ejecutivo y Criterios del Brief
@@ -30,18 +33,18 @@ Todos los valores de color han sido seleccionados para superar el nivel AA de WC
 |---|---|---|---|---|---|---|
 | `--color-bg-canvas` | `#F8FAF6` | Fondo general de la página | N/A | N/A | N/A | Base |
 | `--color-bg-surface` | `#FFFFFF` | Fondo de tarjetas y formulario | `#F8FAF6` | 1.05:1 | Delimitado por borde | Base |
-| `--color-text-primary` | `#132E1B` | Títulos (H1-H3), etiquetas y cuerpo | `#F8FAF6` | **13.8:1** | Mínimo 4.5:1 (3:1 grande) | **PASS (AAA)** |
-| `--color-text-primary` | `#132E1B` | Títulos y cuerpo sobre tarjeta | `#FFFFFF` | **14.7:1** | Mínimo 4.5:1 | **PASS (AAA)** |
-| `--color-text-muted` | `#2D5438` | Metadatos, subtítulos secundarios | `#F8FAF6` | **6.8:1** | Mínimo 4.5:1 | **PASS (AA)** |
-| `--color-text-muted` | `#2D5438` | Metadatos sobre tarjeta blanca | `#FFFFFF` | **7.3:1** | Mínimo 4.5:1 | **PASS (AA)** |
-| `--color-cta-bg` | `#1E5E3A` | Fondo botón "Pedir mi planta" | `#F8FAF6` | **4.8:1** (borde/botón) | Mínimo 3:1 (UI component) | **PASS (AA)** |
-| `--color-cta-text` | `#FFFFFF` | Texto botón "Pedir mi planta" | `#1E5E3A` | **5.7:1** | Mínimo 4.5:1 (texto normal) | **PASS (AA)** |
-| `--color-cta-hover` | `#144428` | Fondo botón en hover/active | `#FFFFFF` | **7.6:1** | Mínimo 4.5:1 | **PASS (AA)** |
-| `--color-focus-ring` | `#0E5E35` | Contorno de foco visible (3px solid) | `#F8FAF6` / `#FFFFFF` | **4.8:1 / 5.7:1** | Mínimo 3:1 (focus indicator) | **PASS (AA)** |
-| `--color-border-card` | `#D2DDD3` | Borde de tarjetas y separadores | `#F8FAF6` | **1.3:1** (no textual) | Borde visual estructural | **PASS** |
-| `--color-border-input`| `#2D5438` | Borde de campos de formulario | `#FFFFFF` | **7.3:1** | Mínimo 3:1 (form boundary) | **PASS (AA)** |
-| `--color-error` | `#B00020` | Mensaje de validación / error | `#FFFFFF` | **5.9:1** | Mínimo 4.5:1 | **PASS (AA)** |
-| `--color-badge-bg` | `#E3EFE4` | Fondo de insignia precio ficticio | `#132E1B` (texto) | **11.2:1** | Mínimo 4.5:1 | **PASS (AAA)** |
+| `--color-text-primary` | `#132E1B` | Títulos (H1-H3), etiquetas y cuerpo | `#F8FAF6` | **13.94:1** | Mínimo 4.5:1 (3:1 grande) | **PASS (AAA)** |
+| `--color-text-primary` | `#132E1B` | Títulos y cuerpo sobre tarjeta | `#FFFFFF` | **14.64:1** | Mínimo 4.5:1 | **PASS (AAA)** |
+| `--color-text-muted` | `#2D5438` | Metadatos, subtítulos secundarios | `#F8FAF6` | **8.21:1** | Mínimo 4.5:1 | **PASS (AA)** |
+| `--color-text-muted` | `#2D5438` | Metadatos sobre tarjeta blanca | `#FFFFFF` | **8.62:1** | Mínimo 4.5:1 | **PASS (AA)** |
+| `--color-cta-bg` | `#1E5E3A` | Fondo botón "Pedir mi planta" | `#F8FAF6` | **7.36:1** (borde/botón) | Mínimo 3:1 (UI component) | **PASS (AA)** |
+| `--color-cta-text` | `#FFFFFF` | Texto botón "Pedir mi planta" | `#1E5E3A` | **7.73:1** | Mínimo 4.5:1 (texto normal) | **PASS (AA)** |
+| `--color-cta-hover` | `#144428` | Fondo botón en hover/active | `#FFFFFF` | **11.13:1** | Mínimo 4.5:1 | **PASS (AA)** |
+| `--color-focus-ring` | `#0E5E35` | Contorno de foco visible (3px solid) | `#F8FAF6` / `#FFFFFF` | **7.49:1 / 7.86:1** | Mínimo 3:1 (focus indicator) | **PASS (AA)** |
+| `--color-border-card` | `#D2DDD3` | Borde de tarjetas y separadores | `#F8FAF6` | **1.33:1** (no textual) | Borde visual estructural | **PASS** |
+| `--color-border-input`| `#2D5438` | Borde de campos de formulario | `#FFFFFF` | **8.62:1** | Mínimo 3:1 (form boundary) | **PASS (AA)** |
+| `--color-error` | `#B00020` | Mensaje de validación / error | `#FFFFFF` | **7.33:1** | Mínimo 4.5:1 | **PASS (AA)** |
+| `--color-badge-bg` | `#E3EFE4` | Fondo de insignia precio ficticio | `#132E1B` (texto) | **12.36:1** | Mínimo 4.5:1 | **PASS (AAA)** |
 
 ---
 
@@ -222,7 +225,7 @@ Para garantizar accesibilidad y feedback claro al usuario, todos los componentes
   - `border-radius: 8px`
   - `display: inline-flex; align-items: center; justify-content: center`
 - **Hover**:
-  - `background-color: #144428` (oscurecimiento visible, ratio aumenta a 7.6:1)
+  - `background-color: #144428` (oscurecimiento visible, ratio 11.13:1)
   - `transform: translateY(-1px)` (solo cuando no hay reduced motion)
 - **Focus-visible (Navegación por teclado)**:
   - `outline: 3px solid #0E5E35`
@@ -232,7 +235,7 @@ Para garantizar accesibilidad y feedback claro al usuario, todos los componentes
   - `background-color: #0E331B`
   - `transform: translateY(1px)`
 - **Disabled (`:disabled` o `[aria-disabled="true"]`)**:
-  - `background-color: #7D9C86` (mantiene contraste 3.2:1 con texto blanco para legibilidad)
+  - `background-color: #7D9C86` (contraste real 3.01:1 con texto blanco; los controles deshabilitados están exentos de WCAG 1.4.3, pero no depender solo del color)
   - `cursor: not-allowed`
   - `opacity: 0.75`
 - **Loading / Submitting**:
@@ -243,7 +246,7 @@ Para garantizar accesibilidad y feedback claro al usuario, todos los componentes
 - **Default**:
   - `background-color: #FFFFFF`
   - `color: #132E1B`
-  - `border: 2px solid #2D5438` (contraste de borde 7.3:1 con el fondo blanco)
+  - `border: 2px solid #2D5438` (contraste de borde 8.62:1 con el fondo blanco)
   - `border-radius: 6px`
   - `min-height: 48px` (en inputs y selects)
   - `font-size: 1rem` (16 px)
@@ -343,7 +346,7 @@ El diseño está concebido bajo metodología **Mobile-First** con prueba obligat
 | **1. Acción principal única** | Visible sin scroll: "Pedir mi planta" | Botón `#cta-principal` dentro del primer bloque visible (altura total ~304 px < 580 px en móvil 360 px) | **CUMPLIDO** |
 | **2. Secciones obligatorias** | Héroe, 3 plantas con precio ficticio, 3 pasos de cuidado, FAQ, Pedido | Secciones 1 a 5 detalladas con semántica HTML5 (`header`, `section`, `ol`, `details`, `form`) | **CUMPLIDO** |
 | **3. Resiliencia y DOM completo** | Legible sin JS, movimiento reducido, móvil 360 px | CSS puro, sin dependencias 3D/JS, media query de reduced motion, layout fluido 328 px utilizables en 360 px | **CUMPLIDO** |
-| **4. Contraste y Accesibilidad** | Contraste AA y foco visible | Tabla de 14 tokens de color con ratios de 4.8:1 a 14.7:1 (todos superan WCAG AA), foco `3px solid #0E5E35` con offset | **CUMPLIDO** |
+| **4. Contraste y Accesibilidad** | Contraste AA y foco visible | Tabla de 14 tokens de color con ratios de 7.36:1 a 14.64:1 en texto y componentes activos (todos superan WCAG AA), foco `3px solid #0E5E35` con offset | **CUMPLIDO** |
 | **5. Prevención de riesgos** | Sin invención de datos comerciales, todo ficticio, sin 3D | Marca "Verdía", precios y garantías etiquetados explícitamente como `[FICTICIO]`; 0 WebGL / 0 Canvas | **CUMPLIDO** |
 
 ---

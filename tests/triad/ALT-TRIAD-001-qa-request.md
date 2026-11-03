@@ -8,7 +8,7 @@ Estado: **PENDIENTE** (Codex sin créditos el 2026-11-03). Este paquete lo puede
 
 ## Qué verificar (marcar PASS / FAIL / NOT_RUN con comando y salida)
 1. **Cumplimiento del brief:** los 4 criterios de éxito y las 5 secciones están presentes en `ui.md`, sin 3D ni datos reales.
-2. **Contraste:** `python tests/triad/contrast-check.py` — confirma que cada par cumple AA y anota los valores declarados inexactos (Claude detectó 9 de 11).
+2. **Contraste:** `python tests/triad/contrast-check.py` — confirma que cada par cumple AA. `ui.md` fue **corregido por Claude** (9 de 11 ratios originales eran inexactos; original en `e1d774f`): comprobar con `git diff e1d774f -- tests/triad/ALT-TRIAD-001-ui.md` que solo cambiaron cifras de contraste y la nota de revisión, y que los números vigentes coinciden con la columna `real`.
 3. **Medida de «sin scroll en 360×640»:** `ui.md` afirma ~304 px; es una suma estimada, no una medición. Marcar NOT_RUN salvo que se maqueta y se mide en navegador.
 4. **Solape de rutas:** `git log --name-only --format=%h -- tests/triad` — un único escritor por archivo.
 5. **Claridad:** ¿un desarrollador podría construir la landing solo con `ui.md`? Listar ambigüedades.
