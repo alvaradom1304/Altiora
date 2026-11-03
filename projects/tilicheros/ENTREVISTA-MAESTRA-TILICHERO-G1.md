@@ -62,6 +62,16 @@ Llenar durante la sesión. Estado: **D** = lo dijo el dueño · **V** = verifica
 | 17 | Factura del proveedor y fotos del producto recibidas | | | |
 | 18 | Siguiente paso y fecha | | | |
 
+### Hoja por categoría (alimenta el BSCG)
+El BSCG evalúa **por categoría**, no por producto. Anotar aquí las categorías que el dueño nombre **por su cuenta**, sin sugerirlas; después, la regla de la [guía del entrevistador](GUIA-ENTREVISTADOR.md) para preguntar por las que no mencione. Estado por dato: **D** dicho por el dueño · **V** con documento · **NS** no lo sabe · **—** no se preguntó.
+
+| Categoría que nombra | ¿La nombró solo? | Ventas último mes (u. e ingreso) | Margen por unidad | Inventario parado | Estado |
+|---|---|---|---|---|---|
+| | | | | | |
+| | | | | | |
+| | | | | | |
+| | | | | | |
+
 ## Lista mínima para G1
 G1 solo se evalúa con estos cinco puntos. Los tres primeros son los que hoy mantienen el HOLD.
 
