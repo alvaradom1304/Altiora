@@ -248,3 +248,30 @@ Pendiente para PASS: ratificación de Antigravity; revisión ejecutada por un mo
 | 6 | Firewall Public de Node.js | Pendiente de sesión de administrador; no bloquea la fusión |
 | 7 | Aprobar MCP playwright/chrome-devtools; proveedor OmniRoute; `altiora-shared`; identidad de Palacio Mental/Claude Red | Pendientes; independientes del PR |
 | 8 | Archivos no versionados (`__pycache__`) | No incluidos en el PR |
+
+## 15. Rev. 7 — 2026-11-03: fusión del PR #71 y estabilización
+
+### 15.1 Fusión
+- Controles previos: PR abierto, CI verde Ubuntu y Windows, `CLEAN`, sin conflictos, sin eliminaciones, sin secretos en el diff. Hallazgo: 2 `.pyc` añadidos por error en `cf59a1f`; se quitaron en `902e62e` con aprobación del fundador y se esperó CI verde antes de fusionar.
+- PR #71 **MERGED** (2026-11-03T18:39:47Z), commit de fusión `17b9fb4` (método: merge commit). No se fusionó ningún otro PR.
+- Checkout canónico `altiora-unificado`: `git pull --ff-only origin main` → `17b9fb4`; archivos locales sin versionar conservados; contiene `scripts/omniroute-safe-start.ps1` y `scripts/omniroute-task-repoint.ps1`.
+
+### 15.2 Tarea de arranque
+- Respaldo previo verificado (`task-Altiora-OmniRoute-SafeStart-2026-11-03.xml`). Simulacro OK; `-Apply` OK. La tarea ahora apunta a `altiora-unificado\scripts\omniroute-safe-start.ps1`; usuario `Usuario`, RunLevel Limited, sin elevación; `LastTaskResult=0`.
+- Tras la ejecución: un solo proceso OmniRoute (PID 24652), escucha solo en 127.0.0.1:20128, salud 200, rutas admin y `/v1/models` sin credencial → 401, IP de red sin respuesta. Datos y credenciales no tocados.
+- **Pendiente:** prueba de persistencia tras reinicio de Windows (no se reinició el equipo; debe hacerse de forma controlada).
+
+### 15.3 Pruebas posteriores a la fusión (checkout canónico, `17b9fb4`)
+| Prueba | Resultado |
+|---|---|
+| `npm run check` | PASS |
+| `skills:audit` | PASS (sin regresión frente a la línea base) |
+| `routing:eval` | PASS 17/17 (ahorro de tokens NOT_MEASURED) |
+| `capability:doctor -- --text` | PASS; conexiones NOT_VERIFIED. Antigravity ya figura `ENTRY_SHAPE_PRESENT` en `main` (el `MISSING` de la rev. 4 venía de una rama antigua) |
+| `visual:preflight` | PASS (npm y Python detectados) |
+
+### 15.4 Estados que se mantienen (sin cambios)
+ALT-TRIAD-001 **CONDITIONAL** · issue #65 **abierto** · revisión ejecutada por modelo distinto de Claude **pendiente** (Codex desde 05/11) · firewall Public de Node.js **sin modificar** (2 reglas Enabled=True; requiere administrador) · OmniRoute generación y ahorro de tokens **sin certificar** (sin proveedor autorizado) · Headroom, Palacio Mental y Claude Red **no instalados** · MCP playwright y chrome-devtools **pendientes de aprobación** · `altiora-shared` apunta a la instalación del 18/10 · G1 de El Tilichero **HOLD**.
+Un PR fusionado no certifica todas las capacidades de Altiora.
+
+### 15.5 Decisión: **CONDITIONAL GO** (sin cambios)
