@@ -22,6 +22,7 @@ Estado: ABIERTA · BLOQUEADA (depende de permiso, dinero o dato externo) · CERR
 | G-10 | P3 | `.pyc` versionados y rutas absolutas en `.mcp.json` | ABIERTA |
 | G-11 | P3 | Headroom, Palacio Mental, Claude Red | ABIERTA (no bloquea) |
 | G-12 | P3 | Tarea de arranque apuntaba a un worktree | CERRADA |
+| G-13 | P1 | Sesgo de cobertura: una campaña tomada por el negocio entero | CERRADA (el control; los datos siguen en G-02) |
 
 ## Detalle
 ### G-01 · P1 · Revisión independiente de ALT-TRIAD-001
@@ -103,7 +104,8 @@ Estado: ABIERTA · BLOQUEADA (depende de permiso, dinero o dato externo) · CERR
 - **Estado:** ABIERTA. NO VERIFICADO qué contiene.
 
 ### G-10 · P3 · Higiene
-- Cuatro `.pyc` versionados aparecen modificados en cada ejecución (visto en `git status` de la rama `altiora-enterprise-os`). El `.gitignore` debería excluirlos.
+- **Parcialmente cerrada (2026-11-03, PR #75, `8d0601a`):** el `.gitignore` raíz estaba vacío; ahora ignora `__pycache__/` y `*.py[cod]`, y se retiraron del PR 8 `.pyc` que se habían añadido por error. `git check-ignore` lo confirma.
+- **Sigue abierta:** `main` versiona 20 `.pyc` anteriores (p. ej. en `.agents/skills/`) que aparecen modificados tras cada ejecución; el `.gitignore` no los destraquea. Quitarlos es una decisión aparte (`git rm --cached`) que no se tomó.
 - `.mcp.json` contiene rutas absolutas de usuario (matriz §4.6): no portable.
 
 ### G-11 · P3 · Headroom, Palacio Mental, Claude Red
@@ -112,3 +114,10 @@ Estado: ABIERTA · BLOQUEADA (depende de permiso, dinero o dato externo) · CERR
 ### G-12 · P3 · Tarea de arranque apuntaba a un worktree temporal — CERRADA
 - **Evidencia:** hoy `omniroute-task-repoint.ps1` en modo simulacro: acción actual = acción nueva, ambas con `…\altiora-unificado\scripts\omniroute-safe-start.ps1`; los dos scripts existen en el checkout canónico, que está en `17b9fb4` sin retraso respecto de `origin/main`.
 - **Prueba:** salida del simulacro (exit 0) y `Test-Path` verdadero. Cierra solo el apuntado de la ruta; el arranque tras reinicio falla por otra causa (G-07).
+
+### G-13 · P1 · Sesgo de cobertura del negocio (caso El Tilichero) — CERRADA (el control)
+- **Evidencia del defecto:** la documentación se concentró en una campaña de audífonos y el foco de un piloto se leyó como el sector de la empresa; el fundador indica además bebés y anime. Detalle y causa raíz en [CONTEXTO-NEGOCIO.md](../../projects/tilicheros/CONTEXTO-NEGOCIO.md).
+- **Corrección:** protocolo [CONTEXT-FIRST-BSCG.md](../altiora-business/entrega/CONTEXT-FIRST-BSCG.md), verificador `bscg.py`, bloque de cobertura en la ficha G1 y paso 0 en `aem-stage-01-discovery`.
+- **Prueba real:** `test_bscg.py`, 17 pruebas en OK desde `main` @ `8d0601a`, con el incidente congelado; con un gate sesgado simulado la regresión falla. `npm run check` exit 0 y CI 4/4 verde. El BSCG sobre El Tilichero da **HOLD** (exit 20).
+- **Límite:** el verificador comprueba coherencia, no veracidad; la entrada es manual (`entrada: MANUAL_NO_VERIFICADA`). Cerrar el control no cierra la falta de datos del negocio: esa sigue en G-02.
+
