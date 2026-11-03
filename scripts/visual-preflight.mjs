@@ -54,7 +54,7 @@ export function probeExecutable(name, executable, args, runner = spawnSync) {
     const result = runner(executable, args, {
       shell: false,
       encoding: "utf8",
-      timeout: 5000,
+      timeout: 15000,
       maxBuffer: 128 * 1024,
       windowsHide: true
     });
@@ -66,6 +66,30 @@ export function probeExecutable(name, executable, args, runner = spawnSync) {
   } catch {
     return {name, status: "ERROR", version: null};
   }
+}
+
+// En Windows npm es npm.cmd: con shell:false da ENOENT/EINVAL aunque este instalado.
+// Se lanza via cmd.exe con argumentos constantes (sin entrada externa).
+export function probeNpm(runner = spawnSync, platform = process.platform) {
+  if (platform === "win32") {
+    const r = probeExecutable("npm", "cmd.exe", ["/d", "/s", "/c", "npm --version"], runner);
+    return {...r, name: "npm"};
+  }
+  return probeExecutable("npm", "npm", ["--version"], runner);
+}
+
+// En Windows "python3" suele ser un atajo de la Microsoft Store que sale con error (9009).
+// Se prueban alias reales y gana el primero que responda.
+export function probePython3(runner = spawnSync, platform = process.platform) {
+  const candidates = platform === "win32" ? ["python3", "python", "py"] : ["python3", "python"];
+  let last = {name: "Python 3", status: "NOT_FOUND", version: null};
+  for (const command of candidates) {
+    const args = command === "py" ? ["-3", "--version"] : ["--version"];
+    const r = probeExecutable("Python 3", command, args, runner);
+    if (r.status === "AVAILABLE") return {...r, command};
+    if (r.status === "ERROR" || last.status === "NOT_FOUND") last = r;
+  }
+  return last;
 }
 
 export async function inspectRemotion() {
@@ -88,11 +112,14 @@ export async function inspectRemotion() {
 export async function createReport(runner = spawnSync) {
   const bins = [
     ["FFmpeg", "ffmpeg", ["-version"]],
-    ["Git", "git", ["--version"]],
-    ["npm", "npm", ["--version"]],
-    ["Python 3", "python3", ["--version"]]
+    ["Git", "git", ["--version"]]
   ];
-  const tools = [detectBlender(runner), ...bins.map(([name, command, args]) => probeExecutable(name, command, args, runner))];
+  const tools = [
+    detectBlender(runner),
+    ...bins.map(([name, command, args]) => probeExecutable(name, command, args, runner)),
+    probeNpm(runner),
+    probePython3(runner)
+  ];
   tools.push(await inspectRemotion());
   return {
     schema_version: 1,

@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import {probeExecutable, createReport, formatReport, blenderCandidates, detectBlender} from "./visual-preflight.mjs";
+import {probeExecutable, createReport, formatReport, blenderCandidates, detectBlender, probeNpm, probePython3} from "./visual-preflight.mjs";
 
 test('Windows Blender discovery uses installed versions in numeric order without shell', () => {
   const paths = blenderCandidates({platform: 'win32', env: {ProgramFiles: 'C:\\Program Files'},
@@ -83,4 +83,25 @@ test("preflight never claims Adobe, Figma or MCP connected", async () => {
 
 test("no arbitrary commands can be passed as preflight probes", () => {
   assert.throws(() => probeExecutable("bad","x","; destructive command"), {name:"AssertionError"});
+});
+
+test("Windows: npm se detecta via cmd.exe y python3 cae a python si el atajo de Store falla", () => {
+  const calls = [];
+  const runner = (exe, args) => {
+    calls.push(exe);
+    if (exe === "cmd.exe") return {status: 0, stdout: "11.0.0"};
+    if (exe === "python3") return {status: 9009, stderr: "Python was not found"};
+    if (exe === "python") return {status: 0, stdout: "Python 3.12.10"};
+    return {status: null, error: {code: "ENOENT"}};
+  };
+  assert.equal(probeNpm(runner, "win32").status, "AVAILABLE");
+  const py = probePython3(runner, "win32");
+  assert.equal(py.status, "AVAILABLE");
+  assert.equal(py.command, "python");
+  assert.ok(calls.includes("cmd.exe") && calls.includes("python3"));
+});
+
+test("Python 3 ausente en todos los alias se reporta sin inventar disponibilidad", () => {
+  const none = () => ({status: null, error: {code: "ENOENT"}});
+  assert.equal(probePython3(none, "linux").status, "NOT_FOUND");
 });

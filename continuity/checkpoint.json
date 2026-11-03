@@ -2,7 +2,7 @@
   "schema_version": 1,
   "project": "Altiora Visual Studio",
   "repository": "alvaradom1304/Altiora",
-  "snapshot_date": "2026-10-31",
+  "snapshot_date": "2026-11-03",
   "snapshot_kind": "repo_checkpoint_not_live_github_api",
   "description": "Estado reproducible para reanudar entre sesiones e IAs. No significa ejecución persistente ni conexión automática con software.",
   "completed_milestones": [
@@ -329,7 +329,8 @@
     "La primera vigilancia completó escaneo y artefacto, pero GitHub bloqueó crear PR automáticamente; habilitar permiso Actions→General→Allow GitHub Actions to create and approve pull requests. Sin él quedan rama y artefacto, no PR automática.",
     "Scout V3 revisa últimas releases estables de GitHub P0/P1; no detecta necesariamente versiones publicadas solo en npm, PyPI o Creative Cloud, ni CVEs sin revisar advisories.",
     "El puente aerender requiere After Effects instalado y autorizado en la laptop: el CI Linux no demuestra conexión ni acceso de un agente a la app del usuario.",
-    "El bibliotecario enruta según capacidades disponibles y metadatos; no garantiza ahorro medido ni descubrimiento automático idéntico en todos los clientes. El puente AE tiene pruebas Windows y validación de configuración Codex aislada; las sesiones Adobe/Claude/Gemini/Antigravity siguen sin certificarse."
+    "El bibliotecario enruta según capacidades disponibles y metadatos; no garantiza ahorro medido ni descubrimiento automático idéntico en todos los clientes. El puente AE tiene pruebas Windows y validación de configuración Codex aislada; las sesiones Adobe/Claude/Gemini/Antigravity siguen sin certificarse.",
+    "Certificación 2026-11-03 (PR #71, sin fusionar): CONDITIONAL GO. ALT-TRIAD-001 en CONDITIONAL, no PASS: falta ratificación de Antigravity sobre tests/triad/ALT-TRIAD-001-ui.md y una revisión ejecutada por un modelo distinto de Claude (Codex vuelve el 05/11). G1 de El Tilichero en HOLD. Tarea Altiora-OmniRoute-SafeStart aún apunta al worktree wt-cert: tras fusionar el PR #71 y actualizar altiora-unificado, ejecutar scripts/omniroute-task-repoint.ps1 -Apply. Firewall Public de Node.js sin modificar (requiere administrador). Detalle y requisitos de fusión en docs/operations/ALTIORA-REAL-INTEGRATION-STATUS.md secciones 12 a 14."
   ],
   "recovery_instruction": "Leer checkpoint, consultar el commit/PR más reciente y los checks, reclamar tarea, ejecutar y escribir evidencia antes de terminar. No pedir al usuario que repita el briefing salvo necesidad material."
 }
