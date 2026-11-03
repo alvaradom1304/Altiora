@@ -211,7 +211,7 @@ Generación **NOT_TESTED / BLOCKED**: no hay proveedor autorizado identificado (
 - E. Un escritor por archivo: `ui.md` es de Antigravity. Se intentó reasignar vía Orca (3 iteraciones: 2 fallos de paso de argumentos en PowerShell y 1 denegación de permiso de comandos en modo headless de `agy`; la alternativa `--dangerously-skip-permissions` no estaba autorizada). Claude aplicó la corrección como **excepción registrada en `ui.md`**; Antigravity debe ratificarla o revertirla. Worktree sobrante `triad-ui-fix` (rama `triad/ui-fix`) sin cambios.
 
 ### 13.3 Estado de la triada: **CONDITIONAL — no PASS global**
-Pendiente para PASS: ratificación de Antigravity; revisión ejecutada por un modelo distinto de Claude (Codex desde 05/11 o ChatGPT con ejecución); lector de pantalla real y otros motores (solo se probó Chrome); estados Loading/Disabled no implementados (NOT_TESTED); el texto al 200 % empuja el CTA fuera de 640 px (hallazgo no bloqueante del revisor, no es un criterio del brief). Issue #65 no se cierra.
+Pendiente para PASS (ratificación de `ui.md` rev.2 ya dada por el fundador, §13.5): revisión ejecutada por un modelo distinto de Claude (Codex desde 05/11 o ChatGPT con ejecución); lector de pantalla real y otros motores (solo se probó Chrome); estados Loading/Disabled no implementados (NOT_TESTED); el texto al 200 % empuja el CTA fuera de 640 px (hallazgo no bloqueante del revisor, no es un criterio del brief). Issue #65 no se cierra.
 
 ### 13.4 Otros
 - OmniRoute: sigue solo en loopback (re-verificado con `omniroute-safe-start.ps1 -CheckOnly`: PASS). El script mantiene el directorio neutro y no toca datos ni credenciales; el arranque automático sigue sin registrar.
@@ -275,3 +275,12 @@ ALT-TRIAD-001 **CONDITIONAL** · issue #65 **abierto** · revisión ejecutada po
 Un PR fusionado no certifica todas las capacidades de Altiora.
 
 ### 15.5 Decisión: **CONDITIONAL GO** (sin cambios)
+
+### 15.6 Correcciones y hallazgos posteriores (misma fecha, después del reinicio de Windows)
+- **Ratificación de `ui.md` rev.2:** la dio el fundador (§13.5). La IA Antigravity no la ratificó; se corrige el texto anterior de §13.3 y del checkpoint. V4 = PASS por excepción documentada; la triada sigue CONDITIONAL por la revisión de otro modelo.
+- **Reinicio real:** arranque del equipo 12:52:09; la tarea `Altiora-OmniRoute-SafeStart` corrió al iniciar sesión (12:52:30) y `LastTaskResult` = 267014 (`0x41306`, `SCHED_S_TASK_TERMINATED`). Sin escucha en 20128 ni proceso OmniRoute. El registro operativo del Programador de tareas está desactivado: no hay eventos que lo expliquen.
+- **Prueba mínima:** se ejecutó a mano el mismo script aprobado. Terminó en 51 s (no se cuelga) con `FAIL`, y el arranque de OmniRoute informó: `STORAGE_ENCRYPTION_KEY is not set but a database already exists` y que no genera una clave nueva porque no podría descifrar los datos.
+- **Causa:** los secretos del `.env` del paquete (`JWT_SECRET`, `API_KEY_SECRET`, `STORAGE_ENCRYPTION_KEY`) tienen valor vacío (se midió solo la longitud, 0) y no existe variable de entorno de usuario ni de máquina. La instancia anterior (PID 24652) funcionaba con claves inyectadas en esa sesión; tras el reinicio no existen. Clasificación: **fallo de inicio** por configuración, no detención normal. El 267014 es un síntoma de que la tarea fue terminada; su causa exacta (límite de 5 min si el demonio retiene la tubería, o cierre de sesión) es HIPÓTESIS sin probar mientras no pueda arrancar.
+- **Acción pendiente del fundador (credenciales, no ejecutada):** decidir cómo persistir la clave (por ejemplo, desde su respaldo en `~/.altiora-backups/omniroute-2026-11-03_pre-intervencion/`; NO VERIFICADO que contenga la clave) o aceptar una base nueva (hoy hay 0 proveedores configurados). Ninguna de las dos se hizo. No se leyeron valores de claves.
+- **MCP:** `claude mcp list` muestra `playwright`, `chrome-devtools` y los `dak-*` en *Pending approval*, lo que explica el `CONNECT_TIMEOUT` en sesión. Alternativa vigente: Playwright CLI 1.64.1 (`npx playwright`) y `tests/triad/mockup/playwright-check.mjs`. No bloquea.
+
