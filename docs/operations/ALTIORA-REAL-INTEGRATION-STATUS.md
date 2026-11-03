@@ -104,11 +104,7 @@ Preparada, **no ejecutada**: `tests/triad/ALT-TRIAD-001-qa-request.md` y `tests/
 
 ## 10. Rev. 3 — P0: seguridad de OmniRoute (resuelto) y render de Blender
 ### 10.1 Identificación del PID 41288 (inequívoca)
-`node.exe` (`C:\Program Files
-odejs
-ode.exe --dns-result-order=ipv4first --max-old-space-size=4096 …
-pm
-ode_modules\omniroute\dist\server-ws.mjs`), usuario `Usuario`, iniciado 03/11 07:26:39, hijo de PID 45220 (`omniroute.mjs`, `serve` por defecto, 07:26:32), que cuelga de una consola PowerShell interactiva (PID 39956, desde 02/11 23:02). Datos: `~/.omniroute` (SQLite activo, `call_logs` con llamadas reales de las 08:00, es decir, **el servicio se usaba**). Único listener público: `0.0.0.0:20128`; otros puertos del PID (20131, 20132) solo en 127.0.0.1.
+`node.exe` (`C:\Program Files\nodejs\node.exe --dns-result-order=ipv4first --max-old-space-size=4096 …\npm\node_modules\omniroute\dist\server-ws.mjs`), usuario `Usuario`, iniciado 03/11 07:26:39, hijo de PID 45220 (`omniroute.mjs`, `serve` por defecto, 07:26:32), que cuelga de una consola PowerShell interactiva (PID 39956, desde 02/11 23:02). Datos: `~/.omniroute` (SQLite activo, `call_logs` con llamadas reales de las 08:00, es decir, **el servicio se usaba**). Único listener público: `0.0.0.0:20128`; otros puertos del PID (20131, 20132) solo en 127.0.0.1.
 
 ### 10.2 Intervención
 | Paso | Resultado | Evidencia |
