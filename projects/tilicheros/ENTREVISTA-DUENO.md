@@ -41,19 +41,19 @@ Fecha: 2026-11-02. Sustituye la solicitud de datos de [CAPTACION_SEMANA_1.md §3
 - ¿Son nuevos o usados? ¿Quién da la garantía y por cuánto tiempo?
 - ¿Cuántos tenés hoy y cada cuánto te llegan más? ¿Quién te los provee?
 
-**Si no se puede comprobar que son originales**, los anuncios no usan el nombre "AirPods" ni "Apple". Los 3 videos aprobados que lo dicen quedan sin publicar hasta resolverlo.
+**Si no se puede comprobar que son originales**, los anuncios no usan el nombre "AirPods" ni "Apple". Los videos aprobados que lo dicen quedan sin publicar hasta resolverlo.
 
 ### 4. Números para la comisión (5 min)
 > Te pregunto esto porque en vez de cobrarte por adelantado queremos cobrar solo de lo que se venda. La comisión tiene que dejarte ganancia a vos. Es confidencial.
 
 - De tus 3 productos que más se venden: ¿precio final, cuánto te cuesta (o cuánto le ganás) y cuántos vendés al mes?
-- ¿Cómo te pagan los clientes? Ya sé que cobrás contra entrega: ¿también aceptás Sinpe o transferencia?
+- ¿Cómo te pagan los clientes? Según las notas del 29 de octubre, cobrás al recibir: ¿sigue siendo así? ¿Aceptás también Sinpe o transferencia?
 - Entregas: ¿a qué zonas llegás, cuánto cobrás y en cuánto tiempo?
 
 ### 5. Cómo quiere trabajar con nosotros (3 min)
 - En 30 días, ¿qué tendría que pasar para que digás "valió la pena"? Pedir un número: consultas, ventas o algo concreto.
 - ¿Cómo preferís aprobar los videos y textos, y cuánto tiempo a la semana podés dedicarle?
-- Los 5 videos ya aprobados siguen sin publicar: ¿qué los frenó?
+- Varios videos ya aprobados siguen sin publicar (TechnoGO v03 y v04, "4 trucos" v02, POV AirPods Pro v02): ¿qué los frenó?
 - ¿Las personas que aparecen en los videos dieron permiso para salir en anuncios?
 
 ### 6. Cierre (2 min) · la propuesta solo con un sí aparte
