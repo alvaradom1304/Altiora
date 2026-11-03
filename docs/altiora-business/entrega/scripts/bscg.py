@@ -59,19 +59,21 @@ def evaluar(d):
             raise EntradaInvalida(f"criterios_manuales.{k}.valor debe ser SI, PARCIAL o NO")
 
     # Estados válidos y «VERIFIED» solo con evidencia, no con una declaración.
-    def revisar_estado(nombre, estado, fuente_tipo):
+    def revisar_estado(nombre, estado, fuente_tipo, fuente=None):
         if estado not in ESTADOS:
             raise EntradaInvalida(f"estado inválido en {nombre}: {estado}")
         if estado == "VERIFIED" and fuente_tipo in (None, "", "declaracion"):
             errores.append(f"{nombre}: marcado VERIFIED pero su fuente es una declaración (debe ser REPORTED)")
+        elif estado == "VERIFIED" and not str(fuente or "").strip():
+            errores.append(f"{nombre}: marcado VERIFIED sin citar la fuente")
 
     for c in cats:
-        revisar_estado(f"categoria '{c['nombre']}'", c.get("origen_declaracion", "UNKNOWN"), c.get("fuente_tipo"))
+        revisar_estado(f"categoria '{c['nombre']}'", c.get("origen_declaracion", "UNKNOWN"), c.get("fuente_tipo"), c.get("fuente"))
         for campo, est in c.get("datos", {}).items():
-            revisar_estado(f"{c['nombre']}.{campo}", est, c.get("fuente_tipo_datos"))
+            revisar_estado(f"{c['nombre']}.{campo}", est, c.get("fuente_tipo_datos"), c.get("fuente"))
     usadas_no_fiables = []
     for a in d.get("afirmaciones", []):
-        revisar_estado(f"afirmación '{a['texto'][:50]}'", a.get("estado", "UNKNOWN"), a.get("fuente_tipo"))
+        revisar_estado(f"afirmación '{a['texto'][:50]}'", a.get("estado", "UNKNOWN"), a.get("fuente_tipo"), a.get("fuente"))
         if a.get("usada_en_decision") and a.get("estado") not in FIABLES:
             usadas_no_fiables.append(a["texto"])
 
@@ -87,6 +89,12 @@ def evaluar(d):
     if usadas_no_fiables and c4 == "SI":
         c4 = "PARCIAL"
     crit = {k: manual[k]["valor"] for k in MANUALES}
+    for k in MANUALES:
+        if crit[k] == "SI" and not str(manual[k].get("evidencia", "")).strip():
+            crit[k] = "PARCIAL"
+            avisos.append(f"'{k}' declarado SI sin evidencia citada: cuenta como PARCIAL")
+    if crit["hechos_vs_supuestos"] != "SI" and c4 == "SI":
+        c4 = crit["hechos_vs_supuestos"]
     crit["hechos_vs_supuestos"] = c4
     crit.update(categorias_revisadas=c2, datos_para_priorizar=c8, respuesta_negocio_completo=c10)
 
@@ -110,7 +118,8 @@ def evaluar(d):
     preguntas = _preguntas(crit, cats, sin_revisar, sin_datos, d["alcance_decision"], d.get("preguntas_extra", []))
     return {
         "empresa": d["empresa"], "decision": d["decision"], "alcance_decision": d["alcance_decision"],
-        "resultado": resultado, "criterios": crit, "errores": errores,
+        "resultado": resultado, "criterios": crit, "errores": errores, "avisos": avisos,
+        "entrada": "MANUAL_NO_VERIFICADA",
         "afirmaciones_no_fiables_usadas": usadas_no_fiables,
         "categorias_sin_revisar": sin_revisar, "categorias_sin_datos": sin_datos, "preguntas": preguntas,
     }
@@ -152,8 +161,11 @@ def main(argv=None):
     else:
         print(f"BSCG {r['resultado']} · {r['empresa']} · decisión: {r['decision']} ({r['alcance_decision']})")
         print("Criterios:", ", ".join(f"{k}={v}" for k, v in r["criterios"].items()))
+        print("Nota: el verificador comprueba coherencia, no veracidad; los datos son los declarados en el archivo.")
         for e in r["errores"]:
             print("ERROR:", e)
+        for w in r["avisos"]:
+            print("AVISO:", w)
         if r["categorias_sin_revisar"]:
             print("Categorías sin revisar:", ", ".join(r["categorias_sin_revisar"]))
         for n, f in r["categorias_sin_datos"].items():

@@ -109,6 +109,26 @@ class ComportamientoGeneral(unittest.TestCase):
         self.assertEqual(r["resultado"], "HOLD")
         self.assertTrue(any("VERIFIED" in e for e in r["errores"]))
 
+    def test_criterio_manual_si_sin_evidencia_no_cuenta_como_si(self):
+        d = negocio_completo()
+        d["criterios_manuales"]["modelo_negocio"]["evidencia"] = "  "
+        r = bscg.evaluar(d)
+        self.assertEqual(r["criterios"]["modelo_negocio"], "PARCIAL")
+        self.assertEqual(r["resultado"], "CONDITIONAL")
+        self.assertTrue(any("modelo_negocio" in w for w in r["avisos"]))
+
+    def test_la_entrada_manual_se_marca_como_no_verificada(self):
+        r = bscg.evaluar(negocio_completo())
+        self.assertEqual(r["resultado"], "PASS")
+        self.assertEqual(r["entrada"], "MANUAL_NO_VERIFICADA")
+
+    def test_verified_sin_fuente_citada_es_error(self):
+        d = negocio_completo()
+        d["categorias"][0]["fuente"] = ""
+        r = bscg.evaluar(d)
+        self.assertEqual(r["resultado"], "HOLD")
+        self.assertTrue(any("sin citar la fuente" in e for e in r["errores"]))
+
     def test_entrada_invalida(self):
         with self.assertRaises(bscg.EntradaInvalida):
             bscg.evaluar({"empresa": "x"})

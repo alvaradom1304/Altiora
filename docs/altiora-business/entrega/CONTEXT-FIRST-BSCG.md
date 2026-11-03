@@ -67,6 +67,8 @@ Resultado:
 
 Criterios críticos: para una decisión de `empresa_completa`, los criterios 1, 2, 5, 6, 8 y 10; para `campana` o `producto`, los criterios 4, 5 y 6. Un crítico en `NO` da **HOLD**; un crítico en `PARCIAL`, cualquier otro criterio que no sea `SI`, o una afirmación no fiable usada en la decisión, da **CONDITIONAL**. El verificador rechaza (HOLD) lo que se declara `SI` pero los datos contradicen, y rechaza un `VERIFIED` sustentado solo en una declaración. **No se marca PASS usando documentación de una sola campaña cuando la decisión afecta a toda la empresa.**
 
+**Límite del verificador:** comprueba coherencia interna, no veracidad. Los datos del archivo son entrada manual y el resultado lo declara (`entrada: MANUAL_NO_VERIFICADA`); que una fuente exista o diga lo anotado lo comprueba una persona. Un criterio manual `SI` sin evidencia citada cuenta como `PARCIAL`, y un `VERIFIED` sin fuente citada es un error.
+
 Uso: `python docs/altiora-business/entrega/scripts/bscg.py <archivo.json>` (códigos de salida: 0 PASS, 10 CONDITIONAL, 20 HOLD, 2 entrada inválida). Formato de entrada: ver `projects/tilicheros/COBERTURA-NEGOCIO.json`.
 
 ## 6. Revisión adversarial
