@@ -18,8 +18,8 @@ Un número de serie válido solo demuestra que **ese número existe** en la base
 4. Precio de compra frente al precio habitual de venta del modelo. Un precio muy inferior es una alerta, no una prueba.
 
 **Nivel B · Correspondencia del dispositivo** (el negocio manda fotos y un video corto de la **misma unidad**; Altiora compara)
-1. Modelo y número de modelo impresos en la caja, en la etiqueta y en el aparato coinciden entre sí y con el modelo que se quiere anunciar.
-2. Los números de serie de la caja, del estuche y de cada auricular coinciden entre sí (fotos legibles, sin editar).
+1. **Identificar el modelo que se quiere anunciar** (por ejemplo, AirPods Pro de una generación concreta) y abrir la documentación oficial de Apple para ese modelo: dónde está impreso cada número de serie y de modelo, cuántos hay y cuáles son los números de modelo esperados. El revisor cita la página consultada y la fecha en su informe.
+2. **Comprobar la correspondencia según esa documentación, pieza por pieza.** Cada pieza (estuche, auricular izquierdo, auricular derecho) puede tener su propio número de modelo, y en algunos modelos los auriculares tienen números de serie individuales distintos del estuche y de la caja. **No se exige que los seriales o modelos sean idénticos entre piezas.** Se exige que cada número fotografiado (legible, sin editar) esté donde la documentación dice que va y tenga el formato que ese modelo usa, y que la caja declare el mismo modelo que el aparato.
 3. Video corto sin cortes de la unidad emparejándose con un teléfono, mostrando el nombre del modelo que el teléfono reporta.
 4. La consulta oficial del fabricante sobre ese serial, como **complemento** del punto 2.
 5. Sin alertas visibles: errores de texto o idioma en caja, calidad de impresión, vendedor que se niega a enseñar documentos, o el propio producto descrito como «réplica», «1:1» o «Airbuds».
@@ -45,3 +45,5 @@ Un centro de servicio autorizado revisa una unidad y entrega un resultado por es
 
 ## Límites
 No se ha recibido ningún documento: **NO VERIFICADO** si el producto es original. Este protocolo reduce el riesgo de publicar una afirmación falsa; no lo elimina, y no sustituye el asesoramiento legal.
+
+La regla por modelo (qué números tiene cada pieza y dónde están) **no está transcrita aquí a propósito**: la fuente es la documentación oficial de Apple para el modelo concreto, que el revisor consulta y cita con fecha. Altiora no ha verificado esa documentación al redactar este protocolo.

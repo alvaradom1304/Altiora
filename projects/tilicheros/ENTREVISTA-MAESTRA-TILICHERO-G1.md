@@ -26,6 +26,8 @@ Objetivo: dejar llenos los tres huecos de G1 (decisor, problema cuantificado, ca
 | 2 | **6 · Producto** | Pedir, sin cuestionar: factura o comprobante del proveedor de los audífonos, y fotos de caja, etiqueta y del aparato. Explicar: «antes de publicar algo con una marca necesitamos revisar los documentos». Ver [PROTOCOLO-AUTENTICIDAD-AIRPODS.md](PROTOCOLO-AUTENTICIDAD-AIRPODS.md). |
 | 1 | **7 · Cierre** | Acordar un siguiente paso con **fecha** (por ejemplo: «me mandás los documentos y los números el jueves; yo te devuelvo una propuesta de alcance el lunes»). Preguntar si podés contarle en 2 minutos cómo se cobraría; solo con un sí, presentar la propuesta del #61 (porcentaje de pedidos cobrados con código del anuncio; pauta pagada por él con el monto que apruebe; aprobación previa de todo). |
 
+**Si el tiempo se acorta** (la sesión no tiene margen): conservar siempre los bloques 1, 2, 4 y 7, que llenan los tres huecos de G1. En el bloque 3, quedarse con las tres primeras preguntas (categorías, margen, captación); inventario, logística y atención pasan a la sesión 2. El bloque 6 se reduce a pedir los documentos por WhatsApp.
+
 ## Sesión 2 · opcional (máximo 45 minutos, otro día)
 Solo si la sesión 1 dio un siguiente paso con fecha. Profundiza lo que cambia el alcance:
 - **Inventario:** rotación por producto, proveedor y tiempo de reposición, devoluciones.
