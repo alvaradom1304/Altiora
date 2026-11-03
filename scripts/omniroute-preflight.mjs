@@ -2,7 +2,6 @@
 // Read-only OmniRoute probe. Loopback only; no external provider calls or writes.
 // Usage: node scripts/omniroute-preflight.mjs [--json]
 // Optional: OMNIROUTE_API_KEY (never printed; GET /v1/models only).
-import { execFileSync } from 'node:child_process';
 
 const ROOT = 'http://127.0.0.1:20128';
 const limit = 3000;
