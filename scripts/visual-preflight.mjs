@@ -54,7 +54,7 @@ export function probeExecutable(name, executable, args, runner = spawnSync) {
     const result = runner(executable, args, {
       shell: false,
       encoding: "utf8",
-      timeout: 5000,
+      timeout: 15000,
       maxBuffer: 128 * 1024,
       windowsHide: true
     });

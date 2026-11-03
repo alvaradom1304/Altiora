@@ -1,4 +1,4 @@
-# Altiora — estado real de integraciones y certificación operativa (2026-11-03)
+# Altiora — estado real de integraciones y certificación operativa (2026-11-03, rev. 2)
 
 Ejecutado por Claude Code 2.1.317 (Sonnet 5.5) en esta máquina, desde `origin/main` @ `472dbf7`. Sin instalaciones, sin cambios de configuración de clientes, sin credenciales leídas, sin gasto. Niveles: `REFERENCED < CONFIGURED < INSTALLED < SERVER_RUNNING < AUTHENTICATED < TOOL_CALL_VERIFIED`; además `BLOCKED` y `FAILED`.
 
@@ -38,15 +38,15 @@ Ejecutado por Claude Code 2.1.317 (Sonnet 5.5) en esta máquina, desde `origin/m
 | Plugin adobe-for-creativity | **INSTALLED, disabled** | `claude plugin list` | dejar apagado |
 | Agentes `altiora-*` (12+) y 355 skills | **DESCUBIERTOS** | listados en la sesión; `check` valida generación | NO lanzados salvo los de la triada |
 | Frontend Design | **DESCUBIERTO (Claude)**; copia en `~/.codex/skills` | skill `frontend-design` en el listado de esta sesión | falta tarea UI validada con capturas y QA |
-| OmniRoute | **INSTALLED, no corre** | npm global `omniroute@3.8.52`, MIT, `diegosouzapw/OmniRoute`; datos en `~/.omniroute`; puerto 20128 libre; preflight UNREACHABLE | aprobar arranque local (§4) |
+| OmniRoute | **TOOL_CALL_VERIFIED (catálogo); generación NOT_TESTED** | Ver §7: arranque local aislado en 127.0.0.1:20129, `/api/health` 200, `/v1/models` 401 sin clave y 200 con clave local (468 entradas, alias `auto/*` presentes), **0 proveedores conectados**; sin inferencia | decidir proveedor gratuito/aprobado antes de probar generación |
 | Headroom | **REFERENCED** | no hay binario, paquete pip/npm ni carpeta | identificar y auditar `headroomlabs-ai/headroom` antes de instalar |
 | Palacio Mental | **BLOCKED_IDENTITY** | no existe en el equipo ni en el historial salvo el runbook | el usuario debe dar la URL o el nombre exacto |
 | Claude Red / claudered | **BLOCKED_IDENTITY** | idem | idem |
-| Blender | **FAILED** (doctor) | capability-doctor: ERROR | diagnosticar solo si un cliente lo necesita |
+| Blender | **TOOL_CALL_VERIFIED (arranque headless)** | 5.2.2 LTS, `--background --factory-startup --disable-autoexec` → EEVEE, exit 0; doctor AVAILABLE en 3 ejecuciones aisladas; sin render ni MCP | el `ERROR` previo era un timeout de 5 s bajo carga: corregido a 15 s (§7) |
 | After Effects (aerender) | NOT_DETECTED | doctor | no necesario para el piloto |
 
 ## 4. Discrepancias y riesgos encontrados
-1. **OmniRoute: identidad.** El runbook (PR #69/#70) apunta a `cheaper-inference/OmniRoute`; lo instalado es `diegosouzapw/OmniRoute`. Confirmar cuál es el oficial antes de dar credenciales de proveedores.
+1. **OmniRoute: identidad — RESUELTA.** `diegosouzapw/OmniRoute` es el mismo repositorio que `cheaper-inference/OmniRoute` (la API de GitHub redirige; `full_name` canónico = `cheaper-inference/OmniRoute`, MIT, no es fork). El paquete npm 3.8.52 coincide con el último release `v3.8.52`. Node 24.21.0 cumple `engines >=24`.
 2. **OmniRoute carga `.env` del directorio actual** al ejecutar su CLI (lo vimos al pedir `--help`). Ejecutarlo siempre desde un directorio neutro para no mezclar secretos de proyectos.
 3. **Solape:** OmniRoute trae módulos `memory` (memoria conversacional) y `compression`. Pueden cubrir parte de lo que se esperaba de Palacio Mental y Headroom. El runbook prohíbe dos proxies sobre la misma BASE_URL: decidir una sola ruta antes de instalar Headroom.
 4. **MCP del proyecto en "Pending approval":** playwright, chrome-devtools, dak-*, metricool y after-effects no cargan en sesión hasta aprobarlos. Eso explica los timeouts que vimos antes. Ejecutar `claude` en el repo y aprobar solo los necesarios.
@@ -64,3 +64,40 @@ Ejecutado por Claude Code 2.1.317 (Sonnet 5.5) en esta máquina, desde `origin/m
 3. Auditar e instalar Headroom (instalación sensible), solo tras decidir la ruta con OmniRoute.
 4. Aprobar en `claude` los MCP del proyecto que se usen (playwright y chrome-devtools como mínimo).
 5. Recargar Codex y relanzar el QA de ALT-TRIAD-001.
+
+## 7. Rev. 2 — pruebas realizadas tras la autorización de OmniRoute y Blender
+**Condiciones de la prueba:** solo 127.0.0.1, directorio neutro sin `.env` de proyectos, `DATA_DIR` aislado (no se tocó `~/.omniroute`), contraseña y clave generadas por mí y borradas al terminar, sin proveedores, sin instalar nada. Puerto 20129 para no interferir con la instancia ajena de 20128.
+
+| Paso | Resultado |
+|---|---|
+| Identidad/versión/Node | ver riesgo 1 (resuelto) |
+| Arranque 1 (puerto 20128, `--headless`) | Arrancó, pero `/` redirigía a `/dashboard` y el puerto ya tenía **otra instancia** (ver hallazgo A). Detenido; solo mis PID |
+| Login con la contraseña generada | Falló (401): la base se había inicializado en el primer arranque con otra contraseña. Iteración 1 de 3 |
+| Reinicio con base nueva | Login 200, creación de clave local 201. Iteración 2 de 3 |
+| `GET /api/health` | 200 `{"status":"ok"}` |
+| `GET /v1/models` sin clave | 401 `invalid_api_key` (correcto) |
+| `GET /v1/models` con clave local | **200, 468 entradas**; alias `auto/cheap`, `auto/coding`, `auto/smart`, etc. presentes; origen: aihorde 179, devin-cli-agentic 127, codex-app-server 52, combo 37, … |
+| `GET /api/providers` | **0 conexiones**: el catálogo no es capacidad usable |
+| Inferencia | **NOT_TESTED** (no hay proveedor aprobado) |
+| Limpieza | procesos propios detenidos (0 escuchas en 20129), directorio temporal y credenciales borrados |
+
+### Hallazgos nuevos
+- **A. Instancia ajena de OmniRoute expuesta a la red.** PID 41288 (hijo de 45220), iniciado hoy 07:26, escucha en `0.0.0.0:20128` y responde también por la IP LAN de esta máquina (`/api/health` 200, `/v1/models` 401). No la inició esta sesión y **no se tocó**. Riesgo: cualquier equipo de la red local puede alcanzar el panel. Acción: el dueño decide si la detiene o la reinicia ligada a 127.0.0.1 (`HOSTNAME=127.0.0.1`).
+- **B. Falso negativo del preflight (corregido).** `scripts/omniroute-preflight.mjs` usaba `redirect: 'error'`; como `/` redirige (307) a `/dashboard`, siempre informaba `UNREACHABLE` aunque el servicio respondía. Cambio a `redirect: 'manual'`: ahora informa `HTTP_RESPONDED_NOT_IDENTIFIED` + `AUTH_REQUIRED_OR_DENIED`. Sigue sin identificar el servicio como OmniRoute y sin probar proveedores.
+- **C. Falso negativo del doctor de Blender (corregido).** `scripts/visual-preflight.mjs` sondeaba con timeout de 5 s; Blender en frío bajo carga lo superaba y se informaba `ERROR`. Timeout a 15 s; `visual:preflight:test` 10/10.
+- **D. El `.env` del paquete OmniRoute** contiene secretos propios (JWT, cifrado, contraseña inicial) y OmniRoute lo carga al ejecutar su CLI. No se leyeron valores. Mantener cwd y `DATA_DIR` neutros.
+- **E.** `visual:preflight` informa `npm: NOT_FOUND` y `Python 3: ERROR` cuando se ejecuta vía `npm run`; el doctor sí detecta Python. Sondeo de wrapper de Windows no fiable: no bloquea, pendiente.
+
+## 8. Revisión independiente de ALT-TRIAD-001
+Preparada, **no ejecutada**: `tests/triad/ALT-TRIAD-001-qa-request.md` y `tests/triad/contrast-check.py` (recalcula los 11 pares: todos cumplen AA; 9 con valor declarado inexacto). Requiere Codex con créditos u otro revisor que no haya escrito brief ni UI. Hasta entonces el estado de la triada es **PARCIAL** y el issue #65 no debe marcarse PASS.
+
+## 9. Acciones necesarias (actualizado)
+| # | Acción | Quién | Bloquea |
+|---|---|---|---|
+| 1 | Decidir qué hacer con la instancia 20128 abierta a la red (PID 41288) | usuario | seguridad |
+| 2 | Recargar Codex y lanzar el QA preparado | usuario | cierre de ALT-TRIAD-001 |
+| 3 | Aprobar playwright y chrome-devtools en `claude` | usuario | uso en sesión |
+| 4 | Elegir proveedor gratuito/aprobado para probar inferencia en OmniRoute (con tope de gasto 0) | usuario | prueba de generación |
+| 5 | URL exacta de Palacio Mental y Claude Red | usuario | integración |
+| 6 | Headroom: no instalar hasta decidir ruta con OmniRoute (que ya incluye compresión/memoria) | usuario | — |
+| 7 | Reapuntar `altiora-shared` al laboratorio vigente | Codex/usuario | — |

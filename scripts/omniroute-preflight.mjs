@@ -14,7 +14,7 @@ const ctl = () => AbortSignal.timeout(limit);
 const baseHeaders = { 'Accept': 'application/json' };
 async function probe(path, headers) {
   try {
-    const response = await fetch(ROOT + path, { method: 'GET', headers, signal: ctl(), redirect: 'error' });
+    const response = await fetch(ROOT + path, { method: 'GET', headers, signal: ctl(), redirect: 'manual' });
     return {status: response.status, ok: response.ok};
   } catch (err) {
     return {error: err?.name === 'TimeoutError' ? 'TIMEOUT' : 'CONNECTION_FAILED'};
