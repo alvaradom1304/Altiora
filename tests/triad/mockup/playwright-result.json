@@ -1,8 +1,8 @@
 {
-  "run_at": "2026-11-03T17:54:27.909Z",
+  "run_at": "2026-11-03T18:06:30.638Z",
   "target": "tests/triad/mockup/index.html",
   "summary": {
-    "pass": 14,
+    "pass": 15,
     "fail": 0
   },
   "results": [
@@ -151,6 +151,11 @@
       "id": "R1-sin-JS-CTA-visible-y-enlaces-validos",
       "status": "PASS",
       "detail": "CTA borde inferior=332.4; href=?planta=monstera#pedido; sin JS la preseleccion no ocurre y se elige en el select (degradacion esperada)"
+    },
+    {
+      "id": "R3-sin-JS-envio-vacio-bloqueado-por-validacion-nativa",
+      "status": "PASS",
+      "detail": "POST emitido=false; url=ab/wt-cert/tests/triad/mockup/index.html"
     },
     {
       "id": "R2-reduced-motion-sin-transform-en-hover",

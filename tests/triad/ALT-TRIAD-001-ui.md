@@ -14,7 +14,7 @@
 
 ---
 
-> **Revisión 2 (2026-11-03, Claude Code — EXCEPCIÓN al principio de un escritor por archivo).** Corrige los hallazgos P1 de `ALT-TRIAD-001-chatgpt-independent-review.md`: (1) los enlaces de ficha pasan de `#pedido?planta=x` (fragmento inválido) a `?planta=x#pedido` con mejora progresiva; (2) `aria-label` empieza por el texto visible «Elegir esta planta» (WCAG 2.5.3); (3) nuevo apartado 2.1 con pares de contraste adicionales. La reasignación a Antigravity (escritor autorizado) se intentó vía Orca y falló: el modo headless de `agy` no puede pedir permiso de comandos y la alternativa `--dangerously-skip-permissions` no estaba autorizada. Antigravity debe **ratificar o revertir** esta revisión. Implementación probada: `tests/triad/mockup/` (Playwright 14/14). Esto no aprueba la triada.
+> **Revisión 2 (2026-11-03, Claude Code — EXCEPCIÓN al principio de un escritor por archivo).** Corrige los hallazgos P1 de `ALT-TRIAD-001-chatgpt-independent-review.md`: (1) los enlaces de ficha pasan de `#pedido?planta=x` (fragmento inválido) a `?planta=x#pedido` con mejora progresiva; (2) `aria-label` empieza por el texto visible «Elegir esta planta» (WCAG 2.5.3); (3) nuevo apartado 2.1 con pares de contraste adicionales. La reasignación a Antigravity (escritor autorizado) se intentó vía Orca y falló: el modo headless de `agy` no puede pedir permiso de comandos y la alternativa `--dangerously-skip-permissions` no estaba autorizada. Antigravity debe **ratificar o revertir** esta revisión. Implementación probada: `tests/triad/mockup/` (Playwright 14/14). **Divergencias conocidas entre esta especificación y la maqueta (QA rev.2, H1/H2):** la maqueta usa ilustraciones SVG de prueba en lugar de los `<img>` de `/img/ficticio/`; `form.noValidate` se aplica por JS (sin JS rige la validación nativa; el `action` es solo de prueba); los estados Loading y Disabled NO están implementados en la maqueta (NOT_TESTED); la altura del bloque héroe medida en 360×640 es 332,4 px (el «~304 px» de la sección 1 era una estimación). Esto no aprueba la triada.
 
 ## 1. Resumen Ejecutivo y Criterios del Brief
 
@@ -360,7 +360,7 @@ El diseño está concebido bajo metodología **Mobile-First** con prueba obligat
 
 | Criterio del Brief | Requisito de Éxito | Implementación en Esquema Visual | Estado |
 |---|---|---|---|
-| **1. Acción principal única** | Visible sin scroll: "Pedir mi planta" | Botón `#cta-principal` dentro del primer bloque visible (altura total ~304 px < 580 px en móvil 360 px) | **CUMPLIDO** |
+| **1. Acción principal única** | Visible sin scroll: "Pedir mi planta" | Botón `#cta-principal` dentro del primer bloque visible (estimado ~304 px; medido 332,4 px en maqueta con Playwright, < 640 px) | **CUMPLIDO (medido)** |
 | **2. Secciones obligatorias** | Héroe, 3 plantas con precio ficticio, 3 pasos de cuidado, FAQ, Pedido | Secciones 1 a 5 detalladas con semántica HTML5 (`header`, `section`, `ol`, `details`, `form`) | **CUMPLIDO** |
 | **3. Resiliencia y DOM completo** | Legible sin JS, movimiento reducido, móvil 360 px | CSS puro, sin dependencias 3D/JS, media query de reduced motion, layout fluido 328 px utilizables en 360 px | **CUMPLIDO** |
 | **4. Contraste y Accesibilidad** | Contraste AA y foco visible | Tabla de 14 tokens de color con ratios de 7.36:1 a 14.64:1 en texto y componentes activos (todos superan WCAG AA), foco `3px solid #0E5E35` con offset | **CUMPLIDO** |

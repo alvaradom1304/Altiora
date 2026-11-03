@@ -129,6 +129,10 @@ try {
   const href = await pn.getAttribute('a[data-planta="monstera"]', 'href');
   check('R1-sin-JS-CTA-visible-y-enlaces-validos', ctaN.y + ctaN.height <= 640 && href === '?planta=monstera#pedido', `CTA borde inferior=${(ctaN.y + ctaN.height).toFixed(1)}; href=${href}; sin JS la preseleccion no ocurre y se elige en el select (degradacion esperada)`);
 
+  let posted = false; pn.on('request', r => { if (r.method() === 'POST') posted = true; });
+  await pn.click('button.btn-cta-submit'); await pn.waitForTimeout(300);
+  check('R3-sin-JS-envio-vacio-bloqueado-por-validacion-nativa', !posted && pn.url().startsWith('file:') && !pn.url().includes('api/pedido'), `POST emitido=${posted}; url=${pn.url().slice(-40)}`);
+
   // --- Movimiento reducido ---
   const rm = await browser.newContext({viewport: {width: 1280, height: 800}, reducedMotion: 'reduce'});
   const pr = await rm.newPage(); await pr.goto(url); await pr.hover('#cta-principal'); await pr.waitForTimeout(100);

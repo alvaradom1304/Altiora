@@ -195,3 +195,26 @@ Generación **NOT_TESTED / BLOCKED**: no hay proveedor autorizado identificado (
 
 ### 12.8 Recomendación
 **CONDITIONAL GO** solo para un primer cliente con proceso humano supervisado (diagnóstico → propuesta → desarrollo web → QA con Playwright/Blender local). **HOLD** para prometer: revisión independiente real, inferencia vía OmniRoute, ahorro de tokens. Bloqueos humanos: aprobar MCP playwright/chrome-devtools; decidir firewall y tarea de arranque; proveedor con tope de gasto 0; recarga de Codex (05/11); identidad de Palacio Mental/Claude Red.
+
+## 13. Rev. 5 — 2026-11-03: cierre de hallazgos de ALT-TRIAD-001
+
+### 13.1 Revisiones (todas parciales; ninguna es Codex)
+| Revisor | Tipo | Resultado |
+|---|---|---|
+| Claude aislado (`altiora-os-qa`), `ALT-TRIAD-001-qa.md` | ejecutada (contraste), mismo modelo que el autor | V1 PASS · V2 PASS · V3 NOT_RUN · V4/V5 CONDITIONAL |
+| ChatGPT (GPT-6), commit `129d162`, `…-chatgpt-independent-review.md` | estática, no ejecutó nada | CONDITIONAL; P1: href inválido, Label in Name, CTA no medido |
+| Claude aislado, `ALT-TRIAD-001-qa-rev2.md` sobre `0d0df6f` | ejecutada (contraste + Playwright + inspección) | CONDITIONAL: PASS en CTA sin scroll, desbordamiento, teclado, nombres accesibles, contraste, preselección |
+
+### 13.2 Correcciones
+- A. Preselección: `?planta=x#pedido` + mejora progresiva (URL, clic, Enter; foco al select; valor inválido ignorado). B. `aria-label` empieza por «Elegir esta planta». C. Maqueta aislada `tests/triad/mockup/` y `playwright-check.mjs` (Chrome del sistema; el Chromium de Playwright instalado era de otra versión y no se descargó nada): **15 PASS / 0 FAIL**, CTA a 332,4 px de 640, sin desbordamiento a 360 px, teclado, formulario en modo prueba, sin JS, reduced motion. D. Contraste: `contrast-check.py` 15 pares (umbral sRGB corregido a 0.04045) + 11 pares de colores renderizados incl. hover.
+- Hallazgos de rev.2 cerrados tras `0d0df6f`: H1 (sin JS el envío vacío hacía POST) → `noValidate` solo por JS, probado R3; H2 → divergencias maqueta/especificación declaradas en `ui.md`.
+- E. Un escritor por archivo: `ui.md` es de Antigravity. Se intentó reasignar vía Orca (3 iteraciones: 2 fallos de paso de argumentos en PowerShell y 1 denegación de permiso de comandos en modo headless de `agy`; la alternativa `--dangerously-skip-permissions` no estaba autorizada). Claude aplicó la corrección como **excepción registrada en `ui.md`**; Antigravity debe ratificarla o revertirla. Worktree sobrante `triad-ui-fix` (rama `triad/ui-fix`) sin cambios.
+
+### 13.3 Estado de la triada: **CONDITIONAL — no PASS global**
+Pendiente para PASS: ratificación de Antigravity; revisión ejecutada por un modelo distinto de Claude (Codex desde 05/11 o ChatGPT con ejecución); lector de pantalla real y otros motores (solo se probó Chrome); estados Loading/Disabled no implementados (NOT_TESTED); el texto al 200 % empuja el CTA fuera de 640 px (hallazgo no bloqueante del revisor, no es un criterio del brief). Issue #65 no se cierra.
+
+### 13.4 Otros
+- OmniRoute: sigue solo en loopback (re-verificado con `omniroute-safe-start.ps1 -CheckOnly`: PASS). El script mantiene el directorio neutro y no toca datos ni credenciales; el arranque automático sigue sin registrar.
+- `altiora-shared`: sigue apuntando a `Documents/Codex/2026-10-18/…/altiora-connection`; es la única instalación existente (no hay carpeta más reciente). Cambiarlo es configuración de usuario global → requiere decisión.
+- El Tilichero: `projects/tilicheros/FICHA-ENCAJE-G1.md` — **G1 HOLD** (sin problema cuantificado, decisor ni presupuesto declarado). Sin cifras inventadas.
+- Decisión empresarial: **CONDITIONAL GO** (sin cambios).

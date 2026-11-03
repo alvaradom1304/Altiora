@@ -105,7 +105,7 @@ label{display:block;font-weight:500;margin-bottom:4px}
 <section class="order-section" id="pedido" aria-labelledby="order-heading"><div class="wrap">
   <h2 id="order-heading">Pide tu planta en línea [FICTICIO]</h2>
   <p>Formulario de pedido directo. Sin registro obligatorio ni pasos innecesarios. [FICTICIO]</p>
-  <form method="POST" action="/api/pedido-ficticio" class="order-form" novalidate>
+  <form method="POST" action="/api/pedido-ficticio" class="order-form">
     <div class="form-group"><label for="campo-planta">Elige tu planta [FICTICIO] <span aria-hidden="true">*</span></label>
       <select id="campo-planta" name="planta" required class="form-control">
         <option value="">-- Selecciona una variedad --</option>
@@ -131,6 +131,7 @@ label{display:block;font-weight:500;margin-bottom:4px}
 /* Mejora progresiva: sin JS el enlace lleva a #pedido y se elige en el select. Modo de prueba: no hay red. */
 (function(){
   var sel=document.getElementById('campo-planta'),form=document.querySelector('.order-form'),res=document.getElementById('resultado');
+  form.noValidate=true; /* con JS: validacion propia accesible; sin JS: validacion nativa del navegador */
   function pre(v){if(v&&sel.querySelector('option[value="'+v+'"]')){sel.value=v;}}
   pre(new URLSearchParams(location.search).get('planta'));
   document.querySelectorAll('.btn-card-select').forEach(function(a){a.addEventListener('click',function(e){
