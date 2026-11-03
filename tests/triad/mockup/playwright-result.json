@@ -1,0 +1,161 @@
+{
+  "run_at": "2026-11-03T17:54:27.909Z",
+  "target": "tests/triad/mockup/index.html",
+  "summary": {
+    "pass": 14,
+    "fail": 0
+  },
+  "results": [
+    {
+      "id": "M1-cta-visible-sin-scroll-360x640",
+      "status": "PASS",
+      "detail": "CTA y=276.4 alto=56.0 borde inferior=332.4 de 640; scrollY=0"
+    },
+    {
+      "id": "M2-sin-desbordamiento-horizontal",
+      "status": "PASS",
+      "detail": "{\"scrollWidth\":360,\"clientWidth\":360,\"wide\":[]}"
+    },
+    {
+      "id": "A1-label-in-name",
+      "status": "PASS",
+      "detail": "[{\"visible\":\"Elegir esta planta\",\"aria\":\"Elegir esta planta: Monstera Deliciosa, $24 USD ficticios\"},{\"visible\":\"Elegir esta planta\",\"aria\":\"Elegir esta planta: Sansevieria Trifasciata, $19 USD ficticios\"},{\"visible\":\"Elegir esta planta\",\"aria\":\"Elegir esta planta: Ficus Lyrata Compacto, $29 USD ficticios\"}]"
+    },
+    {
+      "id": "A2-nombre-accesible-por-rol",
+      "status": "PASS",
+      "detail": "enlaces con nombre accesible que empieza por el texto visible: 3"
+    },
+    {
+      "id": "K1-primer-tab-es-CTA-con-foco-visible",
+      "status": "PASS",
+      "detail": "{\"first\":\"cta-principal\",\"ring\":{\"w\":\"3px\",\"style\":\"solid\",\"color\":\"rgb(14, 94, 53)\"}}"
+    },
+    {
+      "id": "K2-todos-los-controles-alcanzables-por-teclado",
+      "status": "PASS",
+      "detail": "btn-card-select > btn-card-select > btn-card-select > faq-question > faq-question > faq-question > faq-question > campo-planta > campo-nombre > campo-direccion > campo-telefono > campo-notas > btn-cta-submit"
+    },
+    {
+      "id": "K3-enter-en-ficha-preselecciona-y-mueve-foco",
+      "status": "PASS",
+      "detail": "{\"val\":\"sansevieria\",\"focus\":\"campo-planta\"}"
+    },
+    {
+      "id": "P1-url-con-query-preselecciona",
+      "status": "PASS",
+      "detail": "valor del select tras cargar ?planta=ficus#pedido"
+    },
+    {
+      "id": "P2-valor-invalido-se-ignora",
+      "status": "PASS",
+      "detail": "select queda vacio"
+    },
+    {
+      "id": "F1-envio-vacio-muestra-errores-accesibles",
+      "status": "PASS",
+      "detail": "{\"errs\":4,\"invalid\":4,\"firstFocus\":\"campo-planta\"}"
+    },
+    {
+      "id": "F2-envio-valido-confirma-sin-red",
+      "status": "PASS",
+      "detail": "Pedido de prueba registrado (simulado, sin envío de datos): Monstera Deliciosa — $24 USD [FICTICIO]"
+    },
+    {
+      "id": "C1-contraste-renderizado-texto-ge-4.5",
+      "status": "PASS",
+      "detail": "{\"failing\":[],\"total\":11}"
+    },
+    {
+      "id": "C-detalle",
+      "status": "INFO",
+      "detail": [
+        {
+          "name": "CTA reposo",
+          "fg": "255,255,255",
+          "bg": "30,94,58",
+          "opacity": 1,
+          "ratio": 7.73
+        },
+        {
+          "name": "texto cuerpo sobre canvas",
+          "fg": "19,46,27",
+          "bg": "248,250,246",
+          "opacity": 1,
+          "ratio": 13.94
+        },
+        {
+          "name": "hero-trust (muted)",
+          "fg": "45,84,56",
+          "bg": "248,250,246",
+          "opacity": 1,
+          "ratio": 8.21
+        },
+        {
+          "name": "btn-card-select reposo",
+          "fg": "30,94,58",
+          "bg": "255,255,255",
+          "opacity": 1,
+          "ratio": 7.73
+        },
+        {
+          "name": "badge-tag",
+          "fg": "19,46,27",
+          "bg": "227,239,228",
+          "opacity": 1,
+          "ratio": 12.36
+        },
+        {
+          "name": "FAQ summary",
+          "fg": "19,46,27",
+          "bg": "255,255,255",
+          "opacity": 1,
+          "ratio": 14.64
+        },
+        {
+          "name": "FAQ respuesta",
+          "fg": "19,46,27",
+          "bg": "255,255,255",
+          "opacity": 1,
+          "ratio": 14.64
+        },
+        {
+          "name": "placeholder",
+          "fg": "91,107,95",
+          "bg": "255,255,255",
+          "opacity": 1,
+          "ratio": 5.66
+        },
+        {
+          "name": "error-text",
+          "fg": "176,0,32",
+          "bg": "255,255,255",
+          "opacity": 1,
+          "ratio": 7.33
+        },
+        {
+          "name": "CTA hover",
+          "fg": "255,255,255",
+          "bg": "20,68,40",
+          "ratio": 11.13
+        },
+        {
+          "name": "btn-card-select hover",
+          "fg": "255,255,255",
+          "bg": "30,94,58",
+          "ratio": 7.73
+        }
+      ]
+    },
+    {
+      "id": "R1-sin-JS-CTA-visible-y-enlaces-validos",
+      "status": "PASS",
+      "detail": "CTA borde inferior=332.4; href=?planta=monstera#pedido; sin JS la preseleccion no ocurre y se elige en el select (degradacion esperada)"
+    },
+    {
+      "id": "R2-reduced-motion-sin-transform-en-hover",
+      "status": "PASS",
+      "detail": "transform=none"
+    }
+  ]
+}

@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Verdía [FICTICIO] — maqueta ALT-TRIAD-001</title>
+<!-- Maqueta aislada de prueba. Escritor: Claude Code (archivo nuevo, implementa tests/triad/ALT-TRIAD-001-ui.md).
+     Todo el contenido es FICTICIO. Sin red, sin fuentes externas, sin imagenes externas, sin datos reales. -->
+<style>
+:root{--bg:#F8FAF6;--surface:#FFFFFF;--text:#132E1B;--muted:#2D5438;--cta:#1E5E3A;--cta-hover:#144428;--cta-active:#0E331B;--focus:#0E5E35;--border:#D2DDD3;--error:#B00020;--badge:#E3EFE4}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--text);font:400 1rem/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;max-width:100%;overflow-x:hidden}
+main{max-width:100%;overflow-x:hidden}
+img,svg{max-width:100%;height:auto;display:block}
+.wrap{max-width:1040px;margin:0 auto;padding:0 16px}
+section{padding:48px 0}
+@media(min-width:900px){section{padding:80px 0}}
+.brand-logo{display:block;font-size:1.25rem;font-weight:600;padding:16px 0 8px}
+h1{font-size:clamp(2rem,5vw + 1rem,2.75rem);font-weight:700;line-height:1.2;margin:0 0 12px}
+h2{font-size:clamp(1.5rem,3vw + .75rem,2rem);font-weight:600;line-height:1.25;margin:0 0 12px}
+h3{font-size:1.25rem;font-weight:600;line-height:1.3;margin:0 0 8px}
+.hero-subtext,.section-lead{margin:0 0 16px}
+.hero-trust,.form-disclaimer,.price-fictitious,.badge-tag{font-size:.875rem;font-weight:500;line-height:1.4;color:var(--muted)}
+.hero-actions{margin:16px 0}
+.btn-cta-primary,.btn-cta-submit{display:inline-flex;align-items:center;justify-content:center;min-height:50px;width:100%;padding:14px 28px;background:var(--cta);color:#fff;font:600 1rem/1.2 inherit;border:2px solid transparent;border-radius:8px;text-decoration:none;cursor:pointer;transition:background-color .15s,transform .15s}
+@media(min-width:600px){.btn-cta-primary{width:auto}}
+.btn-cta-primary:hover,.btn-cta-submit:hover{background:var(--cta-hover);transform:translateY(-1px)}
+.btn-cta-primary:active,.btn-cta-submit:active{background:var(--cta-active);transform:translateY(1px)}
+a:focus-visible,button:focus-visible,summary:focus-visible,.form-control:focus-visible{outline:3px solid var(--focus);outline-offset:3px;box-shadow:0 0 0 2px #fff}
+.btn-cta-submit[aria-disabled="true"]{background:#7D9C86;opacity:.75;cursor:not-allowed}
+.grid{display:grid;gap:16px;grid-template-columns:1fr}
+@media(min-width:900px){.grid{grid-template-columns:repeat(3,1fr)}}
+.catalog-card{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:16px;transition:transform .15s}
+.catalog-card:hover{transform:translateY(-2px)}
+.badge-tag{display:inline-block;background:var(--badge);color:var(--text);padding:2px 8px;border-radius:4px;margin:4px 0}
+.price-value{font-weight:700}
+.btn-card-select{display:inline-flex;align-items:center;justify-content:center;min-height:48px;width:100%;margin-top:8px;border:2px solid var(--cta);border-radius:8px;color:var(--cta);font-weight:600;text-decoration:none;background:#fff}
+.btn-card-select:hover{background:var(--cta);color:#fff}
+.care-steps{padding-left:0;list-style:none;display:grid;gap:16px}
+.faq-item{background:#fff;border:1px solid var(--border);border-radius:8px;margin-bottom:12px}
+.faq-item summary{padding:16px 20px;min-height:48px;font-weight:600;cursor:pointer}
+.faq-item summary:hover{background:#F0F6F1}
+.faq-item[open]{border-color:var(--muted)}
+.faq-item[open] summary{border-bottom:1px solid var(--border)}
+.faq-answer{padding:0 20px}
+.form-group{margin-bottom:16px}
+label{display:block;font-weight:500;margin-bottom:4px}
+.form-control{display:block;width:100%;min-height:48px;background:#fff;color:var(--text);border:2px solid var(--muted);border-radius:6px;padding:10px 12px;font:400 1rem/1.5 inherit}
+.form-control:hover{border-color:var(--text)}
+.form-control::placeholder{color:#5B6B5F;opacity:1}
+.form-control[aria-invalid="true"]{border-color:var(--error)}
+.error-text{display:block;color:var(--error);font-size:.875rem;margin-top:4px}
+#resultado{background:var(--badge);border:2px solid var(--cta);border-radius:8px;padding:16px;margin-top:16px}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;scroll-behavior:auto!important}.btn-cta-primary:hover,.btn-card-select:hover,.catalog-card:hover{transform:none!important}}
+</style>
+</head>
+<body>
+<main>
+<header class="hero-section" id="heroe"><div class="wrap">
+  <span class="brand-logo">Verdía [FICTICIO]</span>
+  <h1>Plantas de interior cuidadas para durar en tu hogar</h1>
+  <p class="hero-subtext">Seleccionadas según tu nivel de luz y entregadas en maceta lista en 24-48 horas. [FICTICIO]</p>
+  <div class="hero-actions"><a href="#pedido" class="btn-cta-primary" id="cta-principal">Pedir mi planta</a></div>
+  <p class="hero-trust">Garantía de adaptación de 30 días · Guía física de riego incluida [FICTICIO]</p>
+  <svg role="img" aria-label="Mesa de madera con una monstera y una sansevieria en macetas de cerámica verde (ilustración de prueba)" width="600" height="400" viewBox="0 0 600 400"><rect width="600" height="400" fill="#E3EFE4"/><rect y="300" width="600" height="100" fill="#B08D6A"/><circle cx="200" cy="230" r="70" fill="#1E5E3A"/><rect x="170" y="290" width="60" height="50" fill="#fff"/><rect x="380" y="180" width="30" height="120" fill="#2D5438"/></svg>
+</div></header>
+
+<section class="catalog-section" id="catalogo" aria-labelledby="catalog-heading"><div class="wrap">
+  <h2 id="catalog-heading">Plantas destacadas para empezar [FICTICIO]</h2>
+  <p class="section-lead">Variedades resistentes, adaptadas a departamentos y casas con luz natural. [FICTICIO]</p>
+  <div class="grid">
+    <article class="catalog-card"><h3>Monstera Deliciosa</h3><span class="badge-tag">Luz indirecta media · Riego semanal</span>
+      <p>Hojas amplias y porte selvático para salas de estar.</p>
+      <p class="price-tag"><span class="price-value">$24 USD</span> <span class="price-fictitious">[PRECIO FICTICIO]</span></p>
+      <a href="?planta=monstera#pedido" class="btn-card-select" data-planta="monstera" aria-label="Elegir esta planta: Monstera Deliciosa, $24 USD ficticios">Elegir esta planta</a></article>
+    <article class="catalog-card"><h3>Sansevieria Trifasciata</h3><span class="badge-tag">Cualquier nivel de luz · Riego cada 15 días</span>
+      <p>Extremadamente resistente a olvidos de riego y espacios sombreados.</p>
+      <p class="price-tag"><span class="price-value">$19 USD</span> <span class="price-fictitious">[PRECIO FICTICIO]</span></p>
+      <a href="?planta=sansevieria#pedido" class="btn-card-select" data-planta="sansevieria" aria-label="Elegir esta planta: Sansevieria Trifasciata, $19 USD ficticios">Elegir esta planta</a></article>
+    <article class="catalog-card"><h3>Ficus Lyrata Compacto</h3><span class="badge-tag">Luz brillante sin sol directo · Riego moderado</span>
+      <p>Hojas tipo violín de porte erguido y elegante.</p>
+      <p class="price-tag"><span class="price-value">$29 USD</span> <span class="price-fictitious">[PRECIO FICTICIO]</span></p>
+      <a href="?planta=ficus#pedido" class="btn-card-select" data-planta="ficus" aria-label="Elegir esta planta: Ficus Lyrata Compacto, $29 USD ficticios">Elegir esta planta</a></article>
+  </div>
+</div></section>
+
+<section class="care-section" id="cuidado" aria-labelledby="care-heading"><div class="wrap">
+  <h2 id="care-heading">Cuidado sin complicaciones en 3 pasos [FICTICIO]</h2>
+  <ol class="care-steps">
+    <li><h3>1. Ubicación con luz adecuada</h3><p>Coloca la maceta cerca de ventanas sin sol directo del mediodía para evitar quemar sus hojas.</p></li>
+    <li><h3>2. Riego por comprobación</h3><p>Introduce un dedo 3 cm en la tierra. Si notas humedad, espera 3 días más antes de regar.</p></li>
+    <li><h3>3. Calendario incluido</h3><p>Cada planta llega con una tarjeta de cuidados ilustrada y personalizada para tu zona climática. [FICTICIO]</p></li>
+  </ol>
+</div></section>
+
+<section class="faq-section" id="faq" aria-labelledby="faq-heading"><div class="wrap">
+  <h2 id="faq-heading">Preguntas frecuentes [FICTICIO]</h2>
+  <details class="faq-item"><summary class="faq-question">¿Cómo viajan las plantas sin dañarse en el camino? [FICTICIO]</summary><div class="faq-answer"><p>Viajan en cajas térmicas reforzadas con soporte de raíz anti-vuelco y sustrato humidificado para soportar trayectos de hasta 72 horas sin marchitarse.</p></div></details>
+  <details class="faq-item"><summary class="faq-question">¿Qué cubre la garantía de 30 días si mi planta se marchita? [FICTICIO]</summary><div class="faq-answer"><p>Si tu planta muestra signos de daño irreversible durante el primer mes siguiendo la guía, te enviamos una nueva planta sin coste adicional o te devolvemos el dinero.</p></div></details>
+  <details class="faq-item"><summary class="faq-question">¿Son seguras para convivir con gatos y perros? [FICTICIO]</summary><div class="faq-answer"><p>En la ficha de cada planta señalamos claramente su nivel de toxicidad. La Sansevieria y Monstera deben ubicarse fuera del alcance de mascotas mordedoras; ofrecemos alternativas 100% no tóxicas como la Calathea.</p></div></details>
+  <details class="faq-item"><summary class="faq-question">¿Cuáles son los medios de pago aceptados? [FICTICIO]</summary><div class="faq-answer"><p>Aceptamos tarjetas de débito, crédito y pago contra entrega al momento de recibir la planta en tu domicilio. [FICTICIO]</p></div></details>
+</div></section>
+
+<section class="order-section" id="pedido" aria-labelledby="order-heading"><div class="wrap">
+  <h2 id="order-heading">Pide tu planta en línea [FICTICIO]</h2>
+  <p>Formulario de pedido directo. Sin registro obligatorio ni pasos innecesarios. [FICTICIO]</p>
+  <form method="POST" action="/api/pedido-ficticio" class="order-form" novalidate>
+    <div class="form-group"><label for="campo-planta">Elige tu planta [FICTICIO] <span aria-hidden="true">*</span></label>
+      <select id="campo-planta" name="planta" required class="form-control">
+        <option value="">-- Selecciona una variedad --</option>
+        <option value="monstera">Monstera Deliciosa — $24 USD [FICTICIO]</option>
+        <option value="sansevieria">Sansevieria Trifasciata — $19 USD [FICTICIO]</option>
+        <option value="ficus">Ficus Lyrata Compacto — $29 USD [FICTICIO]</option>
+      </select></div>
+    <div class="form-group"><label for="campo-nombre">Nombre y apellido <span aria-hidden="true">*</span></label>
+      <input type="text" id="campo-nombre" name="nombre" required autocomplete="name" class="form-control" placeholder="Ej. Mariana Soto"></div>
+    <div class="form-group"><label for="campo-direccion">Dirección completa de entrega <span aria-hidden="true">*</span></label>
+      <input type="text" id="campo-direccion" name="direccion" required autocomplete="street-address" class="form-control" placeholder="Calle, número, depto y ciudad"></div>
+    <div class="form-group"><label for="campo-telefono">Teléfono móvil para aviso de entrega <span aria-hidden="true">*</span></label>
+      <input type="tel" id="campo-telefono" name="telefono" required autocomplete="tel" class="form-control" placeholder="Ej. +57 300 123 4567"></div>
+    <div class="form-group"><label for="campo-notas">Instrucciones para el repartidor (opcional)</label>
+      <textarea id="campo-notas" name="notas" rows="2" class="form-control" placeholder="Ej. Timbre 4B o dejar en conserjería"></textarea></div>
+    <div class="form-group"><button type="submit" class="btn-cta-submit">Confirmar mi pedido [FICTICIO]</button></div>
+    <p class="form-disclaimer">Tus datos se usan únicamente para coordinar la entrega ficticia. Ejercicio de prueba no transaccional.</p>
+  </form>
+  <div id="resultado" role="status" aria-live="polite" hidden></div>
+</div></section>
+</main>
+<script>
+/* Mejora progresiva: sin JS el enlace lleva a #pedido y se elige en el select. Modo de prueba: no hay red. */
+(function(){
+  var sel=document.getElementById('campo-planta'),form=document.querySelector('.order-form'),res=document.getElementById('resultado');
+  function pre(v){if(v&&sel.querySelector('option[value="'+v+'"]')){sel.value=v;}}
+  pre(new URLSearchParams(location.search).get('planta'));
+  document.querySelectorAll('.btn-card-select').forEach(function(a){a.addEventListener('click',function(e){
+    e.preventDefault();pre(a.dataset.planta);history.replaceState(null,'','?planta='+a.dataset.planta+'#pedido');
+    document.getElementById('pedido').scrollIntoView();sel.focus();});});
+  form.addEventListener('submit',function(e){
+    e.preventDefault();var bad=null;
+    form.querySelectorAll('[required]').forEach(function(f){
+      var old=document.getElementById('err-'+f.id);if(old)old.remove();f.removeAttribute('aria-invalid');f.removeAttribute('aria-describedby');
+      if(!f.value.trim()){var s=document.createElement('span');s.id='err-'+f.id;s.className='error-text';s.setAttribute('role','alert');s.textContent='Este campo es obligatorio';
+        f.after(s);f.setAttribute('aria-invalid','true');f.setAttribute('aria-describedby',s.id);bad=bad||f;}});
+    if(bad){bad.focus();res.hidden=true;return;}
+    res.hidden=false;res.textContent='Pedido de prueba registrado (simulado, sin envío de datos): '+sel.options[sel.selectedIndex].text;
+  });
+})();
+</script>
+</body>
+</html>
