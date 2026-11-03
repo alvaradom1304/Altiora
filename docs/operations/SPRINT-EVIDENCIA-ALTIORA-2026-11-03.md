@@ -25,7 +25,7 @@ Aumentar la preparación **demostrada** de Altiora; no subir puntuaciones por do
 ## Fórmula de recalificación
 `score = 0.20*skills + 0.15*architecture + 0.15*qa + 0.15*multi_ai + 0.10*integrations + 0.20*commercial + 0.05*governance`.
 Solo aumentar una dimensión con evidencia verificable; no confundir resultado de un test aislado con validación end-to-end.
-Objetivos de referencia, **no resultados obtenidos**: [95,95,95,95,90,80,95] ⇒ **90,75/100**.
+Objetivos de referencia, **no resultados obtenidos**: [95,95,95,95,90,80,95] ⇒ **91,5/100**.
 
 ## Primer checkpoint
 1. Obtener evidencia de CI de `main`.
