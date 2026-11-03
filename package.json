@@ -7,7 +7,7 @@
     "node": ">=20"
   },
   "scripts": {
-    "check": "npm run check:base && npm run operations:test && npm run toolkit:test && npm run runtime:test && npm run librarian:test && npm run routing:eval && npm run audio:test && npm run check:enterprise",
+    "check": "npm run check:base && npm run operations:test && npm run toolkit:test && npm run runtime:test && npm run librarian:test && npm run routing:eval && npm run omniroute:test && npm run audio:test && npm run check:enterprise",
     "agents:build": "node scripts/build-agents.mjs && node scripts/build-antigravity.mjs",
     "chat": "node scripts/team-chat.mjs",
     "skills:audit": "node scripts/audit-skills.mjs",
@@ -51,6 +51,8 @@
     "check:runtimes": "python .altiora/system/skills/altiora-runtime-bridge/scripts/check_runtimes.py --project .",
     "check:enterprise": "npm run check:handoff",
     "orca:dispatch": "python scripts/orca-dispatch.py",
-    "check:local": "npm run check:doctor"
+    "check:local": "npm run check:doctor",
+    "omniroute:plan": "python scripts/modular_graph_plan.py --job config/examples/omniroute-smoke-job.json --probe",
+    "omniroute:test": "python -m unittest discover -s scripts -p test_modular_graph_plan.py"
   }
 }
