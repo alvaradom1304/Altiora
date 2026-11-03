@@ -223,3 +223,28 @@ Pendiente para PASS: ratificación de Antigravity; revisión ejecutada por un mo
 - **Ratificación de `ui.md` rev. 2:** aprobada. V4 (un escritor por archivo) pasa de CONDITIONAL a PASS por excepción documentada. La triada **sigue CONDITIONAL**: faltan revisión ejecutada por un modelo distinto de Claude, lector de pantalla/otros motores y estados Loading/Disabled.
 - **Tarea de arranque:** aprobada y registrada a nivel de usuario: `Altiora-OmniRoute-SafeStart` (al iniciar sesión, nivel Limited, límite 5 min, ejecuta `scripts/omniroute-safe-start.ps1`). Probada una vez con OmniRoute ya activo: `LastTaskResult 0`, escucha solo en 127.0.0.1 (PID 24652), sin segunda instancia. Quitar: `Unregister-ScheduledTask -TaskName Altiora-OmniRoute-SafeStart -Confirm:$false`. Limitación: apunta a la ruta del worktree `wt-cert`; si se elimina tras fusionar el PR, repuntar la tarea al checkout canónico. No probado: arranque real tras reiniciar Windows.
 - **Firewall Node.js (Public):** aprobado pero **NO aplicado**: la sesión no es administrador. Respaldo del estado en `C:\Users\Usuario\.altiora-backups\firewall-node-public-2026-11-03.json`. Para aplicarlo, en PowerShell **como administrador**: `Set-NetFirewallRule -Name 'TCP Query User{E6E5353A-942B-43FC-B147-329D75D88376}C:\program files\nodejs\node.exe','UDP Query User{0C8A6BB6-0D0A-4437-A28D-7705CBD7E1EB}C:\program files\nodejs\node.exe' -Enabled False`. Revertir con `-Enabled True`. No afecta a OmniRoute (loopback).
+
+## 14. Rev. 6 — 2026-11-03: controles previos a la fusión del PR #71
+
+### 14.1 Verificado (sin repetir auditorías aprobadas)
+- Sin commits posteriores a `f97ba0e`. CI de `f97ba0e`: 4/4 SUCCESS (ubuntu y windows). `npm run check` local PASSED.
+- OmniRoute: un solo proceso (PID 24652); escuchas 20128, 20131 y 20132 solo en 127.0.0.1 y del mismo proceso; salud local 200; `/api/providers`, `/api/keys`, `/api/settings`, `/v1/models` sin credencial → 401; `192.168.1.113` sin respuesta.
+- Firewall: las 2 reglas Node.js Public siguen **Enabled=True, sin modificar** (se espera sesión de administrador; no se solicitó elevación).
+- Triada ALT-TRIAD-001: **CONDITIONAL**, sin cambios.
+
+### 14.2 Tarea de arranque: repunte al checkout canónico (preparado, NO aplicado)
+- Checkout canónico: `…\Altiora-Immersive-Web-Lab\altiora-unificado` (rama `main`, 9 commits por detrás de `origin/main`). Hoy **no contiene** `scripts/omniroute-safe-start.ps1`; solo existirá tras fusionar el PR #71 y actualizar `main`. Repuntar antes rompería la tarea.
+- Respaldo de la tarea: `C:\Users\Usuario\.altiora-backups\task-Altiora-OmniRoute-SafeStart-2026-11-03.xml` (SHA-256 prefijo `79913B084D3AC323`).
+- `scripts/omniroute-task-repoint.ps1`: simulacro por defecto; con `-Apply` solo cambia la acción si el destino existe, es idéntico al script revisado y hay respaldo; verifica con `LastTaskResult`. Simulacro ejecutado hoy: exit 2 (BLOQUEO por destino inexistente), como se espera.
+
+### 14.3 Requisitos pendientes para fusionar el PR #71
+| # | Requisito | Estado |
+|---|---|---|
+| 1 | CI verde del último commit | PASS en `f97ba0e`; repetir si se añaden commits |
+| 2 | `npm run check` | PASS |
+| 3 | Decisión explícita del fundador de fusionar | **Pendiente** (no se fusiona sin ella) |
+| 4 | Tras fusionar: actualizar `altiora-unificado` (pull) y ejecutar `omniroute-task-repoint.ps1 -Apply` | Pendiente, posterior a la fusión |
+| 5 | Revisión ejecutada de ALT-TRIAD-001 por modelo distinto de Claude o humano | Pendiente (Codex desde 05/11); **no bloquea la fusión** si se mantiene la etiqueta CONDITIONAL y el issue #65 abierto |
+| 6 | Firewall Public de Node.js | Pendiente de sesión de administrador; no bloquea la fusión |
+| 7 | Aprobar MCP playwright/chrome-devtools; proveedor OmniRoute; `altiora-shared`; identidad de Palacio Mental/Claude Red | Pendientes; independientes del PR |
+| 8 | Archivos no versionados (`__pycache__`) | No incluidos en el PR |
