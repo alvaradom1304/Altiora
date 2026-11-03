@@ -38,7 +38,7 @@ Estado: ABIERTA · BLOQUEADA (depende de permiso, dinero o dato externo) · CERR
 - **Evidencia:** `projects/tilicheros/FICHA-ENCAJE-G1.md`: sin problema cuantificado por el comprador, sin decisor identificado, sin presupuesto declarado.
 - **Impacto:** no se puede proponer ni cobrar; cualquier cifra sería inventada.
 - **Causa raíz:** no ha habido conversación con el responsable del negocio.
-- **Solución:** entrevista con el dueño ([ENTREVISTA-DUENO.md](../../projects/tilicheros/ENTREVISTA-DUENO.md), fusionada en #61, + [ENTREVISTA-DISCOVERY-G1.md](../../projects/tilicheros/ENTREVISTA-DISCOVERY-G1.md)). Contacta el fundador; Claude no contacta.
+- **Solución:** guion maestro [ENTREVISTA-MAESTRA-TILICHERO-G1.md](../../projects/tilicheros/ENTREVISTA-MAESTRA-TILICHERO-G1.md) (consolida: [ENTREVISTA-DUENO.md](../../projects/tilicheros/ENTREVISTA-DUENO.md), fusionada en #61, + [ENTREVISTA-DISCOVERY-G1.md](../../projects/tilicheros/ENTREVISTA-DISCOVERY-G1.md)). Contacta el fundador; Claude no contacta.
 - **Responsable:** fundador (conversación); `altiora-os-strategy` (diagnóstico posterior).
 - **Riesgo:** presionar para cerrar sin datos.
 - **Prueba de aceptación:** la ficha G1 con los tres campos llenos con cita textual y fecha.
@@ -56,7 +56,7 @@ Estado: ABIERTA · BLOQUEADA (depende de permiso, dinero o dato externo) · CERR
 - **Evidencia:** `projects/tilicheros/ENTREVISTA-DUENO.md` §3 (PR #61): el audífono aparece como Airbuds, AirPods 3, AirPods Pro y réplica; hay 3 videos aprobados que dicen «AirPods». Sin verificar el serial no está demostrado que sean originales.
 - **Impacto:** publicidad engañosa y riesgo de marca y legal para el cliente.
 - **Causa raíz:** el material se aprobó antes de verificar el producto.
-- **Solución:** pedir captura del serial en `checkcoverage.apple.com`; mientras tanto, no publicar piezas que nombren marca.
+- **Solución:** aplicar [PROTOCOLO-AUTENTICIDAD-AIRPODS.md](../../projects/tilicheros/PROTOCOLO-AUTENTICIDAD-AIRPODS.md) (documentos del proveedor + correspondencia de la unidad; el serial solo no basta); mientras tanto, no publicar piezas que nombren marca.
 - **Responsable:** dueño del negocio (dato); `altiora-os-qa` (revisión de piezas).
 - **Prueba de aceptación:** ficha de producto con verificación fechada, o piezas sin nombre de marca.
 - **Estado:** BLOQUEADA por dato del cliente. NO VERIFICADO si el producto es original.
