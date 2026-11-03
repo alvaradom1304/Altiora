@@ -16,7 +16,7 @@ Estado: ABIERTA · BLOQUEADA (depende de permiso, dinero o dato externo) · CERR
 | G-04 | P1 | El Tilichero · autenticidad del producto | BLOQUEADA |
 | G-05 | P1 | Firewall: reglas Node.js en perfil Public | BLOQUEADA |
 | G-06 | P2 | MCP de navegador y `altiora-shared` | ABIERTA |
-| G-07 | P2 | OmniRoute: fallo de inicio tras reiniciar (clave no persistente) | ABIERTA |
+| G-07 | P2 | OmniRoute: arranque por tarea no fiable (causa del 267014 indeterminada) | ABIERTA |
 | G-08 | P2 | Backlog de PRs abiertos | ABIERTA |
 | G-09 | P2 | Archivo local sin versionar | ABIERTA |
 | G-10 | P3 | `.pyc` versionados y rutas absolutas en `.mcp.json` | ABIERTA |
@@ -38,7 +38,7 @@ Estado: ABIERTA · BLOQUEADA (depende de permiso, dinero o dato externo) · CERR
 - **Evidencia:** `projects/tilicheros/FICHA-ENCAJE-G1.md`: sin problema cuantificado por el comprador, sin decisor identificado, sin presupuesto declarado.
 - **Impacto:** no se puede proponer ni cobrar; cualquier cifra sería inventada.
 - **Causa raíz:** no ha habido conversación con el responsable del negocio.
-- **Solución:** entrevista con el dueño ([ENTREVISTA-DUENO.md](../../projects/tilicheros/ENTREVISTA-DUENO.md), fusionada en #61, + [ENTREVISTA-DISCOVERY-G1.md](../../projects/tilicheros/ENTREVISTA-DISCOVERY-G1.md)). Contacta el fundador; Claude no contacta.
+- **Solución:** guion maestro [ENTREVISTA-MAESTRA-TILICHERO-G1.md](../../projects/tilicheros/ENTREVISTA-MAESTRA-TILICHERO-G1.md) (consolida: [ENTREVISTA-DUENO.md](../../projects/tilicheros/ENTREVISTA-DUENO.md), fusionada en #61, + [ENTREVISTA-DISCOVERY-G1.md](../../projects/tilicheros/ENTREVISTA-DISCOVERY-G1.md)). Contacta el fundador; Claude no contacta.
 - **Responsable:** fundador (conversación); `altiora-os-strategy` (diagnóstico posterior).
 - **Riesgo:** presionar para cerrar sin datos.
 - **Prueba de aceptación:** la ficha G1 con los tres campos llenos con cita textual y fecha.
@@ -56,7 +56,7 @@ Estado: ABIERTA · BLOQUEADA (depende de permiso, dinero o dato externo) · CERR
 - **Evidencia:** `projects/tilicheros/ENTREVISTA-DUENO.md` §3 (PR #61): el audífono aparece como Airbuds, AirPods 3, AirPods Pro y réplica; hay 3 videos aprobados que dicen «AirPods». Sin verificar el serial no está demostrado que sean originales.
 - **Impacto:** publicidad engañosa y riesgo de marca y legal para el cliente.
 - **Causa raíz:** el material se aprobó antes de verificar el producto.
-- **Solución:** pedir captura del serial en `checkcoverage.apple.com`; mientras tanto, no publicar piezas que nombren marca.
+- **Solución:** aplicar [PROTOCOLO-AUTENTICIDAD-AIRPODS.md](../../projects/tilicheros/PROTOCOLO-AUTENTICIDAD-AIRPODS.md) (documentos del proveedor + correspondencia de la unidad; el serial solo no basta); mientras tanto, no publicar piezas que nombren marca.
 - **Responsable:** dueño del negocio (dato); `altiora-os-qa` (revisión de piezas).
 - **Prueba de aceptación:** ficha de producto con verificación fechada, o piezas sin nombre de marca.
 - **Estado:** BLOQUEADA por dato del cliente. NO VERIFICADO si el producto es original.
@@ -79,13 +79,14 @@ Estado: ABIERTA · BLOQUEADA (depende de permiso, dinero o dato externo) · CERR
 - **Prueba de aceptación:** `browser_navigate` desde una sesión nueva.
 - **Estado:** ABIERTA, no bloquea el trabajo comercial.
 
-### G-07 · P2 · OmniRoute no arranca tras reiniciar (fallo de inicio)
-- **Evidencia (2026-11-03):** el equipo arrancó a las 12:52:09 y la tarea corrió a las 12:52:30 con `LastTaskResult` 267014 (`0x41306`, tarea terminada). `omniroute-safe-start.ps1 -CheckOnly` → `NO_RUNNING`. Ejecutado a mano, el script terminó en 51 s con FAIL y OmniRoute informó `STORAGE_ENCRYPTION_KEY is not set but a database already exists`. Los secretos del `.env` del paquete tienen valor vacío (solo se midió la longitud) y no hay variable de entorno de usuario ni de máquina.
-- **Clasificación:** fallo de inicio por configuración; no es una detención normal. La causa del 267014 (p. ej. límite de 5 min si el demonio retiene la tubería) es HIPÓTESIS: no se puede probar hasta que arranque. El registro operativo del Programador de tareas está desactivado.
-- **Causa raíz:** la instancia anterior usaba claves inyectadas en esa sesión; ninguna está en una ubicación persistente.
-- **Impacto:** ninguno para El Tilichero; OmniRoute es optimización y no hay proveedor autorizado. Ahorro de tokens NOT_MEASURED.
-- **Solución (credenciales: decide el fundador):** persistir la clave existente (el respaldo `~/.altiora-backups/omniroute-2026-11-03_pre-intervencion/` existe; NO VERIFICADO que contenga la clave) o aceptar una base nueva (hoy 0 proveedores). No se hizo ninguna. Luego repetir el reinicio controlado.
-- **Prueba de aceptación:** tras un reinicio, `-CheckOnly` PASS y `LastTaskResult` 0 con escucha solo en 127.0.0.1.
+### G-07 · P2 · OmniRoute: el servidor funciona, pero el arranque por tarea no es fiable
+- **Corrección (2026-11-03, tarde):** una versión anterior de este registro lo clasificó como «fallo de inicio por clave no persistente». La evidencia posterior lo desmiente en parte: ejecutado a mano con el script aprobado, OmniRoute **arrancó** (PID 6188, 13:16:42) y quedó solo en `127.0.0.1:20128` con `/api/health` 200, rutas administrativas y `/v1/models` sin credencial → 401, y la IP de la red sin respuesta. El aviso `STORAGE_ENCRYPTION_KEY is not set but a database already exists` es una advertencia, no detiene el servidor.
+- **Defecto real del script:** el servidor tarda unos 70 s en estar listo; `omniroute-safe-start.ps1` solo espera a que aparezca la escucha y sondea de inmediato, así que informó un FAIL falso a los 51 s. Debería sondear `/api/health` hasta 120 s.
+- **Resultado 267014 (`0x41306`, tarea terminada) tras el reinicio de las 12:52:** causa **indeterminada**. Hipótesis más probable, sin probar: el Programador mantiene la tarea «en ejecución» mientras viva el demonio hijo y, al cumplirse el límite de 5 min, termina el árbol y mata a OmniRoute. La hipótesis de la batería (la tarea tiene «detener si pasa a batería») no tiene respaldo: el registro de energía no muestra cambio de fuente en esa ventana.
+- **Clave de cifrado:** no está en el `.env` del paquete ni en su respaldo (ambos con valor vacío), ni en variables de usuario o de máquina, y `~/.omniroute/.env` no existe. NO VERIFICADO dónde estuvo. La copia de respaldo de la base (abierta de solo lectura, sin leer valores) tiene **0 conexiones de proveedor**, `supporter_key_encrypted` vacío y las claves de `version_manager` vacías: ningún secreto de proveedor depende de esa clave. Lo único posiblemente afectado es 1 clave API local de pruebas, reemplazable.
+- **Impacto:** ninguno para El Tilichero; sin proveedor no hay generación ni ahorro medible (NOT_MEASURED).
+- **Solución pendiente de aprobación del fundador:** ver «Opciones para OmniRoute» en la sección 15.7 de la matriz. No se modificó ningún secreto, base de datos ni tarea.
+- **Prueba de aceptación:** reinicio controlado con `-CheckOnly` PASS y `LastTaskResult` 0, con el proceso vivo más de 10 min.
 - **Estado:** ABIERTA, no bloquea.
 
 ### G-08 · P2 · Backlog de PRs abiertos
