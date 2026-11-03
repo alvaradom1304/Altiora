@@ -16,7 +16,7 @@ Estado: ABIERTA · BLOQUEADA (depende de permiso, dinero o dato externo) · CERR
 | G-04 | P1 | El Tilichero · autenticidad del producto | BLOQUEADA |
 | G-05 | P1 | Firewall: reglas Node.js en perfil Public | BLOQUEADA |
 | G-06 | P2 | MCP de navegador y `altiora-shared` | ABIERTA |
-| G-07 | P2 | OmniRoute: servicio detenido y sin prueba de arranque | ABIERTA |
+| G-07 | P2 | OmniRoute: fallo de inicio tras reiniciar (clave no persistente) | ABIERTA |
 | G-08 | P2 | Backlog de PRs abiertos | ABIERTA |
 | G-09 | P2 | Archivo local sin versionar | ABIERTA |
 | G-10 | P3 | `.pyc` versionados y rutas absolutas en `.mcp.json` | ABIERTA |
@@ -38,7 +38,7 @@ Estado: ABIERTA · BLOQUEADA (depende de permiso, dinero o dato externo) · CERR
 - **Evidencia:** `projects/tilicheros/FICHA-ENCAJE-G1.md`: sin problema cuantificado por el comprador, sin decisor identificado, sin presupuesto declarado.
 - **Impacto:** no se puede proponer ni cobrar; cualquier cifra sería inventada.
 - **Causa raíz:** no ha habido conversación con el responsable del negocio.
-- **Solución:** entrevista con el dueño (`ENTREVISTA-DUENO.md` del PR #61, aún sin fusionar, + [ENTREVISTA-DISCOVERY-G1.md](../../projects/tilicheros/ENTREVISTA-DISCOVERY-G1.md)). Contacta el fundador; Claude no contacta.
+- **Solución:** entrevista con el dueño ([ENTREVISTA-DUENO.md](../../projects/tilicheros/ENTREVISTA-DUENO.md), fusionada en #61, + [ENTREVISTA-DISCOVERY-G1.md](../../projects/tilicheros/ENTREVISTA-DISCOVERY-G1.md)). Contacta el fundador; Claude no contacta.
 - **Responsable:** fundador (conversación); `altiora-os-strategy` (diagnóstico posterior).
 - **Riesgo:** presionar para cerrar sin datos.
 - **Prueba de aceptación:** la ficha G1 con los tres campos llenos con cita textual y fecha.
@@ -53,7 +53,7 @@ Estado: ABIERTA · BLOQUEADA (depende de permiso, dinero o dato externo) · CERR
 - **Estado:** BLOQUEADA por G-02.
 
 ### G-04 · P1 · El Tilichero · autenticidad del producto
-- **Evidencia:** PR #61 (`ENTREVISTA-DUENO.md` §3): el audífono aparece como Airbuds, AirPods 3, AirPods Pro y réplica; hay 3 videos aprobados que dicen «AirPods». Sin verificar el serial no está demostrado que sean originales.
+- **Evidencia:** `projects/tilicheros/ENTREVISTA-DUENO.md` §3 (PR #61): el audífono aparece como Airbuds, AirPods 3, AirPods Pro y réplica; hay 3 videos aprobados que dicen «AirPods». Sin verificar el serial no está demostrado que sean originales.
 - **Impacto:** publicidad engañosa y riesgo de marca y legal para el cliente.
 - **Causa raíz:** el material se aprobó antes de verificar el producto.
 - **Solución:** pedir captura del serial en `checkcoverage.apple.com`; mientras tanto, no publicar piezas que nombren marca.
@@ -72,18 +72,20 @@ Estado: ABIERTA · BLOQUEADA (depende de permiso, dinero o dato externo) · CERR
 - **Estado:** BLOQUEADA por permisos de administrador.
 
 ### G-06 · P2 · MCP de navegador y `altiora-shared`
-- **Evidencia:** en esta sesión `playwright`, `chrome-devtools`, `altiora-shared` y `dak-notebook` fallaron con CONNECT_TIMEOUT de 30 s; los `dak-*` de nube, por falta de credenciales ADC. La matriz §12.3 los da como «Pending approval» y `altiora-shared` apunta a una carpeta del 2026-10-18.
-- **Impacto:** las pruebas de navegador no pueden hacerse vía MCP en sesión. Playwright sí funcionó por línea de comandos (`tests/triad/mockup/playwright-check.mjs`, 15/15).
-- **Solución:** aprobar solo playwright y chrome-devtools en `claude`; decidir el destino de `altiora-shared`. No aprobar `dak-*`.
-- **Responsable:** fundador (aprobación de configuración).
-- **Prueba de aceptación:** `browser_navigate` ejecutado desde una sesión nueva.
-- **Estado:** ABIERTA. Alternativa segura vigente: Playwright por CLI.
+- **Evidencia:** en la sesión, `playwright`, `chrome-devtools`, `altiora-shared` y `dak-notebook` dieron CONNECT_TIMEOUT de 30 s. `claude mcp list` (2026-11-03) muestra `playwright`, `chrome-devtools` y los seis `dak-*` en *Pending approval*; los `dak-*` de nube además no tienen credenciales ADC. `altiora-shared` apunta a una carpeta del 2026-10-18.
+- **Causa raíz:** aprobación pendiente en `claude` (decisión de configuración del fundador) más credenciales ausentes en los `dak-*`.
+- **Impacto:** las pruebas de navegador no pueden hacerse por MCP en sesión. **Cubierto por alternativa:** Playwright CLI 1.64.1 (`npx playwright`) y `tests/triad/mockup/playwright-check.mjs` (15/15).
+- **Solución:** aprobar solo playwright y chrome-devtools si hacen falta; no aprobar `dak-*`.
+- **Prueba de aceptación:** `browser_navigate` desde una sesión nueva.
+- **Estado:** ABIERTA, no bloquea el trabajo comercial.
 
-### G-07 · P2 · OmniRoute detenido y sin prueba de arranque
-- **Evidencia:** hoy `omniroute-safe-start.ps1 -CheckOnly` → exit 3 `NO_RUNNING`; ningún puerto 20128/20131/20132 escuchando; la tarea `Altiora-OmniRoute-SafeStart` tiene `LastTaskResult` 267014 (terminada). La generación nunca se probó: 0 proveedores configurados.
-- **Impacto:** ninguno para el alcance de El Tilichero; OmniRoute es optimización, no requisito. No se puede afirmar ahorro de tokens (NOT_MEASURED).
-- **Solución:** arrancar con el script seguro solo si se aprueba un proveedor con tope de gasto; probar arranque tras reiniciar Windows.
-- **Prueba de aceptación:** `-CheckOnly` PASS tras un reinicio real y una llamada con proveedor aprobado medida.
+### G-07 · P2 · OmniRoute no arranca tras reiniciar (fallo de inicio)
+- **Evidencia (2026-11-03):** el equipo arrancó a las 12:52:09 y la tarea corrió a las 12:52:30 con `LastTaskResult` 267014 (`0x41306`, tarea terminada). `omniroute-safe-start.ps1 -CheckOnly` → `NO_RUNNING`. Ejecutado a mano, el script terminó en 51 s con FAIL y OmniRoute informó `STORAGE_ENCRYPTION_KEY is not set but a database already exists`. Los secretos del `.env` del paquete tienen valor vacío (solo se midió la longitud) y no hay variable de entorno de usuario ni de máquina.
+- **Clasificación:** fallo de inicio por configuración; no es una detención normal. La causa del 267014 (p. ej. límite de 5 min si el demonio retiene la tubería) es HIPÓTESIS: no se puede probar hasta que arranque. El registro operativo del Programador de tareas está desactivado.
+- **Causa raíz:** la instancia anterior usaba claves inyectadas en esa sesión; ninguna está en una ubicación persistente.
+- **Impacto:** ninguno para El Tilichero; OmniRoute es optimización y no hay proveedor autorizado. Ahorro de tokens NOT_MEASURED.
+- **Solución (credenciales: decide el fundador):** persistir la clave existente (el respaldo `~/.altiora-backups/omniroute-2026-11-03_pre-intervencion/` existe; NO VERIFICADO que contenga la clave) o aceptar una base nueva (hoy 0 proveedores). No se hizo ninguna. Luego repetir el reinicio controlado.
+- **Prueba de aceptación:** tras un reinicio, `-CheckOnly` PASS y `LastTaskResult` 0 con escucha solo en 127.0.0.1.
 - **Estado:** ABIERTA, no bloquea.
 
 ### G-08 · P2 · Backlog de PRs abiertos
@@ -108,4 +110,4 @@ Estado: ABIERTA · BLOQUEADA (depende de permiso, dinero o dato externo) · CERR
 
 ### G-12 · P3 · Tarea de arranque apuntaba a un worktree temporal — CERRADA
 - **Evidencia:** hoy `omniroute-task-repoint.ps1` en modo simulacro: acción actual = acción nueva, ambas con `…\altiora-unificado\scripts\omniroute-safe-start.ps1`; los dos scripts existen en el checkout canónico, que está en `17b9fb4` sin retraso respecto de `origin/main`.
-- **Prueba:** salida del simulacro (exit 0) y `Test-Path` verdadero. No prueba arranque tras reinicio (ver G-07).
+- **Prueba:** salida del simulacro (exit 0) y `Test-Path` verdadero. Cierra solo el apuntado de la ruta; el arranque tras reinicio falla por otra causa (G-07).
