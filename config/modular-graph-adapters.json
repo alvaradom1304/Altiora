@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "status": "DESIGNED_NOT_CONNECTED",
+  "entrypoint": "team/ROUTING.md",
+  "intent_router": "skills/altiora-bibliotecario/SKILL.md",
+  "model_router": "skills/smart-model-router/SKILL.md",
+  "route_policy": {
+    "default": "existing",
+    "max_external_nodes_per_simple_task": 0,
+    "historical_retrieval": "only_if_context_missing_and_authorized",
+    "cross_client_memory": "deny",
+    "double_compression": "deny",
+    "external_installation": "manual_review_required"
+  },
+  "nodes": {
+    "playwright": {"mode": "reuse_webapp_testing", "enabled": false, "trigger": "authorized_browser_work", "status": "NOT_CONNECTED"},
+    "omniroute": {"mode": "optional_model_gateway", "enabled": false, "trigger": "approved_multi_provider_runtime", "status": "NOT_CONNECTED"},
+    "headroom": {"mode": "optional_reversible_compaction", "enabled": false, "trigger": "large_tool_payload", "status": "NOT_CONNECTED"},
+    "palacio_mental": {"upstream": "MemPalace/mempalace", "mode": "optional_history_retriever", "enabled": false, "trigger": "missing_context_with_consent", "status": "NOT_CONNECTED"},
+    "frontend_design": {"mode": "reuse_existing_skill", "path": "skills/frontend-design/SKILL.md", "enabled": true, "status": "REPOSITORY_SKILL_PRESENT"},
+    "claudered": {"mode": "security_review_adapter", "enabled": false, "upstream": null, "reason": "repository_identity_ambiguous", "status": "AWAITING_SOURCE_SELECTION"}
+  }
+}
