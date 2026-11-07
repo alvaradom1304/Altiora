@@ -1,0 +1,3824 @@
+{
+ "1hora": {
+  "total": "0-49/25",
+  "items": [
+   {
+    "rank": 1,
+    "n": "Desodorante en barra Rexona tono perfecto proteccion 48 horas - 90 g",
+    "b": "REXONA",
+    "ref": "000000000070168626-UN",
+    "price": 5370.0,
+    "stock": 100,
+    "seller": "Walmart Cr",
+    "cat": "/Higiene y Belleza/Cuidado Corporal/Desodorantes/"
+   },
+   {
+    "rank": 2,
+    "n": "Desodorante Rexona Spray Xtra Cool 72 Horas De Protección 3 Pack - 450 g",
+    "b": "REXONA",
+    "ref": "000000000075121432-UN",
+    "price": 7200.0,
+    "stock": 100,
+    "seller": "Walmart Cr",
+    "cat": "/Higiene y Belleza/Cuidado Corporal/Desodorantes/"
+   },
+   {
+    "rank": 3,
+    "n": "Polvo Compacto Loreal Infallible 24 horas Vainilla 120 - 9 g",
+    "b": "L'OREAL",
+    "ref": "000000000075234406-UN",
+    "price": 12100.0,
+    "stock": 1,
+    "seller": "Walmart Cr",
+    "cat": "/Higiene y Belleza/Cosméticos/Polvos compactos/"
+   },
+   {
+    "rank": 4,
+    "n": "Cable de carga 1Hora CAB266 USB tipo C iphone - 1 m",
+    "b": "GENERICO",
+    "ref": "000000000075222929-UN",
+    "price": 4900.0,
+    "stock": 10,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Celulares/"
+   },
+   {
+    "rank": 5,
+    "n": "Audífonos 1Hora Buds AUT114B bluetooth",
+    "b": "GENERICO",
+    "ref": "000000000075222944-UN",
+    "price": 8900.0,
+    "stock": 10,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Audio/Audífonos/"
+   },
+   {
+    "rank": 6,
+    "n": "Maybelly Delineador Tatto Liner 48 Horas Liquido - 1 g",
+    "b": "MAYBELLINE",
+    "ref": "000000000075175581-UN",
+    "price": 7000.0,
+    "stock": 10,
+    "seller": "Walmart Cr",
+    "cat": "/Higiene y Belleza/Cosméticos/Delineador de ojos y cejas/"
+   },
+   {
+    "rank": 7,
+    "n": "Spray fijador John Frieda barrier fijación por 24 horas - 340 ml",
+    "b": "JOHN FRIEDA",
+    "ref": "000000000075009213-UN",
+    "price": 6500.0,
+    "stock": 10,
+    "seller": "Walmart Cr",
+    "cat": "/Higiene y Belleza/Cuidado del cabello/Gel, mousse y spray/"
+   },
+   {
+    "rank": 8,
+    "n": "Muneca Bebe Con Activaciones Hora Del Ba",
+    "b": "DISNEY PRINCESS",
+    "ref": "000000000075513577-UN",
+    "price": 15000.0,
+    "stock": 10,
+    "seller": "Walmart Cr",
+    "cat": "/Juguetes/Peluches y Muñecas/Barbies/"
+   },
+   {
+    "rank": 9,
+    "n": "Altavoz Energy Sistem Bloom Bluetooth 5.3 con 18 horas de batería",
+    "b": "ENERGY SISTEM",
+    "ref": "000000000075276533-UN",
+    "price": 11900.0,
+    "stock": 10,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Audio/Sistemas de Audio/"
+   },
+   {
+    "rank": 10,
+    "n": "Altavoz Energy Sistem Sunrise Bluetooth 5.3 con 18 horas de batería",
+    "b": "ENERGY SISTEM",
+    "ref": "000000000075276530-UN",
+    "price": 11900.0,
+    "stock": 10,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Audio/Sistemas de Audio/"
+   },
+   {
+    "rank": 11,
+    "n": "Altavoz Energy Sistem Bloom Bluetooth 5.3 con 18 horas de batería",
+    "b": "ENERGY SISTEM",
+    "ref": "000000000075276531-UN",
+    "price": 11900.0,
+    "stock": 10,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Audio/Sistemas de Audio/"
+   },
+   {
+    "rank": 12,
+    "n": "Base Revlon Colorstay Grip matte primer 16 Horas - 30 ml",
+    "b": "REVLON",
+    "ref": "000000000075065245-UN",
+    "price": 17000.0,
+    "stock": 10,
+    "seller": "Walmart Cr",
+    "cat": "/Higiene y Belleza/Cosméticos/Polvos compactos/"
+   },
+   {
+    "rank": 13,
+    "n": "Cable 1Hora CAB265 tipo C - 1 m",
+    "b": "GENERICO",
+    "ref": "000000000075222933-UN",
+    "price": 3900.0,
+    "stock": 10,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Celulares/"
+   },
+   {
+    "rank": 14,
+    "n": "Cubo 1Hora Gar152 tipo C 20W",
+    "b": "GENERICO",
+    "ref": "000000000075222925-UN",
+    "price": 6900.0,
+    "stock": 10,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Celulares/"
+   },
+   {
+    "rank": 15,
+    "n": "Cubo 1Hora 65WGAN triple 65W",
+    "b": "GENERICO",
+    "ref": "000000000075222931-UN",
+    "price": 13900.0,
+    "stock": 10,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Celulares/"
+   },
+   {
+    "rank": 16,
+    "n": "Cargador 1Hora CAR24 para auto USB C 38W",
+    "b": "GENERICO",
+    "ref": "000000000075222924-UN",
+    "price": 7900.0,
+    "stock": 10,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Celulares/"
+   },
+   {
+    "rank": 17,
+    "n": "Cable 1Hora Cab250 tipo light C - 1m",
+    "b": "GENERICO",
+    "ref": "000000000075222943-UN",
+    "price": 4900.0,
+    "stock": 10,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Celulares/"
+   },
+   {
+    "rank": 18,
+    "n": "Cable 1Hora tipo A a tipo C Cab246 - 2 m",
+    "b": "GENERICO",
+    "ref": "000000000075222942-UN",
+    "price": 5900.0,
+    "stock": 10,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Celulares/"
+   },
+   {
+    "rank": 19,
+    "n": "Cable de carga 1Hora CAB237 tipo C - 1 m",
+    "b": "GENERICO",
+    "ref": "000000000075222941-UN",
+    "price": 4900.0,
+    "stock": 10,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Celulares/"
+   },
+   {
+    "rank": 20,
+    "n": "Jabón Líquido Huggies Hora de Soñar -200 ml",
+    "b": "HUGGIES",
+    "ref": "000000000075015527-UN",
+    "price": 2860.0,
+    "stock": 100,
+    "seller": "Walmart Cr",
+    "cat": "/Bebes y Niños/Higiene del bebé/Shampoo y jabón para bebé/"
+   },
+   {
+    "rank": 21,
+    "n": "Set de juguete Disney princesa ariel hora del baño",
+    "b": "DISNEY",
+    "ref": "000000000075348226-UN",
+    "price": 0.0,
+    "stock": 0,
+    "seller": "Walmart Cr",
+    "cat": "/Juguetes/Peluches y Muñecas/Muñecas/"
+   },
+   {
+    "rank": 22,
+    "n": "Polvo Compacto Mayballine Super Stay 24 Horas - 6 g",
+    "b": "MAYBELLINE",
+    "ref": "000000000075234403-UN",
+    "price": 0.0,
+    "stock": 0,
+    "seller": "Walmart Cr",
+    "cat": "/Higiene y Belleza/Cosméticos/Polvos compactos/"
+   },
+   {
+    "rank": 23,
+    "n": "Set De Baby My Sweet Love Doll Hora De Comer - 14 pulgadas",
+    "b": "MY SWEET LOVE",
+    "ref": "000000000075269709-UN",
+    "price": 0.0,
+    "stock": 0,
+    "seller": "Walmart Cr",
+    "cat": "/Juguetes/Peluches y Muñecas/Muñecos bebés/"
+   },
+   {
+    "rank": 24,
+    "n": "Cubo carga rápida 1Hora GAR162 dos puertos 20W",
+    "b": "GENERICO",
+    "ref": "000000000075222927-UN",
+    "price": 0.0,
+    "stock": 0,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Celulares/"
+   },
+   {
+    "rank": 25,
+    "n": "Cargador 1Hora GAR111 para auto duo USB",
+    "b": "GENERICO",
+    "ref": "000000000075222937-UN",
+    "price": 0.0,
+    "stock": 0,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Celulares/"
+   }
+  ]
+ },
+ "1 hora": {
+  "total": "0-49/4",
+  "items": [
+   {
+    "rank": 1,
+    "n": "Cable de carga 1Hora CAB266 USB tipo C iphone - 1 m",
+    "b": "GENERICO",
+    "ref": "000000000075222929-UN",
+    "price": 4900.0,
+    "stock": 10,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Celulares/"
+   },
+   {
+    "rank": 2,
+    "n": "Maybelly Delineador Tatto Liner 48 Horas Liquido - 1 g",
+    "b": "MAYBELLINE",
+    "ref": "000000000075175581-UN",
+    "price": 7000.0,
+    "stock": 10,
+    "seller": "Walmart Cr",
+    "cat": "/Higiene y Belleza/Cosméticos/Delineador de ojos y cejas/"
+   },
+   {
+    "rank": 3,
+    "n": "Cable 1Hora CAB265 tipo C - 1 m",
+    "b": "GENERICO",
+    "ref": "000000000075222933-UN",
+    "price": 3900.0,
+    "stock": 10,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Celulares/"
+   },
+   {
+    "rank": 4,
+    "n": "Cable de carga 1Hora CAB237 tipo C - 1 m",
+    "b": "GENERICO",
+    "ref": "000000000075222941-UN",
+    "price": 4900.0,
+    "stock": 10,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Celulares/"
+   }
+  ]
+ },
+ "dadu": {
+  "total": "0-49/0",
+  "items": []
+ },
+ "jortan": {
+  "total": "0-49/0",
+  "items": []
+ },
+ "koosda": {
+  "total": "0-49/0",
+  "items": []
+ },
+ "mikuso": {
+  "total": "0-49/0",
+  "items": []
+ },
+ "hopestar": {
+  "total": "0-49/0",
+  "items": []
+ },
+ "fengqi": {
+  "total": "0-49/0",
+  "items": []
+ },
+ "umipro": {
+  "total": "0-49/0",
+  "items": []
+ },
+ "technogo": {
+  "total": "0-49/0",
+  "items": []
+ },
+ "xo": {
+  "total": "0-49/0",
+  "items": []
+ },
+ "onikuma": {
+  "total": "0-49/0",
+  "items": []
+ },
+ "tuqin": {
+  "total": "0-49/0",
+  "items": []
+ },
+ "vidvie": {
+  "total": "0-49/0",
+  "items": []
+ },
+ "byyo": {
+  "total": "0-49/0",
+  "items": []
+ },
+ "argom": {
+  "total": "50-99/73",
+  "items": [
+   {
+    "rank": 1,
+    "n": "SmartWatch Argom skeiwatch C30",
+    "b": "ARGOM",
+    "ref": "886540008481",
+    "price": 29990.0,
+    "stock": 100,
+    "seller": "Imaginación del Prado",
+    "cat": "/Electrónica/Celulares/Smartwatch y Wearables/"
+   },
+   {
+    "rank": 2,
+    "n": "Cámara Argom epic CAM90 digital",
+    "b": "ARGOM",
+    "ref": "886540008931",
+    "price": 92913.0,
+    "stock": 100,
+    "seller": "Imaginación del Prado",
+    "cat": "/Electrónica/Computación/Accesorios de Computación/"
+   },
+   {
+    "rank": 3,
+    "n": "Audifonos Argom Arg Hs 0075",
+    "b": "ARGOM",
+    "ref": "000000000070089252-UN",
+    "price": 8500.0,
+    "stock": 100,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Computación/Accesorios de Computación/"
+   },
+   {
+    "rank": 4,
+    "n": "Audífono Argom Ergonómico 525 Compatible Androi Y iOs",
+    "b": "ARGOM",
+    "ref": "000000000070460144-UN",
+    "price": 2500.0,
+    "stock": 10,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Audio/Audífonos/"
+   },
+   {
+    "rank": 5,
+    "n": "SmartWatch Argom skeiwatch C30",
+    "b": "ARGOM",
+    "ref": "886540008504",
+    "price": 29990.0,
+    "stock": 99999,
+    "seller": "Imaginación del Prado",
+    "cat": "/Electrónica/Celulares/Smartwatch y Wearables/"
+   },
+   {
+    "rank": 6,
+    "n": "Cámara Argom magic pix 81digital para niños",
+    "b": "ARGOM",
+    "ref": "886540009235",
+    "price": 20251.0,
+    "stock": 99999,
+    "seller": "Imaginación del Prado",
+    "cat": "/Electrónica/Celulares/Accesorios para celular/"
+   },
+   {
+    "rank": 7,
+    "n": "Audifonos Argom Stereo Metro 77 Hs 0077",
+    "b": "ARGOM",
+    "ref": "000000000070089158-UN",
+    "price": 6500.0,
+    "stock": 10,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Computación/Accesorios de Computación/"
+   },
+   {
+    "rank": 8,
+    "n": "Epic Cam 858con Accesorios Argom",
+    "b": "ARGOM",
+    "ref": "000000000075517442-UN",
+    "price": 55900.0,
+    "stock": 10,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Computación/Accesorios de Computación/"
+   },
+   {
+    "rank": 9,
+    "n": "Adaptador Argom Mini Display a Hdmi",
+    "b": "ARGOM",
+    "ref": "000000000075517444-UN",
+    "price": 3900.0,
+    "stock": 10,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Computación/Accesorios de Computación/"
+   },
+   {
+    "rank": 10,
+    "n": "SmartWatch Argom skeiwatch C30",
+    "b": "ARGOM",
+    "ref": "886540008498",
+    "price": 29990.0,
+    "stock": 100,
+    "seller": "Imaginación del Prado",
+    "cat": "/Electrónica/Celulares/Smartwatch y Wearables/"
+   },
+   {
+    "rank": 11,
+    "n": "Parlante Argom inalámbrico BT 26 W RADYON X37  ARGOM ARG-SP-3127BK",
+    "b": "ARGOM",
+    "ref": "886540008795",
+    "price": 19735.0,
+    "stock": 99999,
+    "seller": "Imaginación del Prado",
+    "cat": "/Electrónica/Audio/Sistemas de Audio/"
+   },
+   {
+    "rank": 12,
+    "n": "Concentrador 3 in 1  Argom Type-C  ONEAXESS  Type-C PD USB 3.0 HDMI 4KARG-UB-0181",
+    "b": "ARGOM",
+    "ref": "886540007507",
+    "price": 7795.0,
+    "stock": 99999,
+    "seller": "Imaginación del Prado",
+    "cat": "/Electrónica/Computación/Accesorios de Computación/"
+   },
+   {
+    "rank": 13,
+    "n": "Altavoz Argom inalámbrico Bluetooth BOOGIELINK ARG-SP-3110",
+    "b": "ARGOM",
+    "ref": "886540008825",
+    "price": 10652.0,
+    "stock": 99999,
+    "seller": "Imaginación del Prado",
+    "cat": "/Electrónica/Audio/Sistemas de Audio/"
+   },
+   {
+    "rank": 14,
+    "n": "Parlantes Argom Radyon X41 Beats inalámbrico BT - Negro ARG-SP-3141BK",
+    "b": "ARGOM",
+    "ref": "886540008757",
+    "price": 19735.0,
+    "stock": 100,
+    "seller": "Imaginación del Prado",
+    "cat": "/Electrónica/Audio/Sistemas de Audio/"
+   },
+   {
+    "rank": 15,
+    "n": "Altavoz Argom inalámbrico Bluetooth BOOGIELINK ARG-SP-3110",
+    "b": "ARGOM",
+    "ref": "886540008832",
+    "price": 10652.0,
+    "stock": 100,
+    "seller": "Imaginación del Prado",
+    "cat": "/Electrónica/Audio/Sistemas de Audio/"
+   },
+   {
+    "rank": 16,
+    "n": "Parlante Argom RAVE BOX 65  600W RMS  Karaoke ARG-SP-4050BK",
+    "b": "ARGOM",
+    "ref": "886540008818",
+    "price": 37510.0,
+    "stock": 10,
+    "seller": "Imaginación del Prado",
+    "cat": "/Electrónica/Audio/Sistemas de Audio/"
+   },
+   {
+    "rank": 17,
+    "n": "Altavoz  Argom inalámbrico Bluetooth BOOGIELINK ARG-SP-3110",
+    "b": "ARGOM",
+    "ref": "886540008849",
+    "price": 10652.0,
+    "stock": 99999,
+    "seller": "Imaginación del Prado",
+    "cat": "/Electrónica/Audio/Sistemas de Audio/"
+   },
+   {
+    "rank": 18,
+    "n": "Parlante Argom AMBIENCE 66 Acoustic Sound- 220W RMS   ARG-SP-3366BK",
+    "b": "ARGOM",
+    "ref": "886540009594",
+    "price": 66240.0,
+    "stock": 100,
+    "seller": "Imaginación del Prado",
+    "cat": "/Electrónica/Audio/Sistemas de Audio/"
+   },
+   {
+    "rank": 19,
+    "n": "Audifonos Argom ULTIMATE SOUND SPATIAL  HYBRID Noise Cancellation & Spatial Audio Wireless Headphones ARG-HS-2690BK",
+    "b": "ARGOM",
+    "ref": "886540009280",
+    "price": 31167.0,
+    "stock": 100,
+    "seller": "Imaginación del Prado",
+    "cat": "/Electrónica/Audio/Audífonos/"
+   },
+   {
+    "rank": 20,
+    "n": "Parlante inalámbrico Argom BT 20W RADYON X32 ARGOM ARG-SP-3123",
+    "b": "ARGOM",
+    "ref": "886540008771",
+    "price": 14955.0,
+    "stock": 99999,
+    "seller": "Imaginación del Prado",
+    "cat": "/Electrónica/Audio/Sistemas de Audio/"
+   },
+   {
+    "rank": 21,
+    "n": "Parlante inalámbrico Argom BT 20W RADYON X32 ARGOM ARG-SP-3123",
+    "b": "ARGOM",
+    "ref": "886540008788",
+    "price": 14955.0,
+    "stock": 99999,
+    "seller": "Imaginación del Prado",
+    "cat": "/Electrónica/Audio/Sistemas de Audio/"
+   },
+   {
+    "rank": 22,
+    "n": "Concentrador5 in 1 Argom Type-C  ONEAXESS -  Micro SD SD CARD USB 2.0  USB 3.0 HDMI 4K ARG-UB-0183",
+    "b": "ARGOM",
+    "ref": "886540007668",
+    "price": 12351.0,
+    "stock": 99999,
+    "seller": "Imaginación del Prado",
+    "cat": "/Electrónica/Computación/Accesorios de Computación/"
+   },
+   {
+    "rank": 23,
+    "n": "Concentrador 7-Ports Argom  USB 3.0  Type-C + USBA    ARG-UB-0191",
+    "b": "ARGOM",
+    "ref": "886540008733",
+    "price": 11900.0,
+    "stock": 99999,
+    "seller": "Imaginación del Prado",
+    "cat": "/Electrónica/Computación/Accesorios de Computación/"
+   },
+   {
+    "rank": 24,
+    "n": "Kit manos libres Argom T4 para carro",
+    "b": "ARGOM",
+    "ref": "886540007866",
+    "price": 16744.0,
+    "stock": 99999,
+    "seller": "Imaginación del Prado",
+    "cat": "/Electrónica/Celulares/Accesorios para celular/"
+   },
+   {
+    "rank": 25,
+    "n": "Kit manos libre Argom spectro T1 para carro",
+    "b": "ARGOM",
+    "ref": "886540007644",
+    "price": 16046.0,
+    "stock": 99999,
+    "seller": "Imaginación del Prado",
+    "cat": "/Electrónica/Celulares/Accesorios para celular/"
+   },
+   {
+    "rank": 26,
+    "n": "Reloj Argom skeiwatch C70",
+    "b": "ARGOM",
+    "ref": "886540008290",
+    "price": 51150.0,
+    "stock": 100,
+    "seller": "Imaginación del Prado",
+    "cat": "/Electrónica/Celulares/Smartwatch y Wearables/"
+   },
+   {
+    "rank": 27,
+    "n": "Parlante Argom rave 100",
+    "b": "ARGOM",
+    "ref": "886540007293",
+    "price": 247221.0,
+    "stock": 10,
+    "seller": "Imaginación del Prado",
+    "cat": "/Electrónica/Audio/Sistemas de Audio/"
+   },
+   {
+    "rank": 28,
+    "n": "Cámara Argom epic CAM85 digital",
+    "b": "ARGOM",
+    "ref": "886540008559",
+    "price": 55189.0,
+    "stock": 100,
+    "seller": "Imaginación del Prado",
+    "cat": "/Electrónica/Computación/Accesorios de Computación/"
+   },
+   {
+    "rank": 29,
+    "n": "Cámara Argom epic CAM88 digital",
+    "b": "ARGOM",
+    "ref": "886540008924",
+    "price": 66707.0,
+    "stock": 100,
+    "seller": "Imaginación del Prado",
+    "cat": "/Electrónica/Computación/Accesorios de Computación/"
+   },
+   {
+    "rank": 30,
+    "n": "Cámara Argom magic pix 81 digital para niños",
+    "b": "ARGOM",
+    "ref": "886540009228",
+    "price": 20251.0,
+    "stock": 99999,
+    "seller": "Imaginación del Prado",
+    "cat": "/Electrónica/Celulares/Accesorios para celular/"
+   },
+   {
+    "rank": 31,
+    "n": "Cámara web Argom WEB45",
+    "b": "ARGOM",
+    "ref": "886540008764",
+    "price": 22212.0,
+    "stock": 99999,
+    "seller": "Imaginación del Prado",
+    "cat": "/Electrónica/Computación/Accesorios de Computación/"
+   },
+   {
+    "rank": 32,
+    "n": "Cargador Argom de pared tipo C dual 40W",
+    "b": "ARGOM",
+    "ref": "886540008382",
+    "price": 9811.0,
+    "stock": 99999,
+    "seller": "Imaginación del Prado",
+    "cat": "/Electrónica/Celulares/Accesorios para celular/"
+   },
+   {
+    "rank": 33,
+    "n": "Cargador Argom de pared tipo C y USB 38W",
+    "b": "ARGOM",
+    "ref": "886540007699",
+    "price": 7429.0,
+    "stock": 100,
+    "seller": "Imaginación del Prado",
+    "cat": "/Electrónica/Celulares/Accesorios para celular/"
+   },
+   {
+    "rank": 34,
+    "n": "Cargador Argom de pared doble tipo C y USB",
+    "b": "ARGOM",
+    "ref": "886540007712",
+    "price": 22424.0,
+    "stock": 99999,
+    "seller": "Imaginación del Prado",
+    "cat": "/Electrónica/Celulares/Accesorios para celular/"
+   },
+   {
+    "rank": 35,
+    "n": "Reloj Argom skeiwatch C61",
+    "b": "ARGOM",
+    "ref": "886540008542",
+    "price": 42276.0,
+    "stock": 100,
+    "seller": "Imaginación del Prado",
+    "cat": "/Electrónica/Celulares/Smartwatch y Wearables/"
+   },
+   {
+    "rank": 36,
+    "n": "Reloj Argom skeiwatch C70",
+    "b": "ARGOM",
+    "ref": "886540008283",
+    "price": 46975.0,
+    "stock": 99999,
+    "seller": "Imaginación del Prado",
+    "cat": "/Electrónica/Celulares/Smartwatch y Wearables/"
+   },
+   {
+    "rank": 37,
+    "n": "Cargador Argom inalámbrico 15W para carro M2",
+    "b": "ARGOM",
+    "ref": "886540008115",
+    "price": 14402.0,
+    "stock": 99999,
+    "seller": "Imaginación del Prado",
+    "cat": "/Electrónica/Celulares/Accesorios para celular/"
+   },
+   {
+    "rank": 38,
+    "n": "Cargador Argom inalámbrico para carro M4",
+    "b": "ARGOM",
+    "ref": "886540008870",
+    "price": 11212.0,
+    "stock": 99999,
+    "seller": "Imaginación del Prado",
+    "cat": "/Electrónica/Celulares/Accesorios para celular/"
+   },
+   {
+    "rank": 39,
+    "n": "Adaptador Argom universal con puertos PD y USB",
+    "b": "ARGOM",
+    "ref": "886540008719",
+    "price": 10512.0,
+    "stock": 99999,
+    "seller": "Imaginación del Prado",
+    "cat": "/Electrónica/Celulares/Accesorios para celular/"
+   },
+   {
+    "rank": 40,
+    "n": "Power bank Argom MS5",
+    "b": "ARGOM",
+    "ref": "886540008658",
+    "price": 19239.0,
+    "stock": 99999,
+    "seller": "Imaginación del Prado",
+    "cat": "/Electrónica/Celulares/Accesorios para celular/"
+   },
+   {
+    "rank": 41,
+    "n": "Power bank Argom MS10",
+    "b": "ARGOM",
+    "ref": "886540008672",
+    "price": 22584.0,
+    "stock": 100,
+    "seller": "Imaginación del Prado",
+    "cat": "/Electrónica/Celulares/Accesorios para celular/"
+   },
+   {
+    "rank": 42,
+    "n": "Power bank Argom MS5",
+    "b": "ARGOM",
+    "ref": "886540008665",
+    "price": 19239.0,
+    "stock": 99999,
+    "seller": "Imaginación del Prado",
+    "cat": "/Electrónica/Celulares/Accesorios para celular/"
+   },
+   {
+    "rank": 43,
+    "n": "Power bank Argom 4 en 1",
+    "b": "ARGOM",
+    "ref": "886540008689",
+    "price": 23420.0,
+    "stock": 99999,
+    "seller": "Imaginación del Prado",
+    "cat": "/Electrónica/Celulares/Accesorios para celular/"
+   },
+   {
+    "rank": 44,
+    "n": "Reloj Argom skeiwatch C80",
+    "b": "ARGOM",
+    "ref": "886540008948",
+    "price": 57607.0,
+    "stock": 100,
+    "seller": "Imaginación del Prado",
+    "cat": "/Electrónica/Celulares/Smartwatch y Wearables/"
+   },
+   {
+    "rank": 45,
+    "n": "Parlante Argom rave 75",
+    "b": "ARGOM",
+    "ref": "886540008801",
+    "price": 90933.0,
+    "stock": 100,
+    "seller": "Imaginación del Prado",
+    "cat": "/Electrónica/Audio/Sistemas de Audio/"
+   },
+   {
+    "rank": 46,
+    "n": "Audífonos Argom ultimate sound zone",
+    "b": "ARGOM",
+    "ref": "886540009259",
+    "price": 19183.0,
+    "stock": 99999,
+    "seller": "Imaginación del Prado",
+    "cat": "/Electrónica/Audio/Audífonos/"
+   },
+   {
+    "rank": 47,
+    "n": "Audífonos deportivos Argom skeipods E95",
+    "b": "ARGOM",
+    "ref": "886540009051",
+    "price": 26144.0,
+    "stock": 99999,
+    "seller": "Imaginación del Prado",
+    "cat": "/Electrónica/Audio/Audífonos/"
+   },
+   {
+    "rank": 48,
+    "n": "Audífonos Argom ultimate sound zone",
+    "b": "ARGOM",
+    "ref": "886540009242",
+    "price": 19183.0,
+    "stock": 99999,
+    "seller": "Imaginación del Prado",
+    "cat": "/Electrónica/Audio/Audífonos/"
+   },
+   {
+    "rank": 49,
+    "n": "Hub 4 Puertos Usb Argom",
+    "b": "ARGOM",
+    "ref": "000000000075517446-UN",
+    "price": 7900.0,
+    "stock": 10,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Computación/Accesorios de Computación/"
+   },
+   {
+    "rank": 50,
+    "n": "Audifono Argom Diadema",
+    "b": "ARGOM",
+    "ref": "000000000075260674-UN",
+    "price": 14900.0,
+    "stock": 1,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Audio/Audífonos/"
+   },
+   {
+    "rank": 51,
+    "n": "Audífonos Argom Ultimate Sound Live Wired",
+    "b": "ARGOM",
+    "ref": "000000000075260673-UN",
+    "price": 14900.0,
+    "stock": 10,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Audio/Audífonos/"
+   },
+   {
+    "rank": 52,
+    "n": "Headset Gaming Argomtech Combat HS46",
+    "b": "ARGOM",
+    "ref": "000000000075228476-UN",
+    "price": 10900.0,
+    "stock": 10,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Videojuegos/Accesorios para PC/"
+   },
+   {
+    "rank": 53,
+    "n": "Soporte para pantalla Argom de 23 a 42 pulgadas",
+    "b": "ARGOM",
+    "ref": "000000000075118434-UN",
+    "price": 14900.0,
+    "stock": 100,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Televisores/Accesorios para TV/"
+   },
+   {
+    "rank": 54,
+    "n": "Soporte para pantalla Argom de 23 a 42 pulgadas",
+    "b": "ARGOM",
+    "ref": "000000000075118431-UN",
+    "price": 12900.0,
+    "stock": 10,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Televisores/Accesorios para TV/"
+   },
+   {
+    "rank": 55,
+    "n": "Soporte Argom para pantalla de 37 a 70 pulgadas",
+    "b": "ARGOM",
+    "ref": "000000000075118428-UN",
+    "price": 11900.0,
+    "stock": 10,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Televisores/Accesorios para TV/"
+   },
+   {
+    "rank": 56,
+    "n": "Cargador Cuo Dual Rápido Argom Type-C & USB Para Pared 20W",
+    "b": "ARGOM",
+    "ref": "000000000070386565-UN",
+    "price": 12900.0,
+    "stock": 10,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Celulares/"
+   },
+   {
+    "rank": 57,
+    "n": "Cargador Cubo Rápido Argom Type-C Para Pared 20W",
+    "b": "ARGOM",
+    "ref": "000000000070386018-UN",
+    "price": 9900.0,
+    "stock": 10,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Celulares/"
+   },
+   {
+    "rank": 58,
+    "n": "Bocina Argom BT 10W Luces 3017BK",
+    "b": "ARGOM",
+    "ref": "000000000070155377-UN",
+    "price": 13900.0,
+    "stock": 1,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Audio/Sistemas de Audio/"
+   },
+   {
+    "rank": 59,
+    "n": "Bocina Inalámbrico Argom Boogieboom IPX7 BT TWS",
+    "b": "ARGOM",
+    "ref": "000000000070233627-UN",
+    "price": 24900.0,
+    "stock": 100,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Audio/Sistemas de Audio/"
+   },
+   {
+    "rank": 60,
+    "n": "Audífono Argom Ergonómico 525 Compatible Androi Y iOs",
+    "b": "ARGOM",
+    "ref": "000000000070460145-UN",
+    "price": 2500.0,
+    "stock": 10,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Audio/Audífonos/"
+   },
+   {
+    "rank": 61,
+    "n": "Bocina Argom Bazooka Air beats inalámbrico BT",
+    "b": "ARGOM",
+    "ref": "000000000070386536-UN",
+    "price": 17542.0,
+    "stock": 10,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Audio/Sistemas de Audio/"
+   },
+   {
+    "rank": 62,
+    "n": "Audífono Argom Ultimate Sound Effects Con Micrófono",
+    "b": "ARGOM",
+    "ref": "000000000070460652-UN",
+    "price": 0.0,
+    "stock": 0,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Audio/Audífonos/"
+   },
+   {
+    "rank": 63,
+    "n": "Soporte para pantalla Argom de 37 a 80 pulgadas",
+    "b": "ARGOM",
+    "ref": "000000000075441362-UN",
+    "price": 0.0,
+    "stock": 0,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Televisores/Accesorios para TV/"
+   },
+   {
+    "rank": 64,
+    "n": "Soporte para pantalla Argom de 32 a 55 pulgadas",
+    "b": "ARGOM",
+    "ref": "000000000075441361-UN",
+    "price": 0.0,
+    "stock": 0,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Televisores/Accesorios para TV/"
+   },
+   {
+    "rank": 65,
+    "n": "Pesa Argom accura 10 analizador corporal inteligente",
+    "b": "ARGOM",
+    "ref": "886540008986",
+    "price": 0.0,
+    "stock": 0,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Celulares/Accesorios para celular/"
+   },
+   {
+    "rank": 66,
+    "n": "Hub 4 Puertos Usb Argom",
+    "b": "ARGOM",
+    "ref": "000000000075517461-UN",
+    "price": 0.0,
+    "stock": 0,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Computación/Accesorios de Computación/"
+   },
+   {
+    "rank": 67,
+    "n": "Bocina Argom Inalámbrico ARG3101BK",
+    "b": "ARGOM",
+    "ref": "000000000075263648-UN",
+    "price": 0.0,
+    "stock": 0,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Audio/Sistemas de Audio/"
+   },
+   {
+    "rank": 68,
+    "n": "Hub 5 En 1 Tipo c Argom",
+    "b": "ARGOM",
+    "ref": "000000000075517460-UN",
+    "price": 0.0,
+    "stock": 0,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Computación/Accesorios de Computación/"
+   },
+   {
+    "rank": 69,
+    "n": "Teclado Argom Bt Ultra Delg Bat Recarg",
+    "b": "ARGOM",
+    "ref": "000000000070364359-UN",
+    "price": 0.0,
+    "stock": 0,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Computación/Accesorios de Computación/"
+   },
+   {
+    "rank": 70,
+    "n": "Bocina Inalámbrico Argom Rumabox 4 Con Iluminación Intregados",
+    "b": "ARGOM",
+    "ref": "000000000070155382-UN",
+    "price": 0.0,
+    "stock": 0,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Audio/Sistemas de Audio/"
+   },
+   {
+    "rank": 71,
+    "n": "Audífono Argom Ultimate Sound Effects Con Micrófono",
+    "b": "ARGOM",
+    "ref": "000000000070460873-UN",
+    "price": 0.0,
+    "stock": 0,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Audio/Audífonos/"
+   },
+   {
+    "rank": 72,
+    "n": "Teclado Argom Clasico Cable Usb 2 0 Negr",
+    "b": "ARGOM",
+    "ref": "000000000070364329-UN",
+    "price": 0.0,
+    "stock": 0,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Computación/Accesorios de Computación/"
+   },
+   {
+    "rank": 73,
+    "n": "Base Argom Lapto Ventilador Arg Cf 1594",
+    "b": "ARGOM",
+    "ref": "000000000070385789-UN",
+    "price": 0.0,
+    "stock": 0,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Computación/Accesorios de Computación/"
+   }
+  ]
+ },
+ "durabrand": {
+  "total": "50-99/182",
+  "items": [
+   {
+    "rank": 1,
+    "n": "Lavadora automática Durabrand DUAWM221CAM 10 kg Carga frontal",
+    "b": "DURABRAND",
+    "ref": "000000000075235918-UN",
+    "price": 120900.0,
+    "stock": 10,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Línea Blanca/Lavadoras y Secadoras/"
+   },
+   {
+    "rank": 2,
+    "n": "Soporte Durabrand para pantallas de 20 a 60 pulgadas",
+    "b": "DURABRAND",
+    "ref": "000000000070294803-UN",
+    "price": 5782.0,
+    "stock": 100,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Televisores/Accesorios para TV/"
+   },
+   {
+    "rank": 3,
+    "n": "Olla multifuncional Mainstays con capacidad de 6 L",
+    "b": "MAINSTAYS",
+    "ref": "000000000070644034-UN",
+    "price": 25641.0,
+    "stock": 100,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Electrodomésticos/Freidoras y ollas eléctricas/"
+   },
+   {
+    "rank": 4,
+    "n": "Cafetera Mainstays con capacidad de 12 tazas",
+    "b": "MAINSTAYS",
+    "ref": "000000000075271105-UN",
+    "price": 8811.0,
+    "stock": 100,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Electrodomésticos/Cafeteras y Jarras Eléctricas/"
+   },
+   {
+    "rank": 5,
+    "n": "Cafetera Mainstays con capacidad de 5 Tazas",
+    "b": "MAINSTAYS",
+    "ref": "000000000075311730-UN",
+    "price": 6500.0,
+    "stock": 100,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Electrodomésticos/Cafeteras y Jarras Eléctricas/"
+   },
+   {
+    "rank": 6,
+    "n": "Lavadora semiautomática Durabrand DB WM 20 20 kg Carga superior",
+    "b": "DURABRAND",
+    "ref": "000000000070684910-UN",
+    "price": 138900.0,
+    "stock": 10,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Línea Blanca/Lavadoras y Secadoras/"
+   },
+   {
+    "rank": 7,
+    "n": "Lavadora semiautomática Durabrand DB WM 16 16 kg Carga superior",
+    "b": "DURABRAND",
+    "ref": "000000000070465275-UN",
+    "price": 99900.0,
+    "stock": 1,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Línea Blanca/Lavadoras y Secadoras/"
+   },
+   {
+    "rank": 8,
+    "n": "Pantalla Durabrand Led Smart 4k Google Tv - 43 Pulgadas",
+    "b": "DURABRAND",
+    "ref": "000000000075391024-UN",
+    "price": 112797.0,
+    "stock": 100,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Televisores/Pantallas/"
+   },
+   {
+    "rank": 9,
+    "n": "Pantalla Durabrand Led Smart 4k Google Tv DURA50GFU - 50 pulgadas",
+    "b": "DURABRAND",
+    "ref": "000000000075391025-UN",
+    "price": 141017.0,
+    "stock": 10,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Televisores/Pantallas/"
+   },
+   {
+    "rank": 10,
+    "n": "Máquina para fabricar hielo Durabrand Portátil capacidad 12 kg",
+    "b": "DURABRAND",
+    "ref": "000000000075283669-UN",
+    "price": 39900.0,
+    "stock": 10,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Electrodomésticos/Extractores y Procesadores de alimentos/"
+   },
+   {
+    "rank": 11,
+    "n": "Lavadora semiautomática Durabrand DU WTT130CAM 13 kg Carga superior",
+    "b": "DURABRAND",
+    "ref": "000000000070146593-UN",
+    "price": 89900.0,
+    "stock": 10,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Línea Blanca/Lavadoras y Secadoras/"
+   },
+   {
+    "rank": 12,
+    "n": "Pantalla Durabrand Qled Smart 4k Google Tv - 55 Pulgadas",
+    "b": "DURABRAND",
+    "ref": "000000000075391028-UN",
+    "price": 165917.0,
+    "stock": 10,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Televisores/Pantallas/"
+   },
+   {
+    "rank": 13,
+    "n": "Olla de cocimiento lento Mainstays capacidad 2 L",
+    "b": "MAINSTAYS",
+    "ref": "000000000075349285-UN",
+    "price": 7900.0,
+    "stock": 100,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Electrodomésticos/Freidoras y ollas eléctricas/"
+   },
+   {
+    "rank": 14,
+    "n": "Olla de cocimiento lento Durabrand capacidad 6 L",
+    "b": "DURABRAND",
+    "ref": "000000000075349284-UN",
+    "price": 12900.0,
+    "stock": 100,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Electrodomésticos/Freidoras y ollas eléctricas/"
+   },
+   {
+    "rank": 15,
+    "n": "Enfriador Mainstays de Aire de 65W 12 L",
+    "b": "MAINSTAYS",
+    "ref": "000000000075302764-UN",
+    "price": 49900.0,
+    "stock": 100,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Electrodomésticos/Aires Acondicionados y Ventiladores/"
+   },
+   {
+    "rank": 16,
+    "n": "Sartén  eléctrico Mainstays redondo de 12 Pulgadas",
+    "b": "MAINSTAYS",
+    "ref": "000000000075269622-UN",
+    "price": 12900.0,
+    "stock": 100,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Electrodomésticos/Sartenes eléctricos/"
+   },
+   {
+    "rank": 17,
+    "n": "Licuadora Mainstays con jarra de vidrio",
+    "b": "MAINSTAYS",
+    "ref": "000000000075271107-UN",
+    "price": 17900.0,
+    "stock": 10,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Electrodomésticos/Licuadoras y batidoras/"
+   },
+   {
+    "rank": 18,
+    "n": "Sandwichera Mainstays 2 divisiones 700W",
+    "b": "MAINSTAYS",
+    "ref": "000000000075270274-UN",
+    "price": 8900.0,
+    "stock": 1,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Electrodomésticos/Sandwicheras y Wafleras/"
+   },
+   {
+    "rank": 19,
+    "n": "Refrigeradora Durabrand DUFRF068CAM 18 pies cúbicos French",
+    "b": "DURABRAND",
+    "ref": "000000000075235946-UN",
+    "price": 479900.0,
+    "stock": 10,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Línea Blanca/Refrigeradores y Congeladores/"
+   },
+   {
+    "rank": 20,
+    "n": "Procesador de alimentos Mainstays 1 a 5 tazas",
+    "b": "MAINSTAYS",
+    "ref": "000000000075054050-UN",
+    "price": 7900.0,
+    "stock": 10,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Electrodomésticos/Extractores y Procesadores de alimentos/"
+   },
+   {
+    "rank": 21,
+    "n": "Olla Arrocera Mainstays color negro capacidad de 3 tazas",
+    "b": "MAINSTAYS",
+    "ref": "000000000070316268-UN",
+    "price": 12900.0,
+    "stock": 100,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Electrodomésticos/Freidoras y ollas eléctricas/"
+   },
+   {
+    "rank": 22,
+    "n": "Molino para café en grano Mainstays capacidad 60 g",
+    "b": "MAINSTAYS",
+    "ref": "000000000070142162-UN",
+    "price": 9900.0,
+    "stock": 100,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Electrodomésticos/Extractores y Procesadores de alimentos/"
+   },
+   {
+    "rank": 23,
+    "n": "Pantalla Durabrand HQLED 4K Android Smart - 65 Pulgadas",
+    "b": "DURABRAND",
+    "ref": "000000000070116386-UN",
+    "price": 200000.0,
+    "stock": 1,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Televisores/Pantallas/"
+   },
+   {
+    "rank": 24,
+    "n": "Lavadora semiautomática Durabrand DU WTT180CAM 18 kg Carga superior",
+    "b": "DURABRAND",
+    "ref": "000000000070146723-UN",
+    "price": 119900.0,
+    "stock": 10,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Línea Blanca/Lavadoras y Secadoras/"
+   },
+   {
+    "rank": 25,
+    "n": "Cafetera térmica Durabrand con capacidad 7 tazas",
+    "b": "DURABRAND",
+    "ref": "000000000070505913-UN",
+    "price": 18900.0,
+    "stock": 100,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Electrodomésticos/Cafeteras y Jarras Eléctricas/"
+   },
+   {
+    "rank": 26,
+    "n": "Hervidor eléctrico Mainstays plástico capacidad 1.7 L",
+    "b": "MAINSTAYS",
+    "ref": "000000000070051488-UN",
+    "price": 7500.0,
+    "stock": 100,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Electrodomésticos/Cafeteras y Jarras Eléctricas/"
+   },
+   {
+    "rank": 27,
+    "n": "Db Ventilador De Piso 120v 60hz 80w",
+    "b": "MAINSTAYS",
+    "ref": "000000000075484614-UN",
+    "price": 12900.0,
+    "stock": 10,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Electrodomésticos/Aires Acondicionados y Ventiladores/"
+   },
+   {
+    "rank": 28,
+    "n": "Batidora de Pedestal Mainstays 350w capacidad 5 L",
+    "b": "MAINSTAYS",
+    "ref": "000000000075478786-UN",
+    "price": 39900.0,
+    "stock": 10,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Electrodomésticos/Licuadoras y batidoras/"
+   },
+   {
+    "rank": 29,
+    "n": "Microondas Mainstays Digital capacidad de 20 L de 0.7 pies cúbicos",
+    "b": "MAINSTAYS",
+    "ref": "000000000075461713-UN",
+    "price": 39900.0,
+    "stock": 100,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Electrodomésticos/Hornos de Microondas y Tostadores/"
+   },
+   {
+    "rank": 30,
+    "n": "Pantalla Durabrand Led Smart 4k Google Tv DURA65GFU - 65 Pulgadas",
+    "b": "DURABRAND",
+    "ref": "000000000075391027-UN",
+    "price": 244900.0,
+    "stock": 100,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Televisores/Pantallas/"
+   },
+   {
+    "rank": 31,
+    "n": "Deshumidificador Durabrand con pantalla LED - 25 L",
+    "b": "DURABRAND",
+    "ref": "000000000075390292-UN",
+    "price": 89900.0,
+    "stock": 10,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Electrodomésticos/Aires Acondicionados y Ventiladores/"
+   },
+   {
+    "rank": 32,
+    "n": "Sartén Mainstays eléctrico cuadrado de 12 Pulgadas",
+    "b": "MAINSTAYS",
+    "ref": "000000000075269620-UN",
+    "price": 15900.0,
+    "stock": 10,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Electrodomésticos/Sartenes eléctricos/"
+   },
+   {
+    "rank": 33,
+    "n": "Sartén eléctrico Mainstays retangular 120V 1500W",
+    "b": "MAINSTAYS",
+    "ref": "000000000075269618-UN",
+    "price": 19900.0,
+    "stock": 100,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Electrodomésticos/Sartenes eléctricos/"
+   },
+   {
+    "rank": 34,
+    "n": "Hervidor de agua Mainstays eléctrico de vidrio",
+    "b": "MAINSTAYS",
+    "ref": "000000000075271106-UN",
+    "price": 9000.0,
+    "stock": 1,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Electrodomésticos/Cafeteras y Jarras Eléctricas/"
+   },
+   {
+    "rank": 35,
+    "n": "Plancha a vapor Mainstays antiadherente",
+    "b": "MAINSTAYS",
+    "ref": "000000000075269743-UN",
+    "price": 6500.0,
+    "stock": 100,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Electrodomésticos/Planchas de Vapor/"
+   },
+   {
+    "rank": 36,
+    "n": "Bocina Durabrand 8 Bt 20W 4000W Flame",
+    "b": "DURABRAND",
+    "ref": "000000000075019688-UN",
+    "price": 39102.0,
+    "stock": 10,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Audio/Sistemas de Audio/"
+   },
+   {
+    "rank": 37,
+    "n": "Olla Arrocera Durabrand 10 tazas antiadherente",
+    "b": "DURABRAND",
+    "ref": "000000000070316243-UN",
+    "price": 15900.0,
+    "stock": 100,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Electrodomésticos/Freidoras y ollas eléctricas/"
+   },
+   {
+    "rank": 38,
+    "n": "Bocina Durabrand Bluetooth Flame Lights Dual 8",
+    "b": "DURABRAND",
+    "ref": "000000000070191078-UN",
+    "price": 68502.0,
+    "stock": 100,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Audio/Sistemas de Audio/"
+   },
+   {
+    "rank": 39,
+    "n": "Horno Tostador Mainstays 4 Rebanadas",
+    "b": "MAINSTAYS",
+    "ref": "000000000070554876-UN",
+    "price": 19900.0,
+    "stock": 10,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Electrodomésticos/Hornos de Microondas y Tostadores/"
+   },
+   {
+    "rank": 40,
+    "n": "Mouse Blanco Durabrand Int 211201w",
+    "b": "DURABRAND",
+    "ref": "000000000070003514-UN",
+    "price": 1862.0,
+    "stock": 100,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Computación/Accesorios de Computación/"
+   },
+   {
+    "rank": 41,
+    "n": "Hervidor Mainstays de acero inoxidable capacidad de 1.7 L",
+    "b": "MAINSTAYS",
+    "ref": "000000000070377695-UN",
+    "price": 13500.0,
+    "stock": 10,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Electrodomésticos/Cafeteras y Jarras Eléctricas/"
+   },
+   {
+    "rank": 42,
+    "n": "Teclado y Mouse Durabrandint 072512s",
+    "b": "DURABRAND",
+    "ref": "000000000070003361-UN",
+    "price": 8900.0,
+    "stock": 100,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Computación/Accesorios de Computación/"
+   },
+   {
+    "rank": 43,
+    "n": "Microfono Basico Durabrand Int Mu15",
+    "b": "DURABRAND",
+    "ref": "000000000070003156-UN",
+    "price": 2400.0,
+    "stock": 10,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Audio/Accesorios de Audio/"
+   },
+   {
+    "rank": 44,
+    "n": "Ventilador Mainstays circulador  - 6 pulgadas",
+    "b": "MAINSTAYS",
+    "ref": "000000000075410843-UN",
+    "price": 15900.0,
+    "stock": 100,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Electrodomésticos/Aires Acondicionados y Ventiladores/"
+   },
+   {
+    "rank": 45,
+    "n": "Altavoz Portátil Durabrand Para Fiestas",
+    "b": "DURABRAND",
+    "ref": "000000000075295610-UN",
+    "price": 29900.0,
+    "stock": 10,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Audio/Sistemas de Audio/"
+   },
+   {
+    "rank": 46,
+    "n": "Dispensador de agua Mainstays rectangular de pie",
+    "b": "MAINSTAYS",
+    "ref": "000000000075102596-UN",
+    "price": 49900.0,
+    "stock": 10,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Electrodomésticos/Dispensadores de agua/"
+   },
+   {
+    "rank": 47,
+    "n": "Bocina Durabrand 15 BT 80W 20000W",
+    "b": "DURABRAND",
+    "ref": "000000000075019684-UN",
+    "price": 60662.0,
+    "stock": 10,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Audio/Sistemas de Audio/"
+   },
+   {
+    "rank": 48,
+    "n": "Soporte Durabrand para pantallas de 42 a 90 pulgadas",
+    "b": "DURABRAND",
+    "ref": "000000000070294798-UN",
+    "price": 8990.0,
+    "stock": 100,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Televisores/Accesorios para TV/"
+   },
+   {
+    "rank": 49,
+    "n": "Audífonos Durabrand Alámbricos",
+    "b": "DURABRAND",
+    "ref": "000000000070315524-UN",
+    "price": 3000.0,
+    "stock": 10,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Audio/Audífonos/"
+   },
+   {
+    "rank": 50,
+    "n": "Mouse Durabrand Inalambrico Int 122005b",
+    "b": "DURABRAND",
+    "ref": "000000000070003551-UN",
+    "price": 3200.0,
+    "stock": 100,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Computación/Accesorios de Computación/"
+   },
+   {
+    "rank": 51,
+    "n": "Mouse Durabrand Inalambrico Int 122005w",
+    "b": "DURABRAND",
+    "ref": "000000000070003516-UN",
+    "price": 2900.0,
+    "stock": 100,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Computación/Accesorios de Computación/"
+   },
+   {
+    "rank": 52,
+    "n": "Percoladora Mainstays capacidad de 30 tazas",
+    "b": "MAINSTAYS",
+    "ref": "000000000070189971-UN",
+    "price": 19900.0,
+    "stock": 100,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Electrodomésticos/Cafeteras y Jarras Eléctricas/"
+   },
+   {
+    "rank": 53,
+    "n": "Percoladora Mainstays capacidad 60 Tazas",
+    "b": "MAINSTAYS",
+    "ref": "000000000070189973-UN",
+    "price": 24900.0,
+    "stock": 10,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Electrodomésticos/Cafeteras y Jarras Eléctricas/"
+   },
+   {
+    "rank": 54,
+    "n": "Horno Durabrand con freidora de aire - 22 L",
+    "b": "DURABRAND",
+    "ref": "000000000075446244-UN",
+    "price": 44900.0,
+    "stock": 1,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Electrodomésticos/Hornos de Microondas y Tostadores/"
+   },
+   {
+    "rank": 55,
+    "n": "Procesador Durabrand de Alimentos - 1.9 L",
+    "b": "DURABRAND",
+    "ref": "000000000075440415-UN",
+    "price": 19900.0,
+    "stock": 10,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Electrodomésticos/Extractores y Procesadores de alimentos/"
+   },
+   {
+    "rank": 56,
+    "n": "Altavoz Durabrand Inalambrico Portatil Luz Led",
+    "b": "DURABRAND",
+    "ref": "000000000075426729-UN",
+    "price": 15500.0,
+    "stock": 10,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Audio/Sistemas de Audio/"
+   },
+   {
+    "rank": 57,
+    "n": "Barra de sonido Durabrand 2.1 CH con subwoofer",
+    "b": "DURABRAND",
+    "ref": "000000000075218575-UN",
+    "price": 40500.0,
+    "stock": 10,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Audio/Sistemas de Audio/"
+   },
+   {
+    "rank": 58,
+    "n": "Selfie Stick Durabrand Para Telefono",
+    "b": "DURABRAND",
+    "ref": "000000000075155141-UN",
+    "price": 1900.0,
+    "stock": 10,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Celulares/"
+   },
+   {
+    "rank": 59,
+    "n": "Audifonos Durabrand",
+    "b": "DURABRAND",
+    "ref": "000000000070315543-UN",
+    "price": 3000.0,
+    "stock": 10,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Audio/Audífonos/"
+   },
+   {
+    "rank": 60,
+    "n": "Microfono Durab Inalambrico Con Adapta i",
+    "b": "DURABRAND",
+    "ref": "000000000070003157-UN",
+    "price": 6300.0,
+    "stock": 10,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Audio/Accesorios de Audio/"
+   },
+   {
+    "rank": 61,
+    "n": "Ventilador Mainstays LED Táctil de 24 V y 35 W",
+    "b": "MAINSTAYS",
+    "ref": "000000000075484618-UN",
+    "price": 49900.0,
+    "stock": 10,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Electrodomésticos/Aires Acondicionados y Ventiladores/"
+   },
+   {
+    "rank": 62,
+    "n": "Ventilador Mainstays mini con luz LED táctil",
+    "b": "MAINSTAYS",
+    "ref": "000000000075484616-UN",
+    "price": 39900.0,
+    "stock": 10,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Electrodomésticos/Aires Acondicionados y Ventiladores/"
+   },
+   {
+    "rank": 63,
+    "n": "Cafetera Mainstays programable de 120V con capacidad de 12 tazas",
+    "b": "MAINSTAYS",
+    "ref": "000000000075478784-UN",
+    "price": 19900.0,
+    "stock": 100,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Electrodomésticos/Cafeteras y Jarras Eléctricas/"
+   },
+   {
+    "rank": 64,
+    "n": "Plancha de vapor Mainstays Antiadherente",
+    "b": "MAINSTAYS",
+    "ref": "000000000075450064-UN",
+    "price": 12900.0,
+    "stock": 10,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Electrodomésticos/Planchas de Vapor/"
+   },
+   {
+    "rank": 65,
+    "n": "Altavoz Durabrand Inalambrico Portatil Luz Led",
+    "b": "DURABRAND",
+    "ref": "000000000075426731-UN",
+    "price": 9000.0,
+    "stock": 100,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Audio/Sistemas de Audio/"
+   },
+   {
+    "rank": 66,
+    "n": "Db Cable Usb a a Tipo c",
+    "b": "DURABRAND",
+    "ref": "000000000075426720-UN",
+    "price": 1500.0,
+    "stock": 100,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Celulares/"
+   },
+   {
+    "rank": 67,
+    "n": "Altavoz Durabrand Portatil Boombox Bluetooth",
+    "b": "DURABRAND",
+    "ref": "000000000075426732-UN",
+    "price": 29500.0,
+    "stock": 100,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Audio/Sistemas de Audio/"
+   },
+   {
+    "rank": 68,
+    "n": "Altavoz Durabrand Inalambrico Portatil Luz Led",
+    "b": "DURABRAND",
+    "ref": "000000000075426728-UN",
+    "price": 12500.0,
+    "stock": 10,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Audio/Sistemas de Audio/"
+   },
+   {
+    "rank": 69,
+    "n": "Db Kit De Luz Con Soporte y Microfono Us",
+    "b": "DURABRAND",
+    "ref": "000000000075485671-UN",
+    "price": 7900.0,
+    "stock": 1,
+    "seller": "Walmart Cr",
+    "cat": "/Autos/Accesorios para auto/"
+   },
+   {
+    "rank": 70,
+    "n": "Db Soporte d Celular y Ipad Para Carro",
+    "b": "DURABRAND",
+    "ref": "000000000075425975-UN",
+    "price": 3900.0,
+    "stock": 1,
+    "seller": "Walmart Cr",
+    "cat": "/Autos/Accesorios para auto/"
+   },
+   {
+    "rank": 71,
+    "n": "Audífonos Durabrand Inalambricos Con Banda",
+    "b": "DURABRAND",
+    "ref": "000000000075425865-UN",
+    "price": 8995.0,
+    "stock": 100,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Audio/Audífonos/"
+   },
+   {
+    "rank": 72,
+    "n": "Audífonos Durabrand Inalambricos con Estuche",
+    "b": "DURABRAND",
+    "ref": "000000000075425870-UN",
+    "price": 14995.0,
+    "stock": 10,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Audio/Audífonos/"
+   },
+   {
+    "rank": 73,
+    "n": "Db Cargador De Carro Pd 48w Usb a y Usb",
+    "b": "DURABRAND",
+    "ref": "000000000075425961-UN",
+    "price": 2500.0,
+    "stock": 10,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Celulares/"
+   },
+   {
+    "rank": 74,
+    "n": "Db Kit Cable Viaje 10 Plg y Adap c Micro",
+    "b": "DURABRAND",
+    "ref": "000000000075423261-UN",
+    "price": 6990.0,
+    "stock": 100,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Celulares/"
+   },
+   {
+    "rank": 75,
+    "n": "Db Cable Micro Usb Punta Triple 3 En 1",
+    "b": "DURABRAND",
+    "ref": "000000000075423272-UN",
+    "price": 6990.0,
+    "stock": 100,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Celulares/"
+   },
+   {
+    "rank": 76,
+    "n": "Db Cable Auxiliar 3 5 mm De Audio Usb",
+    "b": "DURABRAND",
+    "ref": "000000000075423271-UN",
+    "price": 6990.0,
+    "stock": 100,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Celulares/"
+   },
+   {
+    "rank": 77,
+    "n": "Db Cable Adaptador Usb c To 3 5m",
+    "b": "DURABRAND",
+    "ref": "000000000075423263-UN",
+    "price": 4500.0,
+    "stock": 100,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Celulares/"
+   },
+   {
+    "rank": 78,
+    "n": "Db Cable Adaptador Light 3 5 mm",
+    "b": "DURABRAND",
+    "ref": "000000000075423262-UN",
+    "price": 4990.0,
+    "stock": 100,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Celulares/"
+   },
+   {
+    "rank": 79,
+    "n": "Pantalla Durabrand LED Smart QLED 4K Google TV - 65 pulgadas",
+    "b": "DURABRAND",
+    "ref": "000000000075391029-UN",
+    "price": 274900.0,
+    "stock": 10,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Televisores/Pantallas/"
+   },
+   {
+    "rank": 80,
+    "n": "Plancha a vapor Mainstays antiadherente",
+    "b": "MAINSTAYS",
+    "ref": "000000000075269613-UN",
+    "price": 7900.0,
+    "stock": 100,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Electrodomésticos/Planchas de Vapor/"
+   },
+   {
+    "rank": 81,
+    "n": "Microondas Durabrand Digital - 1.1 Pies Cúbicos",
+    "b": "DURABRAND",
+    "ref": "000000000075280498-UN",
+    "price": 59900.0,
+    "stock": 1,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Electrodomésticos/Hornos de Microondas y Tostadores/"
+   },
+   {
+    "rank": 82,
+    "n": "Altavoz Durabrand Dual Bluetooth",
+    "b": "DURABRAND",
+    "ref": "000000000075214849-UN",
+    "price": 49900.0,
+    "stock": 10,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Audio/Sistemas de Audio/"
+   },
+   {
+    "rank": 83,
+    "n": "Ventilador Mainstays de piso - 12 pulgadas",
+    "b": "DURABRAND",
+    "ref": "000000000075269732-UN",
+    "price": 12900.0,
+    "stock": 1,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Electrodomésticos/Aires Acondicionados y Ventiladores/"
+   },
+   {
+    "rank": 84,
+    "n": "Soporte Durabrand para celular y Tablet",
+    "b": "DURABRAND",
+    "ref": "000000000075229345-UN",
+    "price": 9600.0,
+    "stock": 100,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Celulares/"
+   },
+   {
+    "rank": 85,
+    "n": "Extractor de jugo Mainstays color negro capacidad 0.8 L",
+    "b": "MAINSTAYS",
+    "ref": "000000000075054049-UN",
+    "price": 7900.0,
+    "stock": 10,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Electrodomésticos/Extractores y Procesadores de alimentos/"
+   },
+   {
+    "rank": 86,
+    "n": "Audífono Durabrand, Cable Kids Rosado",
+    "b": "DURABRAND",
+    "ref": "000000000075023267-UN",
+    "price": 4590.0,
+    "stock": 100,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Audio/Audífonos/"
+   },
+   {
+    "rank": 87,
+    "n": "Audifono Durabrand Cable Kids Aqua",
+    "b": "DURABRAND",
+    "ref": "000000000075425877-UN",
+    "price": 4500.0,
+    "stock": 100,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Audio/Audífonos/"
+   },
+   {
+    "rank": 88,
+    "n": "Audifono Durabrand Cable Kids Unicornio",
+    "b": "DURABRAND",
+    "ref": "000000000075425873-UN",
+    "price": 4500.0,
+    "stock": 10,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Audio/Audífonos/"
+   },
+   {
+    "rank": 89,
+    "n": "Soporte para pantalla Durabrand - 10 a 60 pulgadas",
+    "b": "DURABRAND",
+    "ref": "000000000070294800-UN",
+    "price": 9890.0,
+    "stock": 100,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Televisores/Accesorios para TV/"
+   },
+   {
+    "rank": 90,
+    "n": "Batería Durabrand Portatil De 10000 Mah",
+    "b": "DURABRAND",
+    "ref": "000000000070197303-UN",
+    "price": 13500.0,
+    "stock": 1,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Celulares/"
+   },
+   {
+    "rank": 91,
+    "n": "Pantalla Durabrand Smart TV 4K Led Android Modelo: DURA43MUGS - 43 Pulgadas",
+    "b": "DURABRAND",
+    "ref": "000000000070191531-UN",
+    "price": 249900.0,
+    "stock": 1,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Televisores/Pantallas/"
+   },
+   {
+    "rank": 92,
+    "n": "Soporte de pantalla Durabrand de 47 a 84 pulgadas",
+    "b": "DURABRAND",
+    "ref": "000000000070031112-UN",
+    "price": 4900.0,
+    "stock": 10,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Televisores/Accesorios para TV/"
+   },
+   {
+    "rank": 93,
+    "n": "Mouse Pad Con Gel Durabrand Int 2019124",
+    "b": "DURABRAND",
+    "ref": "000000000070003889-UN",
+    "price": 4190.0,
+    "stock": 10,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Computación/Accesorios de Computación/"
+   },
+   {
+    "rank": 94,
+    "n": "Teclado Mouse Durabra Inala Int 072509bl",
+    "b": "DURABRAND",
+    "ref": "000000000070003232-UN",
+    "price": 7900.0,
+    "stock": 1,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Computación/Accesorios de Computación/"
+   },
+   {
+    "rank": 95,
+    "n": "Soporte de pantalla Empire de 23 a 42 pulgadas",
+    "b": "DURABRAND",
+    "ref": "000000000070429398-UN",
+    "price": 39900.0,
+    "stock": 10,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Televisores/Accesorios para TV/"
+   },
+   {
+    "rank": 96,
+    "n": "Mouse Pad Durabrand Para Mouseint 122006",
+    "b": "DURABRAND",
+    "ref": "000000000070003809-UN",
+    "price": 2700.0,
+    "stock": 10,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Computación/Accesorios de Computación/"
+   },
+   {
+    "rank": 97,
+    "n": "Mouse Negro Durabrand Int 211201b",
+    "b": "DURABRAND",
+    "ref": "000000000070003515-UN",
+    "price": 1725.0,
+    "stock": 10,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Computación/Accesorios de Computación/"
+   },
+   {
+    "rank": 98,
+    "n": "Torre de sonido Durabrand VX4782 con Bluetooth",
+    "b": "DURABRAND",
+    "ref": "000000000070035505-UN",
+    "price": 119900.0,
+    "stock": 100,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Audio/Sistemas de Audio/"
+   },
+   {
+    "rank": 99,
+    "n": "Mochila Durabrand p Laptop 15 6da 082806",
+    "b": "DURABRAND",
+    "ref": "000000000070002570-UN",
+    "price": 14200.0,
+    "stock": 10,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Computación/Accesorios de Computación/"
+   },
+   {
+    "rank": 100,
+    "n": "Bolso Durabrand Para Laptop 14da 071108",
+    "b": "DURABRAND",
+    "ref": "000000000070002529-UN",
+    "price": 8800.0,
+    "stock": 10,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Computación/Accesorios de Computación/"
+   }
+  ]
+ },
+ "klip xtreme": {
+  "total": "0-49/22",
+  "items": [
+   {
+    "rank": 1,
+    "n": "Soporte para pantalla Klip Xtreme de 37 a 80 pulgadas",
+    "b": "KLIP XTREME",
+    "ref": "000000000070638794-UN",
+    "price": 16900.0,
+    "stock": 100,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Televisores/Accesorios para TV/"
+   },
+   {
+    "rank": 2,
+    "n": "Teclado Klipx Usb Kks050s Neg",
+    "b": "KLIP XTREME",
+    "ref": "000000000070417601-UN",
+    "price": 9900.0,
+    "stock": 100,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Computación/Accesorios de Computación/"
+   },
+   {
+    "rank": 3,
+    "n": "Soporte para pantalla Klip Xtreme - 23 a 46 pulgadas",
+    "b": "KLIP",
+    "ref": "000000000070115235-UN",
+    "price": 6000.0,
+    "stock": 10,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Televisores/Accesorios para TV/"
+   },
+   {
+    "rank": 4,
+    "n": "Klip Bateria Portable 10000mah Usb c",
+    "b": "KLIP XTREME",
+    "ref": "000000000075402104-UN",
+    "price": 10000.0,
+    "stock": 10,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Celulares/"
+   },
+   {
+    "rank": 5,
+    "n": "Teclado Klip Mouse USB KCK251S",
+    "b": "KLIP XTREME",
+    "ref": "000000000070250381-UN",
+    "price": 14900.0,
+    "stock": 10,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Televisores/Accesorios para TV/"
+   },
+   {
+    "rank": 6,
+    "n": "Klip Audifonos Tws Cancelacion Ruido",
+    "b": "KLIP XTREME",
+    "ref": "000000000075538673-UN",
+    "price": 14900.0,
+    "stock": 1,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Audio/Audífonos/"
+   },
+   {
+    "rank": 7,
+    "n": "Klip Bateria Externa 2000mah Usb c",
+    "b": "KLIP XTREME",
+    "ref": "000000000075538672-UN",
+    "price": 9900.0,
+    "stock": 10,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Celulares/"
+   },
+   {
+    "rank": 8,
+    "n": "Klip Audifonos Inalambricos Kbc 500",
+    "b": "KLIP XTREME",
+    "ref": "000000000075538671-UN",
+    "price": 18900.0,
+    "stock": 10,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Audio/Audífonos/"
+   },
+   {
+    "rank": 9,
+    "n": "Klip Cable Usb a To Usb c 30w 1 8m",
+    "b": "KLIP XTREME",
+    "ref": "000000000075402110-UN",
+    "price": 2900.0,
+    "stock": 10,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Celulares/"
+   },
+   {
+    "rank": 10,
+    "n": "Klip Soporte Carga Inalámbrica 3 En 1",
+    "b": "KLIP XTREME",
+    "ref": "000000000075402103-UN",
+    "price": 30000.0,
+    "stock": 10,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Celulares/"
+   },
+   {
+    "rank": 11,
+    "n": "Klip Soporte Carga Inalambrica 3 En 1",
+    "b": "KLIP XTREME",
+    "ref": "000000000075402102-UN",
+    "price": 15900.0,
+    "stock": 100,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Celulares/"
+   },
+   {
+    "rank": 12,
+    "n": "Klip Cargador De Carro 140w 3p",
+    "b": "KLIP XTREME",
+    "ref": "000000000075402101-UN",
+    "price": 20900.0,
+    "stock": 10,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Celulares/"
+   },
+   {
+    "rank": 13,
+    "n": "Bocina Klip Xtreme Portátil Inalámbrico Bluetooth",
+    "b": "KLIP XTREME",
+    "ref": "000000000075179733-UN",
+    "price": 16900.0,
+    "stock": 10,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Audio/Sistemas de Audio/"
+   },
+   {
+    "rank": 14,
+    "n": "Premiun  Klip Xtreme  40 Hrs Charcoal",
+    "b": "KLIP XTREME",
+    "ref": "000000000075179732-UN",
+    "price": 25900.0,
+    "stock": 10,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Audio/Audífonos/"
+   },
+   {
+    "rank": 15,
+    "n": "Audífonos Premiun  Klip Xtreme  40 Hrs Blue",
+    "b": "KLIP XTREME",
+    "ref": "000000000075179731-UN",
+    "price": 25900.0,
+    "stock": 10,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Audio/Audífonos/"
+   },
+   {
+    "rank": 16,
+    "n": "Soporte Klip Xtreme para pantallas de 32 a 70 pulgadas",
+    "b": "KLIP XTREME",
+    "ref": "000000000070638793-UN",
+    "price": 13900.0,
+    "stock": 10,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Televisores/Accesorios para TV/"
+   },
+   {
+    "rank": 17,
+    "n": "Soporte para pantalla Klip Xtreme - 32 a 60 pulgadas",
+    "b": "KLIP XTREME",
+    "ref": "000000000070638792-UN",
+    "price": 16900.0,
+    "stock": 10,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Televisores/Accesorios para TV/"
+   },
+   {
+    "rank": 18,
+    "n": "Soporte para pantalla Klip Xtreme - 32 a 65 pulgadas",
+    "b": "KLIP",
+    "ref": "000000000070114172-UN",
+    "price": 45900.0,
+    "stock": 10,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Televisores/Accesorios para TV/"
+   },
+   {
+    "rank": 19,
+    "n": "Klip Cable Usb c a Usb c 30w 1 8m",
+    "b": "KLIP XTREME",
+    "ref": "000000000075402111-UN",
+    "price": 0.0,
+    "stock": 0,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Celulares/"
+   },
+   {
+    "rank": 20,
+    "n": "Klip Cubo De Pared 20w Usb c",
+    "b": "KLIP XTREME",
+    "ref": "000000000075402105-UN",
+    "price": 0.0,
+    "stock": 0,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Celulares/"
+   },
+   {
+    "rank": 21,
+    "n": "Bocina Klip Xtreme 350bk",
+    "b": "KLIP XTREME",
+    "ref": "000000000075179734-UN",
+    "price": 0.0,
+    "stock": 0,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Audio/Sistemas de Audio/"
+   },
+   {
+    "rank": 22,
+    "n": "Base Multimedia Klip Portatil An120klx52",
+    "b": "KLIP XTREME",
+    "ref": "000000000000577749-UN",
+    "price": 0.0,
+    "stock": 0,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Computación/Accesorios de Computación/"
+   }
+  ]
+ },
+ "xtech": {
+  "total": "0-49/44",
+  "items": [
+   {
+    "rank": 1,
+    "n": "Protector de Colchón Relaxtech impermeable Individual",
+    "b": "DORMIPLUS",
+    "ref": "000000000070071951-UN",
+    "price": 8500.0,
+    "stock": 10,
+    "seller": "Walmart Cr",
+    "cat": "/Artículos para el hogar/Colchones y Blancos/Protectores y Sábanas/"
+   },
+   {
+    "rank": 2,
+    "n": "Cubrecama Relaxtech Magnus King",
+    "b": "RELAXTECH",
+    "ref": "000000000075319000-UN",
+    "price": 16000.0,
+    "stock": 10,
+    "seller": "Walmart Cr",
+    "cat": "/Artículos para el hogar/Colchones y Blancos/Colchas y Edredones/"
+   },
+   {
+    "rank": 3,
+    "n": "Mouse Xtech Inalambrico Xtm 310bl Azul",
+    "b": "XTECH",
+    "ref": "000000000070439976-UN",
+    "price": 5900.0,
+    "stock": 100,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Computación/Accesorios de Computación/"
+   },
+   {
+    "rank": 4,
+    "n": "Cable Xtech Hdmi 25ft Xtc425",
+    "b": "XTECH",
+    "ref": "000000000070553349-UN",
+    "price": 12500.0,
+    "stock": 100,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Computación/Accesorios de Computación/"
+   },
+   {
+    "rank": 5,
+    "n": "Cable Xtech Impresora Xtc302 6ft Usb 2 0",
+    "b": "XTECH",
+    "ref": "000000000070497466-UN",
+    "price": 2800.0,
+    "stock": 100,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Computación/Accesorios de Computación/"
+   },
+   {
+    "rank": 6,
+    "n": "Cubrecama Relaxtech Mateo Individual",
+    "b": "RELAXTECH",
+    "ref": "000000000075319021-UN",
+    "price": 10500.0,
+    "stock": 1,
+    "seller": "Walmart Cr",
+    "cat": "/Artículos para el hogar/Colchones y Blancos/Colchas y Edredones/"
+   },
+   {
+    "rank": 7,
+    "n": "Parlante Pc Xtech Xts 115",
+    "b": "XTECH",
+    "ref": "000000000070489137-UN",
+    "price": 9500.0,
+    "stock": 1,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Computación/Accesorios de Computación/"
+   },
+   {
+    "rank": 8,
+    "n": "Mouse Xtech Con Almohadilla Xta 526",
+    "b": "XTECH",
+    "ref": "000000000070646679-UN",
+    "price": 7900.0,
+    "stock": 10,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Computación/Accesorios de Computación/"
+   },
+   {
+    "rank": 9,
+    "n": "Sabanas Relaxtech We Bare Bears Full",
+    "b": "RELAXTECH",
+    "ref": "000000000075417457-UN",
+    "price": 10900.0,
+    "stock": 10,
+    "seller": "Walmart Cr",
+    "cat": "/Artículos para el hogar/Colchones y Blancos/Protectores y Sábanas/"
+   },
+   {
+    "rank": 10,
+    "n": "Sabanas Relaxtech We Bare Bears Twin",
+    "b": "RELAXTECH",
+    "ref": "000000000075417456-UN",
+    "price": 8900.0,
+    "stock": 10,
+    "seller": "Walmart Cr",
+    "cat": "/Artículos para el hogar/Colchones y Blancos/Protectores y Sábanas/"
+   },
+   {
+    "rank": 11,
+    "n": "Cubrecama Relaxtech Toy Story Twin",
+    "b": "RELAXTECH",
+    "ref": "000000000075417498-UN",
+    "price": 11900.0,
+    "stock": 1,
+    "seller": "Walmart Cr",
+    "cat": "/Artículos para el hogar/Colchones y Blancos/Colchas y Edredones/"
+   },
+   {
+    "rank": 12,
+    "n": "Sabanas Relaxtech Toy Story Full",
+    "b": "RELAXTECH",
+    "ref": "000000000075417497-UN",
+    "price": 10900.0,
+    "stock": 10,
+    "seller": "Walmart Cr",
+    "cat": "/Artículos para el hogar/Colchones y Blancos/Protectores y Sábanas/"
+   },
+   {
+    "rank": 13,
+    "n": "Sabanas RelaxtechToy Story Twin",
+    "b": "RELAXTECH",
+    "ref": "000000000075417496-UN",
+    "price": 8900.0,
+    "stock": 100,
+    "seller": "Walmart Cr",
+    "cat": "/Artículos para el hogar/Colchones y Blancos/Protectores y Sábanas/"
+   },
+   {
+    "rank": 14,
+    "n": "Sabana Relaxtech Minnie Full",
+    "b": "RELAXTECH",
+    "ref": "000000000075417436-UN",
+    "price": 10900.0,
+    "stock": 10,
+    "seller": "Walmart Cr",
+    "cat": "/Artículos para el hogar/Colchones y Blancos/Protectores y Sábanas/"
+   },
+   {
+    "rank": 15,
+    "n": "Cubrecama Relaxtech Mateo Full Queen",
+    "b": "RELAXTECH",
+    "ref": "000000000075319003-UN",
+    "price": 14000.0,
+    "stock": 10,
+    "seller": "Walmart Cr",
+    "cat": "/Artículos para el hogar/Colchones y Blancos/Colchas y Edredones/"
+   },
+   {
+    "rank": 16,
+    "n": "Cubrecama Relaxtech Magnus Full Queen",
+    "b": "RELAXTECH",
+    "ref": "000000000075318999-UN",
+    "price": 14000.0,
+    "stock": 10,
+    "seller": "Walmart Cr",
+    "cat": "/Artículos para el hogar/Colchones y Blancos/Colchas y Edredones/"
+   },
+   {
+    "rank": 17,
+    "n": "Cubrecama Relaxtech Magnus Individual",
+    "b": "RELAXTECH",
+    "ref": "000000000075318998-UN",
+    "price": 10500.0,
+    "stock": 100,
+    "seller": "Walmart Cr",
+    "cat": "/Artículos para el hogar/Colchones y Blancos/Colchas y Edredones/"
+   },
+   {
+    "rank": 18,
+    "n": "Cubrecama Relaxtech Dinosaurio Full Queen",
+    "b": "RELAXTECH",
+    "ref": "000000000075222765-UN",
+    "price": 12500.0,
+    "stock": 10,
+    "seller": "Walmart Cr",
+    "cat": "/Artículos para el hogar/Colchones y Blancos/Colchas y Edredones/"
+   },
+   {
+    "rank": 19,
+    "n": "Cubrecama Relaxtech Dinosaurio Individual",
+    "b": "RELAXTECH",
+    "ref": "000000000075222764-UN",
+    "price": 9500.0,
+    "stock": 10,
+    "seller": "Walmart Cr",
+    "cat": "/Artículos para el hogar/Colchones y Blancos/Colchas y Edredones/"
+   },
+   {
+    "rank": 20,
+    "n": "Cable Xtech Hdmi 6ft Xtc406",
+    "b": "XTECH",
+    "ref": "000000000070553347-UN",
+    "price": 6500.0,
+    "stock": 10,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Computación/Accesorios de Computación/"
+   },
+   {
+    "rank": 21,
+    "n": "Mouse Xtech Inalambrico Xtm 310bk Negro",
+    "b": "XTECH",
+    "ref": "000000000070439823-UN",
+    "price": 6500.0,
+    "stock": 10,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Computación/Accesorios de Computación/"
+   },
+   {
+    "rank": 22,
+    "n": "Cable Xtech Xtc308 Vga Monitor 6pies",
+    "b": "XTECH",
+    "ref": "000000000070495088-UN",
+    "price": 4800.0,
+    "stock": 100,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Computación/Accesorios de Computación/"
+   },
+   {
+    "rank": 23,
+    "n": "Adaptador Xtech Hdm M Hdmi M Xtc 333",
+    "b": "XTECH",
+    "ref": "000000000070629957-UN",
+    "price": 4000.0,
+    "stock": 100,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Televisores/Reproductores DVD y Blu Ray/"
+   },
+   {
+    "rank": 24,
+    "n": "Cable Xtech Hdmi 15ft Xtc415",
+    "b": "XTECH",
+    "ref": "000000000070553348-UN",
+    "price": 9800.0,
+    "stock": 100,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Computación/Accesorios de Computación/"
+   },
+   {
+    "rank": 25,
+    "n": "Cable Xtech AB004XTK11 HDMI a HDMI 3840X2160P - 1.8 m",
+    "b": "XTECH",
+    "ref": "000000000070201906-UN",
+    "price": 5500.0,
+    "stock": 10,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Televisores/Accesorios para TV/"
+   },
+   {
+    "rank": 26,
+    "n": "Cable Xtech AB004XTK71 HDMI color negro resolución 3840 x 2160 - 7.6 m",
+    "b": "XTECH",
+    "ref": "000000000070629965-UN",
+    "price": 10500.0,
+    "stock": 100,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Televisores/Accesorios para TV/"
+   },
+   {
+    "rank": 27,
+    "n": "Base Enfriadora Xtech Xta 150",
+    "b": "XTECH",
+    "ref": "000000000070495087-UN",
+    "price": 10900.0,
+    "stock": 10,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Computación/Accesorios de Computación/"
+   },
+   {
+    "rank": 28,
+    "n": "Mouse Xtech Usb Ergo Comico 165 Negro",
+    "b": "XTECH",
+    "ref": "000000000070646684-UN",
+    "price": 3300.0,
+    "stock": 10,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Computación/Accesorios de Computación/"
+   },
+   {
+    "rank": 29,
+    "n": "Cable Xtech AC002XTK04  HDMI a HDMI  3840X2160P - 3 m",
+    "b": "XTECH",
+    "ref": "000000000070629964-UN",
+    "price": 5700.0,
+    "stock": 100,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Televisores/Accesorios para TV/"
+   },
+   {
+    "rank": 30,
+    "n": "Protector de Colchón Relaxtech impermeable Matrimonial",
+    "b": "DORMIPLUS",
+    "ref": "000000000070072004-UN",
+    "price": 0.0,
+    "stock": 0,
+    "seller": "Walmart Cr",
+    "cat": "/Artículos para el hogar/Colchones y Blancos/Protectores y Sábanas/"
+   },
+   {
+    "rank": 31,
+    "n": "Cubrecama Relaxtech Minnie Full",
+    "b": "RELAXTECH",
+    "ref": "000000000075417438-UN",
+    "price": 0.0,
+    "stock": 0,
+    "seller": "Walmart Cr",
+    "cat": "/Artículos para el hogar/Colchones y Blancos/Colchas y Edredones/"
+   },
+   {
+    "rank": 32,
+    "n": "Cubrecama Relaxtech Minnie Twin",
+    "b": "RELAXTECH",
+    "ref": "000000000075417437-UN",
+    "price": 0.0,
+    "stock": 0,
+    "seller": "Walmart Cr",
+    "cat": "/Artículos para el hogar/Colchones y Blancos/Colchas y Edredones/"
+   },
+   {
+    "rank": 33,
+    "n": "Sabana Relaxtech Minnie Twin",
+    "b": "RELAXTECH",
+    "ref": "000000000075417435-UN",
+    "price": 0.0,
+    "stock": 0,
+    "seller": "Walmart Cr",
+    "cat": "/Artículos para el hogar/Colchones y Blancos/Protectores y Sábanas/"
+   },
+   {
+    "rank": 34,
+    "n": "Cubrecama Relaxtech We Bare Bears Full",
+    "b": "RELAXTECH",
+    "ref": "000000000075417459-UN",
+    "price": 0.0,
+    "stock": 0,
+    "seller": "Walmart Cr",
+    "cat": "/Artículos para el hogar/Colchones y Blancos/Colchas y Edredones/"
+   },
+   {
+    "rank": 35,
+    "n": "Cubrecama Relaxtech We Bare Bears Twin",
+    "b": "RELAXTECH",
+    "ref": "000000000075417458-UN",
+    "price": 0.0,
+    "stock": 0,
+    "seller": "Walmart Cr",
+    "cat": "/Artículos para el hogar/Colchones y Blancos/Colchas y Edredones/"
+   },
+   {
+    "rank": 36,
+    "n": "Cubrecama Relaxtech Toy Story Full",
+    "b": "RELAXTECH",
+    "ref": "000000000075417499-UN",
+    "price": 0.0,
+    "stock": 0,
+    "seller": "Walmart Cr",
+    "cat": "/Artículos para el hogar/Colchones y Blancos/Colchas y Edredones/"
+   },
+   {
+    "rank": 37,
+    "n": "Cubrecama Relaxtech Leslie Full Queen",
+    "b": "RELAXTECH",
+    "ref": "000000000075319016-UN",
+    "price": 0.0,
+    "stock": 0,
+    "seller": "Walmart Cr",
+    "cat": "/Artículos para el hogar/Colchones y Blancos/Colchas y Edredones/"
+   },
+   {
+    "rank": 38,
+    "n": "Cubrecama Relaxtech Leslie King",
+    "b": "RELAXTECH",
+    "ref": "000000000075319017-UN",
+    "price": 0.0,
+    "stock": 0,
+    "seller": "Walmart Cr",
+    "cat": "/Artículos para el hogar/Colchones y Blancos/Colchas y Edredones/"
+   },
+   {
+    "rank": 39,
+    "n": "Cubrecama Relaxtech Mateo King",
+    "b": "RELAXTECH",
+    "ref": "000000000075319005-UN",
+    "price": 0.0,
+    "stock": 0,
+    "seller": "Walmart Cr",
+    "cat": "/Artículos para el hogar/Colchones y Blancos/Colchas y Edredones/"
+   },
+   {
+    "rank": 40,
+    "n": "Cubrecama Relaxtech Leslie Individual",
+    "b": "RELAXTECH",
+    "ref": "000000000075319014-UN",
+    "price": 0.0,
+    "stock": 0,
+    "seller": "Walmart Cr",
+    "cat": "/Artículos para el hogar/Colchones y Blancos/Colchas y Edredones/"
+   },
+   {
+    "rank": 41,
+    "n": "Cubrecama Relaxtech Alma liso King",
+    "b": "RELAXTECH",
+    "ref": "000000000075290747-UN",
+    "price": 0.0,
+    "stock": 0,
+    "seller": "Walmart Cr",
+    "cat": "/Artículos para el hogar/Colchones y Blancos/Colchas y Edredones/"
+   },
+   {
+    "rank": 42,
+    "n": "Cubrecama Relaxtech Alma Individual",
+    "b": "RELAXTECH",
+    "ref": "000000000075290745-UN",
+    "price": 0.0,
+    "stock": 0,
+    "seller": "Walmart Cr",
+    "cat": "/Artículos para el hogar/Colchones y Blancos/Colchas y Edredones/"
+   },
+   {
+    "rank": 43,
+    "n": "Cubrecama Individual Relaxtech, Harry Potter",
+    "b": "RELAXTECH",
+    "ref": "000000000075208519-UN",
+    "price": 0.0,
+    "stock": 0,
+    "seller": "Walmart Cr",
+    "cat": "/Artículos para el hogar/Colchones y Blancos/Colchas y Edredones/"
+   },
+   {
+    "rank": 44,
+    "n": "Soporte para pantalla Xtech de 23 a 42 pulgadas",
+    "b": "XTECH",
+    "ref": "000000000070199589-UN",
+    "price": 0.0,
+    "stock": 0,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Televisores/Accesorios para TV/"
+   }
+  ]
+ },
+ "devia": {
+  "total": "0-49/19",
+  "items": [
+   {
+    "rank": 1,
+    "n": "Power Bank DEVIA 10 000 mAh con carga rápida 22,5 W, pantalla digital, un puerto Type‑C y dos USB",
+    "b": "Devia",
+    "ref": "6942297111547",
+    "price": 9900.0,
+    "stock": 99999,
+    "seller": "SASA",
+    "cat": "/Electrónica/Celulares/Accesorios para celular/"
+   },
+   {
+    "rank": 2,
+    "n": "Cable DEVIA USB‑C a Lightning para iPhone con carga rápida PD 20 W y datos, 1 m",
+    "b": "Devia",
+    "ref": "6938595326868",
+    "price": 4900.0,
+    "stock": 99999,
+    "seller": "SASA",
+    "cat": "/Electrónica/Celulares/Accesorios para celular/"
+   },
+   {
+    "rank": 3,
+    "n": "Audífonos Inalámbricos Devia Kintone Series TWS‑K1 Bluetooth 5.4 con Estuche de Carga USB‑C Blanco",
+    "b": "Devia",
+    "ref": "6938595399237",
+    "price": 10250.0,
+    "stock": 99999,
+    "seller": "SASA",
+    "cat": "/Electrónica/Audio/Audífonos/"
+   },
+   {
+    "rank": 4,
+    "n": "Localizador Devia Lite Tag Rastreador para Apple Find My (iPhone) similar al AirTag Negro con Llavero de Silicon",
+    "b": "Devia",
+    "ref": "6942297126947",
+    "price": 9900.0,
+    "stock": 99999,
+    "seller": "SASA",
+    "cat": "/Electrónica/Celulares/Accesorios para celular/"
+   },
+   {
+    "rank": 5,
+    "n": "Cargador Devia 65W Carga Rápida dual USB-C y USB-A con cable incluido 2M, compatible con Apple, Samsung, Honor, Xiaomi",
+    "b": "Devia",
+    "ref": "6942297106413",
+    "price": 13900.0,
+    "stock": 99999,
+    "seller": "SASA",
+    "cat": "/Electrónica/Celulares/Accesorios para celular/"
+   },
+   {
+    "rank": 6,
+    "n": "Cargador de carga rapida carro Devia metálico 116W carga rápida con 2 USB-C y 1 USB-A",
+    "b": "Devia",
+    "ref": "6942297112780",
+    "price": 13750.0,
+    "stock": 99999,
+    "seller": "SASA",
+    "cat": "/Electrónica/Celulares/Accesorios para celular/"
+   },
+   {
+    "rank": 7,
+    "n": "Cargador de carga rápida carro Devia 45W con 3 USB-A y 2 USB-C y cable de extensión 1,5m",
+    "b": "Devia",
+    "ref": "6942297137806",
+    "price": 11900.0,
+    "stock": 99999,
+    "seller": "SASA",
+    "cat": "/Electrónica/Celulares/Accesorios para celular/"
+   },
+   {
+    "rank": 8,
+    "n": "Cable USB a USB‑C DEVIA Shark 100 W 5 A, 1,5 m para Samsung, Xiaomi, Huawei",
+    "b": "Devia",
+    "ref": "6938595344602",
+    "price": 3900.0,
+    "stock": 99999,
+    "seller": "SASA",
+    "cat": "/Electrónica/Celulares/Accesorios para celular/"
+   },
+   {
+    "rank": 9,
+    "n": "Bolsa impermeable para celular Devia, con certificación IPX8 para iPhone 17-16-15-14, ideal para la playa y piscinas",
+    "b": "Devia",
+    "ref": "6938595384806",
+    "price": 4900.0,
+    "stock": 99999,
+    "seller": "SASA",
+    "cat": "/Electrónica/Celulares/Accesorios para celular/"
+   },
+   {
+    "rank": 10,
+    "n": "Audífonos Inalámbricos Devia Kintone Series TWS‑K1 Bluetooth 5.4 con Estuche de Carga USB‑C Negro",
+    "b": "Devia",
+    "ref": "6938595399220",
+    "price": 10250.0,
+    "stock": 99999,
+    "seller": "SASA",
+    "cat": "/Electrónica/Audio/Audífonos/"
+   },
+   {
+    "rank": 11,
+    "n": "Cable USB‑C a USB‑C DEVIA 240 W PD 3.1, ideal para laptops, consolas de juego y tablets, 2 m",
+    "b": "Devia",
+    "ref": "6942297108721",
+    "price": 5900.0,
+    "stock": 99999,
+    "seller": "SASA",
+    "cat": "/Electrónica/Celulares/Accesorios para celular/"
+   },
+   {
+    "rank": 12,
+    "n": "Holder para carro DEVIA carga rapida inalámbrica Qi de hasta 15 W y sujeción automática, compatible con Apple y Android",
+    "b": "Devia",
+    "ref": "6942297106574",
+    "price": 9900.0,
+    "stock": 99999,
+    "seller": "SASA",
+    "cat": "/Electrónica/Celulares/Accesorios para celular/"
+   },
+   {
+    "rank": 13,
+    "n": "Cable USB‑C a USB‑C DEVIA de nylon trenzado duradero, PD 60 W para Samsung, Apple, Xiaomi y Huawei, 1 m",
+    "b": "Devia",
+    "ref": "6938595399381",
+    "price": 4500.0,
+    "stock": 99999,
+    "seller": "SASA",
+    "cat": "/Electrónica/Celulares/Cargadores y power banks para celulares/"
+   },
+   {
+    "rank": 14,
+    "n": "Auriculares inalámbricos DEVIA Lite1 de conducción aérea con Bluetooth y hasta 12 h de uso",
+    "b": "Devia",
+    "ref": "6942297130982",
+    "price": 9900.0,
+    "stock": 99999,
+    "seller": "SASA",
+    "cat": "/Electrónica/Audio/Audífonos/"
+   },
+   {
+    "rank": 15,
+    "n": "Cargador para carro Devia 30w con 2 puertos USB QC 3.0 carga rapida para iPhone 17-16-15-14-13-12, Galaxy S25-24, Honor",
+    "b": "Devia",
+    "ref": "6938595385360",
+    "price": 4900.0,
+    "stock": 99999,
+    "seller": "SASA",
+    "cat": "/Electrónica/Celulares/Accesorios para celular/"
+   },
+   {
+    "rank": 16,
+    "n": "Audífonos alámbricos Devia Kintone A3 3.5mm con micrófono, sonido Hi‑Fi y control de volumen",
+    "b": "Devia",
+    "ref": "6942297108752",
+    "price": 3750.0,
+    "stock": 99999,
+    "seller": "SASA",
+    "cat": "/Electrónica/Audio/Audífonos/"
+   },
+   {
+    "rank": 17,
+    "n": "Cargador rapido Devia 20W USB-C + USB doble puerto, para iPhone 16, Samsung Galaxy Series S - A y otros, blanco",
+    "b": "Devia",
+    "ref": "6938595385254",
+    "price": 5500.0,
+    "stock": 99999,
+    "seller": "SASA",
+    "cat": "/Electrónica/Celulares/Accesorios para celular/"
+   },
+   {
+    "rank": 18,
+    "n": "Auriculares inalámbricos DEVIA Lite1 over‑ear con Bluetooth 5.4, hasta 10 h de batería y conexión dual",
+    "b": "Devia",
+    "ref": "6942297145160",
+    "price": 9900.0,
+    "stock": 99999,
+    "seller": "SASA",
+    "cat": "/Electrónica/Audio/Audífonos/"
+   },
+   {
+    "rank": 19,
+    "n": "Audífonos Alámbricos Devia Kintone A3 para celular Tipo USB‑C con Micrófono, Sonido Hi‑Fi y Control de Volumen",
+    "b": "Devia",
+    "ref": "6942297108769",
+    "price": 4500.0,
+    "stock": 99999,
+    "seller": "SASA",
+    "cat": "/Electrónica/Audio/Audífonos/"
+   }
+  ]
+ },
+ "trust": {
+  "total": "0-49/39",
+  "items": [
+   {
+    "rank": 1,
+    "n": "Lector firma digital Trust USB-C",
+    "b": "TRUST",
+    "ref": "8713439260618",
+    "price": 10000.0,
+    "stock": 100,
+    "seller": "Memoris Forever",
+    "cat": "/Electrónica/Computación/Accesorios de Computación/"
+   },
+   {
+    "rank": 2,
+    "n": "Teclado, Mouse y Almohada Gaming Trust  Color Negro",
+    "b": "TRUST",
+    "ref": "000000000075304656-UN",
+    "price": 27900.0,
+    "stock": 1,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Videojuegos/Accesorios para PC/"
+   },
+   {
+    "rank": 3,
+    "n": "Mouse Inalambrico Trust 24796",
+    "b": "TRUST",
+    "ref": "000000000075263854-UN",
+    "price": 4900.0,
+    "stock": 10,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Computación/Accesorios de Computación/"
+   },
+   {
+    "rank": 4,
+    "n": "Brazo para monitor Trust Black and Decker dual flexible 23941",
+    "b": "BLACK+DECKER",
+    "ref": "8713439239416",
+    "price": 29000.0,
+    "stock": 10,
+    "seller": "Memoris Forever",
+    "cat": "/Electrónica/Televisores/Accesorios para TV/"
+   },
+   {
+    "rank": 5,
+    "n": "Audífonos bluetooth Trust intraurales blanco cancelación ruido 25173",
+    "b": "TRUST",
+    "ref": "8713439251739",
+    "price": 15550.0,
+    "stock": 100,
+    "seller": "Smart Costa Rica",
+    "cat": "/Electrónica/Audio/Audífonos/"
+   },
+   {
+    "rank": 6,
+    "n": "Audífonos bluetooth Trust wireless negro 23712",
+    "b": "TRUST",
+    "ref": "8713439237122",
+    "price": 15910.0,
+    "stock": 100,
+    "seller": "Smart Costa Rica",
+    "cat": "/Electrónica/Audio/Audífonos/"
+   },
+   {
+    "rank": 7,
+    "n": "Audifonos inalambricos gamer Trust negro 24901",
+    "b": "TRUST",
+    "ref": "8713439249019",
+    "price": 40510.0,
+    "stock": 100,
+    "seller": "Smart Costa Rica",
+    "cat": "/Electrónica/Audio/Accesorios de Audio/"
+   },
+   {
+    "rank": 8,
+    "n": "Laptop Powerbank Trust 100w",
+    "b": "TRUST",
+    "ref": "8713439252408",
+    "price": 55000.0,
+    "stock": 10,
+    "seller": "Memoris Forever",
+    "cat": "/Electrónica/Computación/Accesorios de Computación/"
+   },
+   {
+    "rank": 9,
+    "n": "Trust keyra teclado inalambrico multidispositivo Ergonomico US",
+    "b": "TRUST",
+    "ref": "8713439254594",
+    "price": 24500.0,
+    "stock": 10,
+    "seller": "Memoris Forever",
+    "cat": "/Electrónica/Videojuegos/Teclados y Mouse/"
+   },
+   {
+    "rank": 10,
+    "n": "Altavoz Trust azura inalámbrico para fiestas negro 25280",
+    "b": "TRUST",
+    "ref": "8713439252804",
+    "price": 69280.0,
+    "stock": 100,
+    "seller": "Smart Costa Rica",
+    "cat": "/Electrónica/Audio/Sistemas de Audio/"
+   },
+   {
+    "rank": 11,
+    "n": "Cargador Trust GXT mandos PS5 blanco 25597",
+    "b": "TRUST",
+    "ref": "8713439255973",
+    "price": 11100.0,
+    "stock": 99999,
+    "seller": "Smart Costa Rica",
+    "cat": "/Electrónica/Computación/Accesorios de Computación/"
+   },
+   {
+    "rank": 12,
+    "n": "Base enfriadora Trust para laptop hasta 16 pulgadas altura regulable 24613",
+    "b": "TRUST",
+    "ref": "8713439246131",
+    "price": 17720.0,
+    "stock": 100,
+    "seller": "Smart Costa Rica",
+    "cat": "/Electrónica/Computación/Accesorios de Computación/"
+   },
+   {
+    "rank": 13,
+    "n": "Trust Powerbank 20w 10000mah Serie 5",
+    "b": "TRUST",
+    "ref": "000000000075461843-UN",
+    "price": 9000.0,
+    "stock": 10,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Celulares/"
+   },
+   {
+    "rank": 14,
+    "n": "Kit Gaming Trust Controlador y Audifono",
+    "b": "TRUST",
+    "ref": "000000000075425318-UN",
+    "price": 26600.0,
+    "stock": 1,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Computación/Accesorios de Computación/"
+   },
+   {
+    "rank": 15,
+    "n": "Teclado Inal Multidispositivo Ergonomico",
+    "b": "TRUST",
+    "ref": "000000000075415355-UN",
+    "price": 26900.0,
+    "stock": 1,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Computación/Accesorios de Computación/"
+   },
+   {
+    "rank": 16,
+    "n": "Powerbank Para Laptop Laro 100w Carg Rap",
+    "b": "TRUST",
+    "ref": "000000000075415354-UN",
+    "price": 49900.0,
+    "stock": 10,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Computación/Accesorios de Computación/"
+   },
+   {
+    "rank": 17,
+    "n": "Pila Aaa Trust Recargable Usb c Azul",
+    "b": "TRUST",
+    "ref": "000000000075357344-UN",
+    "price": 6900.0,
+    "stock": 10,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Computación/Accesorios de Computación/"
+   },
+   {
+    "rank": 18,
+    "n": "Teclado, Mouse y Almohada Gaming Trust  Color Blanco",
+    "b": "TRUST",
+    "ref": "000000000075304657-UN",
+    "price": 22800.0,
+    "stock": 1,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Videojuegos/Accesorios para PC/"
+   },
+   {
+    "rank": 19,
+    "n": "Teclado Mecánico Gaming Trust Iluminado - 24407",
+    "b": "TRUST",
+    "ref": "000000000075304642-UN",
+    "price": 23900.0,
+    "stock": 10,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Videojuegos/Accesorios para PC/"
+   },
+   {
+    "rank": 20,
+    "n": "Mouse Gamer Inalámbrico GXTrust 931 Ybar Dual/BT Negro",
+    "b": "TRUST",
+    "ref": "000000000075304658-UN",
+    "price": 19900.0,
+    "stock": 1,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Videojuegos/Teclados y Mouse/"
+   },
+   {
+    "rank": 21,
+    "n": "Mouse Inalámbrico Ergonómico Trust Bayo II Recargable Blanco",
+    "b": "TRUST",
+    "ref": "000000000075304661-UN",
+    "price": 17900.0,
+    "stock": 10,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Computación/Accesorios de Computación/"
+   },
+   {
+    "rank": 22,
+    "n": "Audífonos Gaming GXTrust 416 Zirox LED para Switch 2 Negro",
+    "b": "TRUST",
+    "ref": "000000000075304659-UN",
+    "price": 16900.0,
+    "stock": 10,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Videojuegos/Accesorios para PC/"
+   },
+   {
+    "rank": 23,
+    "n": "Mouse Gamer Inalámbrico GXTrust 110 Felox Recargable Blanco",
+    "b": "TRUST",
+    "ref": "000000000075304652-UN",
+    "price": 11900.0,
+    "stock": 1,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Videojuegos/Teclados y Mouse/"
+   },
+   {
+    "rank": 24,
+    "n": "Headset Gaming Trust Eco 24502 Inalámbrico",
+    "b": "TRUST",
+    "ref": "000000000075304643-UN",
+    "price": 26900.0,
+    "stock": 10,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Videojuegos/Accesorios para PC/"
+   },
+   {
+    "rank": 25,
+    "n": "Mouse gamer Trust Eco GXT 923 YBAR- 24729",
+    "b": "TRUST",
+    "ref": "000000000075304647-UN",
+    "price": 12900.0,
+    "stock": 10,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Videojuegos/Teclados y Mouse/"
+   },
+   {
+    "rank": 26,
+    "n": "Teclado  Gaming Trust 835 Azor Iluminado - 23823",
+    "b": "TRUST",
+    "ref": "000000000075304638-UN",
+    "price": 14900.0,
+    "stock": 1,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Videojuegos/Accesorios para PC/"
+   },
+   {
+    "rank": 27,
+    "n": "Kit Gamer Trust Blanco Headset Cargador",
+    "b": "TRUST",
+    "ref": "000000000075425317-UN",
+    "price": 0.0,
+    "stock": 0,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Computación/Accesorios de Computación/"
+   },
+   {
+    "rank": 28,
+    "n": "Teclado Trust Numerico Inalambrico Negro",
+    "b": "TRUST",
+    "ref": "000000000075415356-UN",
+    "price": 0.0,
+    "stock": 0,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Computación/Accesorios de Computación/"
+   },
+   {
+    "rank": 29,
+    "n": "Mouse Gamer Inalámbrico GXTrust 112 Felox mas Mousepad Negro",
+    "b": "TRUST",
+    "ref": "000000000075304653-UN",
+    "price": 0.0,
+    "stock": 0,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Videojuegos/Teclados y Mouse/"
+   },
+   {
+    "rank": 30,
+    "n": "Audífonos Gaming GXTrust 415 Zirox para Switch/PS5/Xbox",
+    "b": "TRUST",
+    "ref": "000000000075304650-UN",
+    "price": 0.0,
+    "stock": 0,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Videojuegos/Accesorios para PC/"
+   },
+   {
+    "rank": 31,
+    "n": "Mouse Ergonómico Trust Bayo II Diseño Certificado de 57° Negro",
+    "b": "TRUST",
+    "ref": "000000000075304655-UN",
+    "price": 0.0,
+    "stock": 0,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Computación/Accesorios de Computación/"
+   },
+   {
+    "rank": 32,
+    "n": "Mouse Gamer Inalámbrico GXTrust 110 Felox Recargable Negro",
+    "b": "TRUST",
+    "ref": "000000000075304651-UN",
+    "price": 0.0,
+    "stock": 0,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Videojuegos/Teclados y Mouse/"
+   },
+   {
+    "rank": 33,
+    "n": "Mouse Trust Recarg Inlam Silenc Ng 24819",
+    "b": "TRUST",
+    "ref": "000000000075304648-UN",
+    "price": 0.0,
+    "stock": 0,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Computación/Accesorios de Computación/"
+   },
+   {
+    "rank": 34,
+    "n": "Mousepad XXL Trust  24194 Color Negro",
+    "b": "TRUST",
+    "ref": "000000000075304640-UN",
+    "price": 0.0,
+    "stock": 0,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Videojuegos/Accesorios para PC/"
+   },
+   {
+    "rank": 35,
+    "n": "AudÍfonos Trust inalámbricos TWS 25296",
+    "b": "TRUST",
+    "ref": "000000000075294425-UN",
+    "price": 0.0,
+    "stock": 0,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Audio/Audífonos/"
+   },
+   {
+    "rank": 36,
+    "n": "Mouse Ergo Inalambrico Recar Trust 25145",
+    "b": "TRUST",
+    "ref": "000000000075263856-UN",
+    "price": 0.0,
+    "stock": 0,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Computación/Accesorios de Computación/"
+   },
+   {
+    "rank": 37,
+    "n": "Combo Teclado Y Mouse Trust 25433",
+    "b": "TRUST",
+    "ref": "000000000075263857-UN",
+    "price": 0.0,
+    "stock": 0,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Computación/Accesorios de Computación/"
+   },
+   {
+    "rank": 38,
+    "n": "Mouse Ergo Inalambrico Recar Trust 23731",
+    "b": "TRUST",
+    "ref": "000000000075263853-UN",
+    "price": 0.0,
+    "stock": 0,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Computación/Accesorios de Computación/"
+   },
+   {
+    "rank": 39,
+    "n": "Mouse Ergo Inalamb Vert Trust 23507",
+    "b": "TRUST",
+    "ref": "000000000075263852-UN",
+    "price": 0.0,
+    "stock": 0,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Computación/Accesorios de Computación/"
+   }
+  ]
+ },
+ "unno tekno": {
+  "total": "0-49/6",
+  "items": [
+   {
+    "rank": 1,
+    "n": "Selfie Stick unno tekno con Trípode y Luz LED",
+    "b": "UNNO TEKNO",
+    "ref": "850030983367",
+    "price": 9800.0,
+    "stock": 10,
+    "seller": "COREX",
+    "cat": "/Electrónica/Celulares/Accesorios para celular/"
+   },
+   {
+    "rank": 2,
+    "n": "Hub USB-C Unno Tekno 8 en 1 con HDMI gris",
+    "b": "UNNO TEKNO",
+    "ref": "9850058179056",
+    "price": 13280.0,
+    "stock": 100,
+    "seller": "Techify",
+    "cat": "/Electrónica/Computación/Accesorios de Computación/"
+   },
+   {
+    "rank": 3,
+    "n": "Trípode para Cámara unno tekno 55 pulgadas Liviano",
+    "b": "UNNO TEKNO",
+    "ref": "850058179926",
+    "price": 18500.0,
+    "stock": 10,
+    "seller": "COREX",
+    "cat": "/Electrónica/Seguridad/Accesorios camaras y equipos seguridad/"
+   },
+   {
+    "rank": 4,
+    "n": "Soporte Magnético para Celular unno tekno con Brazo Extensible para Auto",
+    "b": "UNNO TEKNO",
+    "ref": "850030983626",
+    "price": 5000.0,
+    "stock": 10,
+    "seller": "COREX",
+    "cat": "/Electrónica/Celulares/Accesorios para celular/"
+   },
+   {
+    "rank": 5,
+    "n": "Soporte Magnético para Celular con Carga Inalámbrica unno tekno para Rejilla de Auto",
+    "b": "UNNO TEKNO",
+    "ref": "850030983923",
+    "price": 12000.0,
+    "stock": 10,
+    "seller": "COREX",
+    "cat": "/Electrónica/Celulares/Accesorios para celular/"
+   },
+   {
+    "rank": 6,
+    "n": "Kit de Vlogging unno tekno Influencer Pro",
+    "b": "UNNO TEKNO",
+    "ref": "850058179100",
+    "price": 21500.0,
+    "stock": 100,
+    "seller": "COREX",
+    "cat": "/Electrónica/Audio/Accesorios de Audio/"
+   }
+  ]
+ },
+ "imou": {
+  "total": "0-49/17",
+  "items": [
+   {
+    "rank": 1,
+    "n": "Cámara de seguridad IMOU WiFi Cruiser PANO Z de 13MP para exterior",
+    "b": "IMOU",
+    "ref": "6937479642780",
+    "price": 78300.0,
+    "stock": 100,
+    "seller": "Security Doctors",
+    "cat": "/Electrónica/Seguridad/Cámaras y equipos de Seguridad/"
+   },
+   {
+    "rank": 2,
+    "n": "Cámara de seguridad IMOU IP Mini Ranger con WiFi tipo domo 5MP",
+    "b": "IMOU",
+    "ref": "6971927236299",
+    "price": 30500.0,
+    "stock": 100,
+    "seller": "Security Doctors",
+    "cat": "/Electrónica/Seguridad/Accesorios camaras y equipos seguridad/"
+   },
+   {
+    "rank": 3,
+    "n": "Tarjeta de grabación Micro SD IMOU de 128GB",
+    "b": "IMOU",
+    "ref": "6939554930294",
+    "price": 37700.0,
+    "stock": 100,
+    "seller": "Security Doctors",
+    "cat": "/Electrónica/Seguridad/Accesorios camaras y equipos seguridad/"
+   },
+   {
+    "rank": 4,
+    "n": "Tarjeta de grabación Micro SD IMOU de 64GB",
+    "b": "IMOU",
+    "ref": "6939554929755",
+    "price": 18200.0,
+    "stock": 10,
+    "seller": "Security Doctors",
+    "cat": "/Electrónica/Seguridad/Accesorios camaras y equipos seguridad/"
+   },
+   {
+    "rank": 5,
+    "n": "Cámara de seguridad IMOU WiFi en forma de bombillo de 3MP",
+    "b": "IMOU",
+    "ref": "6971927239153",
+    "price": 33600.0,
+    "stock": 100,
+    "seller": "Security Doctors",
+    "cat": "/Electrónica/Seguridad/Accesorios camaras y equipos seguridad/"
+   },
+   {
+    "rank": 6,
+    "n": "Cámara de seguridad IMOU WiFi inteligente sin cable de 3MP",
+    "b": "IMOU",
+    "ref": "6971927233670",
+    "price": 58200.0,
+    "stock": 100,
+    "seller": "Security Doctors",
+    "cat": "/Electrónica/Seguridad/Accesorios camaras y equipos seguridad/"
+   },
+   {
+    "rank": 7,
+    "n": "Cámara de seguridad IMOU WiFi inteligente para interiores de 3MP",
+    "b": "IMOU",
+    "ref": "6937479641056",
+    "price": 26000.0,
+    "stock": 100,
+    "seller": "Security Doctors",
+    "cat": "/Electrónica/Seguridad/Accesorios camaras y equipos seguridad/"
+   },
+   {
+    "rank": 8,
+    "n": "Cámara de seguridad IMOU  con batería recargable de 3MP",
+    "b": "IMOU",
+    "ref": "6976391039636",
+    "price": 71700.0,
+    "stock": 100,
+    "seller": "Security Doctors",
+    "cat": "/Electrónica/Seguridad/Accesorios camaras y equipos seguridad/"
+   },
+   {
+    "rank": 9,
+    "n": "Cámara de seguridad IMOU WiFi 4MP visión nocturna y micrófono",
+    "b": "IMOU",
+    "ref": "6976391039230",
+    "price": 35500.0,
+    "stock": 100,
+    "seller": "Security Doctors",
+    "cat": "/Electrónica/Seguridad/Accesorios camaras y equipos seguridad/"
+   },
+   {
+    "rank": 10,
+    "n": "Cámara de seguridad IMOU WiFi Cruiser 2 5MP seguimiento inteligente",
+    "b": "IMOU",
+    "ref": "6971927235056",
+    "price": 46400.0,
+    "stock": 100,
+    "seller": "Security Doctors",
+    "cat": "/Electrónica/Seguridad/Accesorios camaras y equipos seguridad/"
+   },
+   {
+    "rank": 11,
+    "n": "Cámara de seguridad IMOU WiFi 6 Cruiser SE Plus 3MP",
+    "b": "IMOU",
+    "ref": "6976391038943",
+    "price": 43700.0,
+    "stock": 100,
+    "seller": "Security Doctors",
+    "cat": "/Electrónica/Seguridad/Accesorios camaras y equipos seguridad/"
+   },
+   {
+    "rank": 12,
+    "n": "Cámara de seguridad IMOU WiFi tipo BulbCam 3MP sin luz",
+    "b": "IMOU",
+    "ref": "6976391035720",
+    "price": 25000.0,
+    "stock": 100,
+    "seller": "Security Doctors",
+    "cat": "/Electrónica/Seguridad/Accesorios camaras y equipos seguridad/"
+   },
+   {
+    "rank": 13,
+    "n": "Cámara de seguridad IMOU 4G Cell PT de 3MP",
+    "b": "IMOU",
+    "ref": "6976391038196",
+    "price": 102400.0,
+    "stock": 100,
+    "seller": "Security Doctors",
+    "cat": "/Electrónica/Seguridad/Accesorios camaras y equipos seguridad/"
+   },
+   {
+    "rank": 14,
+    "n": "Cámara de seguridad IMOU WiFi tipo Bullet 5MP con micrófono",
+    "b": "IMOU",
+    "ref": "6976391038493",
+    "price": 41800.0,
+    "stock": 100,
+    "seller": "Security Doctors",
+    "cat": "/Electrónica/Seguridad/Accesorios camaras y equipos seguridad/"
+   },
+   {
+    "rank": 15,
+    "n": "Cámara de seguridad IMOU WiFi Ranger Dual Pro 10MP con botón de llamada",
+    "b": "IMOU",
+    "ref": "6937479640861",
+    "price": 46800.0,
+    "stock": 100,
+    "seller": "Security Doctors",
+    "cat": "/Electrónica/Seguridad/Accesorios camaras y equipos seguridad/"
+   },
+   {
+    "rank": 16,
+    "n": "Cámara de seguridad IMOU WiFi 6 Bullet 5MP full color",
+    "b": "IMOU",
+    "ref": "6971927238095",
+    "price": 46400.0,
+    "stock": 100,
+    "seller": "Security Doctors",
+    "cat": "/Electrónica/Seguridad/Accesorios camaras y equipos seguridad/"
+   },
+   {
+    "rank": 17,
+    "n": "Panel solar IMOU tipo-C 12W 3 metros de cable",
+    "b": "IMOU",
+    "ref": "6937479641585",
+    "price": 21300.0,
+    "stock": 100,
+    "seller": "Security Doctors",
+    "cat": "/Electrónica/Seguridad/Accesorios camaras y equipos seguridad/"
+   }
+  ]
+ },
+ "tapo": {
+  "total": "0-49/11",
+  "items": [
+   {
+    "rank": 1,
+    "n": "Cámara seguridad tp link exterior wi-fi Tapo C310",
+    "b": "TP-LINK",
+    "ref": "6935364010911",
+    "price": 25320.0,
+    "stock": 99999,
+    "seller": "Smart Costa Rica",
+    "cat": "/Electrónica/Seguridad/Accesorios camaras y equipos seguridad/"
+   },
+   {
+    "rank": 2,
+    "n": "Camara Tplink Smart House Tapo",
+    "b": "TPLINK",
+    "ref": "000000000075197572-UN",
+    "price": 23900.0,
+    "stock": 1,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Computación/Accesorios de Computación/"
+   },
+   {
+    "rank": 3,
+    "n": "Hub Inteligente Mini TP-LINK Tapo H100 con Alarma",
+    "b": "TP-LINK",
+    "ref": "4897098683118",
+    "price": 12240.0,
+    "stock": 99999,
+    "seller": "Smart Costa Rica",
+    "cat": "/Electrónica/Seguridad/Accesorios camaras y equipos seguridad/"
+   },
+   {
+    "rank": 4,
+    "n": "Sensor Movimiento Inteligente TP-LINK Tapo T100",
+    "b": "TP-LINK",
+    "ref": "4897098682708",
+    "price": 9840.0,
+    "stock": 100,
+    "seller": "Smart Costa Rica",
+    "cat": "/Electrónica/Seguridad/Accesorios camaras y equipos seguridad/"
+   },
+   {
+    "rank": 5,
+    "n": "Tapones Tyr Moldeables Azules",
+    "b": "TYR",
+    "ref": "000000000075343022-UN",
+    "price": 3300.0,
+    "stock": 10,
+    "seller": "Walmart Cr",
+    "cat": "/Deportes/Natación/Accesorios Natación/"
+   },
+   {
+    "rank": 6,
+    "n": "Camara Tp Link 360 Tapo",
+    "b": "CDP",
+    "ref": "000000000075226759-UN",
+    "price": 37900.0,
+    "stock": 10,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Televisores/Reproductores DVD y Blu Ray/"
+   },
+   {
+    "rank": 7,
+    "n": "Tapon Oidos Natacion Tyr Moulded Clear - Unidad",
+    "b": "TYR",
+    "ref": "000000000075343025-UN",
+    "price": 3300.0,
+    "stock": 10,
+    "seller": "Walmart Cr",
+    "cat": "/Deportes/Natación/Accesorios Natación/"
+   },
+   {
+    "rank": 8,
+    "n": "Tp Link Camara Tapo C110",
+    "b": "TPLINK",
+    "ref": "000000000075236321-UN",
+    "price": 0.0,
+    "stock": 0,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Computación/Accesorios de Computación/"
+   },
+   {
+    "rank": 9,
+    "n": "Tapo Camar Bomb y Camar Ext",
+    "b": "TARGUS",
+    "ref": "000000000075262613-UN",
+    "price": 0.0,
+    "stock": 0,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Computación/Accesorios de Computación/"
+   },
+   {
+    "rank": 10,
+    "n": "Tapo Camara C210 Plug y Bombillo",
+    "b": "TARGUS",
+    "ref": "000000000075262612-UN",
+    "price": 0.0,
+    "stock": 0,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Computación/Accesorios de Computación/"
+   },
+   {
+    "rank": 11,
+    "n": "Tyr Tapon De Oidos Silicon Para Natacion",
+    "b": "TYR",
+    "ref": "000000000075343023-UN",
+    "price": 0.0,
+    "stock": 0,
+    "seller": "Walmart Cr",
+    "cat": "/Deportes/Natación/Accesorios Natación/"
+   }
+  ]
+ },
+ "ezviz": {
+  "total": "0-49/11",
+  "items": [
+   {
+    "rank": 1,
+    "n": "Camara Pan & Tilt Ezviz H80x Dual 4K 4MM",
+    "b": "EZVIZ",
+    "ref": "4974574786472",
+    "price": 46182.0,
+    "stock": 100,
+    "seller": "Ubalux",
+    "cat": "/Electrónica/Seguridad/Accesorios camaras y equipos seguridad/"
+   },
+   {
+    "rank": 2,
+    "n": "Camara De Seguridad Ezviz H1C 1 Mbps",
+    "b": "EZVIZ",
+    "ref": "9634484546536",
+    "price": 11696.0,
+    "stock": 100,
+    "seller": "Ubalux",
+    "cat": "/Electrónica/Seguridad/Accesorios camaras y equipos seguridad/"
+   },
+   {
+    "rank": 3,
+    "n": "Kit Video Portero Control De Acceso Ezviz Hp7",
+    "b": "EZVIZ",
+    "ref": "5244667279675",
+    "price": 75422.0,
+    "stock": 100,
+    "seller": "Ubalux",
+    "cat": "/Electrónica/Seguridad/Accesorios camaras y equipos seguridad/"
+   },
+   {
+    "rank": 4,
+    "n": "Camara De Seguridad Ezviz Bm1 Wifi 2M Oso Acuatico",
+    "b": "EZVIZ",
+    "ref": "3022890893780",
+    "price": 53234.0,
+    "stock": 10,
+    "seller": "Ubalux",
+    "cat": "/Electrónica/Seguridad/Accesorios camaras y equipos seguridad/"
+   },
+   {
+    "rank": 5,
+    "n": "Camara De Seguridad Ezviz Bm1 Wifi 2Mp Conejo Melocoton",
+    "b": "EZVIZ",
+    "ref": "2763297997936",
+    "price": 53148.0,
+    "stock": 10,
+    "seller": "Ubalux",
+    "cat": "/Electrónica/Seguridad/Accesorios camaras y equipos seguridad/"
+   },
+   {
+    "rank": 6,
+    "n": "Camara De Seguridad Ezviz H3c 2K Smart Wifi 3MP",
+    "b": "EZVIZ",
+    "ref": "5495806668549",
+    "price": 21414.0,
+    "stock": 99999,
+    "seller": "Ubalux",
+    "cat": "/Electrónica/Seguridad/Accesorios camaras y equipos seguridad/"
+   },
+   {
+    "rank": 7,
+    "n": "Camara Pan & Tilt Ezviz H90 2K 2.8MM 30M",
+    "b": "EZVIZ",
+    "ref": "0148029816573",
+    "price": 44634.0,
+    "stock": 99999,
+    "seller": "Ubalux",
+    "cat": "/Electrónica/Seguridad/Accesorios camaras y equipos seguridad/"
+   },
+   {
+    "rank": 8,
+    "n": "Camara Ezviz Pan & Tilt CB8 Lite 2K15M Wifi Con Panel Solar 5W",
+    "b": "EZVIZ",
+    "ref": "6626432302183",
+    "price": 52890.0,
+    "stock": 99999,
+    "seller": "Ubalux",
+    "cat": "/Electrónica/Seguridad/Accesorios camaras y equipos seguridad/"
+   },
+   {
+    "rank": 9,
+    "n": "Cerradura Inteligente Ezviz DL04 Wifi 2.4 GHZ",
+    "b": "EZVIZ",
+    "ref": "1701811738956",
+    "price": 49450.0,
+    "stock": 100,
+    "seller": "Ubalux",
+    "cat": "/Electrónica/Seguridad/Accesorios camaras y equipos seguridad/"
+   },
+   {
+    "rank": 10,
+    "n": "Cámara EZVIZ  Pan & Tilt CS-H6C-R105-1L3WF(AM-STD) 2K  movimiento Pan & Tilt lente 4 mm visión nocturna",
+    "b": "EZVIZ",
+    "ref": "6941545632667",
+    "price": 15394.0,
+    "stock": 99999,
+    "seller": "Ubalux",
+    "cat": "/Electrónica/Seguridad/Accesorios camaras y equipos seguridad/"
+   },
+   {
+    "rank": 11,
+    "n": "Ezviz Camara Seguridad Cb8 y Panel Solar",
+    "b": "EZVIZ",
+    "ref": "000000000075403868-UN",
+    "price": 49900.0,
+    "stock": 10,
+    "seller": "Walmart Cr",
+    "cat": "/Electrónica/Computación/Accesorios de Computación/"
+   }
+  ]
+ }
+}
