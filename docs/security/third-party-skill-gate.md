@@ -16,8 +16,20 @@
 1. Identidad, mantenedor y SHA fijados; no seguir tags móviles.
 2. Examinar licencia, scripts, workflow de CI, dependencias, hooks, red, lectura de archivos y superficie de secretos.
 3. Descargar referencia en carpeta aislada, sin ejecutar nada (el comando `npm run reference -- id` ya incluye verificación de SHA para referencias de su catálogo; nuevo catálogo no se ejecuta automáticamente).
-4. Analizar la skill local con SkillSpector v2.12.0 (sin LLM, fail-on-incomplete) y, para dependencias, con Trivy/OSV. El resultado no reemplaza revisión humana.
-5. En casos SAFE y licencia aprobada, instalar en sandbox con red restringida y sin credenciales, inspeccionar resultados y realizar prueba funcional mínima.
-6. Abrir PR documentando hallazgos, dependencias, pruebas, riesgos aceptados y plan de retirada.
+4. Antes del escáner, tres búsquedas baratas sobre la copia aislada, sin ejecutarla. Todo lo que lee el modelo actúa como instrucción, así que un texto oculto es un vector de ataque:
+   - Unicode invisible y de dirección: `rg -nP '[\x{200B}\x{200C}\x{200D}\x{2060}\x{FEFF}\x{202A}-\x{202E}]' <ruta>`
+   - Contenido escondido: `rg -n '<!--|<script|data:text/html|base64,' <ruta>`
+   - Salida a red y cambios de permisos: `rg -n 'curl|wget|irm |iwr |Invoke-WebRequest|scp|ssh|enableAllProjectMcpServers|ANTHROPIC_BASE_URL|ExecutionPolicy Bypass' <ruta>`
+
+   Cada coincidencia se justifica en el PR o bloquea la importación. `ANTHROPIC_BASE_URL` desvía las llamadas del agente a otro servidor; es lo que hacen los proxies tipo free-claude-code. Fuente: ECC `the-security-guide.md` (`third_party/ecc/SOURCE.md`).
+5. Analizar la skill local con SkillSpector v2.12.0 (sin LLM, fail-on-incomplete) y, para dependencias, con Trivy/OSV. El resultado no reemplaza revisión humana.
+6. En casos SAFE y licencia aprobada, instalar en sandbox con red restringida y sin credenciales, inspeccionar resultados y realizar prueba funcional mínima.
+7. Abrir PR documentando hallazgos, dependencias, pruebas, riesgos aceptados y plan de retirada.
 
 **Nunca instalar automáticamente por su popularidad.**
+
+## Secretos en commits
+`.altiora/policy.json` impide escribir archivos sensibles por nombre (`.env`, `*.pem`), pero no mira el contenido. El guardián `scripts/secret-guard.mjs` cubre ese hueco: revisa las líneas añadidas en cada commit y lo bloquea si alguna parece una credencial, sin mostrar el valor. Funciona igual para Claude, Codex, Antigravity y personas, porque es un hook de git.
+- Activar una vez por copia del repo: `npm run hooks:install` (fija `core.hooksPath` en `.githooks`). Pruebas: `npm run secrets:test`.
+- Falso positivo: una persona lo revisa y añade `secret-guard: allow` en esa línea. Ninguna IA usa `--no-verify` ni añade la marca sin aprobación del dueño.
+- Límite: detecta formatos conocidos y asignaciones evidentes; no sustituye rotar una clave que ya se filtró. Patrones base de ECC (`third_party/ecc/SOURCE.md`).

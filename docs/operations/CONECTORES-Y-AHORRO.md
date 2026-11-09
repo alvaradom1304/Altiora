@@ -31,8 +31,13 @@ Activar un conector no concede permiso para publicar, enviar ni gastar: cada acc
 3. **Subagentes solo si el paralelismo compensa.** Cada uno vuelve a leer todas las instrucciones fijas (100.000 tokens o más). Para leer pocos archivos, hazlo tú.
 4. **Salidas cortas.** Muestra solo el final de los logs (`| tail`), y no pegues archivos enteros si basta una sección.
 5. **Graphify antes que grep masivo,** siempre con `GRAPHIFY_BACKEND=none` (skill `graphify`).
-6. **Plugins sin uso fuera.** Los que piden iniciar sesión y no se usan (Windsor.ai, Marketing, Adobe, SearchFit) listan skills largas en cada turno; desactívalos en la configuración de plugins.
+6. **CLI antes que MCP para tareas repetidas.** Si existe una CLI (`gh`, `vercel`, `supabase`), una skill corta que la llame ahorra el catálogo entero de herramientas del conector. Ejemplo: `gh pr create` en vez del MCP de GitHub encendido.
+7. **Archivo de sesión al cortar.** Antes de cerrar una sesión larga, el traspaso registra tres listas: qué funcionó (con evidencia), qué se probó y falló, y qué falta. La sesión siguiente lee solo ese archivo, no el historial.
+8. **Compactar en puntos lógicos.** Al pasar de explorar a ejecutar, o al cerrar una fase, compacta o abre sesión nueva con el plan. No esperes a que el contexto se llene a mitad de una edición.
+9. **Plugins sin uso fuera.** Los que piden iniciar sesión y no se usan (Windsor.ai, Marketing, Adobe, SearchFit) listan skills largas en cada turno; desactívalos en la configuración de plugins.
 
 **Responsable:** el rol `ai-economist` (`team/roles/ai-economist.md`) aplica estas reglas y entrega el plan de economía de cada tarea grande. Medir una sesión: `npm run usage:report -- <transcript.jsonl>`.
+
+Los hábitos 6 a 8 vienen de la guía larga de ECC (`third_party/ecc/SOURCE.md`); su efecto en Altiora no se ha medido.
 
 Medición de referencia (sesión del 2026-11-01, 576 turnos): 33 % historial releído, 27 % subagentes, 25 % instrucciones fijas (unos 150.000 tokens por turno con todos los conectores encendidos).

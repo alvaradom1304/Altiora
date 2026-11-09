@@ -42,7 +42,7 @@
     "production:qa": "node scripts/production-qa.mjs",
     "skills:compact": "node scripts/compact-skills.mjs",
     "project:identity": "node scripts/project-identity.mjs",
-    "toolkit:test": "node --test scripts/compact-skills.test.mjs scripts/project-identity.test.mjs",
+    "toolkit:test": "node --test scripts/compact-skills.test.mjs scripts/project-identity.test.mjs scripts/secret-guard.test.mjs",
     "runtime:smoke": "python scripts/runtime-smoke.py",
     "runtime:test": "python -m unittest discover -s scripts -p test_runtime_smoke.py",
     "librarian:test": "python -m unittest discover -s skills/altiora-bibliotecario/scripts -p \"test_*.py\"",
@@ -52,6 +52,8 @@
     "check:runtimes": "python .altiora/system/skills/altiora-runtime-bridge/scripts/check_runtimes.py --project .",
     "check:enterprise": "npm run check:handoff",
     "orca:dispatch": "python scripts/orca-dispatch.py",
-    "check:local": "npm run check:doctor"
+    "check:local": "npm run check:doctor",
+    "secrets:test": "node --test scripts/secret-guard.test.mjs",
+    "hooks:install": "git config core.hooksPath .githooks"
   }
 }
