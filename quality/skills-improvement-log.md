@@ -2,6 +2,21 @@
 
 Un bloque por ciclo, el más reciente arriba. Proceso: [mejora continua de skills](../docs/workflows/skill-improvement.md).
 
+## Ciclo 4 — 2026-11-09
+
+**Planificar.** Ciclo semanal automático. Todas las skills propias ya están en 100; las únicas sin casos de evaluación eran 2 de terceros (`n8n-expressions-official`, `n8n-error-handling-official`). Objetivo y métrica: skills sin casos 2 → 0, media 98.3 → ≥ 98.4, un caso ejecutado como mínimo por skill modificada. Solo se eligieron 2 de las 5 posibles: el resto del backlog son reglas de `SKILL.md` de terceros, que no se editan aquí.
+
+**Hacer.** `evals/evals.json` propio (3 casos por skill: normal, borde o datos insuficientes, rechazo o redirección) en inglés, como las skills, y nota en sus `SOURCE.md`. Sus `SKILL.md` no se tocaron, así que la versión no cambia.
+
+**Verificar.** `npm run check`: OK, sin regresiones. Media **98.3 → 98.4**; terceros 93.9 → 94.2; skills con menos de 3 casos: 0. Casos ejecutados: 4, todos PASA ([eval-runs/2026-11-09](eval-runs/2026-11-09.md)); autoevaluación. NO EJECUTADOS: 2 casos nuevos y los pendientes de ciclos anteriores.
+
+**Actuar.** Objetivo cumplido; línea base actualizada con `npm run skills:baseline`. Ningún error repetido nuevo en skills propias.
+
+**Backlog del ciclo 5.**
+- Terceros con fallos de forma en `SKILL.md` (un H1, versión, entregable, descripción sin disparador; p. ej. `gcp-pipeline-orchestration`, `finishing-a-development-branch`, `ai-seo`): actualizar desde origen o proponer el cambio al proyecto original.
+- Revisión humana de al menos un caso por skill de los ciclos 1–4 y ejecución de los pendientes.
+- Decidir la regla `evals-executed` del auditor (propuesta del ciclo 2, aún sin añadir).
+
 ## Ciclo 3 — 2026-11-01/02
 
 **Planificar.** Tras revertir un intento que llevó la media a un 100 artificial (casos de plantilla idénticos, secciones «Entregable» genéricas y prefijos «Usar para:» que rompieron el enrutamiento de «brand»), el dueño pidió llegar al 100 con mejoras reales. Primero se endureció la auditoría (#50): un caso o párrafo repetido en 5 skills o más no puntúa, y el informe separa propias y terceros. Objetivo: todas las skills propias a 100; las de terceros mejoran solo con casos propios, sin editar su `SKILL.md`.
