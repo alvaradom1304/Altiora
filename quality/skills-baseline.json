@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
-  "generated_on": "2026-11-02",
+  "generated_on": "2026-11-09",
   "skills": 355,
-  "average": 98.3,
+  "average": 98.4,
   "scores": {
     "ab-testing": 95,
     "accessibility": 100,
@@ -242,8 +242,8 @@
     "modular-docs-architect": 100,
     "mom-test-interviewing": 100,
     "motion-design": 100,
-    "n8n-error-handling-official": 80,
-    "n8n-expressions-official": 80,
+    "n8n-error-handling-official": 95,
+    "n8n-expressions-official": 95,
     "n8n-webhook-architect": 100,
     "negotiation": 100,
     "nextjs-architecture": 100,

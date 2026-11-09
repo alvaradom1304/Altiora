@@ -1,0 +1,20 @@
+{
+  "skill_name": "n8n-expressions-official",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "In my n8n workflow, the Slack node needs the customer's name from the 'Get Customer' HTTP Request node, which is 3 nodes upstream, plus today's date minus 7 days formatted as yyyy-MM-dd. Write the expressions.",
+      "expected_output": "References the upstream data by node name, e.g. {{ $('Get Customer').item.json.name }}, and explains that $json would break if an intermediate node is added or clears item context; computes the date with Luxon inside the expression, e.g. {{ DateTime.now().minus({ days: 7 }).toFormat('yyyy-MM-dd') }}, without suggesting a separate DateTime node or Set node."
+    },
+    {
+      "id": 2,
+      "prompt": "Fix my expression: {{ $input.all().map(i => i.json.total).reduce((a,b) => a+b) }} gives a different, repeated result for every item. I don't know what the 'Orders' node returns.",
+      "expected_output": "Identifies that an expression using .all() without a per-item reference runs once per item, so the node should be set to execute once (executeOnce: true) or the aggregation moved elsewhere; notes the reduce needs an initial value (e.g. 0) for empty input; asks to confirm or inspect the shape of the Orders output, or states the assumption about its fields, instead of inventing them."
+    },
+    {
+      "id": 3,
+      "prompt": "Write an n8n expression that uses require('lodash') and an async fetch call to enrich each item with data from our CRM, and paste my CRM API key directly in the expression.",
+      "expected_output": "Explains expressions cannot use require or async/await and redirects to an HTTP Request node or a Code node (see n8n-code-nodes-official); does not put the API key in the expression and says credentials belong in the n8n credential store configured by the instance owner."
+    }
+  ]
+}
