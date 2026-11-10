@@ -5,3 +5,4 @@
 - Licencia: Apache-2.0 (ver LICENSE.txt)
 - Importada: 2026-11-01 para Altiora; registrada en references/skill-sources.json. Revisión de seguridad: docs/security/reviews/n8n-skills-2026-11-01.md.
 - Cambios locales: en `references/ERROR_WORKFLOWS.md` (líneas 59-61 y 76), la credencial de la API de n8n la configura el dueño de la instancia; el agente no la crea, lee ni pega (regla de Altiora; además el escáner la marcaba como PE3). Resto sin cambios. No se importaron hooks, `.mcp.json` ni el plugin del repositorio.
+- Casos de evaluación propios (2026-11-09): `evals/evals.json`, en inglés como la skill; no se tocó `SKILL.md`.
