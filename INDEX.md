@@ -42,7 +42,7 @@ Otras IAs (Codex, Gemini, ChatGPT): prompts en [team/agents/](team/agents/experi
 | [altiora-research](.claude/agents/altiora-research.md) | `/chat-altiora-research` |  | `altiora-repository-research` |
 | [altiora-review](.claude/agents/altiora-review.md) | `/chat-altiora-review` |  | `altiora-quality-review` |
 
-## Skills (355)
+## Skills (360)
 
 **Auto** = el adaptador permite invocación por el modelo; no prueba carga en una sesión. La asignación a agentes no restringe el descubrimiento. Origen vacío = sin fuente externa registrada; no certifica autoría.
 
@@ -86,6 +86,7 @@ Otras IAs (Codex, Gemini, ChatGPT): prompts en [team/agents/](team/agents/experi
 | [altiora-case-study](skills/altiora-case-study/SKILL.md) | — | — |  | Convierte un proyecto o piloto de Altiora en un caso de estudio verificable (problema, intervención, evidencia, límites y permiso del cli… |
 | [altiora-commercial-director](skills/altiora-commercial-director/SKILL.md) | — | — |  | Coordinador comercial de Altiora: lleva un prospecto o segmento desde la hipótesis de problema hasta una propuesta de US$10.000 lista par… |
 | [altiora-creative-analyst](skills/altiora-creative-analyst/SKILL.md) | — | — |  | Analista creativo de Altiora: encuentra lo que hace único a cada proyecto (verdad propia del cliente, tensión del consumidor y hueco de l… |
+| [altiora-interaction-guard](skills/altiora-interaction-guard/SKILL.md) | — | — |  | Gestionar continuidad de conversaciones de Altiora al pedir aclaraciones, recibir colas de voz, cerrar sesiones o seguir tareas. Evita pr… |
 | [altiora-os-automation-growth](skills/altiora-os-automation-growth/SKILL.md) | — | — |  | Diseña marketing medible (campañas, experimentos) o automatizaciones operativas (flujos de datos y eventos) con métricas y límites. Usar … |
 | [altiora-os-coordinate](skills/altiora-os-coordinate/SKILL.md) | — | — |  | Coordinar entregas de Altiora entre investigación, estrategia, creación, desarrollo y revisión cuando el encargo requiere varias especial… |
 | [altiora-os-creative](skills/altiora-os-creative/SKILL.md) | — | — |  | Define la dirección creativa (concepto, narrativa, storyboard, composición, movimiento) ligada al objetivo comercial de un proyecto. Usar… |
@@ -95,6 +96,7 @@ Otras IAs (Codex, Gemini, ChatGPT): prompts en [team/agents/](team/agents/experi
 | [altiora-os-strategy](skills/altiora-os-strategy/SKILL.md) | — | — |  | Convierte investigación y contexto comercial en posicionamiento, oferta y prioridades medibles para un cliente o proyecto. Usar en la fas… |
 | [altiora-os-web-3d](skills/altiora-os-web-3d/SKILL.md) | — | — |  | Implementa experiencias web 3D/WebGL premium en un proyecto existente con fallback, movimiento reducido, accesibilidad y rendimiento veri… |
 | [altiora-project-director](skills/altiora-project-director/SKILL.md) | — | — |  | Director de Experiencia y Resultados de Altiora: dirige un proyecto de cliente (unos US$10.000, seis semanas, 75 h) desde el encaje hasta… |
+| [altiora-project-operations](skills/altiora-project-operations/SKILL.md) | — | — |  | Organizar automáticamente archivos, notas, decisiones, pendientes y entregables de Altiora cuando la tarea lo requiera, incluyendo revisi… |
 | [altiora-quality-review](skills/altiora-quality-review/SKILL.md) | sí | qa-reviewer, audio-specialist, altiora-review |  | Revisa cambios de Altiora contra el encargo, las funciones afectadas y su evidencia de prueba. Se usa para comprobar una entrega o una ta… |
 | [altiora-repository-research](skills/altiora-repository-research/SKILL.md) | sí | altiora-research |  | Selecciona y compara repositorios o skills para un proyecto de Altiora según utilidad, compatibilidad, mantenimiento, licencia y coste to… |
 | [altiora-runtime-bridge](skills/altiora-runtime-bridge/SKILL.md) | — | — |  | Prepara o verifica la portabilidad de un proyecto Altiora entre Codex, Claude Code y Antigravity cuando se configura o cambia el entorno … |
@@ -293,6 +295,7 @@ Otras IAs (Codex, Gemini, ChatGPT): prompts en [team/agents/](team/agents/experi
 | [nextjs-architecture](skills/nextjs-architecture/SKILL.md) | — | web-engineer |  | nextjs-architecture: Premium Web Experience. Usar para producir architecture, boundaries, implementation_plan a partir de repo/versiones,… |
 | [notebook-guidance](skills/notebook-guidance/SKILL.md) | — | — |  | This skill guides the use of Jupyter notebooks for data analysis, exploration, and visualization, particularly with BigQuery. It outlines… |
 | [offers](skills/offers/SKILL.md) | — | business-strategist | coreyhaines31/marketingskills | When the user wants to design, construct, or improve an offer — the thing they actually sell — including value framing, bonus stacking, g… |
+| [openseo](skills/openseo/SKILL.md) | — | — |  | Investigación de palabras clave, mapeo de intención de búsqueda (Search Intent), análisis de SERP y optimización técnica on-page para e-c… |
 | [operational-kpis](skills/operational-kpis/SKILL.md) | — | — |  | operational-kpis: Operations & Logistics. Usar para producir kpi_dictionary, capture_plan, review a partir de objetivos, proceso, datos, … |
 | [operational-risk](skills/operational-risk/SKILL.md) | — | — |  | operational-risk: Operations & Logistics. Usar para producir operational_risks, contingencies, triggers a partir de procesos, fallos, exp… |
 | [operational-scalability](skills/operational-scalability/SKILL.md) | — | — |  | operational-scalability: Growth & Scaling. Usar para producir scale_constraints, systems, milestones a partir de demanda, capacidad, proc… |
@@ -365,6 +368,7 @@ Otras IAs (Codex, Gemini, ChatGPT): prompts en [team/agents/](team/agents/experi
 | [storyboarding](skills/storyboarding/SKILL.md) | sí | creative-director, audiovisual-experience-director, creative-ads-director |  | storyboarding: Creative Intelligence. Usar para producir storyboard, shot_sequence, continuity a partir de guion, formato, duración, recu… |
 | [strategic-planning](skills/strategic-planning/SKILL.md) | — | — |  | strategic-planning: Business Intelligence. Usar para producir milestones, initiatives, kpis, dependencies a partir de estrategia vigente,… |
 | [subagent-driven-development](skills/subagent-driven-development/SKILL.md) | — | — |  | Ejecuta un plan de implementación delegando cada tarea independiente en un subagente nuevo, con revisión de especificación y de calidad e… |
+| [superpowers](skills/superpowers/SKILL.md) | — | — |  | Planifica, ejecuta con TDD y verifica de forma autónoma cualquier cambio técnico antes de darlo por terminado. Aplica el Superpowers Qual… |
 | [supplier-evaluation](skills/supplier-evaluation/SKILL.md) | — | — |  | supplier-evaluation: Operations & Logistics. Usar para producir supplier_scorecard, risks, actions a partir de proveedores, criterios, en… |
 | [supply-chain](skills/supply-chain/SKILL.md) | — | — |  | supply-chain: Operations & Logistics. Usar para producir supply_network, vulnerabilities, resilience a partir de red proveedores, flujos,… |
 | [systematic-debugging](skills/systematic-debugging/SKILL.md) | sí | web-engineer | obra/superpowers | Use when encountering any bug, test failure, or unexpected behavior, before proposing fixes |
@@ -374,6 +378,7 @@ Otras IAs (Codex, Gemini, ChatGPT): prompts en [team/agents/](team/agents/experi
 | [threat-modeling](skills/threat-modeling/SKILL.md) | — | — |  | threat-modeling: Cybersecurity. Usar para producir threat_model, scenarios, mitigations a partir de arquitectura, activos, actores, bound… |
 | [threejs-experience](skills/threejs-experience/SKILL.md) | sí | motion-designer, web-engineer |  | threejs-experience: Premium Web Experience. Usar para producir scene_code, loading_plan, fallback a partir de escena, assets, dispositivo… |
 | [tiktok-strategy](skills/tiktok-strategy/SKILL.md) | — | — |  | tiktok-strategy: Marketing Intelligence. Usar para producir tiktok_plan, creative_tests, measurement a partir de audiencia, marca, recurs… |
+| [tilichero-engine](skills/tilichero-engine/SKILL.md) | — | — |  | Motor comercial y de crecimiento para El Tilichero CR. Contiene la lógica del catálogo de gadgets y gaming, el unboxing 3D de Loot Box, l… |
 | [tool-selection](skills/tool-selection/SKILL.md) | — | — |  | tool-selection: AI & Automation. Usar para producir tool_comparison, choice, fallback a partir de tarea, opciones disponibles, permisos, … |
 | [top10-video-research](skills/top10-video-research/SKILL.md) | sí | market-intelligence-director |  | Usar cuando el usuario pida encontrar o estudiar los diez mejores videos, anuncios o Reels de un producto en TikTok, Facebook, Instagram … |
 | [trend-analysis](skills/trend-analysis/SKILL.md) | — | — |  | trend-analysis: Business Intelligence. Usar para producir trend_assessment, drivers, uncertainty a partir de fenómeno, series comparables… |
