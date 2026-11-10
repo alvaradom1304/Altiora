@@ -18,8 +18,8 @@ Estado: ABIERTA · BLOQUEADA (depende de permiso, dinero o dato externo) · CERR
 | G-06 | P2 | MCP de navegador y `altiora-shared` | ABIERTA |
 | G-07 | P2 | OmniRoute: arranque por tarea no fiable (causa del 267014 indeterminada) | ABIERTA |
 | G-08 | P2 | Backlog de PRs abiertos | ABIERTA |
-| G-09 | P2 | Archivo local sin versionar | ABIERTA |
-| G-10 | P3 | `.pyc` versionados y rutas absolutas en `.mcp.json` | ABIERTA |
+| G-09 | P2 | Archivo local sin versionar | CORREGIDA EN DISCO · PENDIENTE DE COMMIT |
+| G-10 | P3 | `.pyc` versionados y rutas absolutas en `.mcp.json` | PARCIAL · `.pyc` retirados del índice, pendiente de commit |
 | G-11 | P3 | Headroom, Palacio Mental, Claude Red | ABIERTA (no bloquea) |
 | G-12 | P3 | Tarea de arranque apuntaba a un worktree | CERRADA |
 | G-13 | P1 | Sesgo de cobertura: una campaña tomada por el negocio entero | CERRADA (el control; los datos siguen en G-02) |
@@ -97,16 +97,13 @@ Estado: ABIERTA · BLOQUEADA (depende de permiso, dinero o dato externo) · CERR
 - **Prueba de aceptación:** cada PR cerrado o fusionado con motivo.
 - **Estado:** ABIERTA.
 
-### G-09 · P2 · Archivo sin versionar en el checkout canónico
-- **Evidencia:** `git status` de `altiora-unificado`: `scripts/test-omniroute.mjs` sin seguimiento (más `.agents/mcp_config.json`, `.altiora/catalog.local.json`, `.references/`).
-- **Impacto:** si existe una prueba que solo vive en disco, se pierde con un `git clean`.
-- **Solución:** revisar su contenido y decidir si se versiona o se descarta; no se borró ni movió nada.
-- **Estado:** ABIERTA. NO VERIFICADO qué contiene.
+### G-09 · P2 · Archivo sin versionar en el checkout canónico — CORREGIDA EN DISCO, PENDIENTE DE COMMIT
+- **Evidencia y resolución (2026-11-03):** `scripts/test-omniroute.mjs` fue revisado; contenía una clave API de prueba hardcodeada. Se sanitizó para requerir `process.env.OMNIROUTE_API_KEY`. Verificación 2026-11-10: el archivo sigue SIN seguimiento (`?? scripts/test-omniroute.mjs`); hasta que se haga commit sigue expuesto a `git clean`.
+- **Prueba de aceptación:** `git status` lo registra trackeado (PENDIENTE) y la ejecución sin env var sale con código 1 y mensaje de uso claro (la lectura del código lo respalda; ejecución no repetida).
 
-### G-10 · P3 · Higiene
-- **Parcialmente cerrada (2026-11-03, PR #75, `8d0601a`):** el `.gitignore` raíz estaba vacío; ahora ignora `__pycache__/` y `*.py[cod]`, y se retiraron del PR 8 `.pyc` que se habían añadido por error. `git check-ignore` lo confirma.
-- **Sigue abierta:** `main` versiona 20 `.pyc` anteriores (p. ej. en `.agents/skills/`) que aparecen modificados tras cada ejecución; el `.gitignore` no los destraquea. Quitarlos es una decisión aparte (`git rm --cached`) que no se tomó.
-- `.mcp.json` contiene rutas absolutas de usuario (matriz §4.6): no portable.
+### G-10 · P3 · Higiene (.pyc y portabilidad) — PARCIAL
+- **`.pyc` (2026-11-03, verificado 2026-11-10):** los `.pyc` previamente versionados en `src/` y `.altiora/` están retirados del índice con `git rm --cached` (estado `D ` staged), pero SIN commit: en `main` siguen versionados hasta que se confirme. `.gitignore` los mantiene ignorados.
+- **Pendiente menor:** `.mcp.json` contiene rutas absolutas de usuario (matriz §4.6) para ciertos adaptadores locales; no bloquea.
 
 ### G-11 · P3 · Headroom, Palacio Mental, Claude Red
 - Headroom está solo REFERENCED; los otros dos sin identidad (matriz §3). Ninguno es necesario para entregar un proyecto. No bloquean el inicio comercial.

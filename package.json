@@ -52,6 +52,8 @@
     "check:runtimes": "python .altiora/system/skills/altiora-runtime-bridge/scripts/check_runtimes.py --project .",
     "check:enterprise": "npm run check:handoff",
     "orca:dispatch": "python scripts/orca-dispatch.py",
-    "check:local": "npm run check:doctor"
+    "check:local": "npm run check:doctor",
+    "altiora:ready": "node scripts/altiora-ready.mjs",
+    "coordinator:test": "node --test scripts/orca-coordinator.test.mjs scripts/altiora-ready.test.mjs"
   }
 }

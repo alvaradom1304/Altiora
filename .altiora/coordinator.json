@@ -1,0 +1,309 @@
+{
+  "version": 1,
+  "createdAt": "2026-11-09",
+  "root": "C:/Users/Usuario/orca/workspaces/Altiora-Immersive-Web-Lab/altiora-unificado",
+  "note": "Politica de enrutado del orquestador de Altiora. Preferencias, no recibos: el modelo efectivo solo cuenta con el recibo de lanzamiento (worker-show). No activa ALTIORA_DISPATCH_EXECUTE ni scripts antiguos del toolkit. Runtime local de empresa; registro propio bajo esta raiz, nunca se importa el registro cliente. Evidencias de transporte del 2026-11-10 obtenidas en raiz cliente del mismo host; verificar preflight de la sesion empresa antes de cualquier lanzamiento.",
+  "requireReturnChannel": true,
+  "activeOwnershipFile": ".altiora/active-ownership.json",
+  "coordinatorReturn": "orca orchestration send --type worker_done (al coordinador que despacho la tarea)",
+  "agents": {
+    "claude": {
+      "model": "claude-sonnet-5-5",
+      "efforts": [
+        "low",
+        "medium",
+        "high",
+        "xhigh"
+      ],
+      "availability": {
+        "transports": {
+          "orca-worker": {
+            "status": "verified",
+            "evidence": "2026-11-10: worker_done real a coordinador Codex; dispatch ctx_242e7b2d505a. No acredita cuota futura."
+          },
+          "external-review": {
+            "status": "verified",
+            "evidence": "CLI Claude verificado y worker funcional; revision externa requiere evidencia y distinto implementador."
+          }
+        }
+      },
+      "capabilities": {
+        "cli": {
+          "status": "verified",
+          "evidence": "Respuesta real desde CLI el 2026-11-09 (claude-sonnet-5-5); no acredita cuota actual"
+        }
+      }
+    },
+    "codex": {
+      "model": "gpt-6.1-sol",
+      "efforts": [
+        "low",
+        "medium",
+        "high",
+        "xhigh"
+      ],
+      "catalog": "C:/Users/Usuario/.codex/models_cache.json",
+      "availability": {
+        "transports": {
+          "orca-worker": {
+            "status": "paused-user-quota",
+            "evidence": "2026-11-10: usuario pide tras esta tarea usar Claude o Antigravity por cuota Codex. No seleccionar Codex automaticamente, tampoco QA externo; reactivar solo por indicacion del usuario. Capacidad tecnica anterior conservada, pausa no es fallo.",
+            "lastVerifiedEvidence": "2026-11-10: coordinador verifico ALTIORA_CODEX_RETURN_OK; run_10da618be3d5 task_91fb0eef374a dispatch ctx_105a19a1e59a; worker_done msg_954bd261dd12, succeeded/settled. Ready/input_accepted inicial no inicio turno; recuperado en el mismo dispatch mediante orchestration send msg_7fe105a29e42, sin relanzar. Evidencia: docs/operations/CODEX-ORCA-20261110.md. Hook Graphify no-op retirado por el coordinador con autorizacion especifica y respaldo; hash Orca intacto. Verifica retorno recuperado, no garantiza inicio automatico ni cuota futura.",
+            "lastVerifiedStatus": "verified"
+          },
+          "external-review": {
+            "status": "paused-user-quota",
+            "evidence": "2026-11-10: usuario pide tras esta tarea usar Claude o Antigravity por cuota Codex. No seleccionar Codex automaticamente, tampoco QA externo; reactivar solo por indicacion del usuario. Capacidad tecnica anterior conservada, pausa no es fallo.",
+            "lastVerifiedEvidence": "Codex disponible como revisor independiente externo mediante CLI/sesion actual; requiere revision real con evidencia, no worker Orca.",
+            "lastVerifiedStatus": "verified"
+          },
+          "coordinator": {
+            "status": "verified",
+            "evidence": "2026-11-10: coordinador Codex recibio worker_done de Claude, dispatch ctx_242e7b2d505a."
+          }
+        }
+      },
+      "capabilities": {
+        "cli": {
+          "status": "verified",
+          "evidence": "2026-11-10: Codex CLI con herramientas funciona; separado del transporte Orca worker."
+        }
+      }
+    },
+    "antigravity": {
+      "model": "gemini-3.8-flash-medium",
+      "efforts": [
+        "low",
+        "medium",
+        "high"
+      ],
+      "availability": {
+        "transports": {
+          "orca-worker": {
+            "status": "verified",
+            "evidence": "2026-11-10: prueba nativa Orca PASS ALTIORA_AGY_SYNC_OK; run_10da618be3d5 task_852eb47e8271 ctx_75f89804a7bf; worker_done msg_2b423889a14f desde term_4f95e751-76cc-4133-8f73-07cb62ea172b, outcome=succeeded. Confirmo GEMINI/ESTADO y raiz Git principal. Evidencia: docs/operations/ANTIGRAVITY-ORCA-20261110.md. Modelo efectivo no observado; no acredita cuota futura."
+          },
+          "external-review": {
+            "status": "verified",
+            "evidence": "2026-11-10: capacidad de sesion/herramientas con retorno nativo verificada en empresa, ctx_abd6d59d622f succeeded/settled (follow-up del timeout ctx_aac501bf6ca8, mismo terminal). Disponible como revisor distinto de Claude; cada revision necesita diff, evidencia y veredicto real. Esta prueba de lectura no aprueba ningun producto."
+          }
+        }
+      },
+      "capabilities": {
+        "cli": {
+          "status": "verified",
+          "evidence": "2026-11-10: coordinador verifico agy 1.4.12 y catalogo models: gemini-3.8-flash-{low,medium,high}, gemini-4-argon-{low,medium,high}; no acredita transporte Orca ni cuota."
+        }
+      },
+      "modelsByEffort": {
+        "low": "gemini-3.8-flash-low",
+        "medium": "gemini-3.8-flash-medium",
+        "high": "gemini-4-argon-high"
+      }
+    }
+  },
+  "omniroute": {
+    "note": "Via EXPLICITA de inferencia sin herramientas (task.transport=omniroute, mode=inference). No es delegacion agentica Orca, no escribe ni revisa codigo, no requiere identidad de retorno (cliente sincrono). Sin secretos aqui: la clave la resuelve scripts/omniroute-client.py en memoria.",
+    "python": "python",
+    "client": "scripts/omniroute-client.py",
+    "configFile": ".altiora/omniroute.json",
+    "defaultModel": "cxa/gpt-6-luna-low",
+    "allowedModels": [
+      "cxa/gpt-6-luna-low"
+    ],
+    "maxPromptChars": 16000,
+    "defaultMaxTokens": 256,
+    "maxTokens": 1024,
+    "timeoutSec": 90
+  },
+  "autoEffortCeiling": "xhigh",
+  "domains": {
+    "ux-copy-frontend": {
+      "chain": [
+        "claude",
+        "codex",
+        "antigravity"
+      ],
+      "roles": [
+        "brand-strategist",
+        "content-designer",
+        "ui-designer"
+      ],
+      "keywords": [
+        "ux",
+        "ui",
+        "copy",
+        "copys",
+        "landing",
+        "marca",
+        "brand",
+        "componente",
+        "react",
+        "next",
+        "css",
+        "tailwind",
+        "pagina",
+        "formulario",
+        "redaccion",
+        "headline",
+        "interfaz",
+        "diseno",
+        "responsive",
+        "hero",
+        "texto"
+      ]
+    },
+    "engineering-security-qa": {
+      "chain": [
+        "codex",
+        "claude",
+        "antigravity"
+      ],
+      "roles": [
+        "web-engineer",
+        "qa-reviewer"
+      ],
+      "keywords": [
+        "api",
+        "backend",
+        "endpoint",
+        "seguridad",
+        "security",
+        "owasp",
+        "test",
+        "tests",
+        "prueba",
+        "pruebas",
+        "qa",
+        "bug",
+        "error",
+        "refactor",
+        "script",
+        "ci",
+        "integridad",
+        "schema",
+        "typescript",
+        "lint",
+        "build",
+        "rendimiento",
+        "performance",
+        "vulnerabilidad",
+        "revision de codigo",
+        "code review",
+        "dependencias"
+      ]
+    },
+    "immersive-3d-motion": {
+      "chain": [
+        "antigravity",
+        "claude",
+        "codex"
+      ],
+      "roles": [
+        "creative-director",
+        "web-engineer",
+        "qa-reviewer"
+      ],
+      "keywords": [
+        "3d",
+        "webgl",
+        "three",
+        "shader",
+        "gsap",
+        "scroll",
+        "motion",
+        "glb",
+        "r3f",
+        "particulas",
+        "cursor 3d",
+        "tipografia cinetica",
+        "escena"
+      ]
+    }
+  },
+  "humanDecisionKeywords": [
+    "precio",
+    "precios",
+    "pricing",
+    "tarifa",
+    "contrato",
+    "legal",
+    "clausula",
+    "licencia",
+    "presupuesto",
+    "cotizacion",
+    "descuento",
+    "impuesto",
+    "factura",
+    "propuesta comercial",
+    "negociacion"
+  ],
+  "externalActionKeywords": [
+    "publicar",
+    "publica",
+    "deploy",
+    "desplegar",
+    "push",
+    "enviar",
+    "pagar",
+    "gastar",
+    "comprar",
+    "suscripcion",
+    "commit",
+    "merge"
+  ],
+  "criticalKeywords": [
+    "secreto",
+    "credencial",
+    "token",
+    "pago",
+    "produccion",
+    "seguridad",
+    "owasp",
+    "vulnerabilidad",
+    "cliente"
+  ],
+  "mechanicalKeywords": [
+    "typo",
+    "ortografia",
+    "formato",
+    "renombrar",
+    "espaciado"
+  ],
+  "deepKeywords": [
+    "arquitectura",
+    "auditoria",
+    "shader",
+    "investigacion",
+    "seguridad",
+    "owasp"
+  ],
+  "forbiddenPathPatterns": [
+    "(^|/)[.]env",
+    "secret",
+    "credential",
+    "(^|/)[.]git(/|$)",
+    "(^|/)[.]claude/settings",
+    "(^|/)[.]mcp[.]json$",
+    "(^|/)app/",
+    "(^|/)components/",
+    "(^|/)lib/",
+    "(^|/)public/",
+    "(^|/)projects/",
+    "vercel[.]json",
+    "(^|/)[.]github/"
+  ],
+  "forbiddenNote": "Rutas de producto, clientes, secretos, permisos y despliegue quedan fuera de este mecanismo: requieren encargo propio y aprobacion.",
+  "userPreference": {
+    "codex": "reserved-until-explicit-user-request",
+    "default": "claude",
+    "visual_specialist_or_fallback": "antigravity",
+    "effective_after": "current-task-close",
+    "reason": "user-request-token-quota-20261110"
+  },
+  "domainAliases": {
+    "brand-copy-frontend": "ux-copy-frontend",
+    "immersive-3d-qa": "immersive-3d-motion"
+  },
+  "domainAliasesNote": "Nombres de team/ROUTING.md aceptados como alias solo si la cadena de IAs coincide. strategy-finance-backend (codex primero) y cloud-data-engineering no tienen dominio equivalente aqui y siguen rechazandose como desconocidos; el router de team/ROUTING.md los cubre."
+}

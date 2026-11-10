@@ -16,6 +16,16 @@
     "metricool": {
       "type": "http",
       "url": "https://ai.metricool.com/mcp"
+    },
+    "graphify": {
+      "type": "stdio",
+      "command": "C:/Users/Usuario/.altiora-tools/graphify/Scripts/graphify-mcp.exe",
+      "args": [
+        "C:/Users/Usuario/.altiora-tools/graphs/altiora-20261110b/graphify-out/graph.json"
+      ],
+      "env": {
+        "GRAPHIFY_BACKEND": "none"
+      }
     }
   }
 }

@@ -1,5 +1,7 @@
 # Altiora Immersive Web Lab
 
+**Entrada:** [mapa de Altiora](docs/operations/MAPA-ALTIORA.md) (raíces empresa/cliente, áreas Dirección · Análisis · Producción · Operación, cómo pedir un encargo) · [estado actual](docs/operations/ESTADO-ACTUAL.md) · [índice de skills y agentes](INDEX.md).
+
 ## Diagnóstico y calidad compartidos
 
 Claude Code, Codex, Gemini CLI, Antigravity y ChatGPT utilizan [el mismo protocolo operativo](docs/operations/SHARED-OPERATIONS.md): `npm run capability:doctor` distingue archivos y herramientas de conexiones comprobadas; `npm run routing:eval` comprueba recuperación de skills con casos representativos; `npm run production:qa` reúne evidencia audiovisual y revisiones pendientes. No instala software, no conecta cuentas ni acredita aprobación comercial. El [índice generado](INDEX.md) contiene los recuentos vigentes de roles y skills.

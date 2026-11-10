@@ -1,3 +1,6 @@
+<!-- ALTIORA_CURRENT_RUNTIME_20261110 -->
+Mapa de raíces (empresa/clientes/laboratorio), cuatro áreas y guía de encargo: [docs/operations/MAPA-ALTIORA.md](docs/operations/MAPA-ALTIORA.md). Estado local vigente y límites de los transportes: [docs/operations/ESTADO-ACTUAL.md](docs/operations/ESTADO-ACTUAL.md). Runtime propio y diagnóstico: [docs/operations/ORQUESTADOR-LOCAL.md](docs/operations/ORQUESTADOR-LOCAL.md). Aplicar primero team/ROUTING.md; estas referencias no autorizan lanzamientos, confianza en hooks ni publicación.
+
 # Trabajo en Altiora
 
 Fuente única de instrucciones para todas las IAs (Claude Code, Codex, Antigravity, Gemini CLI, ChatGPT). `CLAUDE.md` y `GEMINI.md` solo importan este archivo y llevan el bloque obligatorio del Agent System. Cualquier regla nueva se escribe aquí, una sola vez.
@@ -100,3 +103,8 @@ Seguir docs/workflows/immersive-project.md. Antes de ampliar una experiencia, co
 ## Altiora Agent System 1.3.0
 Leer `.altiora/system/core/constitution.md` al empezar trabajo en este proyecto. Usar `.altiora/project.json` como contexto y `.altiora/handoff.json` si existe, contrastando siempre con el encargo vigente. Seleccionar skills por descripcion. Las instrucciones propias del proyecto y las del usuario siguen aplicando.
 <!-- ALTIORA_AGENT_SYSTEM_END -->
+
+<!-- ALTIORA_AI_REPORT_LOCAL_START -->
+## Reporte común de Codex, Claude y Antigravity
+Leer al iniciar cada encargo y antes de informar el contrato local vigente [AI-REPORT-CONTRACT.md](docs/operations/AI-REPORT-CONTRACT.md). Separar modelo planeado de efectivo (null/no_observado sin recibo del proceso exacto), registrar procedencia y workspace/repositorio saneado cuando corresponda. No usar el selector/UI del padre como prueba del subagente ni forzar la raíz cliente para empresa. Respuestas breves; JSON solo si el handoff lo necesita. Mantener permisos y QA independiente; sesiones abiertas deben releer la fuente.
+<!-- ALTIORA_AI_REPORT_LOCAL_END -->
