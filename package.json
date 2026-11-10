@@ -7,7 +7,7 @@
     "node": ">=20"
   },
   "scripts": {
-    "check": "npm run check:base && npm run operations:test && npm run toolkit:test && npm run runtime:test && npm run librarian:test && npm run routing:eval && npm run audio:test && npm run bscg:test && npm run check:enterprise",
+    "check": "npm run check:base && npm run operations:test && npm run toolkit:test && npm run runtime:test && npm run librarian:test && npm run routing:eval && npm run readiness:test && npm run audio:test && npm run bscg:test && npm run check:enterprise",
     "agents:build": "node scripts/build-agents.mjs && node scripts/build-antigravity.mjs",
     "chat": "node scripts/team-chat.mjs",
     "skills:audit": "node scripts/audit-skills.mjs",
@@ -52,6 +52,8 @@
     "check:runtimes": "python .altiora/system/skills/altiora-runtime-bridge/scripts/check_runtimes.py --project .",
     "check:enterprise": "npm run check:handoff",
     "orca:dispatch": "python scripts/orca-dispatch.py",
-    "check:local": "npm run check:doctor"
+    "check:local": "npm run check:doctor",
+    "readiness:report": "node scripts/readiness-score.mjs",
+    "readiness:test": "node --test scripts/readiness-score.test.mjs"
   }
 }

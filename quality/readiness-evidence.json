@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "rubric": "NOTA-V4",
+  "assessed_on": "2026-11-10",
+  "assessed_by": "claude (sesión de validación del estado operativo)",
+  "rules": "Niveles 0-5 de docs/operations/NOTA-V4.md. Cada evidencia declara kind: design (sostiene hasta 1), partial (2), test (3) o real (4); un 5 exige dos evidencias real con fechas distintas. npm run readiness:report aplica además topes calculados con pipeline.json y los P0 abiertos. Para subir un nivel se añade evidencia; no se edita el número a mano.",
+  "axes": {
+    "integrity_recovery": {
+      "level": 2,
+      "evidence": [
+        {"kind": "partial", "source": "cmd:npm run check", "date": "2026-11-10", "note": "Verifica catálogo, agentes y skills en CI. No hay baseline de contenido ni restauración ensayada."}
+      ]
+    },
+    "automation_agents_qa": {
+      "level": 3,
+      "evidence": [
+        {"kind": "test", "source": "cmd:npm run check", "date": "2026-11-10", "note": "CI Windows y Ubuntu en verde en main."},
+        {"kind": "test", "source": "docs/altiora-business/PACKAGE-VALIDATION.json", "date": "2026-10-31", "note": "Revisión independiente con correcciones verificadas, sin cliente."}
+      ]
+    },
+    "connectors_live": {
+      "level": 3,
+      "evidence": [
+        {"kind": "test", "source": "cmd:codex-companion.mjs setup --json", "date": "2026-11-10", "note": "Plugin de Codex listo y sesión verificada; una consulta mínima respondió OK. Antigravity y los conectores de Claude no se probaron."},
+        {"kind": "test", "source": "cmd:graph_stats (altiora-graphify)", "date": "2026-11-10", "note": "El servidor de Graphify conecta y devuelve 21.542 nodos."},
+        {"kind": "partial", "source": "docs/altiora-business/RONDA-ENTREVISTAS-01.md", "date": "2026-10-31", "note": "Borradores creados en Gmail por conector; nada enviado."}
+      ]
+    },
+    "demand_sales": {
+      "level": 1,
+      "evidence": [
+        {"kind": "design", "source": "docs/altiora-business/OFERTA.md", "date": "2026-11-01", "note": "Oferta de US$10.000 definida, sin validar con compradores."},
+        {"kind": "design", "source": "docs/altiora-business/pipeline.json", "date": "2026-11-10", "note": "0 clientes de pago, 0 contactos enviados, 0 entrevistas."}
+      ]
+    },
+    "deliverable_quality": {
+      "level": 2,
+      "evidence": [
+        {"kind": "partial", "source": "url:https://la-central-del-queso.vercel.app", "date": "2026-11-10", "note": "El sitio responde, pero sigue enviando pedidos al WhatsApp provisional."},
+        {"kind": "partial", "source": "projects/tilicheros/DIRECCION_DEL_PROYECTO.md", "date": "2026-10-29", "note": "Preproducción; bloqueado por datos del negocio; nada publicado."}
+      ]
+    },
+    "economy_capacity": {
+      "level": 1,
+      "evidence": [
+        {"kind": "design", "source": "docs/altiora-business/FINANZAS.md", "date": "2026-10-31", "note": "Modelo por proyecto con supuestos; sin caja, costes fijos ni suscripciones reales."}
+      ]
+    }
+  },
+  "p0_open": [
+    {"id": "LCQ-WHATSAPP", "summary": "El sitio público de La Central del Queso sigue enviando pedidos al número provisional, pese a que el PR #5 del repo del cliente se fusionó el 2026-11-03 (comprobado con curl el 2026-11-10: 6 enlaces).", "owner": "Fundador confirma el despliegue; entrega corrige Vercel."},
+    {"id": "LCQ-DEPLOY", "summary": "Los despliegues de Vercel del repo del sitio fallan en 6 de 7 proyectos conectados; el dominio público sigue sirviendo una versión anterior.", "owner": "Entrega con acceso del fundador a Vercel."},
+    {"id": "CLIENT-SECRET-HISTORY", "summary": "Una credencial de API sigue en el historial de un repo público de cliente; rotación no verificada. Detalle fuera de este repo.", "owner": "Solo el fundador puede rotarla."}
+  ]
+}
