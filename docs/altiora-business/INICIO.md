@@ -2,6 +2,8 @@
 
 Estado del 31/10/2026: base preparada para validación. El usuario confirmó cero clientes de pago, un objetivo de US$10.000 por proyecto y mantenimiento mensual opcional. No hay ventas, márgenes reales ni disposición de compra verificados. «Élite» se convierte aquí en criterios de entrega, no en una acreditación o éxito garantizado.
 
+Dónde pedir cada trabajo y qué raíz usar (empresa vs. cliente): [mapa de Altiora](../operations/MAPA-ALTIORA.md).
+
 ## Alcance de Altiora
 
 [Posicionamiento y mapa de capacidades](POSICIONAMIENTO.md): crecimiento digital y físico mediante diagnóstico, estrategia, marca, marketing, ventas, sistemas, operación y análisis económico. La oferta de recorrido web y consultas es un paquete piloto propuesto, no la definición completa de la empresa.

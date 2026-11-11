@@ -1,6 +1,7 @@
 {
   "env": {
-    "SLASH_COMMAND_TOOL_CHAR_BUDGET": "210912"
+    "SLASH_COMMAND_TOOL_CHAR_BUDGET": "210912",
+    "MCP_TIMEOUT": "60000"
   },
   "hooks": {
     "SessionStart": [

@@ -10,3 +10,12 @@ node_modules/
 **/*.min.js
 **/dist/
 **/build/
+
+# Cierre 2026-11-10: sin clientes, secretos ni salidas
+projects/
+out/
+.env
+.env.*
+*.key
+*.pem
+**/secrets/
