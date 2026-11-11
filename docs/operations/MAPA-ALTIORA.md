@@ -49,6 +49,6 @@ Dejar en el informe del encargo: raíz y remoto saneado, archivos propios vs. aj
 
 ## 6. Acceso al grafo (Graphify)
 
-- **MCP real en la sesión Claude del 2026-11-10:** servidor `graphify` en [`.mcp.json`](../../.mcp.json), grafo `C:/Users/Usuario/.altiora-tools/graphs/altiora-20261110b/graphify-out/graph.json`, `GRAPHIFY_BACKEND=none`. Demostrado con `graph_stats` y `query_graph` (21.510 nodos / 24.557 aristas, commit `e438b3a`). Otras IAs: no verificado.
+- **MCP real en la sesión Claude del 2026-11-10:** servidor `graphify` en [`.mcp.json`](../../.mcp.json), grafo único de empresa `C:/Users/Usuario/.altiora-tools/graphs/altiora/graphify-out/graph.json` (sin `projects/` ni `out/`), `GRAPHIFY_BACKEND=none`. Regenerado el 2026-11-11 desde `6c6a887`: `graph_stats` devolvió 21.514 nodos / 24.542 aristas y 0 nodos de clientes; `query_graph` devolvió nodos de `scripts/orca-coordinator.mjs`. El grafo `altiora-20261110b` queda archivado. Otras IAs: no verificado.
 - **Cobertura:** solo código y datos estructurados (`--code-only`). Incluye los scripts nuevos (`orca-coordinator`, `altiora-ready`, `omniroute-client`), pero **no** los documentos Markdown operativos (`ESTADO-ACTUAL`, `ROUTING`, `INICIO`: 0 nodos) ni `projects/`. Para documentos, la fuente es este mapa y los enlaces de arriba.
 - El grafo es una ayuda de orientación; confirmar siempre en el archivo real. No contiene datos de clientes ni secretos por política de `.graphifyignore`.

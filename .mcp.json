@@ -21,7 +21,7 @@
       "type": "stdio",
       "command": "C:/Users/Usuario/.altiora-tools/graphify/Scripts/graphify-mcp.exe",
       "args": [
-        "C:/Users/Usuario/.altiora-tools/graphs/altiora-20261110b/graphify-out/graph.json"
+        "C:/Users/Usuario/.altiora-tools/graphs/altiora/graphify-out/graph.json"
       ],
       "env": {
         "GRAPHIFY_BACKEND": "none"
