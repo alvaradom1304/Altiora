@@ -45,7 +45,7 @@ Un SAFE no autoriza por sí solo: la revisión manual de arriba y estos hallazgo
 ## Pendiente
 
 - Autorizar HubSpot en `/mcp`, en solo lectura (lo hace el dueño).
-- Revisión legal del correo en frío según la Ley 8968.
+- Revisión legal del correo en frío según la Ley 8968. Avance 2026-11-12: [correo-comercial-no-solicitado-cr-2026-11-12.md](../../research/correo-comercial-no-solicitado-cr-2026-11-12.md) (Ley 8642 art. 44 y Ley 10946 art. 29; falta abogado).
 - Volver a escanear si se actualiza cualquiera de las fuentes.
 
 ## Integración en `altiora-unificado` (2026-11-01)
