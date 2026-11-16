@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 900" role="img" aria-labelledby="title desc">
+<title id="title">Altiora — Interpretación conceptual V1</title>
+<desc id="desc">Estudio vectorial orientativo del logotipo A de montaña y la aplicación de identidad. No reproduce el PNG original.</desc>
+<defs>
+ <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#F3D8A3"/><stop offset=".52" stop-color="#C5A15B"/><stop offset="1" stop-color="#856233"/></linearGradient>
+ <linearGradient id="rock" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#2c2b2b"/><stop offset=".5" stop-color="#0B0B0D"/><stop offset="1" stop-color="#574a3c"/></linearGradient>
+ <linearGradient id="fade" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#0B0B0D"/><stop offset="1" stop-color="#790D19" stop-opacity=".30"/></linearGradient>
+ <clipPath id="a"><path d="M720 105 560 446 642 446 720 257 798 446 881 446Z"/></clipPath>
+</defs>
+<rect width="1440" height="900" fill="#08080a"/>
+<rect width="1440" height="900" fill="url(#fade)" opacity=".6"/>
+<path d="M0 600 310 385 500 535 740 320 920 510 1140 370 1440 560 V900 H0Z" fill="#252123" opacity="0.45"/>
+<g><path d="M720 105 560 446 642 446 720 257 798 446 881 446Z" fill="url(#rock)" stroke="url(#gold)" stroke-width="5"/>
+<g clip-path="url(#a)" fill="none" stroke-width="9"><path d="M560 453 705 160" stroke="#790D19"/><path d="m755 210 116 218" stroke="#C5A15B"/><path d="m650 322 56-35 57 55" stroke="#C5A15B" opacity=".6"/></g>
+<path d="m720 112 15 48-15-15-25 35Z" fill="#E8E3D9" opacity=".8"/></g>
+<text x="720" y="545" text-anchor="middle" fill="url(#gold)" font-family="Georgia,serif" font-size="83" letter-spacing="19">ALTIORA</text>
+<text x="720" y="595" text-anchor="middle" fill="#E8E3D9" font-family="Georgia,serif" font-size="22" letter-spacing="12">ALTIORA PETO</text>
+<path d="M80 628h1260" stroke="#C5A15B" opacity=".3"/>
+<text x="80" y="696" fill="#E8E3D9" font-family="Arial,sans-serif" font-size="27" letter-spacing="6">V1 / EXPRESIÓN</text>
+<text x="80" y="741" fill="#B8B0A6" font-family="Arial,sans-serif" font-size="17" letter-spacing="3">IDENTIDAD · UNIFORMES · PAPELERÍA</text>
+<text x="1360" y="698" text-anchor="end" fill="#C5A15B" font-family="Arial,sans-serif" font-size="18" letter-spacing="4">PRESENCIA</text>
+<g transform="translate(80 795)"><rect width="61" height="61" rx="31" fill="#0B0B0D" stroke="#555"/><rect x="82" width="61" height="61" rx="31" fill="#790D19"/><rect x="164" width="61" height="61" rx="31" fill="#C5A15B"/><rect x="246" width="61" height="61" rx="31" fill="#E8E3D9"/></g>
+<text x="1360" y="835" text-anchor="end" fill="#B8B0A6" font-family="Arial,sans-serif" font-size="16" letter-spacing="2">ESTUDIO VISUAL / NO FINAL / 2026</text>
+</svg>
