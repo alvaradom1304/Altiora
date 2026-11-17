@@ -11,7 +11,7 @@ from pathlib import PurePosixPath
 from typing import Any
 
 MODES = ("A", "B", "C", "D")
-OWNERS = ("codex", "claude", "antigravity")
+OWNERS = ("codex", "claude", "antigravity", "chatgpt", "current")
 STATUSES = ("PLANNED", "READY", "IN_PROGRESS", "REVIEW", "APPROVED", "DONE",
             "BLOCKED", "FAILED", "CANCELED")
 
@@ -112,6 +112,8 @@ def decide_mode(message: str, streams: list[dict[str, Any]], entrypoint: str = "
     if len(streams) > 1 and not parallel_request:
         warnings.append("Multiple domains detected; execution is sequential unless independence is proved.")
 
+    if mode == "A":
+        lead = entrypoint
     return {
         "mode": mode,
         "reason": reason,
@@ -136,7 +138,7 @@ def make_handoffs(message: str, streams: list[dict[str, Any]], decision: dict[st
     job_id = "PRE-" + hashlib.sha256(message.encode("utf-8")).hexdigest()[:12].upper()
     contracts = []
     for i, stream in enumerate(streams, start=1):
-        owner = stream.get("preferred_ai", "codex")
+        owner = decision["lead_candidate"] if decision["mode"] == "A" else stream.get("preferred_ai", "codex")
         contracts.append({
             "schema_version": "2.0",
             "job_id": f"{job_id}-{i:02}",
