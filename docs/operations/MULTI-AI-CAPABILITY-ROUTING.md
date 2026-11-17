@@ -31,18 +31,10 @@ No confundir modelo disponible en el mercado, incluido en el plan, visible en CL
 6. Orca es transporte opcional: `npm run orca:dispatch -- --router heuristic --json "encargo"` para plan sin LLM ni envío. `--execute` o `--launch-workers` requieren `ALTIORA_DISPATCH_EXECUTE=1`, Orca local activo y permisos explícitos, y se deben probar individualmente. La propuesta de `worktree_strategy` NO crea un worktree.
 7. Ejecutar validaciones, revisión independiente según riesgo, guardar handoff sin secretos y actualizar `continuity/checkpoint.json` en el PR de cierre. Un modelo que falló se reintenta con esfuerzo superior solo después de comprender por qué.
 
-## Puntuación de enrutamiento (v1, estimativa, NO benchmark)
-Para cada candidato *en una tarea concreta*: calidad técnica estimada (30%), ajuste a herramientas y accesos comprobados (25%), eficiencia de créditos/tokens (20%), latencia esperada (10%), continuidad y recuperación (15%). Puntuar cada rubro de **0 a 5**, sumar el ponderado y documentar evidencia. Una conexión desconocida impide calificarla como ejecutable; la política usa una puntuación preliminar y exige calibrarla con tareas comparables, coste real, correcciones y QA.
+## Puntuación canónica y control de vigencia
+El índice de **preparación operativa 0–10** vive en [preambra-model-matrix.json](preambra-model-matrix.json) y se explica en [PREAMBRA-MULTI-AI-ORCHESTRATION.md](PREAMBRA-MULTI-AI-ORCHESTRATION.md). No debe confundirse con la potencia del modelo ni con un benchmark. Las preferencias de asignación son hipótesis por especialidad, sujetas a coste medido, QA y disponibilidad real. Evitar crear un segundo índice incompatible.
 
-| Modalidad | Primera asignación orientativa | Calificación de ajuste (1–5; criterio editorial, no medición) | Condición de revisión |
-|---|---|---:|---|
-| Estrategia empresarial y finanzas | ChatGPT para discovery; Codex para cálculos verificables | 4.5 | Validar datos, supuestos, hojas de cálculo y revisor humano |
-| Backend, integraciones y tests | Codex | 4.5 | Pruebas, permisos del repo y CI |
-| Identidad, copy, propuestas, frontend | Claude Code | 4.0 | Revisión de marca PREAMBRA y resultado en navegador |
-| 3D, scroll, WebGL, browser QA | Antigravity | 4.5 | Prueba visual real, FPS, accesibilidad y licencias |
-| Orquestación cross-CLI | Orca, **solo si su runtime está probado** | 4.0 (potencial; acceso no comprobado hoy) | Run/Task/worker/estado y coste observables |
-
-Las cifras expresan ajuste de asignación, no una puntuación comparativa objetiva de inteligencia. La puntuación efectiva queda `NOT_MEASURED` hasta realizar el piloto A/B con la misma tarea y criterios de aceptación. Evitar garantizar porcentajes de ahorro.
+Toda fuente tiene fecha. Antes de un cambio de modelos, herramientas, precio o acceso, comprobar la fuente oficial y el menú de la sesión. Para tareas críticas, revisar la vigencia de esta matriz antes de seleccionar modelo. `UNKNOWN` permanece sin puntuación de acceso hasta el preflight real.
 
 ## Primera tarea / prueba de aceptación
-`PRE-ORCH-001`: planificar un encargo que combine estrategia/automatización, branding y revisión 3D, **sin lanzar** agentes. Criterios: JSON válido, 3 streams con propietarios y esfuerzos admitidos, un worktree propuesto por stream, guardia bloquea `--execute` sin autorización, y `npm run orca:test` + `npm run check` pasan en CI. Luego, en el PC autorizado: `orca --version`, `orca orchestration run-list --json`, `claude --version`, `codex --version`, `agy models` y `npm run orca:dispatch -- --router heuristic --json "..." `; registrar resultados reales. No declarar un worker funcionando por pasar los tests de planificación.
+`PMO-ORCA-001`: planificar un encargo que combine estrategia/automatización, branding y revisión 3D, **sin lanzar** agentes. Criterios: JSON válido, 3 streams con propietarios y esfuerzos admitidos, un worktree propuesto por stream, guardia bloquea `--execute` sin autorización, y `npm run orca:test` + `npm run check` pasan en CI. Luego, en el PC autorizado: `orca --version`, `orca orchestration run-list --json`, `claude --version`, `codex --version`, `agy models` y `npm run orca:dispatch -- --router heuristic --json "..." `; registrar resultados reales. No declarar un worker funcionando por pasar los tests de planificación.
