@@ -34,7 +34,13 @@ npm run orca:dispatch -- --json --entrypoint antigravity "Crear estrategia y esc
 npm run orca:dispatch -- --json --entrypoint claude "Proyecto integral de cliente de principio a fin"
 ~~~
 
-La salida incluye modo, riesgo, motivo, colisiones, advertencias y contratos de traspaso. Sin --execute **no** se crean Task, Run, sesión de worker ni worktree.
+**IAs no disponibles:** el router no observa cuotas ni logins. Si una IA está pausada o sin cuota, indícalo con `--unavailable codex` (repetible o separado por comas) o con `PREAMBRA_UNAVAILABLE_AIS=codex`. El revisor se elige en orden codex → claude → antigravity, sin repetir al líder y saltando las no disponibles. Si no queda ninguno, `reviewer_candidate` es `null`, se añade una advertencia y `requires_human_approval` pasa a `true`.
+
+~~~bash
+npm run orca:dispatch -- --json --entrypoint claude --unavailable codex "Implementar una API con pruebas"
+~~~
+
+La salida incluye modo, riesgo, motivo, colisiones, advertencias, `unavailable_ais` y contratos de traspaso. Sin --execute **no** se crean Task, Run, sesión de worker ni worktree.
 
 El router por defecto es heurístico (sin consumo de LLM). Usar --router model únicamente si se desea una invocación Claude CLI y se verificó cuota/cuenta.
 

@@ -67,7 +67,7 @@ Requiere dos workers en worktrees nuevos (`--worktree new-child`) y un segundo e
 1. **Identidad del coordinador:** una sesión de Claude Code fuera de Orca no puede orquestar sin `--from`; el terminal coordinador dedicado lo resuelve sin saltar protecciones.
 2. **`worker-read` recorta bloques largos (~1.200 caracteres), también con `--full`.** Un contrato JSON largo llega cortado y no se puede parsear. Contratos de traspaso: cortos (<1.000 caracteres) o escritos en un archivo de artefacto.
 3. **Codificación en terminal de Antigravity:** los acentos se ven como `Ã³` en la salida de terminal (UTF-8 leído como Latin-1). Afecta la legibilidad del registro; no se comprobó si afecta al razonamiento.
-4. **Router:** `decide_mode` propone `codex` como revisor siempre que el líder no sea Codex, sin consultar disponibilidad ni cuota (`preambra_v2_routing.py:95`). Hoy Codex está pausado; el revisor real fue Antigravity.
+4. **Router (CORREGIDO en esta rama):** `decide_mode` proponía `codex` como revisor siempre que el líder no fuera Codex, sin consultar disponibilidad. Ahora acepta `unavailable` (`--unavailable` o `PREAMBRA_UNAVAILABLE_AIS`), elige el revisor en orden codex → claude → antigravity saltando al líder y a las no disponibles, y exige revisión humana si no queda ninguno. Sin lista, el comportamiento es el anterior. 7 pruebas nuevas en `test_preambra_v2_routing.py` (18/18 OK).
 5. **Clasificación heurística:** «Formatear un resumen» se asigna al stream `codex`/`strategy-finance-backend`, aunque el modo A corrige el líder a la IA de entrada (`:117-118`).
 6. **Orca no valida el id de modelo antes de lanzar.** El router debe pasar solo ids comprobados (`agy models` para Antigravity; ids aceptados por Claude Code) y el coordinador debe vigilar escalaciones: el estado `ready` no prueba que el worker esté trabajando.
 7. **Workers en modo terminal (Antigravity):** las instrucciones deben ir en una línea; el JSON devuelto perdió las comillas al pasar por la terminal. Para contratos estructurados conviene el modo estructurado (Claude) o un archivo.
@@ -77,7 +77,7 @@ Requiere dos workers en worktrees nuevos (`--worktree new-child`) y un segundo e
 
 | Componente | Estado | Evidencia | Pendiente |
 | --- | --- | --- | --- |
-| Router V2 | PROBADO (plan) | 11 + 5 pruebas, smoke 4/4 | disponibilidad/cuota en la elección de revisor (hallazgo 4) |
+| Router V2 | PROBADO (plan) | 18 + 5 pruebas, smoke 4/4; revisor según disponibilidad declarada | la disponibilidad la declara el operador; no se detecta sola |
 | Claude Code | PROBADO como worker | `ctx_1237a82432a8` succeeded, `claude-haiku-5-5` | probar sonnet/opus solo cuando una tarea lo justifique |
 | Codex | IMPLEMENTADO, no lanzado | CLI 0.167.0-alpha.3.2, OAuth presente | reactivar solo si la persona fundadora lo autoriza |
 | Antigravity | PROBADO como revisor | `ctx_32d32d74db54` PASS tras 1 corrección | modo estructurado o instrucciones de una línea |
