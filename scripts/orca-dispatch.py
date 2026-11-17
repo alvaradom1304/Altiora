@@ -21,6 +21,7 @@ import sys
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
+from preambra_v2_routing import decide_mode, make_handoffs
 
 ROOT = Path(__file__).resolve().parents[1]
 CATALOG_PATH = ROOT / ".altiora" / "catalog.local.json"
@@ -857,8 +858,12 @@ def main() -> int:
     parser.add_argument(
         "--router",
         choices=["model", "heuristic"],
-        default="model",
-        help="Quién decide el reparto: un modelo de alto rendimiento (por defecto) o la heurística por palabras clave.",
+        default="heuristic",
+        help="Heurística sin costo por defecto; `model` solicita una decisión explícita al LLM.",
+    )
+    parser.add_argument(
+        "--entrypoint", choices=["current", "chatgpt", "codex", "claude", "antigravity"],
+        default="current", help="IA desde la que se originó el encargo (metadata, no sesión autenticada).",
     )
     parser.add_argument(
         "--router-model",
@@ -909,9 +914,23 @@ def main() -> int:
         "router": router_meta,
         "message": full_message,
         "stream_count": len(streams),
-        "parallel_worktrees": len(streams) > 1,
+        "parallel_worktrees": False,
         "streams": streams,
     }
+    decision = decide_mode(full_message, streams, entrypoint=args.entrypoint)
+    result["policy_v2"] = decision
+    result["handoffs"] = make_handoffs(full_message, streams, decision)
+    # V2 only recommends parallelism when independent tasks and paths are safe.
+    result["parallel_worktrees"] = decision["mode"] == "C"
+
+    # Orca cannot infer real worktree isolation from a planning flag.
+    # Fail closed instead of launching multiple workers onto the same checkout.
+    if args.launch_workers and (
+        decision["mode"] in ("A", "D")
+        or any(st.get("worktree_strategy") == "new-child" for st in streams)
+    ):
+        print("V2: lanzamiento bloqueado. Esta modalidad requiere fases o worktrees reales y verificados; solo planificar.", file=sys.stderr)
+        return 2
 
     if args.execute or args.launch_workers:
         dispatch_info = dispatch_to_orca(
@@ -926,7 +945,10 @@ def main() -> int:
         print(json.dumps(result, indent=2, ensure_ascii=False))
         return 0
 
-    print("=== ALTIORA ORCA MULTI-AI ROUTER ===")
+    print("=== PREAMBRA OS V2 | ALTIORA ORCA ROUTER ===")
+    print(f"Modalidad propuesta: {decision['mode']} | Riesgo: {decision['risk']} | Orca: {decision['orca_policy']}")
+    for warning in decision["warnings"]:
+        print(f"  AVISO: {warning}")
     print(f"Mensaje: {full_message}")
     if router_meta.get("router") == "model" and not router_meta.get("fallback"):
         print(f"Enrutador: {router_meta.get('model_used') or router_meta.get('model')} "
