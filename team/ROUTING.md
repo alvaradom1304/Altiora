@@ -53,6 +53,19 @@ Otros encargos se enrutan por intención con los mismos roles: anuncios y video 
 
 **Esfuerzo de razonamiento:** el más bajo que cumpla el criterio. `low` para tareas mecánicas, `medium` por defecto, `high` para arquitectura, auditoría, investigación o diseño de escenas, y `xhigh`/`max` solo con riesgo económico, legal o de seguridad, o si el usuario pide profundidad. El tema no sube el nivel; lo sube lo que se pide. Modelo grande solo en `high` o más. Si la tarea resulta no ser la adecuada para la IA asignada, detenerse y decirlo en vez de seguir gastando.
 
+## 3.1. PREAMBRA OS V2 — Modos adaptativos integrados (solo planificación segura)
+
+El despachador existente `scripts/orca-dispatch.py` incluye una política determinista en `scripts/preambra_v2_routing.py`. No es un nuevo orquestador. Responde con `policy_v2` y contratos `handoffs` además del JSON histórico:
+
+- **A/directo:** tarea pequeña; resolver desde la IA actual, sin Orca.
+- **B/constructor + revisor:** tarea sustancial, de varios dominios o de riesgo; revisor independiente propuesto.
+- **C/paralelo selectivo:** *solo* cuando el encargo declara independencia, no hay dependencias y los caminos de escritura no se solapan; los worktrees aún requieren creación real en Orca.
+- **D/proyecto integral:** fases empresariales y aprobaciones, no workers paralelos lanzados automáticamente.
+
+`--router heuristic` es el modo por defecto y no invoca ningún LLM. `--router model` es opcional y puede consumir cuota. `--entrypoint` describe el origen pero NO demuestra autenticación. Los nombres de modelos son sugerencias: `model_observed=UNKNOWN` hasta preflight del ejecutor.
+
+**Seguridad:** `--execute` y `--launch-workers` conservan el gate `ALTIORA_DISPATCH_EXECUTE=1`. Además, V2 rechaza `--launch-workers` si el plan implica worktrees todavía no creados o un proyecto de varias fases. No usar el bit del plan `new-child` como prueba de un worktree existente. `npm run routing:v2:test` y `npm run check` son los gates de tests. Guía operativa: [PREAMBRA-V2-ROUTER-RUNBOOK](../docs/operations/PREAMBRA-V2-ROUTER-RUNBOOK.md).
+
 ## 4. Cómo delegar en cada herramienta
 
 | Herramienta | Subagentes del rol | Fijar esfuerzo y modelo |
@@ -62,7 +75,7 @@ Otros encargos se enrutan por intención con los mismos roles: anuncios y video 
 | Antigravity | `.agents/agents/<rol>.md` | `agy --effort <nivel> --model <gemini-3.8-flash-<nivel>\|gemini-4-argon-high>` |
 | Orca (otra IA) | — | `orca worktree create --name <parte> --agent <codex\|claude\|antigravity> --prompt "<encargo>"` |
 
-Para un plan de reparto sin coste: `npm run orca:dispatch -- --router heuristic "mensaje"` (orientativo). Con modelo: `npm run orca:dispatch -- "mensaje"` (usa Claude Sonnet).
+Para un plan de reparto sin coste: `npm run orca:dispatch -- --json "mensaje"` (**heurístico por defecto**). Si se desea pagar una decisión LLM, optar explícitamente por `--router model` y verificar Claude CLI, modelo y cuotas. El plan no ejecuta agentes.
 
 **Encargo al delegar** (plantilla única): objetivo verificable · entradas concretas · archivos que puede tocar (un escritor por archivo) · dependencias · rol y skills · esfuerzo · criterio de aceptación · qué no hacer.
 
