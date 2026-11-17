@@ -47,6 +47,8 @@ def _path(raw: str) -> str:
     if not raw or raw.startswith("/") or re.match(r"^[A-Za-z]:", raw):
         raise ValueError("owned_path must be a nonempty, relative repository path")
     parts = PurePosixPath(raw).parts
+    if not parts:
+        raise ValueError("owned_path cannot point to the whole repository")
     if any(p in ("..", "~") for p in parts):
         raise ValueError("owned_path must not traverse outside the repository")
     return "/".join(p for p in parts if p != ".")
