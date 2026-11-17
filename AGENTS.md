@@ -1,7 +1,9 @@
+# Trabajo en PREAMBRA (sistema histórico: Altiora)
+
+> **IDENTIDAD COMERCIAL VIGENTE — 2026-11-17.** La firma se llama **PREAMBRA**. Antes de redactar propuestas, textos públicos, materiales de identidad o comunicación de marca, consultar [plataforma](brand/preambra/BRAND-PLATFORM.md), [identidad visual](brand/preambra/VISUAL-IDENTITY.md) y [migración](brand/preambra/MIGRATION.md). Su posicionamiento es **firma de estrategia y ejecución empresarial** y su lema «No vendemos lo que hacemos. Hacemos lo que tu negocio necesita». No usar «Altiora» como nombre comercial nuevo; conservar identificadores históricos Altiora en rutas, código y conectores hasta contar con migración probada. No confundir aprobación creativa con registro marcario.
+
 <!-- ALTIORA_CURRENT_RUNTIME_20261110 -->
 Mapa de raíces (empresa/clientes/laboratorio), cuatro áreas y guía de encargo: [docs/operations/MAPA-ALTIORA.md](docs/operations/MAPA-ALTIORA.md). Estado local vigente y límites de los transportes: [docs/operations/ESTADO-ACTUAL.md](docs/operations/ESTADO-ACTUAL.md). Runtime propio y diagnóstico: [docs/operations/ORQUESTADOR-LOCAL.md](docs/operations/ORQUESTADOR-LOCAL.md). Aplicar primero team/ROUTING.md; estas referencias no autorizan lanzamientos, confianza en hooks ni publicación.
-
-# Trabajo en Altiora
 
 Fuente única de instrucciones para todas las IAs (Claude Code, Codex, Antigravity, Gemini CLI, ChatGPT). `CLAUDE.md` y `GEMINI.md` solo importan este archivo y llevan el bloque obligatorio del Agent System. Cualquier regla nueva se escribe aquí, una sola vez.
 
