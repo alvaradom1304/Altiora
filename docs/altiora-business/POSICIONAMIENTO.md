@@ -1,4 +1,6 @@
-# Altiora · alcance de la empresa
+# PREAMBRA · alcance de la firma (documento histórico de Altiora)
+
+> **Actualización 2026-11-17:** la marca comercial pasa a **PREAMBRA**, firma de estrategia y ejecución empresarial. El posicionamiento y descripción vigentes se encuentran en [PREAMBRA / Plataforma de marca](../../brand/preambra/BRAND-PLATFORM.md). El contenido a continuación preserva los antecedentes, hipótesis y limitaciones comerciales documentadas bajo Altiora; no prevalece sobre la nueva dirección de marca.
 
 **Definición confirmada por el fundador, 31 de octubre de 2026.** Altiora acompaña a empresas desde el diagnóstico y la puesta en marcha hasta la mejora y el crecimiento. Su trabajo puede abarcar estrategia, marca, marketing, ventas, operaciones y sistemas, tanto en canales digitales como en puntos de contacto físicos. La intervención se diseña según el problema concreto del cliente; esta lista es un mapa de capacidades, no la promesa de que cada proyecto incluya todo.
 
