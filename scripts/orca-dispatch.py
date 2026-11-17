@@ -540,25 +540,30 @@ def choose_effort(message: str, domain: str) -> str:
 # - antigravity: `agy --model <id> --effort <level>` (verificado con `agy --help` y `agy models` el 2026-11-01).
 EFFORT_HINTS = {
     "claude": "Aplícalo con `claude --effort {level}` si lanzas la sesión a mano. {model_hint}",
-    "codex": "Aplícalo con `codex -c model_reasoning_effort={level_codex}`.",
+    "codex": "Aplícalo con `codex -c model_reasoning_effort={level_codex}` si el modelo lo admite. {model_hint}",
     "antigravity": "Aplícalo con `agy --effort {level}`. {model_hint}",
 }
 
-# Modelo sugerido según el esfuerzo. Claude Code: alias haiku, sonnet, opus. Antigravity: ids de
-# `agy models` (2026-11-01); Gemini 4 Argon es el modelo caro, Gemini 3.8 Flash el ligero.
+# Sugerencias orientativas revisadas 2026-11-17 con documentación oficial.
+# Nunca equivalen a acceso real ni comparativas de calidad; confirmar modelos con el CLI.
+# Fuente y matriz: docs/operations/MULTI-AI-CAPABILITY-ROUTING.md.
 MODEL_HINTS = {
+    "codex": {
+        "low": "Candidato: GPT-6 Luna para tareas repetitivas; comprueba /model y acceso real.",
+        "medium": "Candidato: GPT-6.2 Sol para trabajo diario; si no aparece, elige uno disponible y ajusta el esfuerzo.",
+        "default": "Candidato: GPT-6.2 Astra para problemas difíciles, solo si está habilitado. Consulta /model.",
+    },
     "claude": {
-        "low": "Basta `--model haiku`.",
-        "medium": "Basta `--model sonnet`.",
-        "default": "Usa `--model opus` solo en este nivel o superior.",
+        "low": "Candidato: alias haiku, si está disponible; comprueba /model.",
+        "medium": "Candidato: alias sonnet; no asumas qué versión resuelve el alias.",
+        "default": "Considera alias opus para problemas exigentes, pero verifica disponibilidad y el esfuerzo admitido.",
     },
     "antigravity": {
-        "low": "Usa `--model gemini-3.8-flash-low`.",
-        "medium": "Usa `--model gemini-3.8-flash-medium`; Gemini 4 Argon solo en high o más.",
-        "default": "Gemini 4 Argon se justifica en este nivel: `--model gemini-4-argon-high`.",
+        "low": "Candidato: Gemini 3.8 Flash; confirma el identificador con agy models.",
+        "medium": "Candidato: Gemini 4 Hydrogen o Gemini 3.8 Flash; confirma disponibilidad.",
+        "default": "Considera Gemini 4 Argon/Carbon o Orchestrator si está habilitado. Orchestrator tiene esfuerzo fijo. Confirma con agy models.",
     },
 }
-
 
 def model_hint(ai: str, effort: str) -> str:
     hints = MODEL_HINTS.get(ai)
