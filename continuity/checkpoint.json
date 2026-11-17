@@ -2,63 +2,90 @@
   "schema_version": 1,
   "project": "Altiora Visual Studio",
   "repository": "alvaradom1304/Altiora",
-  "snapshot_date": "2026-11-03",
+  "snapshot_date": "2026-11-17",
   "snapshot_kind": "repo_checkpoint_not_live_github_api",
   "description": "Estado reproducible para reanudar entre sesiones e IAs. No significa ejecución persistente ni conexión automática con software.",
   "completed_milestones": [
     {
+      "id": "PMO-ORCA-001",
+      "name": "PREAMBRA OS: política universal multi-IA y piloto de enrutamiento Orca en modo seguro",
+      "result": "MERGED",
+      "evidence": [
+        {
+          "url": "https://github.com/alvaradom1304/Altiora/pull/90",
+          "claim": "Política y catálogo de capacidades de ChatGPT/Codex, Claude Code, Antigravity y Orca; smoke de enrutamiento y guard sin ejecutar modelos externos. CI Windows/Ubuntu aprobado; no acredita ejecución nativa de Orca ni ahorro de tokens."
+        },
+        {
+          "url": "https://github.com/alvaradom1304/Altiora/actions/runs/44187310079",
+          "claim": "Control completo npm run check aprobado en Windows y Ubuntu, con scripts de prueba Orca integrados."
+        }
+      ]
+    },
+    {
       "id": "VIS-AUDIO-02",
       "name": "Identidad del WAV medido y coherencia del sidecar",
       "result": "DONE",
-      "evidence": [{
-        "url": "https://github.com/alvaradom1304/Altiora/blob/fix/altiora-audio-source-identity-2026-10-31/docs/operations/production-qa.md",
-        "claim": "Medidor PCM incluye hash/tamaño del WAV completo y rechaza ediciones comunes durante lectura; agregado bloquea identidades declaradas contradictorias. Control local aprobado; legacy conserva vínculo manual. No certifica extracción, escucha, derechos ni snapshot atómico."
-      }]
+      "evidence": [
+        {
+          "url": "https://github.com/alvaradom1304/Altiora/blob/fix/altiora-audio-source-identity-2026-10-31/docs/operations/production-qa.md",
+          "claim": "Medidor PCM incluye hash/tamaño del WAV completo y rechaza ediciones comunes durante lectura; agregado bloquea identidades declaradas contradictorias. Control local aprobado; legacy conserva vínculo manual. No certifica extracción, escucha, derechos ni snapshot atómico."
+        }
+      ]
     },
     {
       "id": "VIS-OPS-08",
       "name": "Vigencia de catálogos por metadatos y raíces explícitas",
       "result": "DONE",
-      "evidence": [{
-        "url": "https://github.com/alvaradom1304/Altiora/blob/fix/altiora-catalog-freshness-2026-10-31/skills/altiora-bibliotecario/references/portability.md",
-        "claim": "check detecta altas, bajas y cambios de metadatos; catálogos antiguos piden reconstrucción y fuentes inaccesibles no producen vigencia falsa. Control completo local aprobado y raíces enlazadas probadas. No certifica runtime nativo ni refresca por mensaje."
-      }]
+      "evidence": [
+        {
+          "url": "https://github.com/alvaradom1304/Altiora/blob/fix/altiora-catalog-freshness-2026-10-31/skills/altiora-bibliotecario/references/portability.md",
+          "claim": "check detecta altas, bajas y cambios de metadatos; catálogos antiguos piden reconstrucción y fuentes inaccesibles no producen vigencia falsa. Control completo local aprobado y raíces enlazadas probadas. No certifica runtime nativo ni refresca por mensaje."
+        }
+      ]
     },
     {
       "id": "VIS-OPS-07",
       "name": "Control completo idéntico en local y CI para todas las IAs",
       "result": "DONE",
-      "evidence": [{
-        "url": "https://github.com/alvaradom1304/Altiora/blob/fix/altiora-unified-quality-check-2026-10-31/docs/operations/SHARED-OPERATIONS.md",
-        "claim": "npm run check reúne las suites existentes de catálogo, puentes, operaciones, toolkit, handler, recuperación y audio; CI llama una sola vez al mismo comando. Check completo local aprobado; fixtures no certifican conexiones nativas."
-      }]
+      "evidence": [
+        {
+          "url": "https://github.com/alvaradom1304/Altiora/blob/fix/altiora-unified-quality-check-2026-10-31/docs/operations/SHARED-OPERATIONS.md",
+          "claim": "npm run check reúne las suites existentes de catálogo, puentes, operaciones, toolkit, handler, recuperación y audio; CI llama una sola vez al mismo comando. Check completo local aprobado; fixtures no certifican conexiones nativas."
+        }
+      ]
     },
     {
       "id": "VIS-OPS-06",
       "name": "Bibliotecario sin coincidencias falsas dentro de otras palabras",
       "result": "DONE",
-      "evidence": [{
-        "url": "https://github.com/alvaradom1304/Altiora/blob/fix/altiora-librarian-token-boundaries-2026-10-31/skills/altiora-bibliotecario/references/word-boundaries.md",
-        "claim": "Reproducidos SEO/deseo, CRO/microempresa y API/capital; corregida recuperación por términos completos conservando nombres, componentes y acentos. Pruebas y ejemplos antes/después; no demuestra selección nativa o comprensión semántica."
-      }]
+      "evidence": [
+        {
+          "url": "https://github.com/alvaradom1304/Altiora/blob/fix/altiora-librarian-token-boundaries-2026-10-31/skills/altiora-bibliotecario/references/word-boundaries.md",
+          "claim": "Reproducidos SEO/deseo, CRO/microempresa y API/capital; corregida recuperación por términos completos conservando nombres, componentes y acentos. Pruebas y ejemplos antes/después; no demuestra selección nativa o comprensión semántica."
+        }
+      ]
     },
     {
       "id": "VIS-OPS-05",
       "name": "Verificación funcional aislada de handlers y consulta de ejecutor nativo",
       "result": "DONE",
-      "evidence": [{
-        "url": "https://github.com/alvaradom1304/Altiora/blob/feature/altiora-runtime-functional-verification-2026-10-31/docs/operations/NATIVE-RUNTIME-VALIDATION.md",
-        "claim": "Codex CLI respondió consultas en perfil aislado; kit propio pasó 18 casos de handler en fixtures temporales. No demuestra confianza, descubrimiento o sesión nativa de otros clientes ni conexión MCP."
-      }]
+      "evidence": [
+        {
+          "url": "https://github.com/alvaradom1304/Altiora/blob/feature/altiora-runtime-functional-verification-2026-10-31/docs/operations/NATIVE-RUNTIME-VALIDATION.md",
+          "claim": "Codex CLI respondió consultas en perfil aislado; kit propio pasó 18 casos de handler en fixtures temporales. No demuestra confianza, descubrimiento o sesión nativa de otros clientes ni conexión MCP."
+        }
+      ]
     },
     {
       "id": "VIS-OPS-04",
       "name": "Afilado de copias instaladas, rutas de capacidades e identidad de publicación",
       "result": "DONE",
-      "evidence": [{
-        "url": "https://github.com/alvaradom1304/Altiora/blob/feature/altiora-toolkit-sharpening-2026-10-31/docs/operations/TOOLKIT-VALIDATION.md",
-        "claim": "390 archivos instalados compactados con respaldos/hashes, cinco capacidades pertinentes incorporadas al proyecto, doctor/traspaso validados y lectura/escritura del MCP de coordinación verificada solo en esta sesión. Sesiones de otros clientes y ahorro de tokens sin certificar."
-      }]
+      "evidence": [
+        {
+          "url": "https://github.com/alvaradom1304/Altiora/blob/feature/altiora-toolkit-sharpening-2026-10-31/docs/operations/TOOLKIT-VALIDATION.md",
+          "claim": "390 archivos instalados compactados con respaldos/hashes, cinco capacidades pertinentes incorporadas al proyecto, doctor/traspaso validados y lectura/escritura del MCP de coordinación verificada solo en esta sesión. Sesiones de otros clientes y ahorro de tokens sin certificar."
+        }
+      ]
     },
     {
       "id": "VIS-OPS-03",
@@ -228,7 +255,9 @@
     {
       "name": "Blender local: versión, arranque, render conceptual 1080x1080 y reapertura de fuente comprobados; MCP pendiente",
       "status": "DOCUMENTED",
-      "evidence": ["https://github.com/alvaradom1304/Altiora/blob/fix/altiora-blender-windows-discovery-2026-10-31/docs/operations/BLENDER-LOCAL.md"]
+      "evidence": [
+        "https://github.com/alvaradom1304/Altiora/blob/fix/altiora-blender-windows-discovery-2026-10-31/docs/operations/BLENDER-LOCAL.md"
+      ]
     },
     {
       "name": "Adobe local y APIs UXP",
