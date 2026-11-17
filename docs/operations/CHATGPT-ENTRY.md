@@ -17,7 +17,7 @@
   "job_id": "PRE-ORCH-001",
   "brand": "PREAMBRA",
   "technical_system": "Altiora",
-  "objective": "Verificar routing de una tarea multi-IA con Orion/Orca sin lanzar agentes de forma involuntaria",
+  "objective": "Verificar routing de una tarea multi-IA con Orca sin lanzar agentes de forma involuntaria",
   "owner": "codex",
   "candidate_model": "segun la lista del ejecutor en el momento",
   "reasoning_effort": "medium",
