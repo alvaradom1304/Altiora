@@ -1,0 +1,170 @@
+{
+  "schema_version": 1,
+  "brand": "PREAMBRA",
+  "technical_legacy": "Altiora",
+  "audited_on": "2026-11-17",
+  "purpose": "Readiness and model-discovery policy. This is not a benchmark or authenticated environment inventory.",
+  "scoring": {
+    "scale": 10,
+    "weights": {
+      "shared_instructions": 2,
+      "official_product_docs": 2,
+      "repeatable_routing_smoke": 2,
+      "authenticated_runtime_invocation": 2,
+      "complete_handoff_and_qa": 2
+    },
+    "meaning": "Operational readiness, not comparative AI intelligence or quality"
+  },
+  "agents": [
+    {
+      "id": "chatgpt",
+      "role": "business_discovery_and_executive_review",
+      "readiness_score": 4,
+      "observed_runtime": "CHAT_CONNECTED_GITHUB_ONLY",
+      "model_candidates": [
+        "GPT-6 consumer family, según el selector del plan",
+        "ChatGPT Work GPT-6.2 Sol/Astra solo si el plan y superficie los muestran"
+      ],
+      "effort_policy": [
+        "instant_or_light_if_available",
+        "medium",
+        "high",
+        "extra_high_if_available"
+      ],
+      "orca_launchable": "NOT_VERIFIED",
+      "model_runtime": "UNKNOWN"
+    },
+    {
+      "id": "codex",
+      "role": "engineering_finance_security_qa",
+      "readiness_score": 4,
+      "observed_runtime": "HISTORICAL_ONLY",
+      "model_candidates": [
+        "GPT-6 Luna",
+        "GPT-6.1 Sol",
+        "GPT-6.2 Sol",
+        "GPT-6.2 Astra"
+      ],
+      "effort_policy": [
+        "low",
+        "medium",
+        "high",
+        "xhigh_if_model_supported",
+        "max_or_ultra_if_surface_supported"
+      ],
+      "orca_launchable": "NOT_VERIFIED",
+      "model_runtime": "UNKNOWN"
+    },
+    {
+      "id": "claude",
+      "role": "operational_director_brand_copy_frontend",
+      "readiness_score": 4,
+      "observed_runtime": "HISTORICAL_ONLY",
+      "model_candidates": [
+        "Claude Haiku 5.5",
+        "Claude Sonnet 5.5",
+        "Claude Opus 5.5",
+        "Claude Fable 5.2 (si la cuenta lo expone)"
+      ],
+      "effort_policy": [
+        "low",
+        "medium",
+        "high",
+        "xhigh_if_supported",
+        "max_if_supported",
+        "ultracode_setting_not_effort_level"
+      ],
+      "orca_launchable": "NOT_VERIFIED",
+      "model_runtime": "UNKNOWN"
+    },
+    {
+      "id": "antigravity",
+      "role": "visual_immersive_web_browser_qa",
+      "readiness_score": 4,
+      "observed_runtime": "HISTORICAL_ONLY",
+      "model_candidates": [
+        "Gemini 3.8 Flash",
+        "Gemini 4 Hydrogen",
+        "Gemini 4 Argon",
+        "Gemini 4 Carbon",
+        "Orchestrator Argon/Carbon fixed effort if enabled",
+        "Claude 5.5 partner models only if enabled"
+      ],
+      "effort_policy": [
+        "low",
+        "medium",
+        "high",
+        "xhigh_if_supported",
+        "max_if_supported",
+        "orchestrator_fixed"
+      ],
+      "orca_launchable": "NOT_VERIFIED",
+      "model_runtime": "UNKNOWN"
+    },
+    {
+      "id": "orca",
+      "role": "runtime_coordination_not_reasoning_model",
+      "readiness_score": 4,
+      "observed_runtime": "HISTORICAL_PILOT_NOT_CURRENT",
+      "model_candidates": [],
+      "effort_policy": [],
+      "orca_launchable": "N_A",
+      "model_runtime": "N_A",
+      "latest_public_version_checked": "v1.4.261",
+      "latest_public_version_checked_on": "2026-11-17",
+      "installed_runtime_version": "UNKNOWN_2026-11-17"
+    }
+  ],
+  "validations": {
+    "routing_smoke": "NOT_RUN_IN_REPOSITORY",
+    "live_orca_runtime": "NOT_VERIFIED",
+    "cross_agent_execution": "NOT_VERIFIED",
+    "token_savings": "NOT_MEASURED",
+    "agent_scores_last_verified": "2026-11-17_POLICY_ONLY"
+  },
+  "sources": [
+    {
+      "vendor": "openai",
+      "url": "https://learn.chatgpt.com/docs/models",
+      "checked_on": "2026-11-17",
+      "scope": "Codex and Work supported model family and reasoning tiers"
+    },
+    {
+      "vendor": "anthropic",
+      "url": "https://code.claude.com/docs/en/model-config",
+      "checked_on": "2026-11-17",
+      "scope": "Claude Code supported aliases, efforts, ultracode and per-model limits"
+    },
+    {
+      "vendor": "google",
+      "url": "https://antigravity.google/docs/models",
+      "checked_on": "2026-11-17",
+      "scope": "Antigravity model menu including Orchestrator and plan limits"
+    },
+    {
+      "vendor": "google",
+      "url": "https://antigravity.google/docs/cli/commands/effort",
+      "checked_on": "2026-11-17",
+      "scope": "Antigravity CLI effort levels and per-model constraints"
+    },
+    {
+      "vendor": "orca",
+      "url": "https://github.com/stablyai/orca/releases/tag/v1.4.261",
+      "checked_on": "2026-11-17",
+      "scope": "Latest public release observed, not installed version"
+    },
+    {
+      "vendor": "orca",
+      "url": "https://github.com/stablyai/orca/blob/main/docs/site/content/docs/cli/orchestration.mdx",
+      "checked_on": "2026-11-17",
+      "scope": "Orca runtime and orchestration prerequisites"
+    }
+  ],
+  "next_action": "Run python scripts/preambra-orca-smoke.py, then local Orca first-task read-only execution and independent QA.",
+  "review_policy": {
+    "trigger": "Before model routing on a substantial task, and whenever a provider announces a change",
+    "source_priority": "Official model picker and provider documentation; runtime CLI proof outranks static docs for access",
+    "stale_after_days_for_public_catalog": 14,
+    "note": "This does not install a scheduled background watcher or refresh models automatically."
+  }
+}

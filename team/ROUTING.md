@@ -14,6 +14,8 @@ La **dirección ejecutiva humana** aprueba objetivos, alcance, contratos, presup
 
 Cada delegación debe documentar `job_id`, responsable, inputs, propiedad de archivos, skills, criterios de aceptación, riesgos y evidencia. No se permite que dos agentes editen simultáneamente el mismo archivo. Trabajos de cliente requieren QA independiente y revisión humana donde aplique. La disponibilidad de MCP, Blender, After Effects y coordinación entre IAs **solo se declara verificada** tras pruebas en sesiones reales. Ver [gobierno y gates](../docs/operations/CLAUDE-OPERATIONAL-DIRECTOR-PROPOSAL-2026-11-03.md) y [validación #65](https://github.com/alvaradom1304/Altiora/issues/65).
 
+> **Catálogo actualizado de modelos:** [MULTI-AI-CAPABILITY-ROUTING.md](../docs/operations/MULTI-AI-CAPABILITY-ROUTING.md) (revisión 2026-11-17). Conoce las opciones de ChatGPT/Codex, Claude Code, Antigravity y Orca antes de elegir; el ajuste de esfuerzo, modelos admitidos y cuotas se verifica en cada runtime. Los nombres concretos de modelos de la tabla histórica inferior son ejemplos de 2026-11-01, no garantías de disponibilidad actual.
+
 ## 1. Al recibir un encargo (siempre, cualquier IA)
 
 1. **Entender:** objetivo, entregable, criterio de aceptación, proyecto y riesgo. Si falta algo que cambia el resultado, preguntarlo **una vez** y no avanzar en lo que dependa de eso.
