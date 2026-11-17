@@ -1,4 +1,12 @@
-# Altiora Immersive Web Lab
+# PREAMBRA — Firma de estrategia y ejecución empresarial
+
+![PREAMBRA](brand/preambra/logo-primary.svg)
+
+**No vendemos lo que hacemos. Hacemos lo que tu negocio necesita.**
+
+Este repositorio sigue alojando el laboratorio y sistemas técnicos que nacieron bajo el nombre **Altiora**. La identidad comercial actual es **PREAMBRA**; el nombre del repositorio, las carpetas y los namespaces históricos se mantienen temporalmente para evitar roturas. Consultar la [plataforma de marca](brand/preambra/BRAND-PLATFORM.md), los [logos SVG y la guía visual](brand/preambra/VISUAL-IDENTITY.md) y el [plan de migración](brand/preambra/MIGRATION.md). La disponibilidad legal del nuevo nombre todavía debe verificarse.
+
+## Laboratorio técnico histórico: Altiora Immersive Web Lab
 
 ## Diagnóstico y calidad compartidos
 
