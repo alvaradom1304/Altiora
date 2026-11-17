@@ -1,0 +1,135 @@
+{
+  "schema_version": 1,
+  "brand": "PREAMBRA",
+  "technical_legacy": "Altiora",
+  "audited_on": "2026-11-17",
+  "purpose": "Readiness and model-discovery policy. This is not a benchmark or authenticated environment inventory.",
+  "scoring": {
+    "scale": 10,
+    "weights": {
+      "shared_instructions": 2,
+      "official_product_docs": 2,
+      "repeatable_routing_smoke": 2,
+      "authenticated_runtime_invocation": 2,
+      "complete_handoff_and_qa": 2
+    },
+    "meaning": "Operational readiness, not comparative AI intelligence or quality"
+  },
+  "agents": [
+    {
+      "id": "chatgpt",
+      "role": "business_discovery_and_executive_review",
+      "readiness_score": 4,
+      "observed_runtime": "CHAT_CONNECTED_GITHUB_ONLY",
+      "model_candidates": [
+        "GPT-6 family (subject to product entitlement)"
+      ],
+      "effort_policy": [
+        "medium",
+        "high"
+      ],
+      "orca_launchable": "NOT_VERIFIED",
+      "model_runtime": "UNKNOWN"
+    },
+    {
+      "id": "codex",
+      "role": "engineering_finance_security_qa",
+      "readiness_score": 4,
+      "observed_runtime": "HISTORICAL_ONLY",
+      "model_candidates": [
+        "Codex model selected by current CLI",
+        "GPT family supported by current account"
+      ],
+      "effort_policy": [
+        "low",
+        "medium",
+        "high",
+        "xhigh"
+      ],
+      "orca_launchable": "NOT_VERIFIED",
+      "model_runtime": "UNKNOWN"
+    },
+    {
+      "id": "claude",
+      "role": "operational_director_brand_copy_frontend",
+      "readiness_score": 4,
+      "observed_runtime": "HISTORICAL_ONLY",
+      "model_candidates": [
+        "Haiku",
+        "Sonnet",
+        "Opus"
+      ],
+      "effort_policy": [
+        "low",
+        "medium",
+        "high",
+        "xhigh_if_supported"
+      ],
+      "orca_launchable": "NOT_VERIFIED",
+      "model_runtime": "UNKNOWN"
+    },
+    {
+      "id": "antigravity",
+      "role": "visual_immersive_web_browser_qa",
+      "readiness_score": 4,
+      "observed_runtime": "HISTORICAL_ONLY",
+      "model_candidates": [
+        "Gemini 3.8 Flash",
+        "Gemini 4 Argon/Carbon/Hydrogen",
+        "Claude models if enabled"
+      ],
+      "effort_policy": [
+        "low",
+        "medium",
+        "high",
+        "max_if_supported"
+      ],
+      "orca_launchable": "NOT_VERIFIED",
+      "model_runtime": "UNKNOWN"
+    },
+    {
+      "id": "orca",
+      "role": "runtime_coordination_not_reasoning_model",
+      "readiness_score": 4,
+      "observed_runtime": "HISTORICAL_PILOT_NOT_CURRENT",
+      "model_candidates": [],
+      "effort_policy": [],
+      "orca_launchable": "N_A",
+      "model_runtime": "N_A"
+    }
+  ],
+  "validations": {
+    "routing_smoke": "NOT_RUN_IN_REPOSITORY",
+    "live_orca_runtime": "NOT_VERIFIED",
+    "cross_agent_execution": "NOT_VERIFIED",
+    "token_savings": "NOT_MEASURED",
+    "agent_scores_last_verified": "2026-11-17_POLICY_ONLY"
+  },
+  "sources": [
+    {
+      "vendor": "openai",
+      "url": "https://developers.openai.com/api/docs/guides/reasoning",
+      "checked_on": "2026-11-17",
+      "scope": "model-dependent reasoning effort"
+    },
+    {
+      "vendor": "anthropic",
+      "url": "https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices",
+      "checked_on": "2026-11-17",
+      "scope": "model family and thinking policies"
+    },
+    {
+      "vendor": "google",
+      "url": "https://docs.cloud.google.com/gemini/enterprise/docs/ai-developer-tools-settings",
+      "checked_on": "2026-11-17",
+      "scope": "Enterprise supported model menu, not personal account inventory"
+    },
+    {
+      "vendor": "orca",
+      "url": "https://github.com/stablyai/orca/blob/main/docs/site/content/docs/cli/orchestration.mdx",
+      "checked_on": "2026-11-17",
+      "scope": "runtime and experimental orchestration preflight"
+    }
+  ],
+  "next_action": "Run python scripts/preambra-orca-smoke.py, then local Orca first-task read-only execution and independent QA."
+}
