@@ -32,12 +32,20 @@
         "extra_high_if_available"
       ],
       "orca_launchable": "NOT_VERIFIED",
-      "model_runtime": "UNKNOWN"
+      "model_runtime": "UNKNOWN",
+      "readiness_breakdown": {
+        "shared_instructions": 2,
+        "official_product_docs": 2,
+        "repeatable_routing_smoke": 0,
+        "authenticated_runtime_invocation": 0,
+        "complete_handoff_and_qa": 0
+      },
+      "score_evidence": "GitHub Actions CI check Windows/Linux, run 44187310079 (PR #90); no desktop authentication verified"
     },
     {
       "id": "codex",
       "role": "engineering_finance_security_qa",
-      "readiness_score": 4,
+      "readiness_score": 6,
       "observed_runtime": "HISTORICAL_ONLY",
       "model_candidates": [
         "GPT-6 Luna",
@@ -53,12 +61,20 @@
         "max_or_ultra_if_surface_supported"
       ],
       "orca_launchable": "NOT_VERIFIED",
-      "model_runtime": "UNKNOWN"
+      "model_runtime": "UNKNOWN",
+      "readiness_breakdown": {
+        "shared_instructions": 2,
+        "official_product_docs": 2,
+        "repeatable_routing_smoke": 2,
+        "authenticated_runtime_invocation": 0,
+        "complete_handoff_and_qa": 0
+      },
+      "score_evidence": "GitHub Actions CI check Windows/Linux, run 44187310079 (PR #90); no desktop authentication verified"
     },
     {
       "id": "claude",
       "role": "operational_director_brand_copy_frontend",
-      "readiness_score": 4,
+      "readiness_score": 6,
       "observed_runtime": "HISTORICAL_ONLY",
       "model_candidates": [
         "Claude Haiku 5.5",
@@ -75,12 +91,20 @@
         "ultracode_setting_not_effort_level"
       ],
       "orca_launchable": "NOT_VERIFIED",
-      "model_runtime": "UNKNOWN"
+      "model_runtime": "UNKNOWN",
+      "readiness_breakdown": {
+        "shared_instructions": 2,
+        "official_product_docs": 2,
+        "repeatable_routing_smoke": 2,
+        "authenticated_runtime_invocation": 0,
+        "complete_handoff_and_qa": 0
+      },
+      "score_evidence": "GitHub Actions CI check Windows/Linux, run 44187310079 (PR #90); no desktop authentication verified"
     },
     {
       "id": "antigravity",
       "role": "visual_immersive_web_browser_qa",
-      "readiness_score": 4,
+      "readiness_score": 6,
       "observed_runtime": "HISTORICAL_ONLY",
       "model_candidates": [
         "Gemini 3.8 Flash",
@@ -99,12 +123,20 @@
         "orchestrator_fixed"
       ],
       "orca_launchable": "NOT_VERIFIED",
-      "model_runtime": "UNKNOWN"
+      "model_runtime": "UNKNOWN",
+      "readiness_breakdown": {
+        "shared_instructions": 2,
+        "official_product_docs": 2,
+        "repeatable_routing_smoke": 2,
+        "authenticated_runtime_invocation": 0,
+        "complete_handoff_and_qa": 0
+      },
+      "score_evidence": "GitHub Actions CI check Windows/Linux, run 44187310079 (PR #90); no desktop authentication verified"
     },
     {
       "id": "orca",
       "role": "runtime_coordination_not_reasoning_model",
-      "readiness_score": 4,
+      "readiness_score": 6,
       "observed_runtime": "HISTORICAL_PILOT_NOT_CURRENT",
       "model_candidates": [],
       "effort_policy": [],
@@ -112,15 +144,25 @@
       "model_runtime": "N_A",
       "latest_public_version_checked": "v1.4.261",
       "latest_public_version_checked_on": "2026-11-17",
-      "installed_runtime_version": "UNKNOWN_2026-11-17"
+      "installed_runtime_version": "UNKNOWN_2026-11-17",
+      "readiness_breakdown": {
+        "shared_instructions": 2,
+        "official_product_docs": 2,
+        "repeatable_routing_smoke": 2,
+        "authenticated_runtime_invocation": 0,
+        "complete_handoff_and_qa": 0
+      },
+      "score_evidence": "GitHub Actions CI check Windows/Linux, run 44187310079 (PR #90); no desktop authentication verified"
     }
   ],
   "validations": {
-    "routing_smoke": "NOT_RUN_IN_REPOSITORY",
+    "routing_smoke": "PASSED_IN_GITHUB_CI_WINDOWS_AND_LINUX",
     "live_orca_runtime": "NOT_VERIFIED",
     "cross_agent_execution": "NOT_VERIFIED",
     "token_savings": "NOT_MEASURED",
-    "agent_scores_last_verified": "2026-11-17_POLICY_ONLY"
+    "agent_scores_last_verified": "2026-11-17_CI_PASS_ROUTING_ONLY",
+    "routing_smoke_evidence": "https://github.com/alvaradom1304/Altiora/actions/runs/44187310079",
+    "routing_smoke_merged_pr": "https://github.com/alvaradom1304/Altiora/pull/90"
   },
   "sources": [
     {
