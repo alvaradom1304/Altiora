@@ -2,7 +2,7 @@
 name: "altiora-quality-review"
 description: "Revisa cambios de Altiora contra el encargo, las funciones afectadas y su evidencia de prueba. Se usa para comprobar una entrega o una tarea de otro agente antes de integrarla."
 metadata:
-  version: 1.1.0
+  version: 1.2.0
 ---
 
 # Revisión de entregas de Altiora
@@ -20,3 +20,6 @@ Terminar con una de estas conclusiones, apoyada en evidencia: cumple lo comproba
 
 ## Laboratorio disponible en este equipo
 Para localizar las fuentes y proyectos de Altiora, consultar [la ubicación local](references/altiora-workspace.md) cuando sea pertinente.
+
+## Ingeniería: método ECC adaptado
+Para revisar ingeniería sustancial, consultar [verificación y evaluación](references/ecc-workflow.md). Reutiliza los controles actuales; no instala ECC ni duplica agentes.

@@ -22,3 +22,11 @@
 ## Retirada
 
 Borrar `scripts/secret-guard.mjs`, su prueba, `.githooks/` y esta carpeta; quitar `secrets:test`, `hooks:install` y la prueba de `toolkit:test` en `package.json`, y ejecutar `git config --unset core.hooksPath`.
+
+## Ampliación revisada 2026-11-17
+
+- Upstream de referencia: `3f14a103a8694e51c1df9a806217a6d0b5f7a6f7`; el guardián previo conserva su pin original.
+- Se compararon verification-loop, eval-harness, continuous-learning-v2, strategic-compact, search-first y skill-stocktake.
+- Adaptaciones documentales dentro de las skills existentes; implementación local original de diagnóstico/activación con pruebas. No se copian ni ejecutan scripts externos.
+- Matriz: [ecc-adoption.json](../../references/ecc-adoption.json). Uso y límites: [integración](../../docs/operations/ECC-INTEGRACION.md).
+- Se mantiene MIT; no se instala el plugin completo, captura de sesiones ni observadores.
