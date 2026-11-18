@@ -3,7 +3,7 @@
   "rubric": "NOTA-V4",
   "assessed_on": "2026-11-10",
   "assessed_by": "claude (sesión de validación del estado operativo)",
-  "rules": "Niveles 0-5 de docs/operations/NOTA-V4.md. Cada evidencia declara kind: design (sostiene hasta 1), partial (2), test (3) o real (4); un 5 exige dos evidencias real con fechas distintas. npm run readiness:report aplica además topes calculados con pipeline.json y los P0 abiertos. Para subir un nivel se añade evidencia; no se edita el número a mano.",
+  "rules": "Niveles 0-5 de docs/operations/NOTA-V4.md. Cada evidencia declara kind: design (sostiene hasta 1), partial (2), test (3) o real (4); un 5 exige dos evidencias real con fechas distintas. npm run readiness:score aplica además topes calculados con pipeline.json y los P0 abiertos. Para subir un nivel se añade evidencia; no se edita el número a mano.",
   "axes": {
     "integrity_recovery": {
       "level": 2,

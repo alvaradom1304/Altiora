@@ -1,6 +1,6 @@
 # Nota de preparación empresarial V4
 
-Una sola nota para Claude, Codex, Antigravity y Gemini. Se obtiene con `npm run readiness:report -- --resumen` y se cita tal cual, con su fecha. No se estima a ojo.
+Una sola nota para Claude, Codex, Antigravity y Gemini. Se obtiene con `npm run readiness:score -- --resumen` y se cita tal cual, con su fecha. No se estima a ojo.
 
 **No confundir con la nota de skills.** El 98,3/100 de `quality/skills-report.md` mide la redacción de las skills (estructura y verificabilidad). No mide si Altiora opera ni vende. Se cita aparte y con esa etiqueta.
 
