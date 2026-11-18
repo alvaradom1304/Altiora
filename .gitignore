@@ -1,0 +1,3 @@
+# Python compilado: nunca se versiona
+__pycache__/
+*.py[cod]

@@ -3,10 +3,21 @@
 Una ficha por oportunidad. Solo datos reales del comprador. Lo que no se sepa se deja «desconocido», sin rellenarlo con suposiciones. El registro resumido va en `docs/altiora-business/pipeline.json`.
 
 ## Comprador y decisión
-- Empresa, sector y fuente pública con fecha:
+- Empresa, sector y fuente pública con fecha (el foco de una campaña o piloto **no** es el sector de la empresa):
 - Interlocutor y cargo · ¿decide la compra? (sí / no / desconocido):
 - Cómo compran (quién aprueba, plazo, proceso):
 - Presupuesto declarado por el comprador (cita textual, no inferida):
+
+## Cobertura del negocio (BSCG)
+Norma: [CONTEXT-FIRST-BSCG.md](../CONTEXT-FIRST-BSCG.md). Estados: `VERIFIED` · `REPORTED` · `INFERRED` · `UNKNOWN` · `CONFLICTED` · `OUTDATED`. Una declaración del comprador es `REPORTED`, nunca `VERIFIED`.
+
+| Categoría o línea | Quién la declara | Revisada con una fuente específica (sí/no) | Ventas · margen · inventario (estado) |
+|---|---|---|---|
+| | | | |
+
+- ¿La decisión afecta a toda la empresa o solo a una campaña o producto?:
+- Categorías que existen en la documentación pero no se han revisado:
+- Resultado del BSCG (`bscg.py`): PASS / CONDITIONAL / HOLD. Si la decisión afecta a toda la empresa, la documentación de una sola campaña no permite PASS.
 
 ## Problema (con sus palabras)
 - Episodio reciente concreto (fecha aproximada, qué pasó):

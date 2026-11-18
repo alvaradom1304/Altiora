@@ -1,0 +1,70 @@
+{
+  "empresa": "El Tilichero CR",
+  "fecha": "2026-11-03",
+  "decision": "Elegir qué categoría o producto impulsar primero y fijar el alcance del proyecto",
+  "alcance_decision": "empresa_completa",
+  "criterios_manuales": {
+    "modelo_negocio": {"valor": "PARCIAL", "evidencia": "Tienda online con cierre por WhatsApp Business (REPORTED, auditoría del 2026-10-29). No hay datos de ventas, costos ni caja."},
+    "productos_principales": {"valor": "NO", "evidencia": "No se conocen los productos más vendidos; el SKU de audífonos se eligió para producción (DEC-01), no por ventas."},
+    "hechos_vs_supuestos": {"valor": "SI", "evidencia": "CONTEXTO-NEGOCIO.md separa cada afirmación por estado y ninguna afirmación no fiable se usa en la decisión."},
+    "objetivos": {"valor": "PARCIAL", "evidencia": "OBJ-01 (primer lote de anuncios) está definido pero sin baseline ni meta cuantitativa; falta el objetivo a 30 días del dueño."},
+    "decisores": {"valor": "NO", "evidencia": "FICHA-ENCAJE-G1: responsable comercial «persona por designar»."},
+    "riesgos": {"valor": "PARCIAL", "evidencia": "Autenticidad de producto identificada (PROTOCOLO-AUTENTICIDAD-AIRPODS.md). Sin revisión legal, financiera ni de inventario."},
+    "alternativas": {"valor": "NO", "evidencia": "No se compararon alternativas a empezar por audífonos."}
+  },
+  "categorias": [
+    {
+      "nombre": "Gaming",
+      "origen_declaracion": "REPORTED",
+      "fuente": "Fundador (directiva V7, 2026-11-03); foco del piloto en DIRECCION_DEL_PROYECTO.md y AUDITORIA_VISUAL_2026-10-29.md",
+      "fuente_tipo": "declaracion",
+      "revisada": true,
+      "evidencia_en_repo": "Controles compatibles con PlayStation, aro RGB y consola retro (RETRO1, RGB1) vistos en fotos de vitrina; sin SKU, precio ni stock.",
+      "datos": {"ventas": "UNKNOWN", "margen": "UNKNOWN", "inventario": "UNKNOWN"}
+    },
+    {
+      "nombre": "Tecnología",
+      "origen_declaracion": "REPORTED",
+      "fuente": "Fundador (directiva V7, 2026-11-03); AUDITORIA_VISUAL_2026-10-29.md",
+      "fuente_tipo": "declaracion",
+      "revisada": true,
+      "evidencia_en_repo": "Empaques de audífonos y periféricos vistos en vitrina; SKU de audífonos elegido para producción (DEC-01) sin ficha ni documentos del proveedor.",
+      "datos": {"ventas": "UNKNOWN", "margen": "UNKNOWN", "inventario": "UNKNOWN"}
+    },
+    {
+      "nombre": "Bebés",
+      "origen_declaracion": "REPORTED",
+      "fuente": "Fundador (directiva V7, 2026-11-03)",
+      "fuente_tipo": "declaracion",
+      "revisada": false,
+      "evidencia_en_repo": "Solo una variante conceptual «BEBÉS · REGALOS» en experiments/tilicheros-motion-lab, descrita como concepto original y no ficha de producto real.",
+      "datos": {"ventas": "UNKNOWN", "margen": "UNKNOWN", "inventario": "UNKNOWN"}
+    },
+    {
+      "nombre": "Anime",
+      "origen_declaracion": "REPORTED",
+      "fuente": "Fundador (directiva V7, 2026-11-03)",
+      "fuente_tipo": "declaracion",
+      "revisada": false,
+      "evidencia_en_repo": "Solo una variante conceptual «ANIME · COLECCIONABLES» en experiments/tilicheros-motion-lab, descrita como concepto original y no ficha de producto real.",
+      "datos": {"ventas": "UNKNOWN", "margen": "UNKNOWN", "inventario": "UNKNOWN"}
+    }
+  ],
+  "afirmaciones": [
+    {"texto": "El Tilichero vende en varias categorías: gaming, tecnología, bebés y anime", "estado": "REPORTED", "fuente": "Fundador, directiva V7", "fuente_tipo": "declaracion", "fecha": "2026-11-03", "confianza": "media", "impacto_si_falla": "alto: cambia el alcance de toda la estrategia", "metodo_validacion": "Pedir catálogo o lista de productos al dueño", "usada_en_decision": true},
+    {"texto": "Gaming y tecnología son el foco del piloto", "estado": "REPORTED", "fuente": "DIRECCION_DEL_PROYECTO.md y auditoría visual", "fuente_tipo": "declaracion", "fecha": "2026-10-29", "confianza": "media", "impacto_si_falla": "medio", "metodo_validacion": "Confirmar con el dueño si es el foco del negocio o solo de la primera campaña", "usada_en_decision": false},
+    {"texto": "Los audífonos son la categoría que más vende o la más rentable", "estado": "UNKNOWN", "fuente": "Ninguna: no existen cifras", "fuente_tipo": "ninguna", "fecha": "2026-11-03", "confianza": "ninguna", "impacto_si_falla": "alto: la estrategia se construiría sobre una campaña, no sobre ventas", "metodo_validacion": "Ventas y margen por categoría del último mes", "usada_en_decision": false},
+    {"texto": "El primer lote de anuncios es de audífonos (GAME1+GAME2)", "estado": "INFERRED", "fuente": "DIRECCION_DEL_PROYECTO.md, DEC-01: se eligió por aprovechar un solo rodaje, no por ventas", "fuente_tipo": "documento", "fecha": "2026-10-29", "confianza": "media", "impacto_si_falla": "medio: se trata como experimento, no como prioridad", "metodo_validacion": "Comparar con ventas por categoría", "usada_en_decision": false},
+    {"texto": "Bebés y anime tienen ventas reales", "estado": "UNKNOWN", "fuente": "Solo existen variantes conceptuales", "fuente_tipo": "ninguna", "fecha": "2026-11-03", "confianza": "ninguna", "impacto_si_falla": "alto", "metodo_validacion": "Preguntar al dueño por unidades y margen", "usada_en_decision": false},
+    {"texto": "Los productos nombrados AirPods son originales", "estado": "UNKNOWN", "fuente": "Ningún documento recibido", "fuente_tipo": "ninguna", "fecha": "2026-11-03", "confianza": "ninguna", "impacto_si_falla": "crítico: riesgo legal y reputacional", "metodo_validacion": "PROTOCOLO-AUTENTICIDAD-AIRPODS.md", "usada_en_decision": false},
+    {"texto": "Tienda online con cierre por WhatsApp Business y redes en Facebook, Instagram y TikTok", "estado": "REPORTED", "fuente": "AUDITORIA_VISUAL_2026-10-29.md", "fuente_tipo": "declaracion", "fecha": "2026-10-29", "confianza": "media", "impacto_si_falla": "medio", "metodo_validacion": "Revisar los canales con el dueño", "usada_en_decision": false},
+    {"texto": "Tecnogau es proveedor y espacio de exhibición, no anunciante", "estado": "REPORTED", "fuente": "DIRECCION_DEL_PROYECTO.md", "fuente_tipo": "declaracion", "fecha": "2026-10-29", "confianza": "media", "impacto_si_falla": "medio", "metodo_validacion": "Confirmar la relación con el dueño", "usada_en_decision": false},
+    {"texto": "Presupuesto de anuncios sin aprobar", "estado": "OUTDATED", "fuente": "AUDITORIA_VISUAL_2026-10-29.md", "fuente_tipo": "declaracion", "fecha": "2026-10-29", "confianza": "baja", "impacto_si_falla": "alto", "metodo_validacion": "Preguntar capacidad de inversión al dueño", "usada_en_decision": false},
+    {"texto": "Hay otras categorías exhibidas además de las cuatro nombradas", "estado": "INFERRED", "fuente": "Las fotos de vitrina muestran «otros dispositivos de distintas categorías»", "fuente_tipo": "documento", "fecha": "2026-10-29", "confianza": "baja", "impacto_si_falla": "medio", "metodo_validacion": "Pedir la lista completa de categorías", "usada_en_decision": false},
+    {"texto": "Márgenes, inventario y caja del negocio", "estado": "UNKNOWN", "fuente": "Ninguna", "fuente_tipo": "ninguna", "fecha": "2026-11-03", "confianza": "ninguna", "impacto_si_falla": "alto", "metodo_validacion": "Hoja de captura de la entrevista maestra", "usada_en_decision": false}
+  ],
+  "preguntas_extra": [
+    "Factura del proveedor y fotos de caja, estuche y auriculares de los audífonos (protocolo de autenticidad)",
+    "Qué otras categorías vende además de las cuatro nombradas por el fundador"
+  ]
+}

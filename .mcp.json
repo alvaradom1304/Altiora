@@ -13,66 +13,6 @@
         "C:/Users/Usuario/.altiora-tools/mcp-browser/node_modules/chrome-devtools-mcp/build/src/bin/chrome-devtools-mcp.js"
       ]
     },
-    "playwright": {
-      "command": "node",
-      "args": [
-        "C:/Users/Usuario/.altiora-tools/mcp-browser/node_modules/@playwright/mcp/cli.js"
-      ]
-    },
-    "dak-notebook": {
-      "command": "node",
-      "args": [
-        "C:/Users/Usuario/.gemini/config/plugins/dak/mcp/dist/index.js",
-        "--mode=notebook"
-      ]
-    },
-    "dak-data-agent-kit": {
-      "command": "node",
-      "args": [
-        "C:/Users/Usuario/.gemini/config/plugins/dak/mcp/dist/index.js",
-        "--mode=data-agent-kit"
-      ]
-    },
-    "dak-gcs": {
-      "command": "node",
-      "args": [
-        "C:/Users/Usuario/.gemini/config/plugins/dak/mcp/bin/mcp_proxy_bundle.cjs",
-        "https://storage.googleapis.com/storage/mcp"
-      ],
-      "env": {
-        "X_GOOG_PROXY_HEADERS": "{\"User-Agent\":\"datacloud.altiora\"}"
-      }
-    },
-    "dak-bigquery": {
-      "command": "node",
-      "args": [
-        "C:/Users/Usuario/.gemini/config/plugins/dak/mcp/bin/mcp_proxy_bundle.cjs",
-        "https://bigquery.googleapis.com/mcp"
-      ],
-      "env": {
-        "X_GOOG_PROXY_HEADERS": "{\"User-Agent\":\"datacloud.altiora\"}"
-      }
-    },
-    "dak-cloudsql": {
-      "command": "node",
-      "args": [
-        "C:/Users/Usuario/.gemini/config/plugins/dak/mcp/bin/mcp_proxy_bundle.cjs",
-        "https://sqladmin.googleapis.com/mcp"
-      ],
-      "env": {
-        "X_GOOG_PROXY_HEADERS": "{\"User-Agent\":\"datacloud.altiora\"}"
-      }
-    },
-    "dak-firestore": {
-      "command": "node",
-      "args": [
-        "C:/Users/Usuario/.gemini/config/plugins/dak/mcp/bin/mcp_proxy_bundle.cjs",
-        "https://firestore.googleapis.com/mcp"
-      ],
-      "env": {
-        "X_GOOG_PROXY_HEADERS": "{\"User-Agent\":\"datacloud.altiora\"}"
-      }
-    },
     "metricool": {
       "type": "http",
       "url": "https://ai.metricool.com/mcp"
