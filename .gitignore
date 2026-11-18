@@ -27,7 +27,7 @@ coverage/
 out/
 *.log
 __pycache__/
-*.pyc
+*.py[cod]
 .venv/
 .pytest_cache/
 .DS_Store
