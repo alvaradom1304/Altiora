@@ -4,6 +4,11 @@
 
 Fuente única de instrucciones para todas las IAs (Claude Code, Codex, Antigravity, Gemini CLI, ChatGPT). `CLAUDE.md` y `GEMINI.md` solo importan este archivo y llevan el bloque obligatorio del Agent System. Cualquier regla nueva se escribe aquí, una sola vez.
 
+## Conciencia universal de IAs, modelos y Orca (PREAMBRA OS)
+**Obligatorio para ChatGPT, Codex, Claude Code, Gemini/Antigravity y cualquier asistente posterior:** antes de delegar tareas sustanciales, conocer las otras IAs disponibles, sus familias de modelos, niveles de esfuerzo, cuotas, permisos y Orca como herramienta de ejecución. Aplicar [política multi-IA](docs/operations/PREAMBRA-MULTI-AI-ORCHESTRATION.md) y consultar [matriz puntuada y fechada](docs/operations/preambra-model-matrix.json), [fuentes oficiales por modelo](docs/operations/MULTI-AI-CAPABILITY-ROUTING.md) y [entrada de ChatGPT](docs/operations/CHATGPT-ENTRY.md) sin asumir que versiones documentadas sigan disponibles. El modelo y esfuerzo se eligen para la tarea y se verifican en el cliente ejecutor; no inventar una selección efectiva ni afirmar que ChatGPT maneja Orca en la PC a partir de este texto. Para validar usar `python scripts/preambra-orca-smoke.py`; solo prueba enrutamiento offline, no ejecuta agentes externos. Actualizar periódicamente **con fuentes oficiales, fecha, evidencia y QA**, no cambiar versiones por rumores; probar nuevas opciones en un piloto aislado antes de adoptarlas. Respetar gates actuales de seguridad, gasto y publicación.
+
+**Router V2 implementado para planes:** consultar [PREAMBRA-V2-ROUTER-RUNBOOK](docs/operations/PREAMBRA-V2-ROUTER-RUNBOOK.md) y el [documento maestro de estrategia y orquestación](docs/operations/PREAMBRA-OS-V2-MASTER-HANDOFF.md). Antes de delegar, elegir modo A (directo), B (constructor+revisor), C (paralelo independiente) o D (proyecto integral); el despachador actual devuelve los contratos como `handoffs[]` con estado `PLANNED`. La selección no inicia Orca ni prueba acceso local. Pruebas: `npm run routing:v2:test`. La integración de trabajadores reales y QA de extremo a extremo sigue siendo un hito posterior.
+
 ## Objetivo
 Crear experiencias originales, fluidas y comerciales. El primer caso es La Central del Queso. Usar referencias para resolver problemas concretos de dirección, cámara, materiales y navegación.
 
