@@ -21,6 +21,7 @@ import sys
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
+from preambra_v2_routing import decide_mode, make_handoffs
 
 ROOT = Path(__file__).resolve().parents[1]
 CATALOG_PATH = ROOT / ".altiora" / "catalog.local.json"
@@ -540,25 +541,30 @@ def choose_effort(message: str, domain: str) -> str:
 # - antigravity: `agy --model <id> --effort <level>` (verificado con `agy --help` y `agy models` el 2026-11-01).
 EFFORT_HINTS = {
     "claude": "Aplícalo con `claude --effort {level}` si lanzas la sesión a mano. {model_hint}",
-    "codex": "Aplícalo con `codex -c model_reasoning_effort={level_codex}`.",
+    "codex": "Aplícalo con `codex -c model_reasoning_effort={level_codex}` si el modelo lo admite. {model_hint}",
     "antigravity": "Aplícalo con `agy --effort {level}`. {model_hint}",
 }
 
-# Modelo sugerido según el esfuerzo. Claude Code: alias haiku, sonnet, opus. Antigravity: ids de
-# `agy models` (2026-11-01); Gemini 4 Argon es el modelo caro, Gemini 3.8 Flash el ligero.
+# Sugerencias orientativas revisadas 2026-11-17 con documentación oficial.
+# Nunca equivalen a acceso real ni comparativas de calidad; confirmar modelos con el CLI.
+# Fuente y matriz: docs/operations/MULTI-AI-CAPABILITY-ROUTING.md.
 MODEL_HINTS = {
+    "codex": {
+        "low": "Candidato: GPT-6 Luna para tareas repetitivas; comprueba /model y acceso real.",
+        "medium": "Candidato: GPT-6.2 Sol para trabajo diario; si no aparece, elige uno disponible y ajusta el esfuerzo.",
+        "default": "Candidato: GPT-6.2 Astra para problemas difíciles, solo si está habilitado. Consulta /model.",
+    },
     "claude": {
-        "low": "Basta `--model haiku`.",
-        "medium": "Basta `--model sonnet`.",
-        "default": "Usa `--model opus` solo en este nivel o superior.",
+        "low": "Candidato: alias haiku, si está disponible; comprueba /model.",
+        "medium": "Candidato: alias sonnet; no asumas qué versión resuelve el alias.",
+        "default": "Considera alias opus para problemas exigentes, pero verifica disponibilidad y el esfuerzo admitido.",
     },
     "antigravity": {
-        "low": "Usa `--model gemini-3.8-flash-low`.",
-        "medium": "Usa `--model gemini-3.8-flash-medium`; Gemini 4 Argon solo en high o más.",
-        "default": "Gemini 4 Argon se justifica en este nivel: `--model gemini-4-argon-high`.",
+        "low": "Candidato: Gemini 3.8 Flash; confirma el identificador con agy models.",
+        "medium": "Candidato: Gemini 4 Hydrogen o Gemini 3.8 Flash; confirma disponibilidad.",
+        "default": "Considera Gemini 4 Argon/Carbon o Orchestrator si está habilitado. Orchestrator tiene esfuerzo fijo. Confirma con agy models.",
     },
 }
-
 
 def model_hint(ai: str, effort: str) -> str:
     hints = MODEL_HINTS.get(ai)
@@ -852,8 +858,12 @@ def main() -> int:
     parser.add_argument(
         "--router",
         choices=["model", "heuristic"],
-        default="model",
-        help="Quién decide el reparto: un modelo de alto rendimiento (por defecto) o la heurística por palabras clave.",
+        default="heuristic",
+        help="Heurística sin costo por defecto; `model` solicita una decisión explícita al LLM.",
+    )
+    parser.add_argument(
+        "--entrypoint", choices=["current", "chatgpt", "codex", "claude", "antigravity"],
+        default="current", help="IA desde la que se originó el encargo (metadata, no sesión autenticada).",
     )
     parser.add_argument(
         "--router-model",
@@ -904,9 +914,23 @@ def main() -> int:
         "router": router_meta,
         "message": full_message,
         "stream_count": len(streams),
-        "parallel_worktrees": len(streams) > 1,
+        "parallel_worktrees": False,
         "streams": streams,
     }
+    decision = decide_mode(full_message, streams, entrypoint=args.entrypoint)
+    result["policy_v2"] = decision
+    result["handoffs"] = make_handoffs(full_message, streams, decision)
+    # V2 only recommends parallelism when independent tasks and paths are safe.
+    result["parallel_worktrees"] = decision["mode"] == "C"
+
+    # Orca cannot infer real worktree isolation from a planning flag.
+    # Fail closed instead of launching multiple workers onto the same checkout.
+    if args.launch_workers and (
+        decision["mode"] in ("A", "D")
+        or any(st.get("worktree_strategy") == "new-child" for st in streams)
+    ):
+        print("V2: lanzamiento bloqueado. Esta modalidad requiere fases o worktrees reales y verificados; solo planificar.", file=sys.stderr)
+        return 2
 
     if args.execute or args.launch_workers:
         dispatch_info = dispatch_to_orca(
@@ -921,7 +945,10 @@ def main() -> int:
         print(json.dumps(result, indent=2, ensure_ascii=False))
         return 0
 
-    print("=== ALTIORA ORCA MULTI-AI ROUTER ===")
+    print("=== PREAMBRA OS V2 | ALTIORA ORCA ROUTER ===")
+    print(f"Modalidad propuesta: {decision['mode']} | Riesgo: {decision['risk']} | Orca: {decision['orca_policy']}")
+    for warning in decision["warnings"]:
+        print(f"  AVISO: {warning}")
     print(f"Mensaje: {full_message}")
     if router_meta.get("router") == "model" and not router_meta.get("fallback"):
         print(f"Enrutador: {router_meta.get('model_used') or router_meta.get('model')} "
