@@ -1,3 +1,5 @@
+> **DOCUMENTO HISTÓRICO.** Desde el 2026-11-17, la identidad creativa aprobada para la firma es **PREAMBRA**. Fuente vigente: [Plataforma](../../brand/preambra/BRAND-PLATFORM.md) · [Identidad visual](../../brand/preambra/VISUAL-IDENTITY.md). Se preserva este borrador Altiora para trazabilidad; sus afirmaciones fechadas describen el estado de octubre de 2026, no el actual.
+
 # Plataforma de marca de Altiora — borrador
 
 Fecha: 2026-10-31. Estado: **borrador para revisión del dueño y Dirección creativa (M1)**. Método: skill [premium-branding](../../skills/premium-branding/SKILL.md). Fuentes: [Diferenciación](DIFERENCIACION.md), [Paquetes](PAQUETES-BORRADOR.md), [README](../../README.md) y [caso La Central del Queso](../../projects/la-central-del-queso/BRIEF.md).

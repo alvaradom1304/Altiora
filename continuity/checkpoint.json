@@ -2,63 +2,105 @@
   "schema_version": 1,
   "project": "Altiora Visual Studio",
   "repository": "alvaradom1304/Altiora",
-  "snapshot_date": "2026-11-03",
+  "snapshot_date": "2026-11-17",
   "snapshot_kind": "repo_checkpoint_not_live_github_api",
   "description": "Estado reproducible para reanudar entre sesiones e IAs. No significa ejecución persistente ni conexión automática con software.",
   "completed_milestones": [
     {
+      "id": "PRE-ORCH-002",
+      "name": "PREAMBRA OS V2: router adaptativo A/B/C/D y contratos plan-only",
+      "result": "MERGED",
+      "evidence": [
+        {
+          "url": "https://github.com/alvaradom1304/Altiora/pull/94",
+          "claim": "Integración en main de política A/B/C/D, contratos handoff, default heurístico sin invocación LLM y bloqueo para launch-workers sin worktrees reales."
+        },
+        {
+          "url": "https://github.com/alvaradom1304/Altiora/actions/runs/44194731999",
+          "claim": "GitHub Actions Check Windows y Ubuntu completado exitosamente, incluidas 11 pruebas nuevas de router V2. No prueba ejecución Orca en la PC."
+        }
+      ]
+    },
+    {
+      "id": "PMO-ORCA-001",
+      "name": "PREAMBRA: primer despacho heurístico y conocimiento multi-IA",
+      "result": "MERGED",
+      "evidence": [
+        {
+          "url": "https://github.com/alvaradom1304/Altiora/pull/90",
+          "claim": "Política multi-IA y pruebas offline del dispatcher; no se lanzaron agentes."
+        },
+        {
+          "url": "https://github.com/alvaradom1304/Altiora/pull/91",
+          "claim": "Registro de resultados y matriz de preparación operativa; no mide calidad intrínseca de modelos."
+        }
+      ]
+    },
+    {
       "id": "VIS-AUDIO-02",
       "name": "Identidad del WAV medido y coherencia del sidecar",
       "result": "DONE",
-      "evidence": [{
-        "url": "https://github.com/alvaradom1304/Altiora/blob/fix/altiora-audio-source-identity-2026-10-31/docs/operations/production-qa.md",
-        "claim": "Medidor PCM incluye hash/tamaño del WAV completo y rechaza ediciones comunes durante lectura; agregado bloquea identidades declaradas contradictorias. Control local aprobado; legacy conserva vínculo manual. No certifica extracción, escucha, derechos ni snapshot atómico."
-      }]
+      "evidence": [
+        {
+          "url": "https://github.com/alvaradom1304/Altiora/blob/fix/altiora-audio-source-identity-2026-10-31/docs/operations/production-qa.md",
+          "claim": "Medidor PCM incluye hash/tamaño del WAV completo y rechaza ediciones comunes durante lectura; agregado bloquea identidades declaradas contradictorias. Control local aprobado; legacy conserva vínculo manual. No certifica extracción, escucha, derechos ni snapshot atómico."
+        }
+      ]
     },
     {
       "id": "VIS-OPS-08",
       "name": "Vigencia de catálogos por metadatos y raíces explícitas",
       "result": "DONE",
-      "evidence": [{
-        "url": "https://github.com/alvaradom1304/Altiora/blob/fix/altiora-catalog-freshness-2026-10-31/skills/altiora-bibliotecario/references/portability.md",
-        "claim": "check detecta altas, bajas y cambios de metadatos; catálogos antiguos piden reconstrucción y fuentes inaccesibles no producen vigencia falsa. Control completo local aprobado y raíces enlazadas probadas. No certifica runtime nativo ni refresca por mensaje."
-      }]
+      "evidence": [
+        {
+          "url": "https://github.com/alvaradom1304/Altiora/blob/fix/altiora-catalog-freshness-2026-10-31/skills/altiora-bibliotecario/references/portability.md",
+          "claim": "check detecta altas, bajas y cambios de metadatos; catálogos antiguos piden reconstrucción y fuentes inaccesibles no producen vigencia falsa. Control completo local aprobado y raíces enlazadas probadas. No certifica runtime nativo ni refresca por mensaje."
+        }
+      ]
     },
     {
       "id": "VIS-OPS-07",
       "name": "Control completo idéntico en local y CI para todas las IAs",
       "result": "DONE",
-      "evidence": [{
-        "url": "https://github.com/alvaradom1304/Altiora/blob/fix/altiora-unified-quality-check-2026-10-31/docs/operations/SHARED-OPERATIONS.md",
-        "claim": "npm run check reúne las suites existentes de catálogo, puentes, operaciones, toolkit, handler, recuperación y audio; CI llama una sola vez al mismo comando. Check completo local aprobado; fixtures no certifican conexiones nativas."
-      }]
+      "evidence": [
+        {
+          "url": "https://github.com/alvaradom1304/Altiora/blob/fix/altiora-unified-quality-check-2026-10-31/docs/operations/SHARED-OPERATIONS.md",
+          "claim": "npm run check reúne las suites existentes de catálogo, puentes, operaciones, toolkit, handler, recuperación y audio; CI llama una sola vez al mismo comando. Check completo local aprobado; fixtures no certifican conexiones nativas."
+        }
+      ]
     },
     {
       "id": "VIS-OPS-06",
       "name": "Bibliotecario sin coincidencias falsas dentro de otras palabras",
       "result": "DONE",
-      "evidence": [{
-        "url": "https://github.com/alvaradom1304/Altiora/blob/fix/altiora-librarian-token-boundaries-2026-10-31/skills/altiora-bibliotecario/references/word-boundaries.md",
-        "claim": "Reproducidos SEO/deseo, CRO/microempresa y API/capital; corregida recuperación por términos completos conservando nombres, componentes y acentos. Pruebas y ejemplos antes/después; no demuestra selección nativa o comprensión semántica."
-      }]
+      "evidence": [
+        {
+          "url": "https://github.com/alvaradom1304/Altiora/blob/fix/altiora-librarian-token-boundaries-2026-10-31/skills/altiora-bibliotecario/references/word-boundaries.md",
+          "claim": "Reproducidos SEO/deseo, CRO/microempresa y API/capital; corregida recuperación por términos completos conservando nombres, componentes y acentos. Pruebas y ejemplos antes/después; no demuestra selección nativa o comprensión semántica."
+        }
+      ]
     },
     {
       "id": "VIS-OPS-05",
       "name": "Verificación funcional aislada de handlers y consulta de ejecutor nativo",
       "result": "DONE",
-      "evidence": [{
-        "url": "https://github.com/alvaradom1304/Altiora/blob/feature/altiora-runtime-functional-verification-2026-10-31/docs/operations/NATIVE-RUNTIME-VALIDATION.md",
-        "claim": "Codex CLI respondió consultas en perfil aislado; kit propio pasó 18 casos de handler en fixtures temporales. No demuestra confianza, descubrimiento o sesión nativa de otros clientes ni conexión MCP."
-      }]
+      "evidence": [
+        {
+          "url": "https://github.com/alvaradom1304/Altiora/blob/feature/altiora-runtime-functional-verification-2026-10-31/docs/operations/NATIVE-RUNTIME-VALIDATION.md",
+          "claim": "Codex CLI respondió consultas en perfil aislado; kit propio pasó 18 casos de handler en fixtures temporales. No demuestra confianza, descubrimiento o sesión nativa de otros clientes ni conexión MCP."
+        }
+      ]
     },
     {
       "id": "VIS-OPS-04",
       "name": "Afilado de copias instaladas, rutas de capacidades e identidad de publicación",
       "result": "DONE",
-      "evidence": [{
-        "url": "https://github.com/alvaradom1304/Altiora/blob/feature/altiora-toolkit-sharpening-2026-10-31/docs/operations/TOOLKIT-VALIDATION.md",
-        "claim": "390 archivos instalados compactados con respaldos/hashes, cinco capacidades pertinentes incorporadas al proyecto, doctor/traspaso validados y lectura/escritura del MCP de coordinación verificada solo en esta sesión. Sesiones de otros clientes y ahorro de tokens sin certificar."
-      }]
+      "evidence": [
+        {
+          "url": "https://github.com/alvaradom1304/Altiora/blob/feature/altiora-toolkit-sharpening-2026-10-31/docs/operations/TOOLKIT-VALIDATION.md",
+          "claim": "390 archivos instalados compactados con respaldos/hashes, cinco capacidades pertinentes incorporadas al proyecto, doctor/traspaso validados y lectura/escritura del MCP de coordinación verificada solo en esta sesión. Sesiones de otros clientes y ahorro de tokens sin certificar."
+        }
+      ]
     },
     {
       "id": "VIS-OPS-03",
@@ -228,7 +270,9 @@
     {
       "name": "Blender local: versión, arranque, render conceptual 1080x1080 y reapertura de fuente comprobados; MCP pendiente",
       "status": "DOCUMENTED",
-      "evidence": ["https://github.com/alvaradom1304/Altiora/blob/fix/altiora-blender-windows-discovery-2026-10-31/docs/operations/BLENDER-LOCAL.md"]
+      "evidence": [
+        "https://github.com/alvaradom1304/Altiora/blob/fix/altiora-blender-windows-discovery-2026-10-31/docs/operations/BLENDER-LOCAL.md"
+      ]
     },
     {
       "name": "Adobe local y APIs UXP",
@@ -291,9 +335,18 @@
       "evidence": [
         "https://github.com/alvaradom1304/Altiora/pull/34"
       ]
+    },
+    {
+      "name": "PREAMBRA OS V2: selector A/B/C/D, contratos y protección de ejecución en el router Altiora",
+      "status": "TESTED_IN_CI",
+      "evidence": [
+        "https://github.com/alvaradom1304/Altiora/pull/94",
+        "https://github.com/alvaradom1304/Altiora/actions/runs/44194731999"
+      ]
     }
   ],
   "context_files": [
+    "docs/operations/PREAMBRA-V2-ROUTER-RUNBOOK.md",
     "docs/operations/LIBRARIAN-BOUNDARIES.md",
     "docs/operations/NATIVE-RUNTIME-VALIDATION.md",
     "docs/operations/RUNTIME-SMOKE.md",
@@ -331,7 +384,8 @@
     "El puente aerender requiere After Effects instalado y autorizado en la laptop: el CI Linux no demuestra conexión ni acceso de un agente a la app del usuario.",
     "El bibliotecario enruta según capacidades disponibles y metadatos; no garantiza ahorro medido ni descubrimiento automático idéntico en todos los clientes. El puente AE tiene pruebas Windows y validación de configuración Codex aislada; las sesiones Adobe/Claude/Gemini/Antigravity siguen sin certificarse.",
     "Certificación 2026-11-03 (PR #71 fusionado): CONDITIONAL GO. ALT-TRIAD-001 en CONDITIONAL, no PASS: ui.md rev.2 fue ratificada por el fundador el 2026-11-03 (matriz §13.5; aprobación humana, no de la IA Antigravity); falta una revisión ejecutada por un modelo distinto de Claude (Codex vuelve el 05/11). G1 de El Tilichero en HOLD. PR #71 fusionado (17b9fb4) y altiora-unificado actualizado; la tarea Altiora-OmniRoute-SafeStart ya apunta a altiora-unificado; el reinicio de Windows ocurrió a las 12:52 y OmniRoute NO quedó sirviendo: fallo de inicio por falta de STORAGE_ENCRYPTION_KEY persistente (matriz §15.6); opcional, no bloquea el inicio comercial. Firewall Public de Node.js sin modificar (requiere administrador). Detalle y requisitos de fusión en docs/operations/ALTIORA-REAL-INTEGRATION-STATUS.md secciones 12 a 15.6.",
-    "Context First + BSCG (PR #75, fusionado 8d0601a, 2026-11-03): control de cobertura del negocio, verificador docs/altiora-business/entrega/scripts/bscg.py con 17 pruebas en npm run check. El Tilichero: BSCG HOLD para decidir qué categoría impulsar (categorías declaradas por el fundador: gaming, tecnología, bebés, anime; ninguna con datos comerciales). G1 sigue en HOLD hasta entrevistar al responsable. Registro: docs/operations/REGISTRO-GRIETAS.md (G-13 cerrada, G-10 parcial)."
+    "Context First + BSCG (PR #75, fusionado 8d0601a, 2026-11-03): control de cobertura del negocio, verificador docs/altiora-business/entrega/scripts/bscg.py con 17 pruebas en npm run check. El Tilichero: BSCG HOLD para decidir qué categoría impulsar (categorías declaradas por el fundador: gaming, tecnología, bebés, anime; ninguna con datos comerciales). G1 sigue en HOLD hasta entrevistar al responsable. Registro: docs/operations/REGISTRO-GRIETAS.md (G-13 cerrada, G-10 parcial).",
+    "PRE-ORCH-002 (PR #94, 2026-11-17): PASS en CI Windows/Ubuntu solo del enrutador V2 plan-only. Orca de escritorio y handoffs vivos entre Claude/Codex/Antigravity siguen NO_VERIFIED. PRE-ORCH-003 requiere prueba autorizada en PC con worker de solo lectura."
   ],
   "recovery_instruction": "Leer checkpoint, consultar el commit/PR más reciente y los checks, reclamar tarea, ejecutar y escribir evidencia antes de terminar. No pedir al usuario que repita el briefing salvo necesidad material."
 }
