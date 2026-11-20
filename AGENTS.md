@@ -103,6 +103,11 @@ Seguir docs/workflows/immersive-project.md. Antes de ampliar una experiencia, co
 - **Antigravity / Gemini:** subagentes en `.agents/agents/`, skills en `.agents/skills/`, reglas en `.agents/rules/`; firmar como `gemini/<rol>`. Cargar una skill solo al usarla y sus `references/` solo si el paso lo exige; no recorrer el catálogo completo. MCP: Gemini CLI usa `.gemini/settings.json`, Antigravity `.agents/mcp_config.json`. Toda herramienta externa (Blender, Adobe, MCP) queda UNKNOWN hasta comprobar conexión, versión y permisos desde el cliente.
 - **Codex:** agentes en `.codex/agents/`; lee este archivo y `.agents/skills`.
 
+## Conservación Zero-Loss V4 (bajo demanda)
+- El `AGENTS.md` previo a la compactación se conserva íntegro en [AGENTS-FULL-ARCHIVE-2026-11-02.md](AGENTS-FULL-ARCHIVE-2026-11-02.md) (blob Git `6a9be69879b2b87a25ca154aff80d72a012859b6`). Es la fuente de recuperación si una migración omite instrucciones: no eliminarlo y consultarlo solo cuando una sección sea pertinente.
+- Antes de migraciones, optimizaciones de tokens, integraciones o cambios de arquitectura, aplicar la [política Zero-Loss V4](docs/operations/ALTIORA-SCALE-ZERO-LOSS-V4.md). Para captación comercial, el [Revenue Sprint 30/60/90](docs/altiora-business/REVENUE-SPRINT-30-60-90.md) si corresponde.
+- Cambios que toquen reglas o skills: `npm run capabilities:protect` y `npm run check`, y revisar el diff antes de fusionar. Auditoría independiente: [INDEPENDENT-READINESS-AUDIT-V4.md](docs/operations/INDEPENDENT-READINESS-AUDIT-V4.md); la calidad estructural de skills no certifica preparación comercial.
+
 <!-- ALTIORA_AGENT_SYSTEM_START -->
 ## Altiora Agent System 1.3.0
 Leer `.altiora/system/core/constitution.md` al empezar trabajo en este proyecto. Usar `.altiora/project.json` como contexto y `.altiora/handoff.json` si existe, contrastando siempre con el encargo vigente. Seleccionar skills por descripcion. Las instrucciones propias del proyecto y las del usuario siguen aplicando.

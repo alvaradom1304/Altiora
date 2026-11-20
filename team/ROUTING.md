@@ -7,6 +7,7 @@ Lo que lo garantiza no es la IA, sino que todas compartan:
 - el mismo contrato de encargo y de entrega: [protocolo](../altiora-os/docs/protocol.md);
 - la misma verificación: `npm run check`, [Definition of Done](../quality/definition-of-done.md) y revisión independiente.
 
+**Política transversal de escala y conservación:** antes de migraciones, optimizaciones de tokens, integraciones o cambios de arquitectura, consultar [Altiora Scale & Zero-Loss V4](../docs/operations/ALTIORA-SCALE-ZERO-LOSS-V4.md). Para proyectos de captación comercial, aplicar el [Revenue Sprint 30/60/90](../docs/altiora-business/REVENUE-SPRINT-30-60-90.md) si corresponde. No ampliar permisos ni declarar activas las conexiones basándose solo en archivos.
 
 ## 0. Gobierno operativo de Altiora OS (2026-11-03)
 
