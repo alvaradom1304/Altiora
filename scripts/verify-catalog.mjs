@@ -96,11 +96,14 @@ for (const source of skillSources.sources) {
     externalSkills++;
   }
 }
+const LOCAL_BACKUP_DIRS = new Set(['.altiora/backups']);
 let documentCount = 0;
 async function walk(dir) {
   for (const entry of await readdir(dir, { withFileTypes: true })) {
     if (['.git', '.references', 'node_modules', '.altiora-private', 'out'].includes(entry.name)) continue;
     const path = resolve(dir, entry.name);
+    // Copias de respaldo locales (sin seguimiento): sus enlaces relativos apuntan a su ubicación original.
+    if (LOCAL_BACKUP_DIRS.has(relative(root, path).replaceAll('\\', '/'))) continue;
     if (entry.isDirectory()) await walk(path);
     else if (entry.name.endsWith('.md')) {
       documentCount++;
