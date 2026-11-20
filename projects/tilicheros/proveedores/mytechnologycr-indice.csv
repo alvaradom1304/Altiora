@@ -1,0 +1,154 @@
+pagina,producto,fuente_del_nombre,categoria,riesgo_marca,imagen_local
+1,Portada del catálogo,revisión visual,Portada,,master-v3/imagenes/mytechnologycr/paginas/pagina_001.jpg
+2,Presentación del proveedor,revisión visual,Portada,,master-v3/imagenes/mytechnologycr/paginas/pagina_002.jpg
+3,Fundas silicón (referencias iPhone/Samsung/Honor/Redmi/Huawei),revisión visual,Fundas y protección,MEDIO: usa nombre de marca de terceros; verificar si es original con factura,master-v3/imagenes/mytechnologycr/paginas/pagina_003.jpg
+4,Silicon,texto del PDF,Fundas y protección,,master-v3/imagenes/mytechnologycr/paginas/pagina_004.jpg
+5,Lujo #1,texto del PDF,Fundas y protección,,master-v3/imagenes/mytechnologycr/paginas/pagina_005.jpg
+6,Lujo #2,texto del PDF,Fundas y protección,,master-v3/imagenes/mytechnologycr/paginas/pagina_006.jpg
+7,Lujo #3,texto del PDF,Fundas y protección,,master-v3/imagenes/mytechnologycr/paginas/pagina_007.jpg
+8,Lujo #4,texto del PDF,Fundas y protección,,master-v3/imagenes/mytechnologycr/paginas/pagina_008.jpg
+9,Lujo #5,texto del PDF,Fundas y protección,,master-v3/imagenes/mytechnologycr/paginas/pagina_009.jpg
+10,Lujo #6,texto del PDF,Fundas y protección,,master-v3/imagenes/mytechnologycr/paginas/pagina_010.jpg
+11,Lujo #7,texto del PDF,Fundas y protección,,master-v3/imagenes/mytechnologycr/paginas/pagina_011.jpg
+12,Space Magsafe,texto del PDF,Fundas y protección,,master-v3/imagenes/mytechnologycr/paginas/pagina_012.jpg
+13,"Estuche tablet A16 iPad 10.9""",revisión visual,Fundas y protección,,master-v3/imagenes/mytechnologycr/paginas/pagina_013.jpg
+14,Estuche Agenda,texto del PDF,Fundas y protección,,master-v3/imagenes/mytechnologycr/paginas/pagina_014.jpg
+15,Estuche Agenda,texto del PDF,Fundas y protección,,master-v3/imagenes/mytechnologycr/paginas/pagina_015.jpg
+16,V-Blindado,texto del PDF,Protectores de pantalla,,master-v3/imagenes/mytechnologycr/paginas/pagina_016.jpg
+17,V-Antiespia,texto del PDF,Protectores de pantalla,,master-v3/imagenes/mytechnologycr/paginas/pagina_017.jpg
+18,Hidrogel,texto del PDF,Protectores de pantalla,,master-v3/imagenes/mytechnologycr/paginas/pagina_018.jpg
+19,Máquina de láminas de hidrogel,revisión visual,Protectores de pantalla,,master-v3/imagenes/mytechnologycr/paginas/pagina_019.jpg
+20,Cargador Adt Carro,texto del PDF,Cargadores,,master-v3/imagenes/mytechnologycr/paginas/pagina_020.jpg
+21,Cargador Adt Tc,texto del PDF,Cargadores,,master-v3/imagenes/mytechnologycr/paginas/pagina_021.jpg
+22,Cargador Adt V8,texto del PDF,Cargadores,,master-v3/imagenes/mytechnologycr/paginas/pagina_022.jpg
+23,Cargador 25W Sam,texto del PDF,Cargadores,MEDIO: usa nombre de marca de terceros; verificar si es original con factura,master-v3/imagenes/mytechnologycr/paginas/pagina_023.jpg
+24,Cargador 45W Sam,texto del PDF,Cargadores,MEDIO: usa nombre de marca de terceros; verificar si es original con factura,master-v3/imagenes/mytechnologycr/paginas/pagina_024.jpg
+25,Cargador Iph 35W Tc,texto del PDF,Cargadores,MEDIO: usa nombre de marca de terceros; verificar si es original con factura,master-v3/imagenes/mytechnologycr/paginas/pagina_025.jpg
+26,Cargador Sp-57,texto del PDF,Cargadores,,master-v3/imagenes/mytechnologycr/paginas/pagina_026.jpg
+27,Cargador F-117,texto del PDF,Cargadores,,master-v3/imagenes/mytechnologycr/paginas/pagina_027.jpg
+28,Cargador Sp-M1,texto del PDF,Cargadores,,master-v3/imagenes/mytechnologycr/paginas/pagina_028.jpg
+29,Cargador Sp-003,texto del PDF,Cargadores,,master-v3/imagenes/mytechnologycr/paginas/pagina_029.jpg
+30,Cargador Sp-3.0,texto del PDF,Cargadores,,master-v3/imagenes/mytechnologycr/paginas/pagina_030.jpg
+31,Cargador Sp-20-60,texto del PDF,Cargadores,,master-v3/imagenes/mytechnologycr/paginas/pagina_031.jpg
+32,Cubo Sam 25W,texto del PDF,Cargadores,MEDIO: usa nombre de marca de terceros; verificar si es original con factura,master-v3/imagenes/mytechnologycr/paginas/pagina_032.jpg
+33,Cubo Sam 45W,texto del PDF,Cargadores,MEDIO: usa nombre de marca de terceros; verificar si es original con factura,master-v3/imagenes/mytechnologycr/paginas/pagina_033.jpg
+34,Cubo Iph 20W,texto del PDF,Cargadores,MEDIO: usa nombre de marca de terceros; verificar si es original con factura,master-v3/imagenes/mytechnologycr/paginas/pagina_034.jpg
+35,Cubo Iph 25W,texto del PDF,Cargadores,MEDIO: usa nombre de marca de terceros; verificar si es original con factura,master-v3/imagenes/mytechnologycr/paginas/pagina_035.jpg
+36,Cubo Iph 35W,texto del PDF,Cargadores,MEDIO: usa nombre de marca de terceros; verificar si es original con factura,master-v3/imagenes/mytechnologycr/paginas/pagina_036.jpg
+37,Cable Usb- Lightning,texto del PDF,Cables,MEDIO: usa nombre de marca de terceros; verificar si es original con factura,master-v3/imagenes/mytechnologycr/paginas/pagina_037.jpg
+38,Cable Iph Tc-Iph,texto del PDF,Cables,MEDIO: usa nombre de marca de terceros; verificar si es original con factura,master-v3/imagenes/mytechnologycr/paginas/pagina_038.jpg
+39,Cable Tc-Tc,texto del PDF,Cables,,master-v3/imagenes/mytechnologycr/paginas/pagina_039.jpg
+40,Cable Sam Usb-Tc,texto del PDF,Cables,MEDIO: usa nombre de marca de terceros; verificar si es original con factura,master-v3/imagenes/mytechnologycr/paginas/pagina_040.jpg
+41,Cable Sam Tc-Tc,texto del PDF,Cables,MEDIO: usa nombre de marca de terceros; verificar si es original con factura,master-v3/imagenes/mytechnologycr/paginas/pagina_041.jpg
+42,Cable Eco,texto del PDF,Cables,,master-v3/imagenes/mytechnologycr/paginas/pagina_042.jpg
+43,Cable Iph Thor,texto del PDF,Cables,MEDIO: usa nombre de marca de terceros; verificar si es original con factura,master-v3/imagenes/mytechnologycr/paginas/pagina_043.jpg
+44,Cable Adt Tc,texto del PDF,Cables,,master-v3/imagenes/mytechnologycr/paginas/pagina_044.jpg
+45,Cable Adt Tc-Tc,texto del PDF,Cables,,master-v3/imagenes/mytechnologycr/paginas/pagina_045.jpg
+46,Cable Thor,texto del PDF,Cables,,master-v3/imagenes/mytechnologycr/paginas/pagina_046.jpg
+47,Cargador Carro Spy,texto del PDF,Cargadores,,master-v3/imagenes/mytechnologycr/paginas/pagina_047.jpg
+48,Adaptador Tc,texto del PDF,Cables,,master-v3/imagenes/mytechnologycr/paginas/pagina_048.jpg
+49,Adaptador Lightning,texto del PDF,Cables,MEDIO: usa nombre de marca de terceros; verificar si es original con factura,master-v3/imagenes/mytechnologycr/paginas/pagina_049.jpg
+50,Ml-Piloto,texto del PDF,Otros,,master-v3/imagenes/mytechnologycr/paginas/pagina_050.jpg
+51,Audífonos estilo AirPods 3.ª generación,revisión visual,Audio,ALTO: diseño o nombre de marca registrada; no anunciar como original,master-v3/imagenes/mytechnologycr/paginas/pagina_051.jpg
+52,Audífonos estilo AirPods 4,texto + revisión visual,Audio,ALTO: diseño o nombre de marca registrada; no anunciar como original,master-v3/imagenes/mytechnologycr/paginas/pagina_052.jpg
+53,Audífonos «AirPods Pro 3 Calidad Premium 1:1»,texto + revisión visual,Audio,ALTO: diseño o nombre de marca registrada; no anunciar como original,master-v3/imagenes/mytechnologycr/paginas/pagina_053.jpg
+54,Case Airpods,texto del PDF,Audio,ALTO: diseño o nombre de marca registrada; no anunciar como original,master-v3/imagenes/mytechnologycr/paginas/pagina_054.jpg
+55,Earpods Tc,texto del PDF,Audio,ALTO: diseño o nombre de marca registrada; no anunciar como original,master-v3/imagenes/mytechnologycr/paginas/pagina_055.jpg
+56,EarPods Lightning (logo Apple),revisión visual,Audio,ALTO: diseño o nombre de marca registrada; no anunciar como original,master-v3/imagenes/mytechnologycr/paginas/pagina_056.jpg
+57,Audífonos estilo Galaxy Buds3 Pro (logo Samsung),texto + revisión visual,Audio,ALTO: diseño o nombre de marca registrada; no anunciar como original,master-v3/imagenes/mytechnologycr/paginas/pagina_057.jpg
+58,Diadema estilo AirPods Max 1:1,texto + revisión visual,Audio,ALTO: diseño o nombre de marca registrada; no anunciar como original,master-v3/imagenes/mytechnologycr/paginas/pagina_058.jpg
+59,Audífonos i12 TWS,revisión visual,Audio,,master-v3/imagenes/mytechnologycr/paginas/pagina_059.jpg
+60,Diadema Osea U9,texto del PDF,Audio,,master-v3/imagenes/mytechnologycr/paginas/pagina_060.jpg
+61,Manos libres Bluetooth SPY M-6,texto + revisión visual,Audio,,master-v3/imagenes/mytechnologycr/paginas/pagina_061.jpg
+62,Cuellera Level MJ-6699,texto + revisión visual,Audio,,master-v3/imagenes/mytechnologycr/paginas/pagina_062.jpg
+63,Cuellera iPods3,texto + revisión visual,Audio,,master-v3/imagenes/mytechnologycr/paginas/pagina_063.jpg
+64,Audifonos Metal,texto del PDF,Audio,,master-v3/imagenes/mytechnologycr/paginas/pagina_064.jpg
+65,Metal Thor,texto del PDF,Otros,,master-v3/imagenes/mytechnologycr/paginas/pagina_065.jpg
+66,Audífonos de diadema P9,revisión visual,Audio,,master-v3/imagenes/mytechnologycr/paginas/pagina_066.jpg
+67,Audifonos Labubu,texto del PDF,Audio,,master-v3/imagenes/mytechnologycr/paginas/pagina_067.jpg
+68,Diadema Unicornio,texto del PDF,Audio,,master-v3/imagenes/mytechnologycr/paginas/pagina_068.jpg
+69,Audifonos Akg-Tc,texto del PDF,Audio,,master-v3/imagenes/mytechnologycr/paginas/pagina_069.jpg
+70,Audifonos Akg-3.5Mm,texto del PDF,Audio,,master-v3/imagenes/mytechnologycr/paginas/pagina_070.jpg
+71,Audifonos Spy,texto del PDF,Audio,,master-v3/imagenes/mytechnologycr/paginas/pagina_071.jpg
+72,Power Bank Iph,texto del PDF,Power banks,MEDIO: usa nombre de marca de terceros; verificar si es original con factura,master-v3/imagenes/mytechnologycr/paginas/pagina_072.jpg
+73,Power Bank Magsafe,texto del PDF,Fundas y protección,,master-v3/imagenes/mytechnologycr/paginas/pagina_073.jpg
+74,Power Bank Adt,texto del PDF,Power banks,,master-v3/imagenes/mytechnologycr/paginas/pagina_074.jpg
+75,Trasmisor Moto-09,texto del PDF,Auto y moto,,master-v3/imagenes/mytechnologycr/paginas/pagina_075.jpg
+76,Trasmisor Moto-10,texto del PDF,Auto y moto,,master-v3/imagenes/mytechnologycr/paginas/pagina_076.jpg
+77,Camara De Carro,texto del PDF,Cámaras y seguridad,,master-v3/imagenes/mytechnologycr/paginas/pagina_077.jpg
+78,Cámara 4K portátil tipo gimbal,revisión visual,Creadores,,master-v3/imagenes/mytechnologycr/paginas/pagina_078.jpg
+79,Memorias SD Kingston 4–512 GB,revisión visual,Almacenamiento,MEDIO: usa nombre de marca de terceros; verificar si es original con factura,master-v3/imagenes/mytechnologycr/paginas/pagina_079.jpg
+80,Memorias USB Kingston 4–512 GB,revisión visual,Almacenamiento,MEDIO: usa nombre de marca de terceros; verificar si es original con factura,master-v3/imagenes/mytechnologycr/paginas/pagina_080.jpg
+81,Pulso Ultra,texto del PDF,Relojes,,master-v3/imagenes/mytechnologycr/paginas/pagina_081.jpg
+82,Pulso Liso,texto del PDF,Relojes,,master-v3/imagenes/mytechnologycr/paginas/pagina_082.jpg
+83,Pulso Liso,texto del PDF,Relojes,,master-v3/imagenes/mytechnologycr/paginas/pagina_083.jpg
+84,Holder Bolsa,texto del PDF,Soportes,,master-v3/imagenes/mytechnologycr/paginas/pagina_084.jpg
+85,Holder Car,texto del PDF,Soportes,,master-v3/imagenes/mytechnologycr/paginas/pagina_085.jpg
+86,Holder Morado,texto del PDF,Soportes,,master-v3/imagenes/mytechnologycr/paginas/pagina_086.jpg
+87,Holder Moto Dakar,texto del PDF,Soportes,,master-v3/imagenes/mytechnologycr/paginas/pagina_087.jpg
+88,Holder Carro S9,texto del PDF,Soportes,,master-v3/imagenes/mytechnologycr/paginas/pagina_088.jpg
+89,Holder Dash,texto del PDF,Soportes,,master-v3/imagenes/mytechnologycr/paginas/pagina_089.jpg
+90,Holder Dash,texto del PDF,Soportes,,master-v3/imagenes/mytechnologycr/paginas/pagina_090.jpg
+91,Tripo C17,texto del PDF,Soportes,,master-v3/imagenes/mytechnologycr/paginas/pagina_091.jpg
+92,Hervidor Agua,texto del PDF,Hogar,,master-v3/imagenes/mytechnologycr/paginas/pagina_092.jpg
+93,Cinta Led,texto del PDF,Hogar,,master-v3/imagenes/mytechnologycr/paginas/pagina_093.jpg
+94,Plancha Vapor,texto del PDF,Hogar,,master-v3/imagenes/mytechnologycr/paginas/pagina_094.jpg
+95,Bombillo LED musical Bluetooth E27,revisión visual,Hogar,,master-v3/imagenes/mytechnologycr/paginas/pagina_095.jpg
+96,Aro de luz LED 16–56 cm (sin trípode),revisión visual,Creadores,,master-v3/imagenes/mytechnologycr/paginas/pagina_096.jpg
+97,Tripode,texto del PDF,Soportes,,master-v3/imagenes/mytechnologycr/paginas/pagina_097.jpg
+98,Panel Luz F01,texto del PDF,Creadores,,master-v3/imagenes/mytechnologycr/paginas/pagina_098.jpg
+99,Panel Luz Dy-01,texto del PDF,Creadores,,master-v3/imagenes/mytechnologycr/paginas/pagina_099.jpg
+100,Panel Luz Dy-02,texto del PDF,Creadores,,master-v3/imagenes/mytechnologycr/paginas/pagina_100.jpg
+101,Teclado Y Mous,texto del PDF,Gaming,,master-v3/imagenes/mytechnologycr/paginas/pagina_101.jpg
+102,Hidrolavadora inalámbrica 48V,revisión visual,Hogar,,master-v3/imagenes/mytechnologycr/paginas/pagina_102.jpg
+103,Soporte,texto del PDF,Soportes,,master-v3/imagenes/mytechnologycr/paginas/pagina_103.jpg
+104,"Estuche infantil iGuy para tablet 7""/10.1""",revisión visual,Fundas y protección,,master-v3/imagenes/mytechnologycr/paginas/pagina_104.jpg
+105,Stylus pencil (iPad/Android/Windows),revisión visual,Accesorios tablet,,master-v3/imagenes/mytechnologycr/paginas/pagina_105.jpg
+106,Pencil Tc,texto del PDF,Accesorios tablet,,master-v3/imagenes/mytechnologycr/paginas/pagina_106.jpg
+107,Pencil segunda generación (estilo Apple Pencil),texto + revisión visual,Accesorios tablet,ALTO: diseño o nombre de marca registrada; no anunciar como original,master-v3/imagenes/mytechnologycr/paginas/pagina_107.jpg
+108,Microfono K9,texto del PDF,Creadores,,master-v3/imagenes/mytechnologycr/paginas/pagina_108.jpg
+109,Microfono Sx-31,texto del PDF,Creadores,,master-v3/imagenes/mytechnologycr/paginas/pagina_109.jpg
+110,Microfono F15,texto del PDF,Creadores,,master-v3/imagenes/mytechnologycr/paginas/pagina_110.jpg
+111,Parlante aibimy MY232BT RGB,revisión visual,Audio,,master-v3/imagenes/mytechnologycr/paginas/pagina_111.jpg
+112,Parlante aibimy MY262BT,revisión visual,Audio,,master-v3/imagenes/mytechnologycr/paginas/pagina_112.jpg
+113,Parlante aibimy MY276BT,revisión visual,Audio,,master-v3/imagenes/mytechnologycr/paginas/pagina_113.jpg
+114,Parlante aibimy MY372BT Pro,revisión visual,Audio,,master-v3/imagenes/mytechnologycr/paginas/pagina_114.jpg
+115,Parlante aibimy MY274BT,revisión visual,Audio,,master-v3/imagenes/mytechnologycr/paginas/pagina_115.jpg
+116,Parlante aibimy MY292BTS,revisión visual,Audio,,master-v3/imagenes/mytechnologycr/paginas/pagina_116.jpg
+117,Parlante estilo JBL Go 4,texto + revisión visual,Audio,ALTO: diseño o nombre de marca registrada; no anunciar como original,master-v3/imagenes/mytechnologycr/paginas/pagina_117.jpg
+118,Parlante estilo JBL Clip 5,texto + revisión visual,Audio,ALTO: diseño o nombre de marca registrada; no anunciar como original,master-v3/imagenes/mytechnologycr/paginas/pagina_118.jpg
+119,Parlante portátil Bluetooth (colores),texto + revisión visual,Audio,,master-v3/imagenes/mytechnologycr/paginas/pagina_119.jpg
+120,Parlante portátil Bluetooth con radio FM,texto + revisión visual,Audio,,master-v3/imagenes/mytechnologycr/paginas/pagina_120.jpg
+121,Control estilo PS5,texto + revisión visual,Gaming,ALTO: diseño o nombre de marca registrada; no anunciar como original,master-v3/imagenes/mytechnologycr/paginas/pagina_121.jpg
+122,"Consola retro X50 5.1""",texto + revisión visual,Gaming,,master-v3/imagenes/mytechnologycr/paginas/pagina_122.jpg
+123,Consola retro Faitder,texto + revisión visual,Gaming,,master-v3/imagenes/mytechnologycr/paginas/pagina_123.jpg
+124,Scooter eléctrica L8 6.6Ah,revisión visual,Juguetes y movilidad,,master-v3/imagenes/mytechnologycr/paginas/pagina_124.jpg
+125,Go kart infantil,texto + revisión visual,Juguetes y movilidad,,master-v3/imagenes/mytechnologycr/paginas/pagina_125.jpg
+126,Scooter plegable (no eléctrica),revisión visual,Juguetes y movilidad,,master-v3/imagenes/mytechnologycr/paginas/pagina_126.jpg
+127,Celular infantil con cámara,texto + revisión visual,Juguetes y movilidad,,master-v3/imagenes/mytechnologycr/paginas/pagina_127.jpg
+128,Celular infantil,texto + revisión visual,Juguetes y movilidad,,master-v3/imagenes/mytechnologycr/paginas/pagina_128.jpg
+129,Dron K-11,texto del PDF,Juguetes y movilidad,,master-v3/imagenes/mytechnologycr/paginas/pagina_129.jpg
+130,Pistola Mp5,texto del PDF,Juguetes y movilidad,,master-v3/imagenes/mytechnologycr/paginas/pagina_130.jpg
+131,Pistola Uzi,texto del PDF,Juguetes y movilidad,,master-v3/imagenes/mytechnologycr/paginas/pagina_131.jpg
+132,Cámara instantánea infantil (impresión térmica),texto + revisión visual,Juguetes y movilidad,,master-v3/imagenes/mytechnologycr/paginas/pagina_132.jpg
+133,Cam-Nube,texto del PDF,Cámaras y seguridad,,master-v3/imagenes/mytechnologycr/paginas/pagina_133.jpg
+134,Cam-Sol,texto del PDF,Cámaras y seguridad,,master-v3/imagenes/mytechnologycr/paginas/pagina_134.jpg
+135,Cam-Wifi,texto del PDF,Cámaras y seguridad,,master-v3/imagenes/mytechnologycr/paginas/pagina_135.jpg
+136,Cam-4K,texto del PDF,Cámaras y seguridad,,master-v3/imagenes/mytechnologycr/paginas/pagina_136.jpg
+137,Tvbox 4K,texto del PDF,Hogar,,master-v3/imagenes/mytechnologycr/paginas/pagina_137.jpg
+138,Watch Onn,texto del PDF,Relojes,,master-v3/imagenes/mytechnologycr/paginas/pagina_138.jpg
+139,Trimmer Vintage T9,texto + revisión visual,Cuidado personal,,master-v3/imagenes/mytechnologycr/paginas/pagina_139.jpg
+140,Depiladora-1,texto del PDF,Cuidado personal,,master-v3/imagenes/mytechnologycr/paginas/pagina_140.jpg
+141,Depiladora-2,texto del PDF,Cuidado personal,,master-v3/imagenes/mytechnologycr/paginas/pagina_141.jpg
+142,Hair styler 5 en 1,texto + revisión visual,Cuidado personal,,master-v3/imagenes/mytechnologycr/paginas/pagina_142.jpg
+143,Plancha 2En1,texto del PDF,Hogar,,master-v3/imagenes/mytechnologycr/paginas/pagina_143.jpg
+144,Combo Tik-95,texto del PDF,Relojes,,master-v3/imagenes/mytechnologycr/paginas/pagina_144.jpg
+145,Combo Tik-96,texto del PDF,Relojes,,master-v3/imagenes/mytechnologycr/paginas/pagina_145.jpg
+146,Reloj S60 Max,texto + revisión visual,Relojes,,master-v3/imagenes/mytechnologycr/paginas/pagina_146.jpg
+147,Smartwatch KW-73 3 en 1 (combo con joyería),texto + revisión visual,Relojes,,master-v3/imagenes/mytechnologycr/paginas/pagina_147.jpg
+148,Smartwatch KW88 Max 10 en 1,revisión visual,Relojes,,master-v3/imagenes/mytechnologycr/paginas/pagina_148.jpg
+149,Smartwatch KW89 Ultra 3 10+1,revisión visual,Relojes,,master-v3/imagenes/mytechnologycr/paginas/pagina_149.jpg
+150,Smartwatch KW93 Max 7+2 con audífonos,revisión visual,Audio,,master-v3/imagenes/mytechnologycr/paginas/pagina_150.jpg
+151,Smartwatch KW95 Ultra 3 7+2,revisión visual,Relojes,,master-v3/imagenes/mytechnologycr/paginas/pagina_151.jpg
+152,Smartwatch HK11 Ultra 3,texto + revisión visual,Relojes,,master-v3/imagenes/mytechnologycr/paginas/pagina_152.jpg
+153,Smartwatch HK11 Mini,texto + revisión visual,Relojes,,master-v3/imagenes/mytechnologycr/paginas/pagina_153.jpg
