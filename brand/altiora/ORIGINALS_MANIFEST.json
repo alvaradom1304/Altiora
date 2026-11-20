@@ -1,0 +1,31 @@
+{
+  "brand": "ALTIORA",
+  "date": "2026-11-16",
+  "status": "concept-only",
+  "files_in_repo": [
+    "versions/altiora-v1.svg",
+    "versions/altiora-v2.svg",
+    "versions/altiora-v3.svg"
+  ],
+  "original_png_assets": "Prepared in downloadable ZIP; not yet committed to GitHub",
+  "images": [
+    {
+      "version": "V1",
+      "filename": "ALTIORA_V1_uniformes_papeleria.png",
+      "sha256": "abae613fedf5b716b7616038757515943173a2ba367d94f91274473fb574f3e4",
+      "bytes": 2487168
+    },
+    {
+      "version": "V2",
+      "filename": "ALTIORA_V2_sistema_identidad.png",
+      "sha256": "db5e4efec2d78ce17fa941f4ff61c74b1e107987488747536d22b5af9513c5c4",
+      "bytes": 2280070
+    },
+    {
+      "version": "V3",
+      "filename": "ALTIORA_V3_quiet_authority.png",
+      "sha256": "47b146d76199d4b4c84de04cad49e3e6194e1a675dfdee3a87a115ecf83a31c6",
+      "bytes": 2306669
+    }
+  ]
+}
