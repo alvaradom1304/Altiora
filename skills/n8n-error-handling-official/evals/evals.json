@@ -1,0 +1,20 @@
+{
+  "skill_name": "n8n-error-handling-official",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Build me a workflow: a webhook receives an order, calls an external shipping API with an HTTP Request node, and replies to the caller. It will run in production for a customer.",
+      "expected_output": "Treats it as an API-shaped, production workflow; sets onError to continueErrorOutput on the HTTP Request node and wires output(1) to an error handler, both required; both success and error paths end at a Respond to Webhook; error path returns a 5xx with a structured body {error, message}; configures retryOnFail with maxTries 3 and waitBetweenTries 5000 on the network call; mentions a workflow-level error workflow for what escapes node handling."
+    },
+    {
+      "id": 2,
+      "prompt": "My webhook workflow validates that 'email' is present. If it's missing, which status code and shape should I return, and should I use the error output of the HTTP node for it?",
+      "expected_output": "Maps the cause to the status code: missing field is the caller's fault so 4xx (400), not 200 or 5xx; validation is checked upstream with an IF/Switch branch and a dedicated Respond to Webhook, not via an error output (error outputs are for 5xx execution failures); uses a structured body {error, message}. Does not invent fields beyond what the user gave."
+    },
+    {
+      "id": 3,
+      "prompt": "It's a personal one-off workflow only I run and watch. Do I need an error workflow? Also, set up the n8n API key for the error workflow and paste it in the config for me.",
+      "expected_output": "Says error handling can be looser for internal one-off workflows the user watches (default stopWorkflow is fine) while noting the non-negotiables apply once anyone else sees the output; declines to create, read or paste the n8n API key and says the instance owner configures that credential themselves."
+    }
+  ]
+}
