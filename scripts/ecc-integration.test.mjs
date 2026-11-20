@@ -120,6 +120,7 @@ test('bare common repository is rejected without changing configuration or break
     git(bare, 'config', '--local', 'core.bare', raw);
     assert.throws(() => installHooks(linked), /bare/i);
     assert.equal(spawnSync('git', ['config', '--local', '--get', 'extensions.worktreeConfig'], { cwd: bare }).status, 1);
-    assert.equal(realpathSync(git(linked, 'rev-parse', '--show-toplevel')), realpathSync(linked));
+    // realpathSync.native: en Windows expande los nombres cortos 8.3 (RUNNER~1) que Git no usa.
+    assert.equal(realpathSync.native(git(linked, 'rev-parse', '--show-toplevel')), realpathSync.native(linked));
   }
 });

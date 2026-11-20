@@ -10,9 +10,15 @@ function git(root, args, optional = false) {
   catch (error) { if (optional && error.status === 1) return null; throw new Error('Git metadata operation failed; inspect configuration before retrying.'); }
 }
 const EXPECTED_HOOK = '#!/bin/sh\n# Altiora: bloquea commits con posibles credenciales (scripts/secret-guard.mjs).\nexec node scripts/secret-guard.mjs\n';
+// En Windows, realpathSync (JS) conserva los nombres cortos 8.3 (p. ej. C:\Users\RUNNER~1\...) y Git devuelve la ruta
+// larga; realpathSync.native expande ambos a la misma forma. En POSIX el comportamiento no cambia.
+function canonical(p) {
+  const abs = resolve(p);
+  if (process.platform !== 'win32') return abs;
+  try { return realpathSync.native(abs).toLowerCase(); } catch { return abs.toLowerCase(); }
+}
 function same(a, b) {
-  const norm = p => process.platform === 'win32' ? p.toLowerCase() : p;
-  return norm(resolve(a)) === norm(resolve(b));
+  return canonical(a) === canonical(b);
 }
 function localPath(root, name) {
   if (typeof name !== 'string' || !name || isAbsolute(name) || name.includes('\\') || name.split('/').some(p => p === '..' || p === '.git' || p.startsWith('.env'))) throw new Error('Unsafe adoption path');
