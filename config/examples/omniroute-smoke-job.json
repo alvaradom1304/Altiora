@@ -1,0 +1,8 @@
+{
+  "job_id": "OMNI-SMOKE-001",
+  "intent": "model routing smoke test",
+  "client_id": "altiora-internal",
+  "authorized_tools": [
+    "models:route"
+  ]
+}
