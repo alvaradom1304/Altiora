@@ -7,7 +7,7 @@
     "node": ">=20"
   },
   "scripts": {
-    "check": "npm run orca:test && npm run routing:v2:test && npm run check:base && npm run operations:test && npm run toolkit:test && npm run runtime:test && npm run librarian:test && npm run routing:eval && npm run audio:test && npm run bscg:test && npm run orca:smoke && npm run check:enterprise",
+    "check": "npm run orca:test && npm run routing:v2:test && npm run check:base && npm run operations:test && npm run toolkit:test && npm run runtime:test && npm run librarian:test && npm run routing:eval && npm run audio:test && npm run bscg:test && npm run orca:smoke && npm run readiness:test && npm run check:enterprise",
     "agents:build": "node scripts/build-agents.mjs && node scripts/build-antigravity.mjs",
     "chat": "node scripts/team-chat.mjs",
     "skills:audit": "node scripts/audit-skills.mjs",
@@ -55,6 +55,8 @@
     "orca:test": "python -m unittest discover -s scripts -p \"test_orca_dispatch.py\"",
     "check:local": "npm run check:doctor",
     "orca:smoke": "python scripts/preambra-orca-smoke.py",
-    "routing:v2:test": "python -m unittest discover -s scripts -p \"test_preambra_v2_routing.py\""
+    "routing:v2:test": "python -m unittest discover -s scripts -p \"test_preambra_v2_routing.py\"",
+    "readiness:score": "node scripts/readiness-score.mjs",
+    "readiness:test": "node --test scripts/readiness-score.test.mjs"
   }
 }
