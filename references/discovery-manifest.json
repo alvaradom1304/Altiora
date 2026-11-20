@@ -249,6 +249,12 @@
       "assigned_agents": []
     },
     {
+      "name": "altiora-interaction-guard",
+      "source": "skills/altiora-interaction-guard/SKILL.md",
+      "model_invocable": false,
+      "assigned_agents": []
+    },
+    {
       "name": "altiora-os-automation-growth",
       "source": "skills/altiora-os-automation-growth/SKILL.md",
       "model_invocable": false,
@@ -299,6 +305,12 @@
     {
       "name": "altiora-project-director",
       "source": "skills/altiora-project-director/SKILL.md",
+      "model_invocable": false,
+      "assigned_agents": []
+    },
+    {
+      "name": "altiora-project-operations",
+      "source": "skills/altiora-project-operations/SKILL.md",
       "model_invocable": false,
       "assigned_agents": []
     },
@@ -1608,6 +1620,12 @@
       ]
     },
     {
+      "name": "openseo",
+      "source": "skills/openseo/SKILL.md",
+      "model_invocable": false,
+      "assigned_agents": []
+    },
+    {
       "name": "operational-kpis",
       "source": "skills/operational-kpis/SKILL.md",
       "model_invocable": false,
@@ -2082,6 +2100,12 @@
       "assigned_agents": []
     },
     {
+      "name": "superpowers",
+      "source": "skills/superpowers/SKILL.md",
+      "model_invocable": false,
+      "assigned_agents": []
+    },
+    {
       "name": "supplier-evaluation",
       "source": "skills/supplier-evaluation/SKILL.md",
       "model_invocable": false,
@@ -2137,6 +2161,12 @@
     {
       "name": "tiktok-strategy",
       "source": "skills/tiktok-strategy/SKILL.md",
+      "model_invocable": false,
+      "assigned_agents": []
+    },
+    {
+      "name": "tilichero-engine",
+      "source": "skills/tilichero-engine/SKILL.md",
       "model_invocable": false,
       "assigned_agents": []
     },
@@ -2516,6 +2546,6 @@
     "equipo",
     "repos"
   ],
-  "listing_budget_characters": 210912,
+  "listing_budget_characters": 213394,
   "runtime_discovery": "NOT_RUN"
 }
