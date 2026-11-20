@@ -56,6 +56,8 @@
     "check:local": "npm run check:doctor",
     "orca:smoke": "python scripts/preambra-orca-smoke.py",
     "routing:v2:test": "python -m unittest discover -s scripts -p \"test_preambra_v2_routing.py\"",
+    "altiora:ready": "node scripts/altiora-ready.mjs",
+    "coordinator:test": "node --test scripts/orca-coordinator.test.mjs scripts/altiora-ready.test.mjs",
     "readiness:score": "node scripts/readiness-score.mjs",
     "readiness:test": "node --test scripts/readiness-score.test.mjs"
   }
