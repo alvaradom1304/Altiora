@@ -866,6 +866,15 @@ def main() -> int:
         default="current", help="IA desde la que se originó el encargo (metadata, no sesión autenticada).",
     )
     parser.add_argument(
+        "--unavailable",
+        action="append",
+        default=[],
+        help=(
+            "IA no disponible (pausada, sin cuota o sin login); repetible o separada por comas. "
+            "Se suma a PREAMBRA_UNAVAILABLE_AIS. El router no observa cuotas: solo respeta esta lista."
+        ),
+    )
+    parser.add_argument(
         "--router-model",
         default="sonnet",
         help="Modelo del enrutador para `claude -p` (alias o id completo). Por defecto: sonnet.",
@@ -917,7 +926,17 @@ def main() -> int:
         "parallel_worktrees": False,
         "streams": streams,
     }
-    decision = decide_mode(full_message, streams, entrypoint=args.entrypoint)
+    unavailable = [
+        name.strip()
+        for raw in [os.environ.get("PREAMBRA_UNAVAILABLE_AIS", ""), *args.unavailable]
+        for name in raw.split(",")
+        if name.strip()
+    ]
+    try:
+        decision = decide_mode(full_message, streams, entrypoint=args.entrypoint, unavailable=unavailable)
+    except ValueError as error:
+        print(f"V2: {error}", file=sys.stderr)
+        return 2
     result["policy_v2"] = decision
     result["handoffs"] = make_handoffs(full_message, streams, decision)
     # V2 only recommends parallelism when independent tasks and paths are safe.

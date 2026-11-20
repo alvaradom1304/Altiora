@@ -51,7 +51,7 @@ El ticket alto se gana con casos medidos. Cada escalón fabrica la prueba que ve
 | 3 | Primer ingreso | Primer pago de comisión de El Tilichero o primera propuesta firmada | 30 días | Cobro registrado |
 | 4 | Primer caso medido | Antes y después de LCQ o El Tilichero, con ambos resultados (negocio y consumidor) | 60 días | Informe con la aceptación del dueño |
 | 5 | Economía real | Costes fijos y horas por proyecto registrados | 2 semanas | `FINANZAS.md` |
-| 6 | Preparación | Nota V4 de 40 a 53 (`READY_FOR_PILOT`) y luego a 80 | 30 / 90 días | `npm run readiness:report -- --resumen` |
+| 6 | Preparación | Nota V4 de 40 a 53 (`READY_FOR_PILOT`) y luego a 80 | 30 / 90 días | `npm run readiness:score -- --resumen` |
 | 7 | Primer high ticket | Un proyecto del escalón 3 firmado y con anticipo | Tras dos casos medidos | Contrato y anticipo |
 
 ## Cómo se usa este documento
