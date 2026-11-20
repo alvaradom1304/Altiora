@@ -1,0 +1,3 @@
+#!/bin/sh
+# Altiora: bloquea commits con posibles credenciales (scripts/secret-guard.mjs).
+exec node scripts/secret-guard.mjs

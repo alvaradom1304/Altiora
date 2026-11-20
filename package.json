@@ -42,7 +42,7 @@
     "production:qa": "node scripts/production-qa.mjs",
     "skills:compact": "node scripts/compact-skills.mjs",
     "project:identity": "node scripts/project-identity.mjs",
-    "toolkit:test": "node --test scripts/compact-skills.test.mjs scripts/project-identity.test.mjs",
+    "toolkit:test": "node --test scripts/compact-skills.test.mjs scripts/project-identity.test.mjs scripts/secret-guard.test.mjs scripts/ecc-integration.test.mjs",
     "runtime:smoke": "python scripts/runtime-smoke.py",
     "runtime:test": "python -m unittest discover -s scripts -p test_runtime_smoke.py",
     "librarian:test": "python -m unittest discover -s skills/altiora-bibliotecario/scripts -p \"test_*.py\"",
@@ -56,6 +56,10 @@
     "check:local": "npm run check:doctor",
     "orca:smoke": "python scripts/preambra-orca-smoke.py",
     "routing:v2:test": "python -m unittest discover -s scripts -p \"test_preambra_v2_routing.py\"",
+    "secrets:test": "node --test scripts/secret-guard.test.mjs",
+    "hooks:install": "node scripts/ecc-integration.mjs --install-hooks",
+    "ecc:doctor": "node scripts/ecc-integration.mjs",
+    "ecc:test": "node --test scripts/ecc-integration.test.mjs",
     "readiness:score": "node scripts/readiness-score.mjs",
     "readiness:test": "node --test scripts/readiness-score.test.mjs"
   }

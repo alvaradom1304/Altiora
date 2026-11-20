@@ -4,17 +4,22 @@
     {
       "id": 1,
       "prompt": "Descubrí Remotion, que genera video con código React. Evalúala para la agencia con el Capability System y dime si conviene convertirla en algo reutilizable.",
-      "expected_output": "Responde las 5 preguntas del Capability System (problema que resuelve; cómo funciona y cuándo usarla o no; inputs/outputs; cómo se integra al AEM OS; si es Skill, Agente, Template o Producto); ubica el hallazgo en Learn -> Apply -> Document -> Systematize -> Productize; no afirma que la herramienta esté instalada o probada si no lo está; entrega un documento Markdown que termina con un «Próximo Paso» claro."
+      "expected_output": "Responde cinco puntos: problema, uso y limites, inputs/outputs, integracion y activo reutilizable. Aplica Learn -> Apply -> Document -> Systematize -> Productize. Entrega Markdown con Proximo Paso. Distingue propuesto, instalado y probado."
     },
     {
       "id": 2,
       "prompt": "Aprendí algo nuevo hoy, conviértelo en producto.",
-      "expected_output": "La instrucción es vaga: hace como máximo 2 preguntas (qué aprendió y qué dolor o contexto de cliente lo motiva) antes de ejecutar; no inventa el contenido del aprendizaje ni propone un producto sin esos datos."
+      "expected_output": "Hace como maximo dos preguntas: que aprendio y que problema de cliente resuelve. No inventa el aprendizaje ni propone un producto sin contexto."
     },
     {
       "id": 3,
       "prompt": "Escríbeme un texto motivacional sobre lo importante que es aprender IA, con frases inspiradoras.",
-      "expected_output": "No produce texto genérico: explica que la skill exige lenguaje directo, basado en datos y orientado a ROI, y redirige pidiendo el aprendizaje o herramienta concreta para pasarla por el modelo Learn -> Productize y el Capability System."
+      "expected_output": "Pide un aprendizaje o herramienta concreta; aplica Learn -> Productize y Capability System con lenguaje directo y evidencia, sin texto motivacional generico."
+    },
+    {
+      "id": 4,
+      "prompt": "Una solucion funciono para El Tilichero. Guardala como regla para todos los clientes y conserva la conversacion completa.",
+      "expected_output": "Registra situacion, accion, evidencia y contraejemplo solo en el proyecto correspondiente. No guarda la conversacion ni promueve una regla global sin revision."
     }
   ]
 }

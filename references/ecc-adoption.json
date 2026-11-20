@@ -1,0 +1,107 @@
+{
+  "schema_version": 1,
+  "repository": "https://github.com/affaan-m/ECC",
+  "reviewedCommit": "3f14a103a8694e51c1df9a806217a6d0b5f7a6f7",
+  "reviewedOn": "2026-11-17",
+  "license": "MIT",
+  "scope": "Core engineering workflows relevant to Altiora; not a semantic audit of every language-specific ECC skill.",
+  "upstreamInventory": {
+    "agents": 72,
+    "skills": 327,
+    "commands": 98
+  },
+  "capabilities": [
+    {
+      "id": "secret-guard",
+      "decision": "adapted",
+      "source": "scripts/hooks/governance-capture.js",
+      "paths": [
+        "scripts/secret-guard.mjs",
+        "scripts/secret-guard.test.mjs",
+        ".githooks/pre-commit"
+      ],
+      "sourceCommit": "d2ef2680594f9a17526a6e1a2e18b3d242c5d17b"
+    },
+    {
+      "id": "integration-and-hook-activation",
+      "decision": "added-local-implementation",
+      "source": "hooks/README.md",
+      "paths": [
+        "scripts/ecc-integration.mjs",
+        "scripts/ecc-integration.test.mjs"
+      ]
+    },
+    {
+      "id": "verification-loop",
+      "decision": "extend-existing",
+      "source": "skills/verification-loop/SKILL.md",
+      "paths": [
+        "skills/altiora-quality-review/SKILL.md",
+        "skills/altiora-quality-review/references/ecc-workflow.md"
+      ]
+    },
+    {
+      "id": "capability-and-regression-evals",
+      "decision": "reuse-with-template",
+      "source": "skills/eval-harness/SKILL.md",
+      "paths": [
+        "skills/ai-evaluation/SKILL.md",
+        "quality/templates/ecc-task-eval.md"
+      ]
+    },
+    {
+      "id": "project-scoped-learning",
+      "decision": "extend-existing-manual-only",
+      "source": "skills/continuous-learning-v2/SKILL.md",
+      "paths": [
+        "skills/aem-learning-os/SKILL.md",
+        "skills/aem-learning-os/references/project-lessons.md"
+      ]
+    },
+    {
+      "id": "strategic-compaction",
+      "decision": "already-covered",
+      "source": "skills/strategic-compact/SKILL.md",
+      "paths": [
+        "skills/altiora-session-handoff/SKILL.md",
+        "docs/operations/CONECTORES-Y-AHORRO.md"
+      ]
+    },
+    {
+      "id": "search-first",
+      "decision": "already-covered",
+      "source": "skills/search-first/SKILL.md",
+      "paths": [
+        "skills/altiora-repository-research/SKILL.md",
+        "skills/altiora-bibliotecario/SKILL.md"
+      ]
+    },
+    {
+      "id": "skill-stocktake",
+      "decision": "already-covered",
+      "source": "skills/skill-stocktake/SKILL.md",
+      "paths": [
+        "scripts/audit-skills.mjs",
+        "scripts/build-agents.mjs"
+      ]
+    }
+  ],
+  "excluded": [
+    {
+      "item": "Complete ECC plugin and duplicate agents/commands",
+      "reason": "Existing roles/router/catalog; no need to load parallel instruction libraries."
+    },
+    {
+      "item": "Automatic observer and transcript capture",
+      "reason": "No authorization to capture conversations, run background agents or mix client data."
+    },
+    {
+      "item": "Continuous loops, external services and automatic updates",
+      "reason": "Not needed for the authorized task; no service, spend or recurring task created."
+    },
+    {
+      "item": "Unneeded language/framework-specific skills",
+      "reason": "Retain on-demand research; metadata inventory is not proof of compatibility."
+    }
+  ]
+}

@@ -2,7 +2,7 @@
 name: aem-learning-os
 description: Usa este skill para procesar nuevos conocimientos o herramientas, extraer frameworks y productizar capacidades (Learning OS & Productization).
 metadata:
-  version: 1.1.0
+  version: 1.2.0
 ---
 
 # AEM-LEARNING-OS (Executive Protocol)
@@ -34,3 +34,6 @@ Cuando el usuario (CEO) invoque esta skill, el agente asume el control y **DEBE 
 
 ## 3. Entregable Esperado (Output)
 Generar un artefacto o documento (Markdown) con el resultado de la operación. Debe terminar con una recomendación clara de "Próximo Paso".
+
+## Captura de aprendizajes con límites
+Para conservar aprendizajes entre tareas, aplicar [lecciones por proyecto](references/project-lessons.md): evidencia y contraejemplos, revisión antes de promover, sin captura automática de conversaciones.
