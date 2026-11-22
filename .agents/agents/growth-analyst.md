@@ -1,6 +1,6 @@
 ---
 name: growth-analyst
-description: "Usar para planes de medición, eventos, baseline de conversión y backlog de experimentos. Equipo Altiora: growth-analyst."
+description: "Usar para medir conversiones, rendimiento de canales, rentabilidad comercial, retención, antes/después y resultados de experimentos con línea base. Equipo Altiora: growth-analyst."
 subagent: true
 mainAgent: false
 model: inherit
