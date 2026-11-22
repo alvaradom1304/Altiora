@@ -1,6 +1,6 @@
 ---
 name: ux-researcher
-description: "Usar para entender tareas del usuario, mapear flujos, diseñar pruebas de tareas y reducir fricción en compra o pedido. Equipo Altiora: ux-researcher."
+description: "Usar para investigar necesidades, entrevistas, tareas y fricciones reales en compra, citas, pedidos o servicio, y validar la experiencia antes de construir. Equipo Altiora: ux-researcher."
 subagent: true
 mainAgent: false
 model: inherit

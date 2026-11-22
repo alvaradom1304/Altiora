@@ -512,7 +512,9 @@
       "name": "brand-research",
       "source": "skills/brand-research/SKILL.md",
       "model_invocable": false,
-      "assigned_agents": []
+      "assigned_agents": [
+        "brand-strategist"
+      ]
     },
     {
       "name": "brand-storytelling",
@@ -561,7 +563,9 @@
       "name": "business-diagnostic",
       "source": "skills/business-diagnostic/SKILL.md",
       "model_invocable": false,
-      "assigned_agents": []
+      "assigned_agents": [
+        "business-strategist"
+      ]
     },
     {
       "name": "business-health-assessment",
@@ -573,7 +577,9 @@
       "name": "business-model-analysis",
       "source": "skills/business-model-analysis/SKILL.md",
       "model_invocable": false,
-      "assigned_agents": []
+      "assigned_agents": [
+        "business-strategist"
+      ]
     },
     {
       "name": "business-model-design",
@@ -585,7 +591,9 @@
       "name": "business-model-validation",
       "source": "skills/business-model-validation/SKILL.md",
       "model_invocable": false,
-      "assigned_agents": []
+      "assigned_agents": [
+        "business-strategist"
+      ]
     },
     {
       "name": "business-social-audit",
@@ -651,7 +659,9 @@
       "name": "cash-flow-analysis",
       "source": "skills/cash-flow-analysis/SKILL.md",
       "model_invocable": false,
-      "assigned_agents": []
+      "assigned_agents": [
+        "business-strategist"
+      ]
     },
     {
       "name": "challenger-selling",
@@ -729,13 +739,18 @@
       "name": "competitive-intelligence",
       "source": "skills/competitive-intelligence/SKILL.md",
       "model_invocable": false,
-      "assigned_agents": []
+      "assigned_agents": [
+        "market-intelligence-director"
+      ]
     },
     {
       "name": "competitor-analysis",
       "source": "skills/competitor-analysis/SKILL.md",
       "model_invocable": true,
-      "assigned_agents": []
+      "assigned_agents": [
+        "brand-strategist",
+        "market-intelligence-director"
+      ]
     },
     {
       "name": "competitor-profiling",
@@ -878,13 +893,17 @@
       "name": "customer-acquisition",
       "source": "skills/customer-acquisition/SKILL.md",
       "model_invocable": false,
-      "assigned_agents": []
+      "assigned_agents": [
+        "commerce-growth-director"
+      ]
     },
     {
       "name": "customer-discovery",
       "source": "skills/customer-discovery/SKILL.md",
       "model_invocable": false,
-      "assigned_agents": []
+      "assigned_agents": [
+        "ux-researcher"
+      ]
     },
     {
       "name": "customer-journey",
@@ -898,7 +917,11 @@
       "name": "customer-research",
       "source": "skills/customer-research/SKILL.md",
       "model_invocable": false,
-      "assigned_agents": []
+      "assigned_agents": [
+        "brand-strategist",
+        "ux-researcher",
+        "market-intelligence-director"
+      ]
     },
     {
       "name": "customer-success",
@@ -1208,7 +1231,9 @@
       "name": "go-to-market",
       "source": "skills/go-to-market/SKILL.md",
       "model_invocable": false,
-      "assigned_agents": []
+      "assigned_agents": [
+        "commerce-growth-director"
+      ]
     },
     {
       "name": "google-cloud-storage-basics",
@@ -1241,6 +1266,7 @@
       "source": "skills/growth-experiment-analysis/SKILL.md",
       "model_invocable": true,
       "assigned_agents": [
+        "growth-analyst",
         "commerce-growth-director"
       ]
     },
@@ -1249,7 +1275,8 @@
       "source": "skills/growth-experimentation/SKILL.md",
       "model_invocable": true,
       "assigned_agents": [
-        "growth-analyst"
+        "growth-analyst",
+        "commerce-growth-director"
       ]
     },
     {
@@ -1324,7 +1351,9 @@
       "name": "industry-analysis",
       "source": "skills/industry-analysis/SKILL.md",
       "model_invocable": false,
-      "assigned_agents": []
+      "assigned_agents": [
+        "market-intelligence-director"
+      ]
     },
     {
       "name": "information-architecture",
@@ -1467,19 +1496,26 @@
       "name": "market-segmentation",
       "source": "skills/market-segmentation/SKILL.md",
       "model_invocable": false,
-      "assigned_agents": []
+      "assigned_agents": [
+        "commerce-growth-director",
+        "market-intelligence-director"
+      ]
     },
     {
       "name": "market-sizing",
       "source": "skills/market-sizing/SKILL.md",
       "model_invocable": false,
-      "assigned_agents": []
+      "assigned_agents": [
+        "market-intelligence-director"
+      ]
     },
     {
       "name": "market-validation",
       "source": "skills/market-validation/SKILL.md",
       "model_invocable": false,
-      "assigned_agents": []
+      "assigned_agents": [
+        "market-intelligence-director"
+      ]
     },
     {
       "name": "marketing-analytics",
@@ -1550,7 +1586,9 @@
       "name": "mom-test-interviewing",
       "source": "skills/mom-test-interviewing/SKILL.md",
       "model_invocable": false,
-      "assigned_agents": []
+      "assigned_agents": [
+        "ux-researcher"
+      ]
     },
     {
       "name": "motion-design",
@@ -1629,7 +1667,10 @@
       "name": "opportunity-analysis",
       "source": "skills/opportunity-analysis/SKILL.md",
       "model_invocable": false,
-      "assigned_agents": []
+      "assigned_agents": [
+        "business-strategist",
+        "market-intelligence-director"
+      ]
     },
     {
       "name": "opportunity-discovery",
@@ -1789,7 +1830,10 @@
       "name": "profitability-analysis",
       "source": "skills/profitability-analysis/SKILL.md",
       "model_invocable": false,
-      "assigned_agents": []
+      "assigned_agents": [
+        "business-strategist",
+        "growth-analyst"
+      ]
     },
     {
       "name": "prompt-engineering",
@@ -1883,7 +1927,10 @@
       "name": "revenue-intelligence",
       "source": "skills/revenue-intelligence/SKILL.md",
       "model_invocable": false,
-      "assigned_agents": []
+      "assigned_agents": [
+        "growth-analyst",
+        "commerce-growth-director"
+      ]
     },
     {
       "name": "revops",
@@ -2158,7 +2205,9 @@
       "name": "trend-analysis",
       "source": "skills/trend-analysis/SKILL.md",
       "model_invocable": false,
-      "assigned_agents": []
+      "assigned_agents": [
+        "market-intelligence-director"
+      ]
     },
     {
       "name": "typography-direction",
