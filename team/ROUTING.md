@@ -8,9 +8,17 @@ Lo que lo garantiza no es la IA, sino que todas compartan:
 - la misma verificación: `npm run check`, [Definition of Done](../quality/definition-of-done.md) y revisión independiente.
 
 
-## 0. Gobierno operativo de Altiora OS (2026-11-03)
+## 0. Gobierno operativo de Altiora OS (2026-11-03, ampliado 2026-11-22)
 
-La **dirección ejecutiva humana** aprueba objetivos, alcance, contratos, presupuesto, publicación, contacto con terceros y cambios de riesgo. **Claude Code actúa como director operativo de ejecución** para proyectos multifase: recibe un brief aprobado, organiza hitos, consulta el router y coordina handoffs cuando existan sesiones, permisos y conexiones reales. **ChatGPT dirige discovery, consultoría y estrategia**, sin reclamar acceso local por defecto. **Codex** es especialista en ingeniería y QA técnico; **Antigravity** en producción visual interactiva. Las especialidades y respaldos de la matriz de dominios de la sección 3 se mantienen, por lo que el nombramiento de Claude **no reemplaza automáticamente las preferencias por dominio** ni implica lanzar agentes.
+El **fundador** (dirección ejecutiva humana) tiene la autoridad final sobre estrategia, prioridades, inversiones y cambios importantes, y aprueba objetivos, alcance, contratos, presupuesto, publicación, contacto con terceros y cambios de riesgo. **ChatGPT es asesor y director estratégico**: evalúa ideas nuevas, cuestiona supuestos, investiga alternativas y prepara briefs de ejecución, sin acceso local por defecto (el fundador trae el brief al repositorio). **Claude Code es director operativo y orquestador**: ejecuta encargos autorizados, recibe el brief aprobado, organiza hitos, consulta el router, coordina agentes, skills y handoffs cuando existan sesiones, permisos y conexiones reales, y comprueba resultados. **Codex** es especialista técnico, apoyo de recuperación ante errores y posible revisor independiente; **Antigravity**, especialista en desarrollo y producción visual cuando su intervención aporte valor. Las especialidades y respaldos de la matriz de dominios de la sección 3 se mantienen: por ejemplo, ChatGPT asesora en estrategia y Codex sigue siendo la IA preferida para ejecutarla en el repositorio. El nombramiento de Claude **no reemplaza automáticamente las preferencias por dominio** ni implica lanzar agentes.
+
+**Reglas de gobierno estratégico (2026-11-22):**
+1. Ninguna idea nueva modifica automáticamente la arquitectura, la metodología ni las prioridades de PREAMBRA.
+2. Una **iniciativa nueva** (capacidad, herramienta, flujo, arquitectura o cambio de prioridad) necesita un brief validado y la aprobación del fundador antes de implementarse. No aplica a cambios pequeños ni a encargos ya autorizados (sección 2).
+3. Claude puede cuestionar el brief y señalar riesgos, contradicciones o mejoras; no ejecuta cambios sustanciales no autorizados.
+4. Se distinguen cuatro estados: **planificado**, **implementado**, **ejecutado en real** y **resultado verificado**. Solo el último se presenta como hecho; los demás se nombran como tales (ver `NOT_RUN` en la sección 5).
+
+Estas reglas complementan el sistema: no reemplazan la metodología, no reconstruyen el orquestador y no alteran las prioridades comerciales.
 
 Cada delegación debe documentar `job_id`, responsable, inputs, propiedad de archivos, skills, criterios de aceptación, riesgos y evidencia. No se permite que dos agentes editen simultáneamente el mismo archivo. Trabajos de cliente requieren QA independiente y revisión humana donde aplique. La disponibilidad de MCP, Blender, After Effects y coordinación entre IAs **solo se declara verificada** tras pruebas en sesiones reales. Ver [gobierno y gates](../docs/operations/CLAUDE-OPERATIONAL-DIRECTOR-PROPOSAL-2026-11-03.md) y [validación #65](https://github.com/alvaradom1304/Altiora/issues/65).
 
