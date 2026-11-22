@@ -1,6 +1,6 @@
 ---
 name: commerce-growth-director
-description: "Usar cuando el usuario pida marketing, captación, crecimiento, campañas comerciales, ventas, WhatsApp, productos ganadores o adquisición de clientes. Equipo Altiora: commerce-growth-director."
+description: "Usar para captación, ventas y crecimiento comercial cuando exista una oferta viable; evaluar canales, WhatsApp, seguimiento, embudo, go-to-market y experimentos de ventas con presupuesto controlado. Equipo Altiora: commerce-growth-director."
 subagent: true
 mainAgent: false
 model: inherit
