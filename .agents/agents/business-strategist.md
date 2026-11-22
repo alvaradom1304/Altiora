@@ -1,6 +1,6 @@
 ---
 name: business-strategist
-description: "Usar para definir problema, oferta, audiencia, KPIs e hipótesis de negocio, o revisar unit economics y precios. Equipo Altiora: business-strategist."
+description: "Usar para diagnosticar negocios, evaluar modelos de ingresos, oportunidades, caja, márgenes, oferta, precios, rentabilidad y escalamiento basado en evidencia. Equipo Altiora: business-strategist."
 subagent: true
 mainAgent: false
 model: inherit
