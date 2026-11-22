@@ -1,6 +1,25 @@
 # PREAMBRA OS — Auditoría y certificación de Claude Code como orquestador (2026-11-22)
 
-**Veredicto:** NIVEL 2 (operativo con Claude) · ESTADO **PARTIAL**. El nivel 3 (multi-IA) no se certifica: el piloto Orca `Run → Task → Worker → Resultado → Revisión → Cierre` no se ejecutó (runtime no disponible y sin autorización). Escala: 1 configurado · 2 operativo · 3 multi-IA · 4 comercial.
+**Veredicto:** NIVEL 3 (multi-IA, mínimo: Claude coordina y Codex trabaja vía Orca) · ESTADO **PARTIAL**. Escala: 1 configurado · 2 operativo · 3 multi-IA · 4 comercial.
+
+El piloto `Run → Task → Worker → Resultado → Revisión → Cierre` se completó con IDs reales tras la autorización del fundador (ver «Piloto Orca» más abajo). El estado sigue siendo PARTIAL porque:
+- fue una sola tarea de lectura;
+- Antigravity no se probó;
+- el piloto constructor + revisor con escritura sigue pendiente.
+
+## Piloto Orca (2026-11-22, autorizado por el fundador)
+
+| Paso | ID real / evidencia | Resultado |
+|---|---|---|
+| Coordinador | Terminal `term_62a30b5d-4305-48c3-9be5-dcadbf157ccc`, creada en este worktree; su `ORCA_TERMINAL_HANDLE` coincide | PASS |
+| Run | `run_9b4ceb61a534` (`run-create` sin `--from`) | PASS |
+| Task | `task_2642ce03f9f9`, sintética, solo lectura, estado `ready` | PASS |
+| Worker | `worker-start --agent codex --model gpt-6.1-sol --effort low` → dispatch `ctx_36da41c4331a`. El recibo de Orca confirma `effective`: codex / gpt-6.1-sol / low | PASS |
+| Resultado | `worker_done` `msg_2433c2185144`, outcome `succeeded` | PASS |
+| Revisión (Claude) | Las tres respuestas coinciden con la fuente. El texto del error solo existe en esta rama, así que el worker leyó este worktree. `git status` limpio: no modificó nada | PASS |
+| Cierre | Dispatch `completed`; `worker-release` → `released`, transcripción archivada, terminal del agente cerrada; terminal coordinadora cerrada | PASS |
+
+Hallazgo: fuera de una terminal de Orca, Orchestration responde `no_active_sender_terminal`. El coordinador debe ser una terminal de Orca, y su handle es la única identidad válida para `--from`. Esto confirma la corrección P0.
 
 Rama: `claude/preambra-os-certificacion`, creada desde `origin/main` `256bdfc` en un worktree aislado (`C:/Users/Usuario/wt-preambra-cert`). El checkout canónico tenía cambios ajenos sin confirmar y no se modificó.
 
@@ -15,7 +34,7 @@ Estados: PASS · FAIL · UNKNOWN · NOT_RUN · NOT_APPLICABLE · NOT_VERIFIED.
 | Claude Code | PASS | 2.1.309 | PASS (`claude auth status`: claude.ai) | PASS (invocó el subagente `qa-reviewer`) | Bajo | — |
 | Codex CLI | PASS | 0.167.0-alpha.3.2 (alpha) | PASS («Logged in using ChatGPT») | PASS (revisión QA de este diff, solo lectura) | Medio: versión alpha | Fijar `-m`/esfuerzo en cada delegación |
 | Antigravity (`agy`) | PASS | 1.4.12 | UNKNOWN (el CLI no expone estado de login) | NOT_RUN en esta sesión | Medio | Probar con una tarea 3D sintética cuando haga falta |
-| Orca CLI | PASS | 1.4.261 | NOT_APPLICABLE | FAIL: `orca status --json` → `runtime_unavailable` (app cerrada) | Alto para el nivel 3 | El fundador abre Orca y activa Orchestration (Experimental) |
+| Orca CLI | PASS | 1.4.261 | NOT_APPLICABLE | PASS tras abrir la app (`runtime ready`). Antes había dado `runtime_unavailable` con la app cerrada | Medio | Coordinar siempre desde una terminal de Orca |
 | `gh` | PASS | 2.103.3 | PASS (scopes repo, workflow, read:org, gist) | PASS | Bajo | — |
 | Hook `SessionStart` | PASS | PASS | NOT_APPLICABLE | PASS (payload sintético → contexto inyectado) | Bajo | — |
 | Hook `PreToolUse` | PASS | PASS | NOT_APPLICABLE | PASS (`.env` → `deny`; `README.md` → permitido) | Bajo: la ruta apunta al canónico, pero el guard compara nombres base, así que protege también los worktrees | Ninguna |
@@ -34,7 +53,7 @@ Estados: PASS · FAIL · UNKNOWN · NOT_RUN · NOT_APPLICABLE · NOT_VERIFIED.
 | Revisor independiente por traspaso | Sí | Defectuoso | **FAIL → PASS** | En D, el flujo de Codex salía con `reviewer=None` sin aviso; corregido |
 | Delegación Claude → Codex por terminal | Sí | Sí | **PASS** | `codex exec -s read-only` revisó el diff (veredicto abajo) |
 | Delegación a Antigravity | Sí | Sí | NOT_RUN | Funcionó en la sesión de origen (sin recibo propio aquí) |
-| Orca supervisado (Run/Task/Worker) | Sí | Con defecto de identidad | **NOT_RUN** | Runtime no disponible; defecto `--from` corregido en el código |
+| Orca supervisado (Run/Task/Worker) | Sí | Sí (defecto `--from` corregido) | **PASS** (una tarea de lectura) | `run_9b4ceb61a534` / `task_2642ce03f9f9` / `ctx_36da41c4331a` |
 | Equipos experimentales de Claude | — | — | NOT_APPLICABLE | No se habilitaron (prohibido por el encargo) |
 | After Effects | Sí | Puente | FAIL | `aerender` ausente |
 
@@ -83,7 +102,7 @@ QA independiente (Codex `gpt-6.1-sol`, esfuerzo low, solo lectura): «ACEPTAR CO
 | A — Entorno | Preflight, versiones, auth, hooks, MCP | PASS con FAIL en Orca runtime y AE |
 | B — Calidad del repo | `npm run check` en `origin/main` (4 min 32 s) | PASS (código 0) |
 | C — Router y despachador | Suites `routing:v2:test` (20) y `orca:test` (7), `orca:smoke` | PASS tras corregir |
-| D — Orquestación real | Claude → subagente: PASS. Claude → Codex por terminal: PASS. Piloto Orca: NOT_RUN | PARCIAL |
+| D — Orquestación real | Claude → subagente: PASS. Claude → Codex por terminal: PASS. Piloto Orca con worker Codex: PASS. Antigravity y piloto con escritura: NOT_RUN | PARCIAL |
 | E — QA independiente | Revisión de Codex sobre el diff | PASS (correcciones aplicadas) |
 
 ## F. Guía de primer uso — ejemplo: estudio de mercado de Currenda (revisado)
@@ -100,7 +119,7 @@ Datos sintéticos. No tocar `C:/Users/Usuario/Currenda` sin el encargo del sprin
 
 1. Fusionar el PR #100 (dictamen favorable) y el #101 (gobierno). No se fusionó nada.
 2. Revisar y fusionar el PR de esta rama (correcciones P0/P1 y runbook).
-3. Autorizar el piloto Orca. Pasos: abrir Orca, activar Orchestration (Experimental) y, desde una terminal de Orca, ejecutar `run-create` → `task-create` → `worker-start --agent codex` (tarea de lectura sintética) → `worker_done` → revisión → `worker-release`. Registrar los IDs reales.
+3. ~~Piloto Orca de lectura~~: hecho y con IDs registrados. Siguiente paso, que requiere autorización: piloto constructor + revisor con escritura en un worktree aislado y, si aporta valor, un worker de Antigravity para una tarea 3D.
 4. Decidir si se consolidan los agentes duplicados (lista en B) y si se fija `model` por agente.
 5. `.altiora/orchestration.json`: decidir si se marca su `runtime` como histórico. No se modificó.
 6. PR #81: el CI del arreglo de Windows `d49dc37` ya está en verde y es fusionable (antes constaba como no verificado). Revisar #86 y el resto de PR abiertos (16 en total).
