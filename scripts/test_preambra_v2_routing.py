@@ -116,6 +116,36 @@ class AdaptiveRoutingV2Test(unittest.TestCase):
         self.assertTrue(d["requires_human_approval"])
         self.assertTrue(any("human review" in w for w in d["warnings"]))
 
+    def test_every_reviewed_handoff_gets_an_independent_reviewer(self):
+        # Regression: in D, the stream owned by the run-level reviewer got reviewer=None silently.
+        streams = [task("claude", "docs/strategy/"), task("codex", "scripts/"),
+                   task("antigravity", "experiments/3d/")]
+        msg = "Proyecto integral: estrategia, backend y escena 3D"
+        d = decide_mode(msg, streams, entrypoint="claude")
+        self.assertEqual(d["mode"], "D")
+        for handoff in make_handoffs(msg, streams, d):
+            self.assertIsNotNone(handoff["reviewer"], handoff["owner"])
+            self.assertNotEqual(handoff["reviewer"], handoff["owner"])
+            self.assertEqual(validate_contract(handoff), [])
+
+    def test_handoff_without_any_reviewer_flags_human_review(self):
+        streams = [task("claude", "docs/"), task("codex", "scripts/")]
+        msg = "Implementar API y documentarla"
+        d = decide_mode(msg, streams, entrypoint="claude", unavailable=["antigravity"])
+        handoffs = make_handoffs(msg, streams, d)
+        self.assertEqual([h["reviewer"] for h in handoffs], ["codex", "claude"])
+        d = decide_mode(msg, streams, entrypoint="claude", unavailable=["codex", "antigravity"])
+        handoffs = make_handoffs(msg, streams, d)
+        codex = [h for h in handoffs if h["owner"] == "codex"][0]
+        self.assertEqual(codex["reviewer"], "claude")
+        claude = [h for h in handoffs if h["owner"] == "claude"][0]
+        self.assertIsNone(claude["reviewer"])
+        self.assertTrue(any("human review" in r for r in claude["risks"]))
+        done = dict(claude, status="DONE", evidence=["log"], checks=["npm run check"])
+        self.assertIn("DONE requires an independent reviewer or recorded human_review",
+                      validate_contract(done))
+        self.assertEqual(validate_contract(dict(done, human_review="humano/qa 2026-11-22")), [])
+
     def test_unavailable_lead_is_warned(self):
         d = decide_mode("Implementar una API para clientes", [task("codex", "src/api/")],
                         unavailable=["codex"])

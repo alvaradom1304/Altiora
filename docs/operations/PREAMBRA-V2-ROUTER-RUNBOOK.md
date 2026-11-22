@@ -61,6 +61,18 @@ El router por defecto es heurístico (sin consumo de LLM). Usar --router model �
 5. Solo después ensayar constructor+revisor y paralelismo en worktrees reales con permiso expreso.
 6. Si el runtime falla, BLOCKED_RUNTIME; usar handoffs por GitHub en su lugar.
 
+**Identidad en Orca (corregido 2026-11-22).** Orca atesta la terminal que llama y rechaza con `consumer_fenced` cualquier `--from` con otra identidad. El despachador solo reutiliza un Run coordinado por su propia terminal (`ORCA_TERMINAL_HANDLE`) y, si no, crea uno sin `--from`. El piloto debe lanzarse **desde una terminal de Orca**; un Run de otra terminal no se reutiliza. Orchestration es experimental: activarla en Settings → Experimental. Usar `worker-start` (supervisado, con `worker_done`) en vez de `agent launch` para el piloto. Diagnóstico completo: [certificación 2026-11-22](PREAMBRA-OS-CERTIFICACION-20261122.md).
+
+## Arranque diario (Claude como orquestador)
+
+1. `git fetch` y trabajar en un worktree propio desde `origin/main`; no editar el checkout canónico si tiene cambios ajenos.
+2. `npm run resume` y `gh pr list`: el estado vivo lo da GitHub, no el checkpoint.
+3. Clasificar el encargo: `python scripts/orca-dispatch.py --json --entrypoint claude "<encargo>"` (heurístico, sin coste). Modo A: hacerlo en la sesión. B: constructor + revisor distinto. C/D: plan hasta que Orca esté certificado.
+4. Delegar en subagentes de `.claude/agents/` (descubrimiento e invocación comprobados el 2026-11-22). Codex por terminal: `codex exec -s read-only --skip-git-repo-check -C <worktree> -m <modelo> -c model_reasoning_effort=<nivel> -`. Antigravity: `agy -p "..." --mode accept-edits` solo para 3D/visual.
+5. Cerrar con `npm run check`, revisión independiente y PR; nunca push a `main`.
+
+**Autoridad de continuidad.** Estado vivo: GitHub (PR, CI, ramas) y, durante una ejecución, la Run de Orca con sus IDs reales. Histórico: `continuity/checkpoint.json` (instantánea fechada) y `team/chat/` (registro de reparto y cierres). `.altiora/orchestration.json` es registro local, no prueba de runtime: su `VERIFIED_READY` de 2026-11-01 no vale como estado actual.
+
 ## Próximos hitos
 
 - PRE-ORCH-002: integración de política A/B/C/D, contratos y pruebas en router existente; solo planificación.

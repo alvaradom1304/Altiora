@@ -5,6 +5,7 @@ import importlib.util
 import io
 import os
 import sys
+import tempfile
 import unittest
 from pathlib import Path
 from unittest.mock import patch
@@ -60,6 +61,56 @@ class OrcaRoutingSmokeTest(unittest.TestCase):
         self.assertEqual(dispatcher.choose_effort("implementar UI", "brand-copy-frontend"), "medium")
         self.assertEqual(dispatcher.choose_effort("auditar arquitectura", "brand-copy-frontend"), "high")
         self.assertEqual(dispatcher.choose_effort("seguridad de pagos", "strategy-finance-backend"), "xhigh")
+
+
+class OrcaIdentityFencingTest(unittest.TestCase):
+    """Regression for consumer_fenced: Orca only lets a terminal act as itself (--from)."""
+
+    STREAM = {"stream_index": 1, "preferred_ai": "codex", "orca_worker_agent": "codex",
+              "worktree_strategy": "current", "task_title": "Tarea sintética", "skills": [],
+              "spec": "Datos sintéticos", "domain": "strategy-finance-backend"}
+
+    def _dispatch(self, env: dict[str, str], state: dict) -> list[list[str]]:
+        calls: list[list[str]] = []
+
+        def fake_run_orca(args: list[str], timeout: int = 30) -> dict:
+            calls.append(list(args))
+            if args[:2] == ["orchestration", "run-show"]:
+                return {"ok": True, "result": {"run": {"id": "run_old", "coordinator_handle": "term_other"}}}
+            if args[:2] == ["orchestration", "run-list"]:
+                return {"ok": True, "result": {"runs": [{"id": "run_old", "coordinator_handle": "term_other"}]}}
+            if args[:2] == ["terminal", "show"] or args[:2] == ["terminal", "list"]:
+                return {"ok": True, "result": {"terminals": [
+                    {"handle": "term_other", "connected": True, "orphaned": False}]}}
+            if args[:2] == ["orchestration", "run-create"]:
+                return {"ok": True, "result": {"run": {"id": "run_new", "coordinator_handle": env.get("ORCA_TERMINAL_HANDLE")}}}
+            if args[:2] == ["orchestration", "task-create"]:
+                return {"ok": True, "result": {"task": {"id": "task_x", "status": "ready"}}}
+            return {"ok": False}
+
+        with tempfile.TemporaryDirectory() as tmp, \
+             patch.dict(os.environ, env, clear=False), \
+             patch.object(dispatcher, "ORCHESTRATION_PATH", Path(tmp) / "orchestration.json"), \
+             patch.object(dispatcher, "run_orca", side_effect=fake_run_orca), \
+             patch.object(dispatcher, "load_orchestration_state", return_value=state):
+            if "ORCA_TERMINAL_HANDLE" not in env:
+                os.environ.pop("ORCA_TERMINAL_HANDLE", None)
+            dispatcher.dispatch_to_orca("mensaje sintético", [dict(self.STREAM)])
+        return calls
+
+    def _from_values(self, calls: list[list[str]]) -> list[str]:
+        return [c[c.index("--from") + 1] for c in calls if "--from" in c]
+
+    def test_never_impersonates_another_terminal(self):
+        state = {"orca": {"orca_run_id": "run_old", "coordinator_handle": "term_other"}}
+        calls = self._dispatch({"ORCA_TERMINAL_HANDLE": "term_self"}, state)
+        self.assertEqual(set(self._from_values(calls)) - {"term_self"}, set())
+        task = [c for c in calls if c[:2] == ["orchestration", "task-create"]][0]
+        self.assertEqual(task[task.index("--run") + 1], "run_new")
+
+    def test_outside_orca_terminal_sends_no_from(self):
+        calls = self._dispatch({}, {"orca": {"orca_run_id": "run_old", "coordinator_handle": "term_other"}})
+        self.assertEqual(self._from_values(calls), [])
 
 
 if __name__ == "__main__":
