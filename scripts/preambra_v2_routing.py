@@ -170,8 +170,18 @@ def make_handoffs(message: str, streams: list[dict[str, Any]], decision: dict[st
     """Create contracts, never auto-create worktrees, workers or tasks."""
     job_id = "PRE-" + hashlib.sha256(message.encode("utf-8")).hexdigest()[:12].upper()
     contracts = []
+    paused = _unavailable_set(decision.get("unavailable_ais", ()))
     for i, stream in enumerate(streams, start=1):
         owner = decision["lead_candidate"] if decision["mode"] == "A" else stream.get("preferred_ai", "codex")
+        risks = ["Execution is not authorized by the planning output"]
+        reviewer = None
+        if decision["mode"] != "A":
+            # Each builder needs a reviewer other than itself, not only the run lead.
+            reviewer = decision["reviewer_candidate"]
+            if reviewer is None or reviewer == owner:
+                reviewer = _reviewer(owner, paused)
+            if reviewer is None:
+                risks.append("No independent reviewer available; human review required before DONE.")
         contracts.append({
             "schema_version": "2.0",
             "job_id": f"{job_id}-{i:02}",
@@ -180,7 +190,7 @@ def make_handoffs(message: str, streams: list[dict[str, Any]], decision: dict[st
             "goal": stream.get("objective") or stream.get("title") or message,
             "mode": decision["mode"],
             "owner": owner,
-            "reviewer": decision["reviewer_candidate"] if decision["reviewer_candidate"] != owner else None,
+            "reviewer": reviewer,
             "model_observed": "UNKNOWN",
             "reasoning_effort_candidate": stream.get("effort", "medium"),
             "tool_access": {"orca": "UNKNOWN", "agent_session": "UNKNOWN"},
@@ -195,7 +205,7 @@ def make_handoffs(message: str, streams: list[dict[str, Any]], decision: dict[st
             "checks": [],
             "status": "PLANNED",
             "evidence": [],
-            "risks": ["Execution is not authorized by the planning output"],
+            "risks": risks,
             "next_action": "VERIFY_RUNTIME_AND_APPROVE_SCOPE",
         })
     return contracts
@@ -220,6 +230,9 @@ def validate_contract(contract: dict[str, Any]) -> list[str]:
         errors.append("DONE requires nonempty evidence")
     if contract.get("status") == "DONE" and not contract.get("checks"):
         errors.append("DONE requires checks")
+    if (contract.get("status") == "DONE" and contract.get("mode") in ("B", "C", "D")
+            and not contract.get("reviewer") and not contract.get("human_review")):
+        errors.append("DONE requires an independent reviewer or recorded human_review")
     if not isinstance(contract.get("owned_paths"), list):
         errors.append("owned_paths must be a list")
     else:
