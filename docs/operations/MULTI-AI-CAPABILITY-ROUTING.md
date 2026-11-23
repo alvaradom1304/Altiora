@@ -1,5 +1,5 @@
 # PREAMBRA | Enrutamiento multi-IA y evaluación de capacidades
-**Revisión de fuentes públicas:** 2026-11-17 (Costa Rica). **Estado:** política operativa propuesta, no prueba de acceso a modelos ni benchmark.
+**Revisión de fuentes públicas:** 2026-11-23 (Costa Rica); línea base: 2026-11-17. **Estado:** política operativa propuesta, no prueba de acceso a modelos ni benchmark.
 
 ## Propósito y precedencia
 PREAMBRA es la firma comercial; Altiora sigue siendo el núcleo técnico y el nombre del repositorio. Esta guía forma parte de las reglas compartidas de `AGENTS.md`, visibles también desde `CLAUDE.md` y `GEMINI.md`. Cada IA debe conocer las otras plataformas, Orca, sus modelos, esfuerzos, límites, cuota y rutas de traspaso, aunque se inicie fuera de Orca. ChatGPT usa [su entrada específica](CHATGPT-ENTRY.md). No se instalan conectores ni se heredan permisos por leer documentación.
@@ -8,17 +8,29 @@ PREAMBRA es la firma comercial; Altiora sigue siendo el núcleo técnico y el no
 | Plataforma | Opciones comprobadas en documentación | Esfuerzo | Uso propuesto (no superioridad medida) |
 |---|---|---|---|
 | ChatGPT / Codex | GPT-6 Luna, GPT-6.1 Terra/Sol, GPT-6.2 Sol/Astra en las superficies y planes indicados por OpenAI | Low, Medium, High, Extra High; Max/Ultra solo donde esté disponible; los nombres cambian por cliente y modelo | ChatGPT: discovery, análisis empresarial, integración de información y dirección; Codex: código, backend, seguridad, pruebas |
-| Claude Code | Familias Haiku, Sonnet, Opus (documentación actual incluye Haiku 5.5, Sonnet 5.5, Opus 5.5; revisar disponibilidad del cliente) | low, medium, high, xhigh; max solo en modelos/CLI compatibles; `ultracode` es una configuración, **no** otro nivel | Copy, propuesta comercial, UX, arquitectura y ejecución multifase |
-| Antigravity | Gemini 3.8 Flash; Gemini 4 Hydrogen/Argon/Carbon y Orchestrator (Argon/Carbon), sujetos al plan; también lista modelos de terceros | Low, Medium, High y Extra/xhigh solo donde corresponde; Orchestrator tiene configuración fija | Browser QA, escenas interactivas y trabajo visual; Orchestrator para planificación + ejecución, si está habilitado |
+| Claude Code | Haiku/Sonnet/Opus 5.5 y Fable 5.2 según proveedor; alias `opusplan` usa Opus al planear y Sonnet al implementar (**no** otro modelo) | low, medium, high, xhigh, max sujetos a modelo y CLI; `ultracode` no es esfuerzo | Copy, estrategia, arquitectura y ejecución; ensayar `opusplan` tras comprobar CLI y costos |
+| Antigravity | Gemini 3.8 Flash y Gemini 4 Hydrogen/Argon/Carbon/**Neon**; Orchestrator planifica con Neon/Argon/Carbon y ejecuta con Hydrogen, sujeto a plan; terceros si están habilitados | Low, Medium, High y Extra/xhigh en Neon y Hydrogen; Orchestrator no ajusta /effort | Browser QA y trabajo visual; ensayar Orchestrator solo en trabajos complejos donde supere el modelo directo |
 | Orca | Runtime externo para coordinar CLI, Runs, Tasks, Dispatches, workers y worktrees | No reemplaza esfuerzo del modelo subyacente | Puente opcional entre CLIs, no es otro LLM |
 
-**Orca:** el repositorio de Altiora documentaba la release `v1.4.245`. La página oficial de `releases/latest` redirigía a **v1.4.261** el 2026-11-17. Es una **novedad pública**, NO actualización instalada ni validación de compatibilidad con el dispatcher existente. Nunca actualizar Orca, sus hooks o perfiles sin inspección, backup y prueba aislada.
+**Orca:** línea base documentada `v1.4.245` y revisión pública `v1.4.261` al 17-11. La release pública más reciente verificada al **2026-11-23** es **`v1.4.272`**, con notas de recuperación de bots, reanudación de sesiones y trabajadores interrumpidos. Estado **PUBLIC_ONLY**, no versión instalada ni prueba de compatibilidad con el dispatcher. Nunca actualizar Orca, hooks o perfiles sin inspección, backup y prueba aislada.
 
-**Fuentes oficiales, revisadas 2026-11-17:**
-- OpenAI Codex/Work: https://developers.openai.com/codex/models (redirecciona a https://learn.chatgpt.com/docs/models).
-- Claude Code: https://code.claude.com/docs/en/model-config
-- Antigravity: https://antigravity.google/docs/models y https://antigravity.google/docs/cli/commands/effort
-- Orca: https://github.com/stablyai/orca/releases/latest y https://github.com/stablyai/orca/blob/main/docs/site/content/docs/cli/orchestration.mdx
+**Fuentes oficiales, revisadas 2026-11-23:**
+- OpenAI Codex/Work: https://learn.chatgpt.com/docs/models ; créditos y cuotas: https://learn.chatgpt.com/docs/pricing .
+- Claude Code: https://code.claude.com/docs/en/model-config ; precios API: https://platform.claude.com/docs/en/about-claude/pricing
+- Antigravity: https://antigravity.google/docs/models , https://antigravity.google/docs/cli/commands/effort y https://antigravity.google/docs/plans
+- Orca: https://github.com/stablyai/orca/releases/tag/v1.4.272 y https://github.com/stablyai/orca/blob/main/docs/site/content/docs/cli/orchestration.mdx
+
+## Delta público frente al 2026-11-17; NO_VERIFICADO en el PC
+| Fuente | Cambio verificado en documentación | Restricción y decisión |
+|---|---|---|
+| OpenAI | GPT-6.2 Astra/Sol siguen documentados para Work/Codex; no se atribuye a una fecha de lanzamiento posterior | Créditos Standard por 1M entrada/caché/salida: Sol 50/2.5/250 y Astra 200/10/1000. Dependen de plan/velocidad; facturación API es distinta. Mantener modelo bajo viable |
+| Claude Code | Alias opusplan: Opus plan + Sonnet ejecuta; mínimos de CLI: Opus 5.5 >=2.1.280, Sonnet 5.5 >=2.1.284, Haiku 5.5 >=2.1.293 | API USD por 1M entrada/salida: Haiku 5.5 0.10/0.50 hasta prompts 100K (más después), Sonnet 5.5 2/10, Opus 5.5 4/20. No equivale a cuota de suscripción. Probar modo híbrido si CLI compatible |
+| Antigravity | Gemini 4 Neon (hasta 512K contexto, xhigh), Orchestrator: planner Neon/Argon/Carbon + ejecutor Hydrogen según plan | Neon no está en Free/Plus; Pro/Ultra/Enterprise sujetos a oferta. Cuotas de cinco horas y semanales, saldo personal desconocido. No convertir en predeterminado |
+| stablyai/Orca | Release v1.4.272 frente a v1.4.261 del 17-11; recuperación de workers y sesiones indicada en changelog | Compatibilidad con scripts locales, estado de instalación y continuidad real NO_VERIFICADOS. No actualizar binarios |
+
+**Control de gastos:** nunca confundir precio API en USD, créditos Codex/Work, cuotas de suscripción y costos del runtime. Decidir por entregable aprobado, minutos, revisión y fallos; tarea sencilla -> solución directa; solo delegar cuando haya ahorro o mejora comprobada. Fuentes y tarifas consultadas 2026-11-23; sujetas a cambio.
+
+**Pruebas pendientes, sin ejecución de agentes:** JSON parse + contratos de routing; smoke heurístico plan-only; posteriormente preflight de versión/modelos/cuotas en el PC autorizado; luego piloto A/B con datos anonimizados y métricas costo/calidad; finalmente ensayo aislado de recuperación de Orca. No se ha medido ahorro ni ejecutado workers en esta revisión.
 
 No confundir modelo disponible en el mercado, incluido en el plan, visible en CLI, autenticado, ejecutado y validado; son seis estados diferentes. Detectar modelos realmente utilizables con `/model` en Claude/Codex, `agy models` y el selector de Antigravity, y las capacidades reales del entorno ChatGPT. Anotar fecha, comando y evidencia. No fijar identificadores inexistentes en el dispositivo.
 

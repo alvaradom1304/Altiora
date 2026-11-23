@@ -2,7 +2,7 @@
   "schema_version": 1,
   "brand": "PREAMBRA",
   "technical_legacy": "Altiora",
-  "audited_on": "2026-11-17",
+  "audited_on": "2026-11-23",
   "purpose": "Readiness and model-discovery policy. This is not a benchmark or authenticated environment inventory.",
   "scoring": {
     "scale": 10,
@@ -51,7 +51,8 @@
         "GPT-6 Luna",
         "GPT-6.1 Sol",
         "GPT-6.2 Sol",
-        "GPT-6.2 Astra"
+        "GPT-6.2 Astra",
+        "GPT-6.1 Terra, según superficie y plan"
       ],
       "effort_policy": [
         "low",
@@ -99,7 +100,11 @@
         "authenticated_runtime_invocation": 0,
         "complete_handoff_and_qa": 0
       },
-      "score_evidence": "GitHub Actions CI check Windows/Linux, run 44187310079 (PR #90); no desktop authentication verified"
+      "score_evidence": "GitHub Actions CI check Windows/Linux, run 44187310079 (PR #90); no desktop authentication verified",
+      "routing_options_documented": [
+        "opusplan: Opus para planificación y Sonnet para ejecución (alias no-modelo)",
+        "CLI mínimo: Opus 5.5 v2.1.280; Sonnet 5.5 v2.1.284; Haiku 5.5 v2.1.293"
+      ]
     },
     {
       "id": "antigravity",
@@ -112,7 +117,9 @@
         "Gemini 4 Argon",
         "Gemini 4 Carbon",
         "Orchestrator Argon/Carbon fixed effort if enabled",
-        "Claude 5.5 partner models only if enabled"
+        "Claude 5.5 partner models only if enabled",
+        "Gemini 4 Neon (Pro/Ultra/Enterprise; acceso local NO_VERIFICADO)",
+        "Orchestrator Neon/Argon/Carbon planner + Hydrogen executor según plan"
       ],
       "effort_policy": [
         "low",
@@ -142,9 +149,9 @@
       "effort_policy": [],
       "orca_launchable": "N_A",
       "model_runtime": "N_A",
-      "latest_public_version_checked": "v1.4.261",
-      "latest_public_version_checked_on": "2026-11-17",
-      "installed_runtime_version": "UNKNOWN_2026-11-17",
+      "latest_public_version_checked": "v1.4.272",
+      "latest_public_version_checked_on": "2026-11-23",
+      "installed_runtime_version": "UNKNOWN_2026-11-23",
       "readiness_breakdown": {
         "shared_instructions": 2,
         "official_product_docs": 2,
@@ -162,31 +169,32 @@
     "token_savings": "NOT_MEASURED",
     "agent_scores_last_verified": "2026-11-17_CI_PASS_ROUTING_ONLY",
     "routing_smoke_evidence": "https://github.com/alvaradom1304/Altiora/actions/runs/44187310079",
-    "routing_smoke_merged_pr": "https://github.com/alvaradom1304/Altiora/pull/90"
+    "routing_smoke_merged_pr": "https://github.com/alvaradom1304/Altiora/pull/90",
+    "public_catalog_checked_on": "2026-11-23"
   },
   "sources": [
     {
       "vendor": "openai",
       "url": "https://learn.chatgpt.com/docs/models",
-      "checked_on": "2026-11-17",
+      "checked_on": "2026-11-23",
       "scope": "Codex and Work supported model family and reasoning tiers"
     },
     {
       "vendor": "anthropic",
       "url": "https://code.claude.com/docs/en/model-config",
-      "checked_on": "2026-11-17",
+      "checked_on": "2026-11-23",
       "scope": "Claude Code supported aliases, efforts, ultracode and per-model limits"
     },
     {
       "vendor": "google",
       "url": "https://antigravity.google/docs/models",
-      "checked_on": "2026-11-17",
+      "checked_on": "2026-11-23",
       "scope": "Antigravity model menu including Orchestrator and plan limits"
     },
     {
       "vendor": "google",
       "url": "https://antigravity.google/docs/cli/commands/effort",
-      "checked_on": "2026-11-17",
+      "checked_on": "2026-11-23",
       "scope": "Antigravity CLI effort levels and per-model constraints"
     },
     {
@@ -198,15 +206,85 @@
     {
       "vendor": "orca",
       "url": "https://github.com/stablyai/orca/blob/main/docs/site/content/docs/cli/orchestration.mdx",
-      "checked_on": "2026-11-17",
+      "checked_on": "2026-11-23",
       "scope": "Orca runtime and orchestration prerequisites"
+    },
+    {
+      "vendor": "openai",
+      "url": "https://learn.chatgpt.com/docs/pricing",
+      "checked_on": "2026-11-23",
+      "scope": "Codex/Work credits and quotas"
+    },
+    {
+      "vendor": "anthropic",
+      "url": "https://platform.claude.com/docs/en/about-claude/pricing",
+      "checked_on": "2026-11-23",
+      "scope": "API pricing"
+    },
+    {
+      "vendor": "google",
+      "url": "https://antigravity.google/docs/plans",
+      "checked_on": "2026-11-23",
+      "scope": "Quota and paid plans"
+    },
+    {
+      "vendor": "orca",
+      "url": "https://github.com/stablyai/orca/releases/tag/v1.4.272",
+      "checked_on": "2026-11-23",
+      "scope": "Public latest release, not local runtime"
     }
   ],
-  "next_action": "Run python scripts/preambra-orca-smoke.py, then local Orca first-task read-only execution and independent QA.",
+  "next_action": "Read-only schema and heuristics smoke; authorized local preflight before any worker, paid request, runtime update or production change.",
   "review_policy": {
     "trigger": "Before model routing on a substantial task, and whenever a provider announces a change",
     "source_priority": "Official model picker and provider documentation; runtime CLI proof outranks static docs for access",
     "stale_after_days_for_public_catalog": 14,
     "note": "This does not install a scheduled background watcher or refresh models automatically."
+  },
+  "previous_public_review": "2026-11-17",
+  "public_catalog_update": {
+    "date": "2026-11-23",
+    "baseline": "2026-11-17",
+    "status": "PUBLIC_ONLY",
+    "delta": {
+      "openai": "GPT-6.2 Astra/Sol documented; no proven new launch since prior review",
+      "claude": "opusplan and version minimums documented; local CLI unknown",
+      "google": "Gemini 4 Neon and Orchestrator composition newly documented; personal plan access unknown",
+      "orca": "v1.4.272 public release; local installation and dispatcher compatibility unknown"
+    },
+    "cost_reference": {
+      "openai_codex_credits_per_1m_standard": {
+        "sol_6_2": {
+          "input": 50,
+          "cached": 2.5,
+          "output": 250
+        },
+        "astra_6_2": {
+          "input": 200,
+          "cached": 10,
+          "output": 1000
+        }
+      },
+      "claude_api_usd_per_1m": {
+        "haiku_5_5_up_to_100k": {
+          "input": 0.1,
+          "output": 0.5
+        },
+        "sonnet_5_5": {
+          "input": 2,
+          "output": 10
+        },
+        "opus_5_5": {
+          "input": 4,
+          "output": 20
+        }
+      },
+      "notes": "API USD, Work/Codex credits, subscription usage and Google quota are not interchangeable; Haiku >100K prompts carry higher price."
+    },
+    "personal_access": "NO_VERIFICADO",
+    "local_cli_versions": "NO_VERIFICADO",
+    "quota_remaining": "NO_VERIFICADO",
+    "cross_agent_compatibility": "NO_VERIFICADO",
+    "measured_savings": "NOT_MEASURED"
   }
 }
