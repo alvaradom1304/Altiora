@@ -153,6 +153,34 @@ DOMAIN_RULES: list[dict[str, Any]] = [
             "notebooks/",
         ],
     },
+    {
+        "domain": "client-content",
+        "title": "Contenido de Cliente: Carruseles, Reels, Captions y Calendario",
+        "agent": "claude",
+        "orca_agent": "claude",
+        "rationale": (
+            "Claude Code redacta guiones, captions y piezas sociales de un cliente y las renderiza "
+            "con herramientas deterministas; el codigo web del repo no interviene."
+        ),
+        "keywords": [
+            "carrusel", "carruseles", "reel", "reels", "caption", "pie de foto", "lamina",
+            "laminas", "láminas", "lámina", "storyboard", "portada", "instagram", "tiktok",
+            "facebook", "calendario de contenido", "guion", "moodboard",
+        ],
+        "default_skills": [
+            "social-creative",
+            "copywriting",
+            "scriptwriting",
+            "storyboarding",
+        ],
+        "owned_paths": [
+            "produccion/",
+        ],
+        "verification": (
+            "validaciones deterministas del entregable (formato, texto prohibido, archivos) y "
+            "revision independiente antes de publicar (el codigo web del repo no interviene)"
+        ),
+    },
 ]
 
 
@@ -245,12 +273,45 @@ def match_catalog_skills(message: str, domain_defaults: list[str], limit: int = 
     return selected[:limit]
 
 
-def classify_message(message: str) -> list[dict[str, Any]]:
+WEB_VERIFICATION = "npm run check"
+# Palabras que delatan trabajo de codigo web: con ellas el dominio de marca/frontend no se descarta.
+WEB_ONLY_KEYWORDS = {"ui", "componente", "react", "nextjs", "next.js", "tailwind", "css", "layout", "landing"}
+PROJECTS_ENV = "ALTIORA_PROJECTS_FILE"
+
+
+def keyword_hit(kw: str, lowered: str) -> bool:
+    """Palabras de 3 letras o menos exigen limites de palabra (evita 'ui' dentro de 'construir')."""
+    if len(kw) <= 3:
+        return re.search(rf"(?<!\w){re.escape(kw)}(?!\w)", lowered) is not None
+    return kw in lowered
+
+
+def load_projects(path: str | None = None) -> dict[str, dict[str, Any]]:
+    """Proyectos opcionales fuera del repo: {id: {keywords, domain?, owned_paths?, verification?}}."""
+    raw = path or os.environ.get(PROJECTS_ENV)
+    if not raw or not Path(raw).exists():
+        return {}
+    try:
+        data = json.loads(Path(raw).read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        return {}
+    return {k: v for k, v in data.items() if isinstance(v, dict) and v.get("keywords")}
+
+
+def detect_project(message: str, projects: dict[str, dict[str, Any]]) -> str | None:
+    lowered = message.lower()
+    for pid, cfg in projects.items():
+        if any(keyword_hit(str(k).lower(), lowered) for k in cfg["keywords"]):
+            return pid
+    return None
+
+
+def classify_message(message: str, projects: dict[str, dict[str, Any]] | None = None) -> list[dict[str, Any]]:
     lowered = message.lower()
     matched_streams: list[dict[str, Any]] = []
 
     for rule in DOMAIN_RULES:
-        hits = [kw for kw in rule["keywords"] if kw in lowered]
+        hits = [kw for kw in rule["keywords"] if keyword_hit(kw, lowered)]
         if hits:
             matched_streams.append(
                 {
@@ -265,6 +326,34 @@ def classify_message(message: str) -> list[dict[str, Any]]:
                     "owned_paths": rule["owned_paths"],
                 }
             )
+
+    # Contenido de cliente sin codigo web: el dominio de marca/frontend (Next.js) no aplica.
+    domains_hit = {m["domain"] for m in matched_streams}
+    if "client-content" in domains_hit and "brand-copy-frontend" in domains_hit:
+        brand = next(m for m in matched_streams if m["domain"] == "brand-copy-frontend")
+        if not WEB_ONLY_KEYWORDS & set(brand["matched_keywords"]):
+            matched_streams = [m for m in matched_streams if m["domain"] != "brand-copy-frontend"]
+
+    known = projects if projects is not None else load_projects()
+    project_id = detect_project(message, known)
+    if project_id:
+        cfg = known[project_id]
+        rule = next(r for r in DOMAIN_RULES if r["domain"] == cfg.get("domain", "client-content"))
+        matched_streams = [
+            {
+                "domain": rule["domain"],
+                "title": rule["title"],
+                "preferred_ai": rule["agent"],
+                "orca_worker_agent": rule["orca_agent"],
+                "rationale": rule["rationale"],
+                "matched_keywords": [f"project:{project_id}"],
+                "score": 99,
+                "skills": match_catalog_skills(message, rule["default_skills"]),
+                "owned_paths": cfg.get("owned_paths", rule["owned_paths"]),
+                "project": project_id,
+                "verification": cfg.get("verification", rule.get("verification", WEB_VERIFICATION)),
+            }
+        ]
 
     matched_streams.sort(key=lambda item: -item["score"])
 
@@ -302,6 +391,10 @@ def finalize_streams(message: str, streams: list[dict[str, Any]]) -> list[dict[s
         )
         skills_str = ", ".join(stream["skills"])
         paths_str = ", ".join(stream["owned_paths"])
+        verification = stream.get("verification") or next(
+            (r.get("verification", WEB_VERIFICATION) for r in DOMAIN_RULES if r["domain"] == stream["domain"]),
+            WEB_VERIFICATION,
+        )
         stream["task_title"] = f"[{stream['preferred_ai'].upper()}] {stream['title']}"
         # El enrutador por modelo ya trae el esfuerzo; la heurística solo se usa si falta.
         effort = stream.get("effort") or choose_effort(message, stream["domain"])
@@ -321,7 +414,7 @@ def finalize_streams(message: str, streams: list[dict[str, Any]]) -> list[dict[s
             f"Esfuerzo de razonamiento sugerido: {effort}. {stream['effort_hint']}\n"
             f"Skills a consultar bajo demanda: {skills_str}.\n"
             f"Ámbito de archivos propios (un escritor por archivo): {paths_str}.\n"
-            f"Verificación requerida antes de cerrar: npm run check."
+            f"Verificación requerida antes de cerrar: {verification}."
         )
 
     return streams
@@ -883,6 +976,11 @@ def main() -> int:
         help="Segundos que se vigila cada worker lanzado para detectar falta de créditos y reenviar a otra IA.",
     )
     parser.add_argument(
+        "--projects-file",
+        default=None,
+        help="JSON opcional (fuera del repo) con proyectos de cliente: palabras clave, rutas y verificacion. Tambien ALTIORA_PROJECTS_FILE.",
+    )
+    parser.add_argument(
         "--json",
         action="store_true",
         help="Imprime el resultado completo en formato JSON.",
@@ -907,7 +1005,7 @@ def main() -> int:
         if streams is None:
             router_meta["fallback"] = "heuristic"
     if streams is None:
-        streams = classify_message(full_message)
+        streams = classify_message(full_message, load_projects(args.projects_file) if args.projects_file else None)
 
     result: dict[str, Any] = {
         "ok": True,

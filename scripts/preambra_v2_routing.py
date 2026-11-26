@@ -16,12 +16,24 @@ STATUSES = ("PLANNED", "READY", "IN_PROGRESS", "REVIEW", "APPROVED", "DONE",
             "BLOCKED", "FAILED", "CANCELED")
 
 # Signal-based, conservative policy. This does not constitute an AI quality score.
-CRITICAL = re.compile(
-    r"\b(?:seguridad|owasp|vulnerabilid\w*|contrato\w*|legal(?:es)?|"
+_CRITICAL_TERMS = (
+    r"(?:seguridad|owasp|vulnerabilid\w*|contrato\w*|legal(?:es)?|"
     r"impuest\w*|pago\w*|cobro\w*|finanz\w*|datos personales|"
-    r"producci[oó]n|publicar|publicaci[oó]n|borrar|eliminar)\b",
+    r"(?:en|a) producci[oó]n|publicar|publicaci[oó]n(?:es)? (?:en vivo|oficial)|borrar|eliminar)"
+)
+CRITICAL = re.compile(rf"\b{_CRITICAL_TERMS}\b", re.IGNORECASE)
+# "no publicar", "sin borrar", "nunca eliminar...": una prohibicion no es una accion de riesgo.
+NEGATED_CRITICAL = re.compile(
+    rf"\b(?:no|sin|nunca|ni|jam[aá]s|evit\w*)\s+(?:[\wáéíóúñ]+\s+){{0,2}}?{_CRITICAL_TERMS}\b",
     re.IGNORECASE,
 )
+
+
+def risk_signals(message: str) -> list[str]:
+    """Terminos criticos que quedan tras quitar los negados; permite auditar por que un encargo es critical."""
+    return [m.group(0).lower() for m in CRITICAL.finditer(NEGATED_CRITICAL.sub(" ", message))]
+
+
 SUBSTANTIAL = re.compile(
     r"\b(?:crear|desarrollar|implementar|integrar|auditar|investigar|"
     r"refactorizar|dise[nñ]ar|redise[nñ]ar|desplegar|revisar|"
@@ -87,7 +99,8 @@ def decide_mode(message: str, streams: list[dict[str, Any]], entrypoint: str = "
         raise ValueError("The job description cannot be empty")
     collisions = overlapping_paths(streams)
     dependent = _has_dependencies(streams)
-    critical = bool(CRITICAL.search(message))
+    signals = risk_signals(message)
+    critical = bool(signals)
     high_scope = bool(INTEGRAL.search(message))
     parallel_request = bool(INDEPENDENT.search(message))
     separate = len(streams) > 1 and not collisions and not dependent
@@ -122,6 +135,7 @@ def decide_mode(message: str, streams: list[dict[str, Any]], entrypoint: str = "
         "entrypoint": entrypoint,
         "lead_candidate": lead,
         "reviewer_candidate": reviewer if mode in ("B", "C", "D") else None,
+        "risk_signals": signals,
         "risk": "critical" if critical else ("elevated" if high_scope else "standard"),
         "parallel_requested": parallel_request,
         "parallel_safe": bool(separate and not critical),
