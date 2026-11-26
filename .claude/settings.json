@@ -27,5 +27,57 @@
         ]
       }
     ]
+  },
+  "permissions": {
+    "deny": [
+      "Edit(**/.env*)",
+      "Write(**/.env*)",
+      "Edit(**/*.pem)",
+      "Write(**/*.pem)",
+      "Edit(**/*.key)",
+      "Write(**/*.key)",
+      "Edit(**/id_rsa*)",
+      "Write(**/id_rsa*)",
+      "Edit(**/id_ed25519*)",
+      "Write(**/id_ed25519*)",
+      "Bash(git reset --hard*)",
+      "Bash(rm -rf*)",
+      "Edit(**/.claude/settings*.json)",
+      "Write(**/.claude/settings*.json)",
+      "Edit(**/.mcp.json)",
+      "Write(**/.mcp.json)",
+      "Edit(**/.codex/config.toml)",
+      "Write(**/.codex/config.toml)",
+      "Edit(**/.agents/mcp_config.json)",
+      "Write(**/.agents/mcp_config.json)",
+      "Edit(**/.altiora/policy.json)",
+      "Write(**/.altiora/policy.json)",
+      "Edit(**/.github/workflows/**)",
+      "Write(**/.github/workflows/**)",
+      "Edit(**/.githooks/**)",
+      "Write(**/.githooks/**)",
+      "Edit(team/profiles/profiles.json)",
+      "Write(team/profiles/profiles.json)",
+      "Bash(git config*)",
+      "Bash(setx*)",
+      "Bash(reg *)"
+    ],
+    "ask": [
+      "Bash(git push*)",
+      "Bash(git merge*)",
+      "Bash(gh pr merge*)",
+      "Bash(gh release*)",
+      "Bash(gh api*)",
+      "Bash(gh repo*)",
+      "Bash(npm publish*)",
+      "Bash(npm install*)",
+      "Bash(npm i *)",
+      "Bash(pip install*)",
+      "Bash(winget *)",
+      "Bash(choco *)",
+      "Bash(vercel*)",
+      "Bash(netlify*)",
+      "Bash(npm config*)"
+    ]
   }
 }

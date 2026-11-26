@@ -3,6 +3,7 @@ import argparse
 import copy
 import importlib.util
 import json
+import shutil
 import tempfile
 import unittest
 from pathlib import Path
@@ -41,7 +42,8 @@ def args(task: str = "Redacta el caption del carrusel", **kw) -> argparse.Namesp
     tmp.close()
     base = dict(profile="lean", project="altiora", task_file=tmp.name, cwd=str(REPO), add_dir=[],
                 allow_external_dir=False, mcp_config=[], provider=None, effort=None, reason=None,
-                approved_risk=False, allow_write=False, task_id=None, role="worker", log=None)
+                approved_risk=False, allow_write=False, allow_exec=False, task_id=None, role="worker", log=None,
+                det_cmd=None, depends_on=[], interactive=False, context_file=[], verify_cmd=None)
     base.update(kw)
     return argparse.Namespace(**base)
 
@@ -59,11 +61,16 @@ class ArranqueLeanTest(unittest.TestCase):
                      "--disallowedTools", "--max-turns", "--max-budget-usd"):
             self.assertIn(flag, r["command"])
         self.assertTrue(lean.LEAN_PROMPT.exists())
+        self.assertNotIn("Bash", r["tools_allowed"])  # LEAN sin ejecucion de comandos por defecto
+        deny = r["command"][r["command"].index("--disallowedTools") + 1].split(",")
+        self.assertIn("Bash", deny)
+        self.assertIn("Write(./**)", r["tools_allowed"])
+        self.assertEqual(r["command"][r["command"].index("--permission-mode") + 1], "default")
 
     def test_persistence_is_file_based(self):
         # Un proceso nuevo relee profiles.json: el predeterminado sobrevive a reinicios sin flags.
-        a = lean.parser(lean.load_config()).parse_args(["--project", "altiora", "--check"])
-        self.assertEqual(a.profile, "lean")
+        a = lean.parser(lean.load_config()).parse_args(["--check"])
+        self.assertEqual((a.profile, a.project), ("lean", "auto"))
 
 
 class ProyectoTest(unittest.TestCase):
@@ -131,6 +138,163 @@ class DelegacionTest(unittest.TestCase):
             self.assertEqual(pf(args(task_id="T2", role="reviewer", log=str(log)))["status"], "READY")
 
 
+class OrquestacionV31Test(unittest.TestCase):
+    def log_with(self, d, *rows):
+        log = Path(d) / "log.csv"
+        for r in rows:
+            lean.append_log(log, r)
+        return str(log)
+
+    def test_auto_project_and_task_id(self):
+        a = args(project="auto")
+        r = pf(a)
+        self.assertEqual((r["project"], r["status"]), ("altiora", "READY"))
+        self.assertTrue(r["task_id"].startswith("T-"))
+        self.assertEqual(pf(args(project="auto"), git=git_none)["status"], "BLOCKED")
+
+    def test_duplicate_task_blocked(self):
+        with tempfile.TemporaryDirectory() as d:
+            log = self.log_with(d, {"task_id": "T1", "rol": "worker", "estado": "OK", "total": 10})
+            self.assertTrue(any("duplicada" in b for b in pf(args(task_id="T1", log=log))["blocks"]))
+
+    def test_token_budget_exhausted(self):
+        with tempfile.TemporaryDirectory() as d:
+            log = self.log_with(d, {"task_id": "T1", "rol": "worker", "estado": "FALLO_rc1", "total": 150000})
+            self.assertTrue(any("presupuesto de tokens" in b for b in pf(args(task_id="T1", log=log))["blocks"]))
+
+    def test_coordination_budget(self):
+        with tempfile.TemporaryDirectory() as d:
+            rows = [{"task_id": "T1", "rol": "worker", "estado": "FALLO_rc1", "total": 1}] * 4
+            log = self.log_with(d, *rows)
+            self.assertTrue(any("coordinacion" in b for b in pf(args(task_id="T1", log=log))["blocks"]))
+
+    def test_dependencies(self):
+        with tempfile.TemporaryDirectory() as d:
+            log = self.log_with(d, {"task_id": "T0", "rol": "worker", "estado": "OK", "calidad": "FAIL", "total": 1})
+            self.assertTrue(any("dependencia" in b for b in pf(args(task_id="T1", depends_on=["T0"], log=log))["blocks"]))
+            log2 = self.log_with(d, {"task_id": "T9", "rol": "worker", "estado": "OK", "calidad": "PASS", "total": 1})
+            self.assertEqual(pf(args(task_id="T1", depends_on=["T9"], log=log2))["status"], "READY")
+
+    def test_deterministic_preferred_and_validated(self):
+        r = pf(args(det_cmd="python -c print(1)"))
+        self.assertEqual((r["provider"], r["model_planned"]), ("det", "determinista"))
+        self.assertTrue(any("sin -c/-e" in b for b in r["blocks"]))  # codigo en linea rechazado
+        self.assertTrue(lean.check_script_cmd("bash x.sh", ROOT, CFG, "v"))
+        self.assertEqual(lean.check_script_cmd("python scripts/lean_run.py --help", ROOT, CFG, "v"), [])
+        self.assertTrue(lean.check_script_cmd("python ../fuera.py", ROOT, CFG, "v"))
+
+    def test_exec_opt_in_and_not_with_risk(self):
+        r = pf(args(allow_exec=True))
+        self.assertIn("Bash(python *)", r["tools_allowed"])
+        self.assertNotIn("Bash", r["command"][r["command"].index("--disallowedTools") + 1].split(","))
+        r = pf(args("borra la carpeta vieja", allow_exec=True, approved_risk=True))
+        self.assertTrue(any("allow-exec" in b for b in r["blocks"]))
+
+    def test_interactive_has_no_print_only_flags(self):
+        r = pf(args(interactive=True))
+        self.assertEqual(r["status"], "READY", r["blocks"])
+        self.assertNotIn("-p", r["command"])
+        self.assertIn("--safe-mode", r["command"])
+        self.assertIn("--disallowedTools", r["command"])
+
+    def test_empty_result_is_not_ok(self):
+        s = lean.parse_stream([json.dumps({"type": "result", "result": "", "usage": {}})])
+        self.assertFalse(s["ok"])
+
+    def test_integrity_detects_secret_and_config_writes(self):
+        with tempfile.TemporaryDirectory() as d:
+            root = Path(d)
+            (root / ".claude").mkdir()
+            (root / "ok.txt").write_text("x")
+            before = lean.integrity_snapshot(root, CFG)
+            (root / "nuevo.txt").write_text("legitimo")
+            self.assertEqual(lean.integrity_diff(before, lean.integrity_snapshot(root, CFG)), [])
+            (root / ".env").write_text("FAKE=1")
+            (root / ".claude" / "settings.json").write_text("{}")
+            (root / ".env.example").write_text("A=")
+            self.assertEqual(lean.integrity_diff(before, lean.integrity_snapshot(root, CFG)),
+                             [".claude/settings.json", ".env"])
+
+
+class RevisionV31Test(unittest.TestCase):
+    """Regresiones de los hallazgos de la revision independiente de Codex (V31-REV)."""
+
+    def test_task_id_path_rejected(self):
+        for bad in (str(REPO), "../x", "a/b", "..", "C:\\x"):
+            r = pf(args(task_id=bad))
+            self.assertTrue(any("--task-id invalido" in b for b in r["blocks"]), bad)
+        with self.assertRaises(ValueError):
+            lean.neutral_workspace(str(REPO), [], REPO)
+
+    def test_neutral_workspace_never_reuses_or_deletes(self):
+        with tempfile.TemporaryDirectory() as d:
+            root = Path(d)
+            (root / "a.py").write_text("x")
+            w1 = lean.neutral_workspace("SAME", ["a.py"], root)
+            w2 = lean.neutral_workspace("SAME", ["a.py"], root)
+            self.assertNotEqual(w1, w2)
+            self.assertTrue(w1.exists())
+            shutil.rmtree(w1)
+            shutil.rmtree(w2)
+
+    def test_bash_denied_without_allow_exec_in_every_profile(self):
+        for prof, extra in (("standard", {}), ("advanced", {"reason": "arquitectura"})):
+            r = pf(args(profile=prof, **extra))
+            deny = r["command"][r["command"].index("--disallowedTools") + 1].split(",")
+            self.assertIn("Bash", deny, prof)
+            self.assertNotIn("Bash", r["tools_allowed"], prof)
+
+    def test_interactive_from_delegation_blocked(self):
+        r = pf(args(interactive=True, provider="claude"), env={lean.CHAIN_ENV: "codex"})
+        self.assertTrue(any("interactiva" in b for b in r["blocks"]))
+
+    def test_cmd_shims_rejected_on_windows(self):
+        if lean.sys.platform == "win32":
+            self.assertIsNone(lean.resolve_exe("x", which=lambda p: "C:/npm/x.CMD"))
+        self.assertEqual(lean.resolve_exe("x", which=lambda p: "C:/npm/x.EXE"), "C:/npm/x.EXE")
+
+    def test_limits_rechecked_before_each_attempt(self):
+        with tempfile.TemporaryDirectory() as d:
+            log = Path(d) / "log.csv"
+            task = Path(d) / "t.txt"
+            task.write_text("Redacta un caption", encoding="utf-8")
+            calls = []
+
+            def fake_run(cmd, provider, task_text, cwd, env):
+                calls.append(provider)
+                lean.append_log(log, {"task_id": "TB", "rol": "worker", "estado": "FALLO_rc1", "total": 150000})
+                return lean.subprocess.CompletedProcess(cmd, 1, "", "")
+
+            orig_run, orig_git, orig_which = lean.run_provider, lean.git_info, lean.shutil.which
+            lean.run_provider = fake_run
+            lean.git_info = lambda _c: (Path(d).resolve(), "https://github.com/alvaradom1304/Altiora.git")
+            lean.shutil.which = lambda p: f"/bin/{p}"
+            try:
+                rc = lean.main(["--project", "altiora", "--cwd", d, "--task-file", str(task), "--log", str(log),
+                                "--task-id", "TB"])
+            finally:
+                lean.run_provider, lean.git_info, lean.shutil.which = orig_run, orig_git, orig_which
+            self.assertEqual(rc, 2)
+            self.assertEqual(len(calls), 1)  # el presupuesto agotado tras el 1.er intento impide el 2.o
+
+
+class CodexNeutralTest(unittest.TestCase):
+    def test_codex_lean_ignores_user_config(self):
+        self.assertIn("--ignore-user-config", pf(args(provider="codex"))["command"])
+
+    def test_context_files_validated_and_copied(self):
+        with tempfile.TemporaryDirectory() as d:
+            root = Path(d)
+            (root / "a.py").write_text("x = 1")
+            (root / ".env").write_text("S=1")
+            self.assertEqual(lean.check_context_files(["a.py"], root, CFG), [])
+            self.assertTrue(lean.check_context_files([".env"], root, CFG))
+            self.assertTrue(lean.check_context_files(["../fuera.py"], root, CFG))
+            ws = lean.neutral_workspace("TEST-NEUTRAL", ["a.py"], root)
+            self.assertEqual(sorted(p.name for p in ws.iterdir()), ["AGENTS.md", "a.py"])
+            shutil.rmtree(ws)
+
+
 class SeguridadTest(unittest.TestCase):
     def test_mixed_negation_blocks_risky_task(self):
         self.assertEqual(pf(args("no publicar el borrador"))["status"], "READY")
@@ -149,9 +313,10 @@ class SeguridadTest(unittest.TestCase):
         cfg["profiles"]["lean"]["claude_flags"].append("--dangerously-skip-permissions")
         self.assertTrue(any("prohibida" in b for b in pf(args(), cfg=cfg)["blocks"]))
 
-    def test_codex_write_only_when_explicit(self):
+    def test_codex_read_only_and_write_blocked(self):
         self.assertIn("read-only", pf(args(provider="codex"))["command"])
-        self.assertIn("workspace-write", pf(args(provider="codex", allow_write=True))["command"])
+        r = pf(args(provider="codex", allow_write=True))
+        self.assertTrue(any("--allow-write bloqueado" in b for b in r["blocks"]))
 
 
 class EconomiaTest(unittest.TestCase):

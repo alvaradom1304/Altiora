@@ -1,74 +1,226 @@
 {
-  "schema_version": "3.0.0",
+  "schema_version": "3.1.0",
   "updated": "2026-11-26",
   "note": "Fuente unica de perfiles PREAMBRA. La lee scripts/lean_run.py; no duplicar estos valores en otros archivos. Presupuestos en USD son nocionales (con OAuth/suscripcion no hay cargo de API).",
   "default_profile": "lean",
   "limits": {
     "max_retries": 2,
     "max_review_cycles": 2,
-    "max_delegation_depth": 1
+    "max_delegation_depth": 1,
+    "max_delegations_per_task": 4
   },
   "security": {
     "deny_tools": [
-      "Edit(**/.env*)", "Write(**/.env*)", "Edit(**/*.pem)", "Write(**/*.pem)",
-      "Edit(**/*.key)", "Write(**/*.key)", "Edit(**/id_rsa*)", "Write(**/id_rsa*)",
-      "Edit(**/id_ed25519*)", "Write(**/id_ed25519*)",
-      "Bash(git push*)", "Bash(git merge*)", "Bash(git reset --hard*)", "Bash(gh pr merge*)",
-      "Bash(gh release*)", "Bash(npm publish*)", "Bash(npm install*)", "Bash(npm i *)",
-      "Bash(pip install*)", "Bash(winget *)", "Bash(choco *)", "Bash(rm -rf*)"
+      "Edit(**/.env*)",
+      "Write(**/.env*)",
+      "Edit(**/*.pem)",
+      "Write(**/*.pem)",
+      "Edit(**/*.key)",
+      "Write(**/*.key)",
+      "Edit(**/id_rsa*)",
+      "Write(**/id_rsa*)",
+      "Edit(**/id_ed25519*)",
+      "Write(**/id_ed25519*)",
+      "Bash(git push*)",
+      "Bash(git merge*)",
+      "Bash(git reset --hard*)",
+      "Bash(gh pr merge*)",
+      "Bash(gh release*)",
+      "Bash(npm publish*)",
+      "Bash(npm install*)",
+      "Bash(npm i *)",
+      "Bash(pip install*)",
+      "Bash(winget *)",
+      "Bash(choco *)",
+      "Bash(rm -rf*)",
+      "Edit(**/.claude/settings*.json)",
+      "Write(**/.claude/settings*.json)",
+      "Edit(**/.mcp.json)",
+      "Write(**/.mcp.json)",
+      "Edit(**/.codex/config.toml)",
+      "Write(**/.codex/config.toml)",
+      "Edit(**/.agents/mcp_config.json)",
+      "Write(**/.agents/mcp_config.json)",
+      "Edit(**/.altiora/policy.json)",
+      "Write(**/.altiora/policy.json)",
+      "Edit(**/.github/workflows/**)",
+      "Write(**/.github/workflows/**)",
+      "Edit(**/.githooks/**)",
+      "Write(**/.githooks/**)",
+      "Edit(team/profiles/profiles.json)",
+      "Write(team/profiles/profiles.json)",
+      "Bash(gh repo*)",
+      "Bash(gh api*)",
+      "Bash(vercel*)",
+      "Bash(netlify*)",
+      "Bash(git config*)",
+      "Bash(npm config*)",
+      "Bash(setx*)",
+      "Bash(reg *)"
     ],
-    "forbidden_flags": ["--dangerously-skip-permissions", "--dangerously-bypass-approvals-and-sandbox", "bypassPermissions", "--allow-dangerously-skip-permissions"],
+    "forbidden_flags": [
+      "--dangerously-skip-permissions",
+      "--dangerously-bypass-approvals-and-sandbox",
+      "bypassPermissions",
+      "--allow-dangerously-skip-permissions"
+    ],
     "codex_sandbox": "read-only",
     "codex_sandbox_write": "workspace-write",
     "agy_mode": "plan",
-    "agy_mode_write": "accept-edits"
+    "agy_mode_write": "accept-edits",
+    "protected_names": [
+      ".env",
+      ".env.*",
+      "*.pem",
+      "*.key",
+      "id_rsa*",
+      "id_ed25519*"
+    ],
+    "protected_paths": [
+      ".claude/settings.json",
+      ".claude/settings.local.json",
+      ".mcp.json",
+      ".codex/config.toml",
+      ".agents/mcp_config.json",
+      ".altiora/policy.json",
+      "team/profiles/profiles.json",
+      ".github/workflows/",
+      ".githooks/"
+    ],
+    "note_hooks": "Los hooks fallan abiertos al agotar tiempo (Claude Code). Los controles obligatorios son reglas nativas (--disallowedTools / permissions.deny) y la verificacion de integridad del lanzador, no hooks.",
+    "codex_windows_sandbox": "elevated",
+    "note_codex": "--ignore-user-config descarta [windows] sandbox; sin el, Codex no ejecuta comandos en Windows (piloto V31-T5). El lanzador lo reinyecta con -c.",
+    "note_write": "Codex workspace-write y Agy accept-edits no pueden denegar rutas protegidas: --allow-write queda BLOQUEADO para ellos hasta decision del fundador.",
+    "script_runners": [
+      "python",
+      "node"
+    ]
   },
   "models": {
-    "claude": {"low": "claude-haiku-5-5", "medium": "claude-sonnet-5-5", "high": "claude-opus-5-5", "xhigh": "claude-opus-5-5", "max": "claude-opus-5-5"},
-    "codex": {"low": "gpt-6.1-sol", "medium": "gpt-6.1-sol", "high": "gpt-6.1-sol", "xhigh": "gpt-6.1-sol"},
-    "agy": {"low": "gemini-3.8-flash", "medium": "gemini-3.8-flash", "high": "gemini-4-argon"}
+    "claude": {
+      "low": "claude-haiku-5-5",
+      "medium": "claude-sonnet-5-5",
+      "high": "claude-opus-5-5",
+      "xhigh": "claude-opus-5-5",
+      "max": "claude-opus-5-5"
+    },
+    "codex": {
+      "low": "gpt-6.1-sol",
+      "medium": "gpt-6.1-sol",
+      "high": "gpt-6.1-sol",
+      "xhigh": "gpt-6.1-sol"
+    },
+    "agy": {
+      "low": "gemini-3.8-flash",
+      "medium": "gemini-3.8-flash",
+      "high": "gemini-4-argon"
+    }
   },
   "profiles": {
     "lean": {
       "purpose": "Predeterminado: redaccion, render, ajustes de un dominio, tareas repetibles con contexto pre-extraido.",
-      "efforts": ["low", "medium"],
+      "efforts": [
+        "low",
+        "medium"
+      ],
       "default_effort": "medium",
       "max_turns": 12,
       "max_budget_usd": 0.5,
-      "providers": ["claude", "codex"],
-      "claude_flags": ["--safe-mode", "--strict-mcp-config", "--disable-slash-commands"],
+      "providers": [
+        "claude",
+        "codex"
+      ],
+      "claude_flags": [
+        "--safe-mode",
+        "--strict-mcp-config",
+        "--disable-slash-commands"
+      ],
       "append_prompt": "team/profiles/lean.md",
-      "tools": "Read,Write,Edit,Glob,Grep,Bash(python *)",
-      "extra_deny": ["Bash(curl*)", "Bash(wget*)", "WebFetch", "WebSearch"],
-      "hooks": "OFF por --safe-mode; sustituidos por security.deny_tools via --disallowedTools"
+      "tools": "Read,Write,Edit,Glob,Grep",
+      "extra_deny": [
+        "Bash(curl*)",
+        "Bash(wget*)",
+        "WebFetch",
+        "WebSearch"
+      ],
+      "hooks": "OFF por --safe-mode; sustituidos por reglas nativas (--disallowedTools) y verificacion de integridad posterior",
+      "exec_tools": "Bash(python *)",
+      "max_task_tokens": 150000,
+      "codex_flags": [
+        "--ignore-user-config"
+      ]
     },
     "standard": {
       "purpose": "Bajo demanda: investigacion especializada o logica de componentes/ventas con solo los MCP que la tarea pida.",
-      "efforts": ["low", "medium", "high"],
+      "efforts": [
+        "low",
+        "medium",
+        "high"
+      ],
       "default_effort": "medium",
       "max_turns": 25,
       "max_budget_usd": 2.0,
-      "providers": ["claude", "codex", "agy"],
-      "claude_flags": ["--strict-mcp-config"],
-      "tools": "Read,Write,Edit,Glob,Grep,Bash(python *),Bash(node *),Bash(git status*),Bash(git diff*)",
-      "hooks": "ON (settings del proyecto)"
+      "providers": [
+        "claude",
+        "codex",
+        "agy"
+      ],
+      "claude_flags": [
+        "--strict-mcp-config"
+      ],
+      "tools": "Read,Write,Edit,Glob,Grep",
+      "hooks": "ON (settings del proyecto)",
+      "max_task_tokens": 600000,
+      "codex_flags": [
+        "--ignore-user-config"
+      ],
+      "exec_tools": "Bash(python *),Bash(node *),Bash(git status*),Bash(git diff*)"
     },
     "advanced": {
       "purpose": "Escalamiento justificado: arquitectura, decisiones estrategicas, multiagente, revision independiente. Exige --reason.",
-      "efforts": ["low", "medium", "high", "xhigh", "max"],
+      "efforts": [
+        "low",
+        "medium",
+        "high",
+        "xhigh",
+        "max"
+      ],
       "default_effort": "high",
       "max_turns": 40,
       "max_budget_usd": 5.0,
-      "providers": ["claude", "codex", "agy"],
+      "providers": [
+        "claude",
+        "codex",
+        "agy"
+      ],
       "claude_flags": [],
-      "tools": "Read,Write,Edit,Glob,Grep,Bash",
+      "tools": "Read,Write,Edit,Glob,Grep",
       "requires_reason": true,
-      "hooks": "ON (configuracion completa del usuario)"
+      "hooks": "ON (configuracion completa del usuario)",
+      "max_task_tokens": 2000000,
+      "codex_flags": [],
+      "exec_tools": "Bash"
     }
   },
   "projects": {
-    "altiora": {"kind": "git", "remote": "alvaradom1304/Altiora"},
-    "la-central-del-queso": {"kind": "git", "remote": "alvaradom1304/la-central-del-queso"},
-    "currenda": {"kind": "folder", "note": "Carpeta local sin GitHub; no debe estar dentro de un repo registrado."}
-  }
+    "altiora": {
+      "kind": "git",
+      "remote": "alvaradom1304/Altiora"
+    },
+    "la-central-del-queso": {
+      "kind": "git",
+      "remote": "alvaradom1304/la-central-del-queso"
+    },
+    "currenda": {
+      "kind": "folder",
+      "note": "Carpeta local sin GitHub; no debe estar dentro de un repo registrado."
+    }
+  },
+  "known_providers": [
+    "claude",
+    "codex",
+    "agy",
+    "gemini",
+    "ollama"
+  ]
 }

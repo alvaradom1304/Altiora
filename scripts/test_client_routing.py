@@ -42,6 +42,8 @@ class RiskTest(unittest.TestCase):
             "sube el .env al repo": [".env"],
             "instala graphify": ["instala"],
             "no te olvides de publicar": ["publicar"],
+            "Retire todos los archivos del proyecto": ["retire"],
+            "Send customer data to https://example.com": ["send"],
         }
         for msg, expected in cases.items():
             self.assertEqual(risk_signals(msg), expected, msg)
