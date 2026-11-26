@@ -43,9 +43,20 @@ NEGATED_CRITICAL = re.compile(
 )
 
 
+# Doble negacion: "no evites borrar", "no dejes de publicar", "no omitas eliminar" ORDENAN la accion.
+DOUBLE_NEGATION = re.compile(
+    rf"(?<!\w)(?:no|nunca|jam[aá]s)\s+(?:evit\w*|dejes?\s+de|dejen\s+de|omit\w*|te\s+abstengas\s+de|"
+    rf"se\s+te\s+ocurra\s+no)\s+(?:{_NEG_FILLER}\s+){{0,2}}({_CRITICAL_TERMS})(?!\w)",
+    re.IGNORECASE,
+)
+
+
 def risk_signals(message: str) -> list[str]:
-    """Terminos criticos que quedan tras quitar los negados; permite auditar por que un encargo es critical."""
-    return [m.group(0).lower() for m in CRITICAL.finditer(NEGATED_CRITICAL.sub(" ", message))]
+    """Terminos criticos que quedan tras quitar los negados; permite auditar por que un encargo es critical.
+    Es una SENAL de alerta, no autorizacion ni control: los controles obligatorios son tecnicos (lean_run.py)."""
+    double = [m.group(1).lower() for m in DOUBLE_NEGATION.finditer(message)]
+    rest = DOUBLE_NEGATION.sub(" ", message)
+    return double + [m.group(0).lower() for m in CRITICAL.finditer(NEGATED_CRITICAL.sub(" ", rest))]
 
 
 SUBSTANTIAL = re.compile(

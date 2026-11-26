@@ -43,7 +43,7 @@ def args(task: str = "Redacta el caption del carrusel", **kw) -> argparse.Namesp
     base = dict(profile="lean", project="altiora", task_file=tmp.name, cwd=str(REPO), add_dir=[],
                 allow_external_dir=False, mcp_config=[], provider=None, effort=None, reason=None,
                 approved_risk=False, allow_write=False, allow_exec=False, task_id=None, role="worker", log=None,
-                det_cmd=None, depends_on=[], interactive=False, context_file=[], verify_cmd=None, accept_interactive_limits=False)
+                det_cmd=None, depends_on=[], interactive=False, context_file=[], verify_cmd=None, accept_interactive_limits=False, accept_script_risk=True)
     base.update(kw)
     return argparse.Namespace(**base)
 
@@ -329,6 +329,23 @@ class RevisionV32Test(unittest.TestCase):
         r = pf(a)
         self.assertEqual(a.add_dir, [str(REPO.parent.resolve())])
         self.assertTrue(any("fuera del proyecto" in b for b in r["blocks"]))
+
+
+class RevisionV33Test(unittest.TestCase):
+    def test_scripts_need_explicit_risk_acceptance(self):
+        r = pf(args(det_cmd="python scripts/lean_run.py --help", accept_script_risk=False, cwd=str(ROOT)), git=lambda _c: (ROOT, "https://github.com/alvaradom1304/Altiora.git"))
+        self.assertTrue(any("--accept-script-risk" in b for b in r["blocks"]))
+
+    def test_clean_env_drops_secrets(self):
+        os_env = lean.os.environ
+        os_env["GH_TOKEN_TEST"], os_env["ANTHROPIC_API_KEY"] = "x", "y"
+        try:
+            env = lean.clean_env(["claude"])
+        finally:
+            del os_env["GH_TOKEN_TEST"], os_env["ANTHROPIC_API_KEY"]
+        self.assertNotIn("GH_TOKEN_TEST", env)
+        self.assertNotIn("ANTHROPIC_API_KEY", env)
+        self.assertEqual(env[lean.CHAIN_ENV], "claude")
 
 
 class CodexNeutralTest(unittest.TestCase):

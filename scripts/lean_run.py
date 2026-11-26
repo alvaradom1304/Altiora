@@ -368,6 +368,9 @@ def preflight(a, cfg: dict, which=None, git=None, env: dict | None = None) -> di
     if a.allow_write and (chosen_pre := next((p for p in ([a.provider] if a.provider else []) + list(prof["providers"])
                                               if which(p)), None)) in ("codex", "agy"):
         blocks.append("--allow-write bloqueado para codex/agy (proveedor efectivo): su sandbox no puede denegar rutas protegidas")
+    if (a.det_cmd or a.verify_cmd) and not a.accept_script_risk:
+        blocks.append("--det-cmd/--verify-cmd ejecutan codigo del proyecto SIN sandbox (red y escritura externa no se "
+                      "pueden impedir en esta plataforma): exige --accept-script-risk")
     if a.allow_exec and signals:
         blocks.append("--allow-exec no se combina con tareas de riesgo critical: los scripts escapan a las reglas por herramienta")
     known = cfg.get("known_providers", ["claude", "codex", "agy"])
@@ -430,6 +433,17 @@ def neutral_workspace(task_id: str, files: list[str], root: Path) -> Path:
         shutil.copy2(src, target)
     (dest / "AGENTS.md").write_text(LEAN_PROMPT.read_text(encoding="utf-8"), encoding="utf-8")
     return dest
+
+
+SAFE_ENV_KEYS = ("PATH", "SYSTEMROOT", "WINDIR", "COMSPEC", "PATHEXT", "TEMP", "TMP", "USERPROFILE", "HOME", "LANG")
+
+
+def clean_env(chain: list[str] | None = None) -> dict:
+    """Entorno minimo para scripts (--det-cmd/--verify-cmd): sin tokens, claves ni proxies heredados.
+    No bloquea la red ni la escritura externa: eso exige un sandbox que la plataforma no ofrece aqui."""
+    env = {k: v for k, v in os.environ.items() if k.upper() in SAFE_ENV_KEYS}
+    env[CHAIN_ENV] = ",".join(chain or [])
+    return env
 
 
 def split_cmd(cmd_text: str) -> list[str]:
@@ -497,6 +511,8 @@ def run_provider(cmd: list[str], provider: str, task: str, cwd: str, env: dict) 
     cmd = [exe, *cmd[1:]]
     if provider == "agy":
         cmd, task = cmd + [task], ""  # argumento de proceso, sin interprete de shell
+    if provider == "det":
+        env = clean_env([x for x in env.get(CHAIN_ENV, "").split(",") if x])  # el script no hereda secretos del entorno
     return subprocess.run(cmd, input=task if provider != "det" else None, capture_output=True, text=True,
                           encoding="utf-8", errors="replace", cwd=cwd, env=env)
 
@@ -526,6 +542,8 @@ def parser(cfg: dict) -> argparse.ArgumentParser:
     ap.add_argument("--log")
     ap.add_argument("--raw-dir", help="Carpeta donde guardar la salida bruta de cada intento (evidencia).")
     ap.add_argument("--verify-cmd", help="Comprobacion determinista posterior; su exit code fija 'calidad'.")
+    ap.add_argument("--accept-script-risk", action="store_true",
+                    help="Acepta que los scripts autorizados corren sin sandbox (solo entorno limpio e integridad posterior).")
     ap.add_argument("--accept-interactive-limits", action="store_true",
                     help="Acepta que la sesion interactiva no aplica presupuesto ni integridad automaticos.")
     mode = ap.add_mutually_exclusive_group()
@@ -551,8 +569,21 @@ def main(argv: list[str] | None = None) -> int:
     if a.interactive:
         print(json.dumps({k: report[k] for k in ("project", "profile", "model_planned", "effort", "deny_rules", "hooks")},
                          ensure_ascii=False))
-        return subprocess.call([resolve_exe("claude"), *report["command"][1:]], cwd=a.cwd,
-                               env={**os.environ, CHAIN_ENV: ",".join(chain_from_env() + ["claude"])})
+        iroot = Path(report["project_root"]) if report["project_root"] else None
+        try:
+            ibefore = integrity_snapshot(iroot, cfg)
+        except RuntimeError as exc:
+            print(json.dumps({"status": "BLOCKED", "blocks": [str(exc)]}, ensure_ascii=False))
+            return 2
+        irc = subprocess.call([resolve_exe("claude"), *report["command"][1:]], cwd=a.cwd,
+                              env={**os.environ, CHAIN_ENV: ",".join(chain_from_env() + ["claude"])})
+        try:
+            ivio = integrity_diff(ibefore, integrity_snapshot(iroot, cfg))
+        except RuntimeError as exc:
+            ivio = [str(exc)]
+        print(json.dumps({"integridad_posterior": "VIOLACION" if ivio else "OK", "violaciones": ivio,
+                          "presupuesto": "NO_APLICABLE_EN_INTERACTIVO"}, ensure_ascii=False))
+        return 3 if ivio else irc
     if not (a.task_file and a.log):
         print(json.dumps({"status": "BLOCKED", "blocks": ["ejecucion real exige --task-file y --log"]}))
         return 2
@@ -600,7 +631,8 @@ def main(argv: list[str] | None = None) -> int:
             if ok and not violations and a.verify_cmd:
                 vparts = split_cmd(a.verify_cmd)
                 try:
-                    v = subprocess.run([resolve_exe(vparts[0]) or vparts[0], *vparts[1:]], cwd=a.cwd, timeout=600)
+                    v = subprocess.run([resolve_exe(vparts[0]) or vparts[0], *vparts[1:]], cwd=a.cwd, timeout=600,
+                                       env=clean_env(chain))
                     calidad = "PASS" if v.returncode == 0 else "FAIL"
                 except subprocess.TimeoutExpired:
                     calidad = "FAIL"  # un control que agota su tiempo bloquea, no aprueba
