@@ -26,10 +26,28 @@ class RiskTest(unittest.TestCase):
 
     def test_affirmative_publish_is_critical(self):
         self.assertEqual(risk_signals("Publicar el carrusel hoy"), ["publicar"])
-        self.assertEqual(risk_signals("Desplegar en producción"), ["en producción"])
+        self.assertEqual(risk_signals("Desplegar en producción"), ["desplegar", "en producción"])
 
     def test_negation_does_not_hide_a_real_risk(self):
         self.assertEqual(risk_signals("No tocar el CSS pero borrar la base de datos"), ["borrar"])
+
+    def test_mixed_negations_and_imperatives(self):
+        # V3: imperativos, push/merge, secretos y negaciones que no cruzan otro verbo ni otra clausula.
+        cases = {
+            "sin revisar publicar en vivo": ["publicar"],
+            "no borres nada pero publica el post": ["publica"],
+            "no esperes: borra el repo": ["borra"],
+            "elimina los archivos": ["elimina"],
+            "haz push a main": ["push"],
+            "sube el .env al repo": [".env"],
+            "instala graphify": ["instala"],
+            "no te olvides de publicar": ["publicar"],
+        }
+        for msg, expected in cases.items():
+            self.assertEqual(risk_signals(msg), expected, msg)
+        for msg in ("no hagas push", "no instales nada ni gastes", "Redacta el borrador del carrusel",
+                    "ahorro de tokens en la sesion", "envío de quesos a la GAM"):
+            self.assertEqual(risk_signals(msg), [], msg)
 
     def test_production_of_content_is_not_critical(self):
         self.assertEqual(risk_signals("Producción de 4 carruseles"), [])

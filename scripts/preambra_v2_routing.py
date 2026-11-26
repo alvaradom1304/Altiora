@@ -16,15 +16,26 @@ STATUSES = ("PLANNED", "READY", "IN_PROGRESS", "REVIEW", "APPROVED", "DONE",
             "BLOCKED", "FAILED", "CANCELED")
 
 # Signal-based, conservative policy. This does not constitute an AI quality score.
+# Fail-safe: ante la duda se marca critical (un falso positivo cuesta una revision; un falso negativo,
+# una accion irreversible). Incluye imperativos y subjuntivos ("borra", "no borres") ademas de infinitivos.
 _CRITICAL_TERMS = (
-    r"(?:seguridad|owasp|vulnerabilid\w*|contrato\w*|legal(?:es)?|"
-    r"impuest\w*|pago\w*|cobro\w*|finanz\w*|datos personales|"
-    r"(?:en|a) producci[oó]n|publicar|publicaci[oó]n(?:es)? (?:en vivo|oficial)|borrar|eliminar)"
+    r"(?:seguridad|owasp|vulnerabilid\w*|contrato\w*|legal(?:es)?|impuest\w*|finanz\w*|datos personales|"
+    r"pag(?:ar|a|an|o|os|ue|uen|ues|alo|ala|ad)|cobr\w*|transfer\w*|gast(?:ar|a|an|e|en|es|o|os)|comprar|"
+    r"(?:en|a) producci[oó]n|despleg\w*|desplieg\w*|deploy\w*|publish\w*|"
+    r"publ[ií]c(?:ar|a|an|ad|alo|ala|alos|alas)|publiqu\w*|publicaci[oó]n(?:es)? (?:en vivo|oficial)|"
+    r"borr(?:ar|a|an|e|en|es|ad|alo|ala|alos|alas|amos)|elimin\w*|delete\w*|rm -rf|drop table|"
+    r"push|force[- ]push|merge|fusion(?:ar|a|an|e|en|es|ad)|"
+    r"envi(?:ar|ad|alo|ala|alos|alas)|env[ií](?:a|an|e|en|es)|"
+    r"instal(?:ar|a|an|e|en|es|ad|alo|ala)|"
+    r"\.env|credencial\w*|contrase[nñ]\w*|secretos?|api[ _-]?keys?|tokens? de (?:acceso|api))"
 )
-CRITICAL = re.compile(rf"\b{_CRITICAL_TERMS}\b", re.IGNORECASE)
-# "no publicar", "sin borrar", "nunca eliminar...": una prohibicion no es una accion de riesgo.
+CRITICAL = re.compile(rf"(?<!\w){_CRITICAL_TERMS}(?!\w)", re.IGNORECASE)
+# Una prohibicion ("no publicar", "no hagas push", "sin borrar") no es una accion de riesgo, pero solo si
+# el negador precede al termino con, como mucho, cliticos o auxiliares entre ambos. "sin revisar publicar"
+# o "no publicar, pero borrar" siguen siendo critical: la negacion no cruza otro verbo ni otra clausula.
+_NEG_FILLER = r"(?:lo|la|los|las|le|les|se|te|me|nos|hagas|hagan|haga|vayas a|vaya a|debes|debe|hay que)"
 NEGATED_CRITICAL = re.compile(
-    rf"\b(?:no|sin|nunca|ni|jam[aá]s|evit\w*)\s+(?:[\wáéíóúñ]+\s+){{0,2}}?{_CRITICAL_TERMS}\b",
+    rf"(?<!\w)(?:no|sin|nunca|ni|jam[aá]s|tampoco|evit\w*)\s+(?:{_NEG_FILLER}\s+){{0,2}}{_CRITICAL_TERMS}(?!\w)",
     re.IGNORECASE,
 )
 

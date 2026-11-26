@@ -1,0 +1,74 @@
+{
+  "schema_version": "3.0.0",
+  "updated": "2026-11-26",
+  "note": "Fuente unica de perfiles PREAMBRA. La lee scripts/lean_run.py; no duplicar estos valores en otros archivos. Presupuestos en USD son nocionales (con OAuth/suscripcion no hay cargo de API).",
+  "default_profile": "lean",
+  "limits": {
+    "max_retries": 2,
+    "max_review_cycles": 2,
+    "max_delegation_depth": 1
+  },
+  "security": {
+    "deny_tools": [
+      "Edit(**/.env*)", "Write(**/.env*)", "Edit(**/*.pem)", "Write(**/*.pem)",
+      "Edit(**/*.key)", "Write(**/*.key)", "Edit(**/id_rsa*)", "Write(**/id_rsa*)",
+      "Edit(**/id_ed25519*)", "Write(**/id_ed25519*)",
+      "Bash(git push*)", "Bash(git merge*)", "Bash(git reset --hard*)", "Bash(gh pr merge*)",
+      "Bash(gh release*)", "Bash(npm publish*)", "Bash(npm install*)", "Bash(npm i *)",
+      "Bash(pip install*)", "Bash(winget *)", "Bash(choco *)", "Bash(rm -rf*)"
+    ],
+    "forbidden_flags": ["--dangerously-skip-permissions", "--dangerously-bypass-approvals-and-sandbox", "bypassPermissions", "--allow-dangerously-skip-permissions"],
+    "codex_sandbox": "read-only",
+    "codex_sandbox_write": "workspace-write",
+    "agy_mode": "plan",
+    "agy_mode_write": "accept-edits"
+  },
+  "models": {
+    "claude": {"low": "claude-haiku-5-5", "medium": "claude-sonnet-5-5", "high": "claude-opus-5-5", "xhigh": "claude-opus-5-5", "max": "claude-opus-5-5"},
+    "codex": {"low": "gpt-6.1-sol", "medium": "gpt-6.1-sol", "high": "gpt-6.1-sol", "xhigh": "gpt-6.1-sol"},
+    "agy": {"low": "gemini-3.8-flash", "medium": "gemini-3.8-flash", "high": "gemini-4-argon"}
+  },
+  "profiles": {
+    "lean": {
+      "purpose": "Predeterminado: redaccion, render, ajustes de un dominio, tareas repetibles con contexto pre-extraido.",
+      "efforts": ["low", "medium"],
+      "default_effort": "medium",
+      "max_turns": 12,
+      "max_budget_usd": 0.5,
+      "providers": ["claude", "codex"],
+      "claude_flags": ["--safe-mode", "--strict-mcp-config", "--disable-slash-commands"],
+      "append_prompt": "team/profiles/lean.md",
+      "tools": "Read,Write,Edit,Glob,Grep,Bash(python *)",
+      "extra_deny": ["Bash(curl*)", "Bash(wget*)", "WebFetch", "WebSearch"],
+      "hooks": "OFF por --safe-mode; sustituidos por security.deny_tools via --disallowedTools"
+    },
+    "standard": {
+      "purpose": "Bajo demanda: investigacion especializada o logica de componentes/ventas con solo los MCP que la tarea pida.",
+      "efforts": ["low", "medium", "high"],
+      "default_effort": "medium",
+      "max_turns": 25,
+      "max_budget_usd": 2.0,
+      "providers": ["claude", "codex", "agy"],
+      "claude_flags": ["--strict-mcp-config"],
+      "tools": "Read,Write,Edit,Glob,Grep,Bash(python *),Bash(node *),Bash(git status*),Bash(git diff*)",
+      "hooks": "ON (settings del proyecto)"
+    },
+    "advanced": {
+      "purpose": "Escalamiento justificado: arquitectura, decisiones estrategicas, multiagente, revision independiente. Exige --reason.",
+      "efforts": ["low", "medium", "high", "xhigh", "max"],
+      "default_effort": "high",
+      "max_turns": 40,
+      "max_budget_usd": 5.0,
+      "providers": ["claude", "codex", "agy"],
+      "claude_flags": [],
+      "tools": "Read,Write,Edit,Glob,Grep,Bash",
+      "requires_reason": true,
+      "hooks": "ON (configuracion completa del usuario)"
+    }
+  },
+  "projects": {
+    "altiora": {"kind": "git", "remote": "alvaradom1304/Altiora"},
+    "la-central-del-queso": {"kind": "git", "remote": "alvaradom1304/la-central-del-queso"},
+    "currenda": {"kind": "folder", "note": "Carpeta local sin GitHub; no debe estar dentro de un repo registrado."}
+  }
+}
