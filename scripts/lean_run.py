@@ -274,6 +274,13 @@ def integrity_diff(before: dict, after: dict) -> list[str]:
 
 def parse_stream(lines) -> dict:
     """Claude stream-json, Codex --json o Agy json: toma init, result y el ultimo bloque con usage."""
+    lines = list(lines)
+    try:  # un unico objeto JSON formateado en varias lineas (Agy)
+        whole = json.loads("\n".join(lines))
+        if isinstance(whole, dict):
+            lines = [json.dumps(whole)]
+    except ValueError:
+        pass
     init, result, usage, last_msg, model_seen = {}, {}, {}, "", None
     for line in lines:
         try:
@@ -575,8 +582,12 @@ def main(argv: list[str] | None = None) -> int:
         except RuntimeError as exc:
             print(json.dumps({"status": "BLOCKED", "blocks": [str(exc)]}, ensure_ascii=False))
             return 2
-        irc = subprocess.call([resolve_exe("claude"), *report["command"][1:]], cwd=a.cwd,
-                              env={**os.environ, CHAIN_ENV: ",".join(chain_from_env() + ["claude"])})
+        irc = 1
+        try:
+            irc = subprocess.call([resolve_exe("claude"), *report["command"][1:]], cwd=a.cwd,
+                                  env={**os.environ, CHAIN_ENV: ",".join(chain_from_env() + ["claude"])})
+        except KeyboardInterrupt:
+            irc = 130
         try:
             ivio = integrity_diff(ibefore, integrity_snapshot(iroot, cfg))
         except RuntimeError as exc:
@@ -631,7 +642,10 @@ def main(argv: list[str] | None = None) -> int:
             if ok and not violations and a.verify_cmd:
                 vparts = split_cmd(a.verify_cmd)
                 try:
-                    v = subprocess.run([resolve_exe(vparts[0]) or vparts[0], *vparts[1:]], cwd=a.cwd, timeout=600,
+                    vexe = resolve_exe(vparts[0])
+                    if vexe is None:
+                        raise subprocess.TimeoutExpired(vparts, 0)  # interprete no nativo: FAIL, nunca via shell
+                    v = subprocess.run([vexe, *vparts[1:]], cwd=a.cwd, timeout=600,
                                        env=clean_env(chain))
                     calidad = "PASS" if v.returncode == 0 else "FAIL"
                 except subprocess.TimeoutExpired:

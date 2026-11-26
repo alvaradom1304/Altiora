@@ -149,3 +149,19 @@ Queda abierto, por decisión de diseño: el proyecto `currenda` (carpeta sin git
 **Antigravity:** la primera delegación real devolvió «listo», pero el lanzador no leía su formato (`response`). Hizo 3 reintentos inútiles (~103 k tokens) y pasó al respaldo de Claude, que respondió: el respaldo funcionó en real. Parser corregido y con prueba.
 
 **Claude Desktop:** NO verificado. Esta sesión no puede inspeccionar los permisos efectivos de otra sesión de Desktop; las reglas de `.claude/settings.json` están configuradas, no probadas allí.
+
+---
+
+## V3.3 — Verificación final dirigida (2026-11-26)
+
+Presupuesto de coordinación fijado antes de empezar: 1 revisión de Codex limitada al diff, 1 ronda de correcciones, sin segunda revisión. Se cumplió.
+
+| Punto | Resultado |
+|---|---|
+| Scripts autorizados | **Restringido, no aislado.** Entorno limpio (sin tokens ni claves heredados) y exigencia de `--accept-script-risk`. Red y escritura externa no se pueden impedir sin sandbox en esta plataforma; solo cubre la integridad posterior de secretos y configuración |
+| Sesión interactiva | Integridad posterior por hash (también si se interrumpe). El presupuesto no es técnicamente posible: `--max-budget-usd` y `--max-turns` solo existen en modo `-p` |
+| Claude Desktop | **Verificado el motor, no Desktop.** Una sesión normal de `claude -p`, sin safe-mode y en la raíz del repo, denegó `.env` y creó `ok.txt` con las reglas de `.claude/settings.json`. Desktop usa los mismos archivos de configuración, pero no se probó directamente |
+| Dobles negaciones | «No evites borrar» y «no dejes de publicar» cuentan como acción. «No evites no borrar» no. Sigue siendo una señal de alerta, no el control; lo ambiguo sin términos reconocidos no se detecta |
+| Revisión de Codex limitada al diff | 1 alto y 3 medios. Corregidos: ejecutable del verificador sin fallback al nombre crudo, integridad en `finally` si se interrumpe la sesión y JSON de Agy en varias líneas. Sin corregir y fail-closed: `--det-cmd` con `--allow-write` se bloquea aunque Codex no vaya a ejecutarse |
+
+Consumo: revisión Codex 571.258 tokens (251.520 en caché); prueba de permisos con haiku 200.605. Cuota de ejecutores no observable.

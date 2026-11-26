@@ -412,6 +412,11 @@ class EconomiaTest(unittest.TestCase):
                                            "usage": {"input_tokens": 34116, "output_tokens": 2, "cache_read_tokens": 0}})])
         self.assertEqual((s["ok"], s["resultado"].strip(), s["total"], s["turnos"], s["segundos"]), (True, "listo", 34118, 1, 20))
 
+    def test_parse_agy_multiline_json(self):
+        raw = json.dumps({"status": "SUCCESS", "response": "ok", "num_turns": 1,
+                          "usage": {"input_tokens": 5, "output_tokens": 1}}, indent=2)
+        self.assertTrue(lean.parse_stream(raw.splitlines())["ok"])
+
     def test_old_log_header_respected(self):
         with tempfile.TemporaryDirectory() as d:
             p = Path(d) / "old.csv"
