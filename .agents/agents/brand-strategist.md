@@ -1,6 +1,6 @@
 ---
 name: brand-strategist
-description: "Usar para traducir el posicionamiento a atributos, voz y reglas de marca. Equipo Altiora: brand-strategist."
+description: "Usar para investigar necesidades, percepción y competencia, definir posicionamiento, propuesta diferencial y sistema de marca coherente con problemas reales del cliente. Equipo Altiora: brand-strategist."
 subagent: true
 mainAgent: false
 model: inherit

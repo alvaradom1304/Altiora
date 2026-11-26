@@ -758,52 +758,36 @@ def load_orchestration_state() -> dict[str, Any]:
     return {}
 
 
-def terminal_alive(handle: str | None) -> bool:
-    # Un Run cuyo coordinador es una terminal cerrada rechaza task-create con consumer_fenced.
-    return bool(handle) and bool(run_orca(["terminal", "show", "--terminal", handle]).get("ok"))
+def own_terminal_handle() -> str | None:
+    """Handle de la terminal que ejecuta este script (Orca lo inyecta en ORCA_TERMINAL_HANDLE).
+
+    Orca atesta la terminal que llama y rechaza con consumer_fenced cualquier --from con
+    otra identidad. Por eso solo se reutiliza un Run coordinado por esta misma terminal.
+    """
+    return os.environ.get("ORCA_TERMINAL_HANDLE") or None
 
 
 def ensure_orca_run(state: dict[str, Any], objective: str) -> tuple[str | None, str | None]:
-    orca_cfg = state.get("orca", {})
-    existing_run_id = orca_cfg.get("orca_run_id")
-    existing_coord = orca_cfg.get("coordinator_handle")
+    me = own_terminal_handle()
+    existing_run_id = state.get("orca", {}).get("orca_run_id")
 
-    if existing_run_id:
+    if me and existing_run_id:
         show_res = run_orca(["orchestration", "run-show", "--id", existing_run_id])
-        if show_res.get("ok"):
-            run_obj = show_res.get("result", {}).get("run", {})
-            coord = run_obj.get("coordinator_handle") or existing_coord
-            if run_obj.get("id") and terminal_alive(coord):
-                return run_obj.get("id"), coord
+        run_obj = show_res.get("result", {}).get("run", {}) if show_res.get("ok") else {}
+        if run_obj.get("id") and run_obj.get("coordinator_handle") == me:
+            return run_obj["id"], me
 
-    list_res = run_orca(["orchestration", "run-list"])
-    if list_res.get("ok"):
-        for run in list_res.get("result", {}).get("runs", []):
-            if not run.get("legacy") and terminal_alive(run.get("coordinator_handle")):
-                return run.get("id"), run.get("coordinator_handle")
+    if me:
+        list_res = run_orca(["orchestration", "run-list"])
+        for run in list_res.get("result", {}).get("runs", []) if list_res.get("ok") else []:
+            if not run.get("legacy") and run.get("coordinator_handle") == me:
+                return run.get("id"), me
 
-    term_res = run_orca(["terminal", "list", "--worktree", "active"])
-    if term_res.get("ok"):
-        terms = [
-            t for t in term_res.get("result", {}).get("terminals", [])
-            if t.get("connected") and not t.get("orphaned")
-        ]
-        if terms:
-            first_handle = terms[0].get("handle")
-            if first_handle:
-                create_res = run_orca(
-                    [
-                        "orchestration",
-                        "run-create",
-                        "--objective",
-                        objective[:180],
-                        "--from",
-                        first_handle,
-                    ]
-                )
-                if create_res.get("ok"):
-                    new_run = create_res.get("result", {}).get("run", {})
-                    return new_run.get("id"), new_run.get("coordinator_handle") or first_handle
+    # Sin --from: Orca toma la identidad atestada de la terminal que llama.
+    create_res = run_orca(["orchestration", "run-create", "--objective", objective[:180]])
+    if create_res.get("ok"):
+        new_run = create_res.get("result", {}).get("run", {})
+        return new_run.get("id"), new_run.get("coordinator_handle") or me
 
     return None, None
 
@@ -841,7 +825,7 @@ def dispatch_to_orca(
             "skills": stream["skills"],
         }
 
-        if run_id and coord_handle:
+        if run_id:
             create_cmd = [
                 "orchestration",
                 "task-create",
@@ -851,9 +835,9 @@ def dispatch_to_orca(
                 stream["spec"],
                 "--run",
                 run_id,
-                "--from",
-                coord_handle,
             ]
+            if coord_handle and coord_handle == own_terminal_handle():
+                create_cmd += ["--from", coord_handle]
             create_res = run_orca(create_cmd)
             if create_res.get("ok"):
                 task_obj = create_res.get("result", {}).get("task", {})
@@ -959,6 +943,15 @@ def main() -> int:
         default="current", help="IA desde la que se originó el encargo (metadata, no sesión autenticada).",
     )
     parser.add_argument(
+        "--unavailable",
+        action="append",
+        default=[],
+        help=(
+            "IA no disponible (pausada, sin cuota o sin login); repetible o separada por comas. "
+            "Se suma a PREAMBRA_UNAVAILABLE_AIS. El router no observa cuotas: solo respeta esta lista."
+        ),
+    )
+    parser.add_argument(
         "--router-model",
         default="sonnet",
         help="Modelo del enrutador para `claude -p` (alias o id completo). Por defecto: sonnet.",
@@ -1015,7 +1008,17 @@ def main() -> int:
         "parallel_worktrees": False,
         "streams": streams,
     }
-    decision = decide_mode(full_message, streams, entrypoint=args.entrypoint)
+    unavailable = [
+        name.strip()
+        for raw in [os.environ.get("PREAMBRA_UNAVAILABLE_AIS", ""), *args.unavailable]
+        for name in raw.split(",")
+        if name.strip()
+    ]
+    try:
+        decision = decide_mode(full_message, streams, entrypoint=args.entrypoint, unavailable=unavailable)
+    except ValueError as error:
+        print(f"V2: {error}", file=sys.stderr)
+        return 2
     result["policy_v2"] = decision
     result["handoffs"] = make_handoffs(full_message, streams, decision)
     # V2 only recommends parallelism when independent tasks and paths are safe.

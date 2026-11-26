@@ -27,7 +27,7 @@
     },
     {
       "id": "business-strategist",
-      "when": "Usar para definir problema, oferta, audiencia, KPIs e hipótesis de negocio, o revisar unit economics y precios.",
+      "when": "Usar para diagnosticar negocios, evaluar modelos de ingresos, oportunidades, caja, márgenes, oferta, precios, rentabilidad y escalamiento basado en evidencia.",
       "milestones": [
         "M0"
       ],
@@ -39,12 +39,18 @@
         "pricing",
         "market-research",
         "financial-forecasting",
-        "offers"
+        "offers",
+        "business-diagnostic",
+        "business-model-analysis",
+        "business-model-validation",
+        "cash-flow-analysis",
+        "opportunity-analysis",
+        "profitability-analysis"
       ]
     },
     {
       "id": "brand-strategist",
-      "when": "Usar para traducir el posicionamiento a atributos, voz y reglas de marca.",
+      "when": "Usar para investigar necesidades, percepción y competencia, definir posicionamiento, propuesta diferencial y sistema de marca coherente con problemas reales del cliente.",
       "milestones": [
         "M1"
       ],
@@ -54,7 +60,10 @@
         "brand-voice",
         "brand-personality",
         "premium-branding",
-        "brand-guidelines"
+        "brand-guidelines",
+        "brand-research",
+        "customer-research",
+        "competitor-analysis"
       ]
     },
     {
@@ -97,7 +106,7 @@
     },
     {
       "id": "ux-researcher",
-      "when": "Usar para entender tareas del usuario, mapear flujos, diseñar pruebas de tareas y reducir fricción en compra o pedido.",
+      "when": "Usar para investigar necesidades, entrevistas, tareas y fricciones reales en compra, citas, pedidos o servicio, y validar la experiencia antes de construir.",
       "milestones": [
         "M0",
         "M2",
@@ -110,7 +119,10 @@
         "information-architecture",
         "conversion-ux",
         "accessibility",
-        "web-design-guidelines"
+        "web-design-guidelines",
+        "customer-research",
+        "customer-discovery",
+        "mom-test-interviewing"
       ]
     },
     {
@@ -216,7 +228,7 @@
     },
     {
       "id": "growth-analyst",
-      "when": "Usar para planes de medición, eventos, baseline de conversión y backlog de experimentos.",
+      "when": "Usar para medir conversiones, rendimiento de canales, rentabilidad comercial, retención, antes/después y resultados de experimentos con línea base.",
       "milestones": [
         "M6"
       ],
@@ -230,12 +242,15 @@
         "analytics",
         "ab-testing",
         "referrals",
-        "events"
+        "events",
+        "growth-experiment-analysis",
+        "revenue-intelligence",
+        "profitability-analysis"
       ]
     },
     {
       "id": "commerce-growth-director",
-      "when": "Usar cuando el usuario pida marketing, captación, crecimiento, campañas comerciales, ventas, WhatsApp, productos ganadores o adquisición de clientes.",
+      "when": "Usar para captación, ventas y crecimiento comercial cuando exista una oferta viable; evaluar canales, WhatsApp, seguimiento, embudo, go-to-market y experimentos de ventas con presupuesto controlado.",
       "milestones": [
         "M0",
         "M1",
@@ -248,12 +263,17 @@
         "whatsapp-lead-to-sale",
         "growth-experiment-analysis",
         "consumer-psychology",
-        "marketing-analytics"
+        "marketing-analytics",
+        "market-segmentation",
+        "go-to-market",
+        "customer-acquisition",
+        "revenue-intelligence",
+        "growth-experimentation"
       ]
     },
     {
       "id": "market-intelligence-director",
-      "when": "Usar cuando el usuario solicite buscar los diez mejores videos de un producto, estudiar publicidad de competidores, investigar tendencias y escoger producto ganador.",
+      "when": "Usar para estudios de mercado, demanda, industria, segmentación, tamaño TAM/SAM/SOM, competencia, tendencias, validación de oportunidades y, si aporta valor, análisis de anuncios, videos o productos ganadores.",
       "milestones": [
         "M0",
         "M1"
@@ -263,7 +283,16 @@
         "product-winner-scorecard",
         "creative-deconstruction-originality",
         "marketing-psychology",
-        "market-research"
+        "market-research",
+        "industry-analysis",
+        "competitive-intelligence",
+        "competitor-analysis",
+        "market-segmentation",
+        "market-sizing",
+        "market-validation",
+        "trend-analysis",
+        "opportunity-analysis",
+        "customer-research"
       ]
     },
     {

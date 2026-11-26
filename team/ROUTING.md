@@ -8,9 +8,17 @@ Lo que lo garantiza no es la IA, sino que todas compartan:
 - la misma verificación: `npm run check`, [Definition of Done](../quality/definition-of-done.md) y revisión independiente.
 
 
-## 0. Gobierno operativo de Altiora OS (2026-11-03)
+## 0. Gobierno operativo de Altiora OS (2026-11-03, ampliado 2026-11-22)
 
-La **dirección ejecutiva humana** aprueba objetivos, alcance, contratos, presupuesto, publicación, contacto con terceros y cambios de riesgo. **Claude Code actúa como director operativo de ejecución** para proyectos multifase: recibe un brief aprobado, organiza hitos, consulta el router y coordina handoffs cuando existan sesiones, permisos y conexiones reales. **ChatGPT dirige discovery, consultoría y estrategia**, sin reclamar acceso local por defecto. **Codex** es especialista en ingeniería y QA técnico; **Antigravity** en producción visual interactiva. Las especialidades y respaldos de la matriz de dominios de la sección 3 se mantienen, por lo que el nombramiento de Claude **no reemplaza automáticamente las preferencias por dominio** ni implica lanzar agentes.
+El **fundador** (dirección ejecutiva humana) tiene la autoridad final sobre estrategia, prioridades, inversiones y cambios importantes, y aprueba objetivos, alcance, contratos, presupuesto, publicación, contacto con terceros y cambios de riesgo. **ChatGPT es asesor y director estratégico**: evalúa ideas nuevas, cuestiona supuestos, investiga alternativas y prepara briefs de ejecución, sin acceso local por defecto (el fundador trae el brief al repositorio). **Claude Code es director operativo y orquestador**: ejecuta encargos autorizados, recibe el brief aprobado, organiza hitos, consulta el router, coordina agentes, skills y handoffs cuando existan sesiones, permisos y conexiones reales, y comprueba resultados. **Codex** es especialista técnico, apoyo de recuperación ante errores y posible revisor independiente; **Antigravity**, especialista en desarrollo y producción visual cuando su intervención aporte valor. Las especialidades y respaldos de la matriz de dominios de la sección 3 se mantienen: por ejemplo, ChatGPT asesora en estrategia y Codex sigue siendo la IA preferida para ejecutarla en el repositorio. El nombramiento de Claude **no reemplaza automáticamente las preferencias por dominio** ni implica lanzar agentes.
+
+**Reglas de gobierno estratégico (2026-11-22):**
+1. Ninguna idea nueva modifica automáticamente la arquitectura, la metodología ni las prioridades de PREAMBRA.
+2. Una **iniciativa nueva** (capacidad, herramienta, flujo, arquitectura o cambio de prioridad) necesita un brief validado y la aprobación del fundador antes de implementarse. No aplica a cambios pequeños ni a encargos ya autorizados (sección 2).
+3. Claude puede cuestionar el brief y señalar riesgos, contradicciones o mejoras; no ejecuta cambios sustanciales no autorizados.
+4. Se distinguen cuatro estados: **planificado**, **implementado**, **ejecutado en real** y **resultado verificado**. Solo el último se presenta como hecho; los demás se nombran como tales (ver `NOT_RUN` en la sección 5).
+
+Estas reglas complementan el sistema: no reemplazan la metodología, no reconstruyen el orquestador y no alteran las prioridades comerciales.
 
 Cada delegación debe documentar `job_id`, responsable, inputs, propiedad de archivos, skills, criterios de aceptación, riesgos y evidencia. No se permite que dos agentes editen simultáneamente el mismo archivo. Trabajos de cliente requieren QA independiente y revisión humana donde aplique. La disponibilidad de MCP, Blender, After Effects y coordinación entre IAs **solo se declara verificada** tras pruebas en sesiones reales. Ver [gobierno y gates](../docs/operations/CLAUDE-OPERATIONAL-DIRECTOR-PROPOSAL-2026-11-03.md) y [validación #65](https://github.com/alvaradom1304/Altiora/issues/65).
 
@@ -50,7 +58,7 @@ Coincide con `DOMAIN_RULES` de `scripts/orca-dispatch.py`; el test `scripts/rout
 | `cloud-data-engineering`: Google Cloud, BigQuery, pipelines | antigravity | claude → codex | web-engineer | gcp-data-pipelines, dbt-bigquery |
 | `client-content`: carruseles, reels, captions y calendario de un cliente, sin código web del repo | claude | codex → antigravity | content-designer, visual-producer | social-creative, copywriting, scriptwriting, storyboarding |
 
-Otros encargos se enrutan por intención con los mismos roles: anuncios y video → creative-ads-director ([WORK_ROUTER](../creative-ads-os/WORK_ROUTER.md)); audio → audio-specialist; medición → growth-analyst; coordinación de varios roles → experience-director. Las skills fuera del listado automático se usan leyendo `skills/<nombre>/SKILL.md`.
+Otros encargos se enrutan por intención con los mismos roles: investigación de mercado, segmentos, competencia y oportunidades → market-intelligence-director (solo las skills pertinentes, con evidencia y QA); anuncios y video → creative-ads-director ([WORK_ROUTER](../creative-ads-os/WORK_ROUTER.md)); audio → audio-specialist; medición → growth-analyst; coordinación de varios roles → experience-director. Las skills fuera del listado automático se usan leyendo `skills/<nombre>/SKILL.md`.
 
 **Esfuerzo de razonamiento:** el más bajo que cumpla el criterio. `low` para tareas mecánicas, `medium` por defecto, `high` para arquitectura, auditoría, investigación o diseño de escenas, y `xhigh`/`max` solo con riesgo económico, legal o de seguridad, o si el usuario pide profundidad. El tema no sube el nivel; lo sube lo que se pide. Modelo grande solo en `high` o más. Si la tarea resulta no ser la adecuada para la IA asignada, detenerse y decirlo en vez de seguir gastando.
 
@@ -96,3 +104,5 @@ Para entregas entre IAs, usar el JSON del [protocolo](../altiora-os/docs/protoco
 - Revisión independiente con `qa-reviewer` (o `altiora-quality-review`) para todo lo que vea un cliente; si solo hay una IA, declarar que la revisión fue secuencial.
 - Sin hechos comerciales inventados, sin secretos y sin afirmar conexiones o ejecuciones no comprobadas.
 - Apuntar a la mejor calidad posible dentro del alcance acordado: no ampliar el alcance ni entrar en bucles de mejora sin fin.
+
+**Nota de Altiora (la misma en todas las IAs):** si piden evaluar, puntuar o dar un porcentaje de Altiora o de su sistema, ejecutar `npm run readiness:score -- --resumen` y citar esa línea tal cual, con la fecha. El script la calcula con la rúbrica de [NOTA-V4](../docs/operations/NOTA-V4.md) a partir de `quality/readiness-evidence.json`; no se estima a ojo. El 98,3/100 de `quality/skills-report.md` es la nota de redacción de las skills: se cita aparte y con esa etiqueta, nunca como nota de la empresa. Para subir la nota se añade evidencia al registro; el número no se edita a mano.

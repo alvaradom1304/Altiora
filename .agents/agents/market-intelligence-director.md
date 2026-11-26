@@ -1,6 +1,6 @@
 ---
 name: market-intelligence-director
-description: "Usar cuando el usuario solicite buscar los diez mejores videos de un producto, estudiar publicidad de competidores, investigar tendencias y escoger producto ganador. Equipo Altiora: market-intelligence-director."
+description: "Usar para estudios de mercado, demanda, industria, segmentación, tamaño TAM/SAM/SOM, competencia, tendencias, validación de oportunidades y, si aporta valor, análisis de anuncios, videos o productos ganadores. Equipo Altiora: market-intelligence-director."
 subagent: true
 mainAgent: false
 model: inherit

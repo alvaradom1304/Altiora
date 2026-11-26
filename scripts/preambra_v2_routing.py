@@ -8,10 +8,13 @@ from __future__ import annotations
 import hashlib
 import re
 from pathlib import PurePosixPath
-from typing import Any
+from typing import Any, Iterable
 
 MODES = ("A", "B", "C", "D")
 OWNERS = ("codex", "claude", "antigravity", "chatgpt", "current")
+# Independent reviewers that can run in the repository, in preference order.
+# ChatGPT is excluded: without repository access it cannot review the artifacts.
+REVIEWER_PREFERENCE = ("codex", "claude", "antigravity")
 STATUSES = ("PLANNED", "READY", "IN_PROGRESS", "REVIEW", "APPROVED", "DONE",
             "BLOCKED", "FAILED", "CANCELED")
 
@@ -118,10 +121,32 @@ def _lead(streams: list[dict[str, Any]], entrypoint: str) -> str:
     return entrypoint if entrypoint in OWNERS else "codex"
 
 
-def decide_mode(message: str, streams: list[dict[str, Any]], entrypoint: str = "current") -> dict[str, Any]:
-    """Select mode conservatively. C is permitted only with explicit independence."""
+def _unavailable_set(unavailable: Iterable[str]) -> set[str]:
+    names = {str(name).strip().lower() for name in unavailable if str(name).strip()}
+    unknown = names - set(OWNERS)
+    if unknown:
+        raise ValueError("unknown AI in unavailable list: " + ", ".join(sorted(unknown)))
+    return names
+
+
+def _reviewer(lead: str, unavailable: set[str]) -> str | None:
+    """First preferred reviewer that is not the lead and not marked unavailable."""
+    for candidate in REVIEWER_PREFERENCE:
+        if candidate != lead and candidate not in unavailable:
+            return candidate
+    return None
+
+
+def decide_mode(message: str, streams: list[dict[str, Any]], entrypoint: str = "current",
+                unavailable: Iterable[str] = ()) -> dict[str, Any]:
+    """Select mode conservatively. C is permitted only with explicit independence.
+
+    ``unavailable`` lists AIs the operator marked as paused, out of quota or not
+    authenticated. The router cannot observe quota itself; it only honours this list.
+    """
     if not message.strip():
         raise ValueError("The job description cannot be empty")
+    paused = _unavailable_set(unavailable)
     collisions = overlapping_paths(streams)
     dependent = _has_dependencies(streams)
     signals = risk_signals(message)
@@ -130,7 +155,7 @@ def decide_mode(message: str, streams: list[dict[str, Any]], entrypoint: str = "
     parallel_request = bool(INDEPENDENT.search(message))
     separate = len(streams) > 1 and not collisions and not dependent
     lead = _lead(streams, entrypoint)
-    reviewer = "codex" if lead != "codex" else "claude"
+    reviewer = _reviewer(lead, paused)
 
     if high_scope:
         mode, reason = "D", "Multi-phase business engagement requires phase gates."
@@ -154,13 +179,19 @@ def decide_mode(message: str, streams: list[dict[str, Any]], entrypoint: str = "
 
     if mode == "A":
         lead = entrypoint
+    needs_review = mode in ("B", "C", "D")
+    if needs_review and reviewer is None:
+        warnings.append("No independent reviewer available; human review required before DONE.")
+    if lead in paused:
+        warnings.append(f"Lead candidate '{lead}' is marked unavailable; reassign before execution.")
     return {
         "mode": mode,
         "reason": reason,
         "entrypoint": entrypoint,
         "lead_candidate": lead,
-        "reviewer_candidate": reviewer if mode in ("B", "C", "D") else None,
+        "reviewer_candidate": reviewer if needs_review else None,
         "risk_signals": signals,
+        "unavailable_ais": sorted(paused),
         "risk": "critical" if critical else ("elevated" if high_scope else "standard"),
         "parallel_requested": parallel_request,
         "parallel_safe": bool(separate and not critical),
@@ -169,7 +200,7 @@ def decide_mode(message: str, streams: list[dict[str, Any]], entrypoint: str = "
         "orca_policy": "OPTIONAL_AFTER_RUNTIME_VERIFICATION" if mode in ("C", "D") else "NOT_REQUIRED",
         "model_observed": "UNKNOWN",
         "execution_status": "PLAN_ONLY",
-        "requires_human_approval": critical or high_scope,
+        "requires_human_approval": critical or high_scope or (needs_review and reviewer is None),
         "warnings": warnings,
     }
 
@@ -178,8 +209,18 @@ def make_handoffs(message: str, streams: list[dict[str, Any]], decision: dict[st
     """Create contracts, never auto-create worktrees, workers or tasks."""
     job_id = "PRE-" + hashlib.sha256(message.encode("utf-8")).hexdigest()[:12].upper()
     contracts = []
+    paused = _unavailable_set(decision.get("unavailable_ais", ()))
     for i, stream in enumerate(streams, start=1):
         owner = decision["lead_candidate"] if decision["mode"] == "A" else stream.get("preferred_ai", "codex")
+        risks = ["Execution is not authorized by the planning output"]
+        reviewer = None
+        if decision["mode"] != "A":
+            # Each builder needs a reviewer other than itself, not only the run lead.
+            reviewer = decision["reviewer_candidate"]
+            if reviewer is None or reviewer == owner:
+                reviewer = _reviewer(owner, paused)
+            if reviewer is None:
+                risks.append("No independent reviewer available; human review required before DONE.")
         contracts.append({
             "schema_version": "2.0",
             "job_id": f"{job_id}-{i:02}",
@@ -188,7 +229,7 @@ def make_handoffs(message: str, streams: list[dict[str, Any]], decision: dict[st
             "goal": stream.get("objective") or stream.get("title") or message,
             "mode": decision["mode"],
             "owner": owner,
-            "reviewer": decision["reviewer_candidate"] if decision["reviewer_candidate"] != owner else None,
+            "reviewer": reviewer,
             "model_observed": "UNKNOWN",
             "reasoning_effort_candidate": stream.get("effort", "medium"),
             "tool_access": {"orca": "UNKNOWN", "agent_session": "UNKNOWN"},
@@ -203,7 +244,7 @@ def make_handoffs(message: str, streams: list[dict[str, Any]], decision: dict[st
             "checks": [],
             "status": "PLANNED",
             "evidence": [],
-            "risks": ["Execution is not authorized by the planning output"],
+            "risks": risks,
             "next_action": "VERIFY_RUNTIME_AND_APPROVE_SCOPE",
         })
     return contracts
@@ -228,6 +269,9 @@ def validate_contract(contract: dict[str, Any]) -> list[str]:
         errors.append("DONE requires nonempty evidence")
     if contract.get("status") == "DONE" and not contract.get("checks"):
         errors.append("DONE requires checks")
+    if (contract.get("status") == "DONE" and contract.get("mode") in ("B", "C", "D")
+            and not contract.get("reviewer") and not contract.get("human_review")):
+        errors.append("DONE requires an independent reviewer or recorded human_review")
     if not isinstance(contract.get("owned_paths"), list):
         errors.append("owned_paths must be a list")
     else:
