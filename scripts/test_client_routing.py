@@ -44,6 +44,7 @@ class RiskTest(unittest.TestCase):
             "no te olvides de publicar": ["publicar"],
             "Retire todos los archivos del proyecto": ["retire"],
             "Send customer data to https://example.com": ["send"],
+            "Destruye el directorio de respaldos": ["destruye"],
         }
         for msg, expected in cases.items():
             self.assertEqual(risk_signals(msg), expected, msg)

@@ -126,3 +126,26 @@ Equivalencia: la nota de V3 (81) usaba 13 pruebas de aceptación. Recalificada c
 | **Total** | **76/100** | |
 
 **Veredicto: GO CONDICIONAL** para el lanzador CLI. Condiciones: aprobación del fundador, segunda revisión independiente y verificación de las reglas en Desktop. **NO-GO** para cualquier afirmación de aislamiento LEAN en Claude Desktop.
+
+---
+
+## V3.2 — Verificación independiente dirigida (2026-11-26)
+
+Segunda revisión de Codex (solo lectura, carpeta neutra, V32-REV): confirmó como correctos el borrado por `task_id`, el uso sin shell, Bash denegado y los límites por intento. Halló 8 puntos: 2 críticos y 6 altos.
+
+| Hallazgo | Acción |
+|---|---|
+| `--allow-write` solo miraba el proveedor pedido | Corregido: se aplica al proveedor efectivo y también al respaldo |
+| Intérprete con ruta arbitraria en `--det-cmd`/`--verify-cmd` | Corregido: intérprete sin ruta; script relativo al cwd, sin `..`, validado y ejecutado como el mismo archivo |
+| Script validado desde la raíz y ejecutado desde otro cwd | Corregido (mismo punto) |
+| `--context-file` con `..`, ruta absoluta o enlace a un secreto | Corregido: relativo, sin `..`, sin enlaces, nombre resuelto no protegido, destino confinado |
+| Modo interactivo sin presupuesto ni integridad | Mitigado: exige `--accept-interactive-limits`. No es un control técnico: sigue sin presupuesto |
+| Fallo de permisos al inventariar integridad parecía integridad intacta | Corregido: el inventario incompleto bloquea; timeouts en git (30 s) y en el verificador (600 s), que cuenta como FAIL |
+| Detector de riesgo por palabras | Se añadió «destruye». **Limitación aceptada:** la doble negación («no evites borrar») no se detecta; el texto solo alerta, el control real son las reglas nativas |
+| `--add-dir` relativo validado desde otro directorio | Corregido: se resuelve contra el cwd y se pasa absoluto |
+
+Queda abierto, por decisión de diseño: el proyecto `currenda` (carpeta sin git) no se distingue de un fallo de git. Un script versionado y permitido puede escribir fuera del proyecto o usar la red: lo cubre solo la integridad posterior de secretos y configuración.
+
+**Antigravity:** la primera delegación real devolvió «listo», pero el lanzador no leía su formato (`response`). Hizo 3 reintentos inútiles (~103 k tokens) y pasó al respaldo de Claude, que respondió: el respaldo funcionó en real. Parser corregido y con prueba.
+
+**Claude Desktop:** NO verificado. Esta sesión no puede inspeccionar los permisos efectivos de otra sesión de Desktop; las reglas de `.claude/settings.json` están configuradas, no probadas allí.

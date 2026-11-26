@@ -23,7 +23,7 @@ _CRITICAL_TERMS = (
     r"pag(?:ar|a|an|o|os|ue|uen|ues|alo|ala|ad)|cobr\w*|transfer\w*|gast(?:ar|a|an|e|en|es|o|os)|comprar|"
     r"(?:en|a) producci[oó]n|despleg\w*|desplieg\w*|deploy\w*|publish\w*|"
     r"publ[ií]c(?:ar|a|an|ad|alo|ala|alos|alas)|publiqu\w*|publicaci[oó]n(?:es)? (?:en vivo|oficial)|"
-    r"borr(?:ar|a|an|e|en|es|ad|alo|ala|alos|alas|amos)|elimin\w*|delete\w*|remove|wipe|rm -rf|drop table|"
+    r"borr(?:ar|a|an|e|en|es|ad|alo|ala|alos|alas|amos)|elimin\w*|delete\w*|remove|wipe|destru\w*|rm -rf|drop table|"
     r"retir(?:ar|a|an|e|en|es|ad)|vaci(?:ar|a|an|e|en)|send|upload\w*|"
     r"sub(?:ir|e|an|a) (?:a|al) (?:internet|la nube|github|drive)|"
     r"compart(?:ir|e|an|a) (?:los |el |la )?datos|datos de (?:clientes|usuarios)|"

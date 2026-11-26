@@ -59,7 +59,7 @@ def chain_from_env(env: dict | None = None) -> list[str]:
 def git_info(cwd: Path) -> tuple[Path | None, str | None]:
     def run(*args: str) -> str | None:
         try:
-            out = subprocess.run(["git", "-C", str(cwd), *args], capture_output=True, text=True, timeout=15)
+            out = subprocess.run(["git", "-C", str(cwd), *args], capture_output=True, text=True, timeout=30)
         except (OSError, subprocess.TimeoutExpired):
             return None
         return out.stdout.strip() if out.returncode == 0 else None
@@ -153,7 +153,7 @@ def build_command(provider: str, prof: dict, cfg: dict, cwd: str, add_dirs: list
                   det_cmd: str | None = None) -> list[str]:
     eff, sec = prof["effort"], cfg["security"]
     if provider == "det":
-        return shlex.split(det_cmd or "", posix=sys.platform != "win32")
+        return split_cmd(det_cmd or "")
     model = model_for(provider, eff, cfg)
     if provider == "claude":
         tools = scoped_tools(prof["tools"]) + ("," + prof["exec_tools"] if allow_exec and prof.get("exec_tools") else "")
@@ -248,7 +248,9 @@ def integrity_snapshot(root: Path | None, cfg: dict) -> dict[str, str]:
     names = [n.lower() for n in sec["protected_names"]]
     paths = [p.replace("\\", "/") for p in sec["protected_paths"]]
     snap = {}
-    for dirpath, dirnames, filenames in os.walk(root):
+    def fail(exc):
+        raise RuntimeError(f"inventario de integridad incompleto: {exc}")
+    for dirpath, dirnames, filenames in os.walk(root, onerror=fail):
         dirnames[:] = [d for d in dirnames if d not in SKIP_DIRS]
         for fn in filenames:
             full = Path(dirpath) / fn
@@ -286,11 +288,17 @@ def parse_stream(lines) -> dict:
             result = obj
         if isinstance(obj.get("usage"), dict):
             usage = obj["usage"]
+        if obj.get("status") == "SUCCESS" and "response" in obj:  # Agy --output-format json
+            last_msg = str(obj["response"])
+            u2 = obj.get("usage", {})
+            usage = {"input_tokens": u2.get("input_tokens", 0), "output_tokens": u2.get("output_tokens", 0),
+                     "cache_read_input_tokens": u2.get("cache_read_tokens", 0)}
+            result = {**result, "num_turns": obj.get("num_turns", 0), "duration_ms": obj.get("duration_seconds", 0) * 1000}
         item = obj.get("item") if isinstance(obj.get("item"), dict) else {}
         if item.get("type") == "agent_message" and item.get("text"):  # Codex --json
             last_msg = item["text"]
         model_seen = obj.get("model") if isinstance(obj.get("model"), str) else model_seen
-    u = result.get("usage", usage)
+    u = usage if "usage" not in result else result["usage"]
     creada = u.get("cache_creation_input_tokens", 0)
     if "cached_input_tokens" in u:  # Codex/OpenAI: input_tokens ya incluye los cacheados
         leida = u["cached_input_tokens"]
@@ -342,6 +350,7 @@ def new_task_id(task: str) -> str:
 def preflight(a, cfg: dict, which=None, git=None, env: dict | None = None) -> dict:
     which, git = which or shutil.which, git or git_info
     chain = chain_from_env(env)
+    a.add_dir = [str((Path(a.cwd) / d).resolve()) for d in a.add_dir]  # mismo cwd para validar y para el proveedor
     prof, blocks = resolve_profile(a.profile, a.effort, a.reason, cfg)
     if a.project == "auto":
         a.project = detect_project(Path(a.cwd), cfg, git=git) or "auto"
@@ -356,8 +365,9 @@ def preflight(a, cfg: dict, which=None, git=None, env: dict | None = None) -> di
     signals = risk_signals(task) if task else []
     if signals and not a.approved_risk:
         blocks.append(f"riesgo critical en la tarea {signals}: requiere aprobacion humana (--approved-risk)")
-    if a.allow_write and a.provider in ("codex", "agy"):
-        blocks.append("--allow-write bloqueado para codex/agy: su sandbox no puede denegar rutas protegidas (decision del fundador)")
+    if a.allow_write and (chosen_pre := next((p for p in ([a.provider] if a.provider else []) + list(prof["providers"])
+                                              if which(p)), None)) in ("codex", "agy"):
+        blocks.append("--allow-write bloqueado para codex/agy (proveedor efectivo): su sandbox no puede denegar rutas protegidas")
     if a.allow_exec and signals:
         blocks.append("--allow-exec no se combina con tareas de riesgo critical: los scripts escapan a las reglas por herramienta")
     known = cfg.get("known_providers", ["claude", "codex", "agy"])
@@ -377,10 +387,12 @@ def preflight(a, cfg: dict, which=None, git=None, env: dict | None = None) -> di
         blocks += security_check(cmd, chosen, cfg, getattr(a, "interactive", False))
         if a.context_file:
             blocks += check_context_files(a.context_file, root, cfg)
-        blocks += check_script_cmd(a.det_cmd, root, cfg, "--det-cmd")
-        blocks += check_script_cmd(a.verify_cmd, root, cfg, "--verify-cmd")
+        blocks += check_script_cmd(a.det_cmd, root, cfg, "--det-cmd", Path(a.cwd))
+        blocks += check_script_cmd(a.verify_cmd, root, cfg, "--verify-cmd", Path(a.cwd))
         if chosen != "det" and not resolve_exe(cmd[0], which):
             blocks.append(f"ejecutable de {chosen} no es un binario nativo resoluble: se rechaza shell para evitar inyeccion")
+        if getattr(a, "interactive", False) and not getattr(a, "accept_interactive_limits", False):
+            blocks.append("modo interactivo sin presupuesto, registro ni integridad posterior: exige --accept-interactive-limits")
         if getattr(a, "interactive", False) and chain:
             blocks.append(f"sesion interactiva pedida desde una delegacion {chain}: un trabajador no abre sesiones")
         blocks += check_limits(a, prof, cfg, chain, chosen, read_log(Path(a.log) if a.log else None))
@@ -411,27 +423,40 @@ def neutral_workspace(task_id: str, files: list[str], root: Path) -> Path:
     dest = Path(tempfile.mkdtemp(prefix=f"{task_id}-", dir=base))  # carpeta nueva y exclusiva; nunca se borra nada
     for rel in files:
         src = (root / rel).resolve()
-        target = dest / rel
+        target = (dest / rel).resolve()
+        if not is_within(target, dest):
+            raise ValueError(f"destino fuera de la carpeta neutra: {rel}")
         target.parent.mkdir(parents=True, exist_ok=True)
         shutil.copy2(src, target)
     (dest / "AGENTS.md").write_text(LEAN_PROMPT.read_text(encoding="utf-8"), encoding="utf-8")
     return dest
 
 
-def check_script_cmd(cmd_text: str | None, root: Path | None, cfg: dict, label: str) -> list[str]:
-    """--det-cmd / --verify-cmd: solo 'python|node <script versionado del proyecto> [args]', sin codigo en linea."""
+def split_cmd(cmd_text: str) -> list[str]:
+    return [x.strip("\"'") for x in shlex.split(cmd_text, posix=sys.platform != "win32")]
+
+
+def check_script_cmd(cmd_text: str | None, root: Path | None, cfg: dict, label: str, cwd: Path | None = None) -> list[str]:
+    """--det-cmd / --verify-cmd: solo 'python|node <script versionado> [args]'; el interprete es un nombre desnudo
+    (resuelto por PATH), el script se valida y se ejecuta con la MISMA ruta relativa al cwd, sin '..'."""
     if not cmd_text:
         return []
-    parts = shlex.split(cmd_text, posix=sys.platform != "win32")
-    runner = Path(parts[0]).stem.lower() if parts else ""
-    if runner not in cfg["security"]["script_runners"] or len(parts) < 2 or parts[1].startswith("-"):
-        return [f"{label} debe ser 'python|node <script del proyecto>' sin -c/-e: {cmd_text!r}"]
-    script = (root / parts[1]) if root else Path(parts[1])
+    parts = split_cmd(cmd_text)
+    if (not parts or parts[0].lower() not in cfg["security"]["script_runners"] or len(parts) < 2
+            or parts[1].startswith("-")):
+        return [f"{label} debe ser 'python|node <script del proyecto>' (interprete sin ruta, sin -c/-e): {cmd_text!r}"]
+    rel = Path(parts[1])
+    if rel.is_absolute() or ".." in rel.parts:
+        return [f"{label}: la ruta del script debe ser relativa al cwd y sin '..': {parts[1]}"]
+    script = ((cwd or root or Path(".")) / rel) if root else rel
     if root is None or not script.is_file() or not is_within(script, root):
         return [f"{label}: script fuera del proyecto o inexistente: {parts[1]}"]
     if (root / ".git").exists():
-        tracked = subprocess.run(["git", "-C", str(root), "ls-files", "--error-unmatch", str(script.resolve())],
-                                 capture_output=True, text=True)
+        try:
+            tracked = subprocess.run(["git", "-C", str(root), "ls-files", "--error-unmatch", str(script.resolve())],
+                                     capture_output=True, text=True, timeout=30)
+        except subprocess.TimeoutExpired:
+            return [f"{label}: el control de git agoto su tiempo (fail-closed)"]
         if tracked.returncode != 0:
             return [f"{label}: el script no esta versionado en git (solo se ejecuta codigo revisado): {parts[1]}"]
     return []
@@ -441,10 +466,15 @@ def check_context_files(files: list[str], root: Path | None, cfg: dict) -> list[
     blocks = []
     names = [n.lower() for n in cfg["security"]["protected_names"]]
     for rel in files:
-        src = (root / rel) if root else Path(rel)
-        if root is None or not src.is_file() or not is_within(src, root):
+        r = Path(rel)
+        src = (root / r) if root else r
+        if r.is_absolute() or ".." in r.parts:
+            blocks.append(f"--context-file debe ser relativo al proyecto y sin '..': {rel}")
+        elif root is None or not src.is_file() or not is_within(src, root):
             blocks.append(f"--context-file invalido o fuera del proyecto: {rel}")
-        elif any(fnmatch.fnmatchcase(src.name.lower(), n) for n in names):
+        elif src.is_symlink():
+            blocks.append(f"--context-file es un enlace simbolico: {rel}")
+        elif any(fnmatch.fnmatchcase(n_, n) for n in names for n_ in (src.name.lower(), src.resolve().name.lower())):
             blocks.append(f"--context-file protegido (secreto): {rel}")
     return blocks
 
@@ -496,6 +526,8 @@ def parser(cfg: dict) -> argparse.ArgumentParser:
     ap.add_argument("--log")
     ap.add_argument("--raw-dir", help="Carpeta donde guardar la salida bruta de cada intento (evidencia).")
     ap.add_argument("--verify-cmd", help="Comprobacion determinista posterior; su exit code fija 'calidad'.")
+    ap.add_argument("--accept-interactive-limits", action="store_true",
+                    help="Acepta que la sesion interactiva no aplica presupuesto ni integridad automaticos.")
     mode = ap.add_mutually_exclusive_group()
     mode.add_argument("--check", action="store_true")
     mode.add_argument("--dry-run", action="store_true")
@@ -530,6 +562,8 @@ def main(argv: list[str] | None = None) -> int:
     root = Path(report["project_root"]) if report["project_root"] else None
     rc, attempt = 1, 0
     for provider in [p for p in report["provider_order"] if report["providers_available"].get(p)]:
+        if a.allow_write and provider in ("codex", "agy"):
+            continue  # tampoco como respaldo
         run_cwd = a.cwd
         if a.context_file and provider in ("codex", "agy") and root:
             run_cwd = str(neutral_workspace(a.task_id, a.context_file, root))
@@ -545,9 +579,16 @@ def main(argv: list[str] | None = None) -> int:
                 return 2
             attempt += 1
             t0 = time.time()
-            before = integrity_snapshot(root, cfg)
+            try:
+                before = integrity_snapshot(root, cfg)
+            except RuntimeError as exc:
+                print(json.dumps({"status": "BLOCKED", "task_id": a.task_id, "blocks": [str(exc)]}, ensure_ascii=False))
+                return 2
             proc = run_provider(cmd, provider, task, run_cwd, env)
-            violations = integrity_diff(before, integrity_snapshot(root, cfg))
+            try:
+                violations = integrity_diff(before, integrity_snapshot(root, cfg))
+            except RuntimeError as exc:
+                violations = [str(exc)]  # sin inventario posterior no se puede afirmar integridad
             stats = parse_stream(proc.stdout.splitlines()) if provider != "det" else {
                 **parse_stream([]), "resultado": proc.stdout.strip()[:200], "ok": True}
             if a.raw_dir:
@@ -557,9 +598,12 @@ def main(argv: list[str] | None = None) -> int:
             ok = proc.returncode == 0 and stats["ok"]
             calidad = ""
             if ok and not violations and a.verify_cmd:
-                vparts = shlex.split(a.verify_cmd, posix=sys.platform != "win32")
-                v = subprocess.run([resolve_exe(vparts[0]) or vparts[0], *vparts[1:]], cwd=a.cwd)
-                calidad = "PASS" if v.returncode == 0 else "FAIL"
+                vparts = split_cmd(a.verify_cmd)
+                try:
+                    v = subprocess.run([resolve_exe(vparts[0]) or vparts[0], *vparts[1:]], cwd=a.cwd, timeout=600)
+                    calidad = "PASS" if v.returncode == 0 else "FAIL"
+                except subprocess.TimeoutExpired:
+                    calidad = "FAIL"  # un control que agota su tiempo bloquea, no aprueba
                 violations = integrity_diff(before, integrity_snapshot(root, cfg))  # el verificador tambien se audita
             estado = ("VIOLACION_INTEGRIDAD" if violations else "FALLO_CALIDAD" if calidad == "FAIL"
                       else "OK" if ok else f"FALLO_rc{proc.returncode}")

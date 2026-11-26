@@ -43,7 +43,7 @@ def args(task: str = "Redacta el caption del carrusel", **kw) -> argparse.Namesp
     base = dict(profile="lean", project="altiora", task_file=tmp.name, cwd=str(REPO), add_dir=[],
                 allow_external_dir=False, mcp_config=[], provider=None, effort=None, reason=None,
                 approved_risk=False, allow_write=False, allow_exec=False, task_id=None, role="worker", log=None,
-                det_cmd=None, depends_on=[], interactive=False, context_file=[], verify_cmd=None)
+                det_cmd=None, depends_on=[], interactive=False, context_file=[], verify_cmd=None, accept_interactive_limits=False)
     base.update(kw)
     return argparse.Namespace(**base)
 
@@ -191,7 +191,8 @@ class OrquestacionV31Test(unittest.TestCase):
         self.assertTrue(any("allow-exec" in b for b in r["blocks"]))
 
     def test_interactive_has_no_print_only_flags(self):
-        r = pf(args(interactive=True))
+        self.assertTrue(any("--accept-interactive-limits" in b for b in pf(args(interactive=True))["blocks"]))
+        r = pf(args(interactive=True, accept_interactive_limits=True))
         self.assertEqual(r["status"], "READY", r["blocks"])
         self.assertNotIn("-p", r["command"])
         self.assertIn("--safe-mode", r["command"])
@@ -278,6 +279,58 @@ class RevisionV31Test(unittest.TestCase):
             self.assertEqual(len(calls), 1)  # el presupuesto agotado tras el 1.er intento impide el 2.o
 
 
+class RevisionV32Test(unittest.TestCase):
+    """Regresiones de la segunda revision independiente (V32-REV)."""
+
+    def test_allow_write_blocked_for_effective_provider(self):
+        only_codex = lambda p: "/bin/codex" if p == "codex" else None
+        r = pf(args(allow_write=True), which=only_codex)
+        self.assertTrue(any("proveedor efectivo" in b for b in r["blocks"]))
+
+    def test_script_runner_must_be_bare_name_and_relative_script(self):
+        for bad in ("C:/attacker/python.exe scripts/lean_run.py", "python /abs/x.py", "python ../x.py", "python -c x"):
+            self.assertTrue(lean.check_script_cmd(bad, ROOT, CFG, "v", ROOT), bad)
+        self.assertEqual(lean.check_script_cmd('python "scripts/lean_run.py" --help', ROOT, CFG, "v", ROOT), [])
+
+    def test_script_resolved_from_cwd_not_root(self):
+        self.assertTrue(lean.check_script_cmd("python lean_run.py", ROOT, CFG, "v", ROOT))  # existe solo en scripts/
+        self.assertEqual(lean.check_script_cmd("python lean_run.py", ROOT, CFG, "v", ROOT / "scripts"), [])
+
+    def test_context_file_traversal_absolute_and_symlink(self):
+        with tempfile.TemporaryDirectory() as d:
+            root = Path(d) / "A"
+            root.mkdir()
+            (root / "ok.txt").write_text("x")
+            (root / ".env").write_text("S=1")
+            self.assertTrue(lean.check_context_files(["../A/ok.txt"], root, CFG))
+            self.assertTrue(lean.check_context_files([str(root / "ok.txt")], root, CFG))
+            try:
+                (root / "public.txt").symlink_to(root / ".env")
+            except OSError:
+                return  # Windows sin privilegio de enlaces: se omite solo esta parte
+            self.assertTrue(lean.check_context_files(["public.txt"], root, CFG))
+
+    def test_integrity_inventory_failure_is_blocking(self):
+        with tempfile.TemporaryDirectory() as d:
+            orig = lean.os.walk
+
+            def bad_walk(root, onerror=None, **kw):
+                onerror(PermissionError("denegado"))
+                return iter(())
+            lean.os.walk = bad_walk
+            try:
+                with self.assertRaises(RuntimeError):
+                    lean.integrity_snapshot(Path(d), CFG)
+            finally:
+                lean.os.walk = orig
+
+    def test_relative_add_dir_resolved_against_cwd(self):
+        a = args(add_dir=[".."])
+        r = pf(a)
+        self.assertEqual(a.add_dir, [str(REPO.parent.resolve())])
+        self.assertTrue(any("fuera del proyecto" in b for b in r["blocks"]))
+
+
 class CodexNeutralTest(unittest.TestCase):
     def test_codex_lean_ignores_user_config(self):
         self.assertIn("--ignore-user-config", pf(args(provider="codex"))["command"])
@@ -335,6 +388,12 @@ class EconomiaTest(unittest.TestCase):
     def test_parse_codex_usage(self):
         s = lean.parse_stream(CODEX)
         self.assertEqual((s["entrada"], s["cache_leida"], s["salida"], s["ok"], s["resultado"]), (600, 300, 40, True, "18"))
+
+    def test_parse_agy_json(self):
+        s = lean.parse_stream([json.dumps({"conversation_id": "c", "status": "SUCCESS", "response": "listo",
+                                           "duration_seconds": 20.2, "num_turns": 1,
+                                           "usage": {"input_tokens": 34116, "output_tokens": 2, "cache_read_tokens": 0}})])
+        self.assertEqual((s["ok"], s["resultado"].strip(), s["total"], s["turnos"], s["segundos"]), (True, "listo", 34118, 1, 20))
 
     def test_old_log_header_respected(self):
         with tempfile.TemporaryDirectory() as d:
