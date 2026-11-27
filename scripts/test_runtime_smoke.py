@@ -173,5 +173,92 @@ class RuntimeSmokeTests(unittest.TestCase):
         self.assertEqual(smoke.run_smoke(self.project, alias)['status'], 'UNSAFE_LOCATION')
 
 
+class ClaudeHookConfigTest(unittest.TestCase):
+    def test_config_and_guard(self):
+        import sys
+        from pathlib import PureWindowsPath
+
+        repo = Path(__file__).resolve().parents[1]
+        config = json.loads(
+            (repo / ".claude/settings.json").read_text(encoding="utf-8-sig")
+        )["hooks"]
+        marker = "${CLAUDE_PROJECT_DIR}"
+        handlers = {}
+        for event in ("SessionStart", "PreToolUse"):
+            with self.subTest(event=event):
+                self.assertEqual(len(config[event]), 1)
+                group = config[event][0]
+                self.assertEqual(group["matcher"], "*")
+                self.assertEqual(len(group["hooks"]), 1)
+                handler = group["hooks"][0]
+                self.assertEqual(handler["type"], "command")
+                self.assertIsInstance(handler["command"], str)
+                self.assertTrue(handler["command"])
+                self.assertEqual(handler["timeout"], 10)
+                expected = [
+                    marker + "/.altiora/system/scripts/guard.py",
+                    "--runtime", "claude", "--project", marker, "--event", event,
+                ]
+                self.assertEqual(handler["args"], expected)
+                for arg in handler["args"]:
+                    self.assertNotIn("altiora-unificado", arg)
+                    self.assertFalse(Path(arg).is_absolute())
+                    self.assertFalse(PureWindowsPath(arg).is_absolute())
+                handlers[event] = handler
+        self.assertEqual(handlers["PreToolUse"]["onFailure"], "block")
+
+        with tempfile.TemporaryDirectory(prefix="claude hook spaces ") as tmp:
+            project = Path(tmp)
+            script = project / ".altiora/system/scripts/guard.py"
+            policy = project / ".altiora/policy.json"
+            script.parent.mkdir(parents=True)
+            script.write_bytes(
+                (repo / ".altiora/system/scripts/guard.py").read_bytes()
+            )
+            policy.write_bytes((repo / ".altiora/policy.json").read_bytes())
+
+            def run(event, name=None, substitute=True):
+                args = handlers[event]["args"]
+                if substitute:
+                    args = [a.replace(marker, str(project)) for a in args]
+                payload = {} if name is None else {
+                    "tool_name": "Write",
+                    "tool_input": {"file_path": str(project / name)},
+                }
+                return subprocess.run(
+                    [sys.executable, *args], input=json.dumps(payload),
+                    text=True, capture_output=True, timeout=10,
+                    shell=False, cwd=project,
+                )
+
+            def output(event, name=None):
+                result = run(event, name)
+                self.assertEqual(result.returncode, 0, result.stderr)
+                return json.loads(result.stdout)
+
+            denied = output("PreToolUse", ".env")
+            self.assertEqual(
+                denied["hookSpecificOutput"]["permissionDecision"], "deny"
+            )
+            for name in (".env.example", "README.md"):
+                self.assertEqual(output("PreToolUse", name), {})
+            self.assertTrue(output("SessionStart")["hookSpecificOutput"]["additionalContext"])
+            def assert_unopenable(result, fragment):
+                # Python exit 2 because the script path cannot be opened, not another error.
+                self.assertEqual(result.returncode, 2, result.stderr)
+                self.assertIn("can't open file", result.stderr)
+                self.assertIn(fragment, result.stderr)
+
+            assert_unopenable(run("PreToolUse", ".env", False), marker)
+            saved = script.read_bytes()
+            script.unlink()
+            assert_unopenable(run("PreToolUse", ".env"), "guard.py")
+            script.write_bytes(saved)
+            self.assertEqual(output("PreToolUse", "README.md"), {})  # control: restored guard runs
+            policy.unlink()
+            denied = output("PreToolUse", "README.md")
+            self.assertEqual(denied["hookSpecificOutput"]["permissionDecision"], "deny")
+
+
 if __name__ == '__main__':
     unittest.main()

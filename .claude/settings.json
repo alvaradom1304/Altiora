@@ -9,7 +9,16 @@
         "hooks": [
           {
             "type": "command",
-            "command": "C:/Users/Usuario/AppData/Local/Programs/Python/Python312/python.exe C:/Users/Usuario/orca/workspaces/Altiora-Immersive-Web-Lab/altiora-unificado/.altiora/system/scripts/guard.py --runtime claude --project C:/Users/Usuario/orca/workspaces/Altiora-Immersive-Web-Lab/altiora-unificado --event SessionStart",
+            "command": "C:/Users/Usuario/AppData/Local/Programs/Python/Python312/python.exe",
+            "args": [
+              "${CLAUDE_PROJECT_DIR}/.altiora/system/scripts/guard.py",
+              "--runtime",
+              "claude",
+              "--project",
+              "${CLAUDE_PROJECT_DIR}",
+              "--event",
+              "SessionStart"
+            ],
             "timeout": 10
           }
         ]
@@ -21,8 +30,18 @@
         "hooks": [
           {
             "type": "command",
-            "command": "C:/Users/Usuario/AppData/Local/Programs/Python/Python312/python.exe C:/Users/Usuario/orca/workspaces/Altiora-Immersive-Web-Lab/altiora-unificado/.altiora/system/scripts/guard.py --runtime claude --project C:/Users/Usuario/orca/workspaces/Altiora-Immersive-Web-Lab/altiora-unificado --event PreToolUse",
-            "timeout": 10
+            "command": "C:/Users/Usuario/AppData/Local/Programs/Python/Python312/python.exe",
+            "args": [
+              "${CLAUDE_PROJECT_DIR}/.altiora/system/scripts/guard.py",
+              "--runtime",
+              "claude",
+              "--project",
+              "${CLAUDE_PROJECT_DIR}",
+              "--event",
+              "PreToolUse"
+            ],
+            "timeout": 10,
+            "onFailure": "block"
           }
         ]
       }
