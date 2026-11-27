@@ -86,7 +86,7 @@ class ProyectoTest(unittest.TestCase):
             self.assertEqual(pf(args(project="currenda", cwd=own), git=git_none)["status"], "READY")
 
     def test_folder_project_parent_of_other_repo_blocked(self):
-        # Defecto 2026-11-27: --cwd C:\Users\Usuario aceptaba 'currenda' con todo el perfil como raiz.
+        # Defecto 2026-11-27: --cwd %USERPROFILE% aceptaba 'currenda' con todo el perfil como raiz.
         with tempfile.TemporaryDirectory() as parent:
             (Path(parent) / "otro-cliente" / ".git").mkdir(parents=True)
             r = pf(args(project="currenda", cwd=parent), git=git_none)
@@ -105,7 +105,7 @@ class ProyectoTest(unittest.TestCase):
             self.assertEqual(lean.nested_repo(Path(wide), max_entries=2), "DEMASIADO_AMPLIA")
 
     def test_nested_scan_reaches_depth_three_like_profile_onedrive_desktop(self):
-        # Revision Codex 52dfc35: Usuario\OneDrive\Desktop\altiora\.git quedaba sin examinar (solo 2 niveles).
+        # Revision Codex 52dfc35: %USERPROFILE%\OneDrive\Desktop\<carpeta>\.git quedaba sin examinar (solo 2 niveles).
         with tempfile.TemporaryDirectory() as home:
             (Path(home) / "OneDrive" / "Desktop" / "altiora" / ".git").mkdir(parents=True)
             self.assertTrue(lean.nested_repo(Path(home)).endswith("altiora"))
