@@ -9,6 +9,8 @@ Fuente única de instrucciones para todas las IAs (Claude Code, Codex, Antigravi
 
 **Router V2 implementado para planes:** consultar [PREAMBRA-V2-ROUTER-RUNBOOK](docs/operations/PREAMBRA-V2-ROUTER-RUNBOOK.md) y el [documento maestro de estrategia y orquestación](docs/operations/PREAMBRA-OS-V2-MASTER-HANDOFF.md). Antes de delegar, elegir modo A (directo), B (constructor+revisor), C (paralelo independiente) o D (proyecto integral); el despachador actual devuelve los contratos como `handoffs[]` con estado `PLANNED`. La selección no inicia Orca ni prueba acceso local. Pruebas: `npm run routing:v2:test`. La integración de trabajadores reales y QA de extremo a extremo sigue siendo un hito posterior.
 
+**Perfiles LEAN-first (V3.1):** toda delegación a otra IA o sesión aislada se lanza con `python scripts/lean_run.py ...` (proyecto autodetectado por el remote; LEAN por defecto; STANDARD bajo demanda; ADVANCED con `--reason`); sesión interactiva LEAN: `scripts\preambra.cmd` (`--check` antes, sin consumo). Los controles obligatorios son reglas nativas (`--disallowedTools`, `permissions.deny/ask` de `.claude/settings.json`, sandbox `read-only` de Codex) e integridad posterior por hash, no hooks: un hook que agota su tiempo deja pasar la acción. Si falla un control, el lanzador bloquea. Claude Desktop no admite perfiles por lanzamiento: sus sesiones en este repo solo reciben las reglas nativas del proyecto. Detalle, evidencia y límites en [PREAMBRA-LEAN-V3](docs/operations/PREAMBRA-LEAN-V3.md).
+
 ## Objetivo
 Crear experiencias originales, fluidas y comerciales. El primer caso es La Central del Queso. Usar referencias para resolver problemas concretos de dirección, cámara, materiales y navegación.
 

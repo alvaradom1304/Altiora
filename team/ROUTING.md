@@ -56,6 +56,7 @@ Coincide con `DOMAIN_RULES` de `scripts/orca-dispatch.py`; el test `scripts/rout
 | `brand-copy-frontend`: marca, copy, propuestas, ventas, UI/Next.js | claude | codex → antigravity | brand-strategist, content-designer, commerce-growth-director, ui-designer | premium-branding, copywriting, sales-proposal, draft-outreach, conversion-ux, nextjs-architecture |
 | `immersive-3d-qa`: 3D/WebGL, GSAP/scroll, auditoría visual | antigravity | claude → codex | creative-director → web-engineer → qa-reviewer | immersive-interaction-lab, threejs-experience, react-three-fiber, gsap-animation, web-quality-assurance |
 | `cloud-data-engineering`: Google Cloud, BigQuery, pipelines | antigravity | claude → codex | web-engineer | gcp-data-pipelines, dbt-bigquery |
+| `client-content`: carruseles, reels, captions y calendario de un cliente, sin código web del repo | claude | codex → antigravity | content-designer, visual-producer | social-creative, copywriting, scriptwriting, storyboarding |
 
 Otros encargos se enrutan por intención con los mismos roles: investigación de mercado, segmentos, competencia y oportunidades → market-intelligence-director (solo las skills pertinentes, con evidencia y QA); anuncios y video → creative-ads-director ([WORK_ROUTER](../creative-ads-os/WORK_ROUTER.md)); audio → audio-specialist; medición → growth-analyst; coordinación de varios roles → experience-director. Las skills fuera del listado automático se usan leyendo `skills/<nombre>/SKILL.md`.
 

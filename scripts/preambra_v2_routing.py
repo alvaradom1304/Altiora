@@ -19,12 +19,49 @@ STATUSES = ("PLANNED", "READY", "IN_PROGRESS", "REVIEW", "APPROVED", "DONE",
             "BLOCKED", "FAILED", "CANCELED")
 
 # Signal-based, conservative policy. This does not constitute an AI quality score.
-CRITICAL = re.compile(
-    r"\b(?:seguridad|owasp|vulnerabilid\w*|contrato\w*|legal(?:es)?|"
-    r"impuest\w*|pago\w*|cobro\w*|finanz\w*|datos personales|"
-    r"producci[oó]n|publicar|publicaci[oó]n|borrar|eliminar)\b",
+# Fail-safe: ante la duda se marca critical (un falso positivo cuesta una revision; un falso negativo,
+# una accion irreversible). Incluye imperativos y subjuntivos ("borra", "no borres") ademas de infinitivos.
+_CRITICAL_TERMS = (
+    r"(?:seguridad|owasp|vulnerabilid\w*|contrato\w*|legal(?:es)?|impuest\w*|finanz\w*|datos personales|"
+    r"pag(?:ar|a|an|o|os|ue|uen|ues|alo|ala|ad)|cobr\w*|transfer\w*|gast(?:ar|a|an|e|en|es|o|os)|comprar|"
+    r"(?:en|a) producci[oó]n|despleg\w*|desplieg\w*|deploy\w*|publish\w*|"
+    r"publ[ií]c(?:ar|a|an|ad|alo|ala|alos|alas)|publiqu\w*|publicaci[oó]n(?:es)? (?:en vivo|oficial)|"
+    r"borr(?:ar|a|an|e|en|es|ad|alo|ala|alos|alas|amos)|elimin\w*|delete\w*|remove|wipe|destru\w*|rm -rf|drop table|"
+    r"retir(?:ar|a|an|e|en|es|ad)|vaci(?:ar|a|an|e|en)|send|upload\w*|"
+    r"sub(?:ir|e|an|a) (?:a|al) (?:internet|la nube|github|drive)|"
+    r"compart(?:ir|e|an|a) (?:los |el |la )?datos|datos de (?:clientes|usuarios)|"
+    r"push|force[- ]push|merge|fusion(?:ar|a|an|e|en|es|ad)|"
+    r"envi(?:ar|ad|alo|ala|alos|alas)|env[ií](?:a|an|e|en|es)|"
+    r"instal(?:ar|a|an|e|en|es|ad|alo|ala)|"
+    r"\.env|credencial\w*|contrase[nñ]\w*|secretos?|api[ _-]?keys?|tokens? de (?:acceso|api))"
+)
+CRITICAL = re.compile(rf"(?<!\w){_CRITICAL_TERMS}(?!\w)", re.IGNORECASE)
+# Una prohibicion ("no publicar", "no hagas push", "sin borrar") no es una accion de riesgo, pero solo si
+# el negador precede al termino con, como mucho, cliticos o auxiliares entre ambos. "sin revisar publicar"
+# o "no publicar, pero borrar" siguen siendo critical: la negacion no cruza otro verbo ni otra clausula.
+_NEG_FILLER = r"(?:lo|la|los|las|le|les|se|te|me|nos|hagas|hagan|haga|vayas a|vaya a|debes|debe|hay que)"
+NEGATED_CRITICAL = re.compile(
+    rf"(?<!\w)(?:no|sin|nunca|ni|jam[aá]s|tampoco|evit\w*)\s+(?:{_NEG_FILLER}\s+){{0,2}}{_CRITICAL_TERMS}(?!\w)",
     re.IGNORECASE,
 )
+
+
+# Doble negacion: "no evites borrar", "no dejes de publicar", "no omitas eliminar" ORDENAN la accion.
+DOUBLE_NEGATION = re.compile(
+    rf"(?<!\w)(?:no|nunca|jam[aá]s)\s+(?:evit\w*|dejes?\s+de|dejen\s+de|omit\w*|te\s+abstengas\s+de|"
+    rf"se\s+te\s+ocurra\s+no)\s+(?:{_NEG_FILLER}\s+){{0,2}}({_CRITICAL_TERMS})(?!\w)",
+    re.IGNORECASE,
+)
+
+
+def risk_signals(message: str) -> list[str]:
+    """Terminos criticos que quedan tras quitar los negados; permite auditar por que un encargo es critical.
+    Es una SENAL de alerta, no autorizacion ni control: los controles obligatorios son tecnicos (lean_run.py)."""
+    double = [m.group(1).lower() for m in DOUBLE_NEGATION.finditer(message)]
+    rest = DOUBLE_NEGATION.sub(" ", message)
+    return double + [m.group(0).lower() for m in CRITICAL.finditer(NEGATED_CRITICAL.sub(" ", rest))]
+
+
 SUBSTANTIAL = re.compile(
     r"\b(?:crear|desarrollar|implementar|integrar|auditar|investigar|"
     r"refactorizar|dise[nñ]ar|redise[nñ]ar|desplegar|revisar|"
@@ -112,7 +149,8 @@ def decide_mode(message: str, streams: list[dict[str, Any]], entrypoint: str = "
     paused = _unavailable_set(unavailable)
     collisions = overlapping_paths(streams)
     dependent = _has_dependencies(streams)
-    critical = bool(CRITICAL.search(message))
+    signals = risk_signals(message)
+    critical = bool(signals)
     high_scope = bool(INTEGRAL.search(message))
     parallel_request = bool(INDEPENDENT.search(message))
     separate = len(streams) > 1 and not collisions and not dependent
@@ -152,6 +190,7 @@ def decide_mode(message: str, streams: list[dict[str, Any]], entrypoint: str = "
         "entrypoint": entrypoint,
         "lead_candidate": lead,
         "reviewer_candidate": reviewer if needs_review else None,
+        "risk_signals": signals,
         "unavailable_ais": sorted(paused),
         "risk": "critical" if critical else ("elevated" if high_scope else "standard"),
         "parallel_requested": parallel_request,

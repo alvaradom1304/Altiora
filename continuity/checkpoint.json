@@ -2,7 +2,7 @@
   "schema_version": 1,
   "project": "Altiora Visual Studio",
   "repository": "alvaradom1304/Altiora",
-  "snapshot_date": "2026-11-17",
+  "snapshot_date": "2026-11-26",
   "snapshot_kind": "repo_checkpoint_not_live_github_api",
   "description": "Estado reproducible para reanudar entre sesiones e IAs. No significa ejecución persistente ni conexión automática con software.",
   "completed_milestones": [
@@ -373,7 +373,8 @@
     "creative/visual-studio/after-effects/VERIFICATION.md",
     "team/agents/audio-specialist.md",
     "skills/audio-production/SKILL.md",
-    "references/audio-repositories-2026.json"
+    "references/audio-repositories-2026.json",
+    "docs/operations/PREAMBRA-LEAN-V3.md"
   ],
   "known_limits": [
     "Este snapshot no consulta GitHub en tiempo real; cotejar siempre PR, checks y archivos antes de declarar completado.",
@@ -387,7 +388,8 @@
     "Certificación 2026-11-03 (PR #71 fusionado): CONDITIONAL GO. ALT-TRIAD-001 en CONDITIONAL, no PASS: ui.md rev.2 fue ratificada por el fundador el 2026-11-03 (matriz §13.5; aprobación humana, no de la IA Antigravity); falta una revisión ejecutada por un modelo distinto de Claude (Codex vuelve el 05/11). G1 de El Tilichero en HOLD. PR #71 fusionado (17b9fb4) y altiora-unificado actualizado; la tarea Altiora-OmniRoute-SafeStart ya apunta a altiora-unificado; el reinicio de Windows ocurrió a las 12:52 y OmniRoute NO quedó sirviendo: fallo de inicio por falta de STORAGE_ENCRYPTION_KEY persistente (matriz §15.6); opcional, no bloquea el inicio comercial. Firewall Public de Node.js sin modificar (requiere administrador). Detalle y requisitos de fusión en docs/operations/ALTIORA-REAL-INTEGRATION-STATUS.md secciones 12 a 15.6.",
     "Context First + BSCG (PR #75, fusionado 8d0601a, 2026-11-03): control de cobertura del negocio, verificador docs/altiora-business/entrega/scripts/bscg.py con 17 pruebas en npm run check. El Tilichero: BSCG HOLD para decidir qué categoría impulsar (categorías declaradas por el fundador: gaming, tecnología, bebés, anime; ninguna con datos comerciales). G1 sigue en HOLD hasta entrevistar al responsable. Registro: docs/operations/REGISTRO-GRIETAS.md (G-13 cerrada, G-10 parcial).",
     "PRE-ORCH-002 (PR #94, 2026-11-17): PASS en CI Windows/Ubuntu solo del enrutador V2 plan-only. Orca de escritorio y handoffs vivos entre Claude/Codex/Antigravity siguen NO_VERIFIED. PRE-ORCH-003 requiere prueba autorizada en PC con worker de solo lectura.",
-    "PRE-ORCH-003 (2026-11-17, pendiente de aprobación): Orca ejecutó un worker Claude real de solo lectura y una revisión independiente de Antigravity en run_534259da3356; no certifica paralelismo (Etapa D), cuota/timeout ni operación con clientes."
+    "PRE-ORCH-003 (2026-11-17, pendiente de aprobación): Orca ejecutó un worker Claude real de solo lectura y una revisión independiente de Antigravity en run_534259da3356; no certifica paralelismo (Etapa D), cuota/timeout ni operación con clientes.",
+    "LEAN V3.4 (PR #104, 2026-11-26): revision independiente y dos regresiones sinteticas verificadas; archivo protegido ilegible bloquea y facturacion sin evidencia queda NO_OBSERVADO. Orca 1.4.261 runtime ready observado localmente; no certifica handoff. Desktop, cuota y delegacion local multi-IA siguen sin verificar en esta entrega. El orquestador aprobado es Opus 5.5 High; LEAN por defecto corresponde a workers, no cambia esa preferencia. Consultar PR/CI vigentes y PREAMBRA-LEAN-V3.md antes de operar."
   ],
   "recovery_instruction": "Leer checkpoint, consultar el commit/PR más reciente y los checks, reclamar tarea, ejecutar y escribir evidencia antes de terminar. No pedir al usuario que repita el briefing salvo necesidad material."
 }
