@@ -186,3 +186,10 @@ Consumo: revisión Codex 571.258 tokens (251.520 en caché); prueba de permisos 
 **Decisión:** si los pasos 1 y 2 son PASS, Desktop puede usarse con las limitaciones declaradas, **sin** afirmar aislamiento LEAN. Si alguno es FAIL, usar solo `scripts\preambra.cmd` para trabajo sensible.
 
 **Propuesta pendiente de aprobación del fundador (NO aplicada):** `.claude/settings.json` está protegido contra edición por IA. Para cerrar el hueco del paso 4 se propone añadir a `permissions.ask`: `Bash(python *)`, `Bash(node *)`, `Bash(powershell*)`, `Bash(pwsh*)`, `Bash(curl*)`, `Bash(wget*)`. Costo: más ventanas de aprobación en sesiones interactivas. No sustituye un sandbox. Debe aplicarla una persona.
+
+
+## Cierre dirigido de V3.4 — correcciones de revision independiente (2026-11-26)
+
+- Inventario incompleto: si un archivo protegido no puede leerse, el lanzador bloquea. Antes dos lecturas denegadas podian producir una comparacion sin cambios; ahora se trata igual que un error de recorrido. Regresion sintetica: `FinalReadinessTest.test_unreadable_protected_file_blocks_inventory`.
+- Facturacion: ausencia de `init.apiKeySource` produce `NO_OBSERVADO`, no una afirmacion de suscripcion o ausencia de cargo. `apiKeySource=none` solo declara ausencia de clave: `SIN_API_KEY_DECLARADA_FACTURA_NO_VERIFICADA`; una fuente de clave declarada exige ver factura. Regresion: `FinalReadinessTest.test_unknown_auth_does_not_claim_subscription`. Los registros historicos no se reescriben ni sirven por si solos para certificar cargos reales.
+- Estas correcciones no cambian permisos, perfiles, proveedores ni secretos. Los limites de scripts autorizados, sesiones interactivas, Desktop y cuota no observable siguen vigentes.

@@ -261,8 +261,8 @@ def integrity_snapshot(root: Path | None, cfg: dict) -> dict[str, str]:
             if any(fnmatch.fnmatchcase(low, n) for n in names) or any(rel == p or (p.endswith("/") and rel.startswith(p)) for p in paths):
                 try:
                     snap[rel] = hashlib.sha256(full.read_bytes()).hexdigest()  # contenido, no mtime/tamano
-                except OSError as exc:  # ilegible: se registra igual y cualquier cambio de estado cuenta
-                    snap[rel] = f"ILEGIBLE:{type(exc).__name__}"
+                except OSError as exc:  # inventario incompleto: nunca declarar integridad valida
+                    fail(exc)
     return snap
 
 
@@ -322,7 +322,8 @@ def parse_stream(lines) -> dict:
         "total": entrada + creada + leida + salida,
         "ponderado": round(entrada + creada * 1.25 + leida * 0.1 + salida * 5),
         "costo_nocional_usd": round(result.get("total_cost_usd", 0), 3),
-        "costo_real": "SUSCRIPCION_SIN_CARGO_API" if init.get("apiKeySource", "none") == "none" else "API_VER_FACTURA",
+        "costo_real": ("SIN_API_KEY_DECLARADA_FACTURA_NO_VERIFICADA" if init.get("apiKeySource") == "none"
+                       else "API_VER_FACTURA" if init.get("apiKeySource") else "NO_OBSERVADO"),
         "cuota": "NO_OBSERVADA",
         "herramientas": len(init.get("tools", [])), "mcp": len(init.get("mcp_servers", [])),
         "skills": len(init.get("skills", [])), "modelo_efectivo": init.get("model") or model_seen or "NO_OBSERVADO",

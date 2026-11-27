@@ -395,7 +395,7 @@ class EconomiaTest(unittest.TestCase):
         self.assertEqual((s["turnos"], s["total"], s["herramientas"], s["mcp"]), (6, 150833, 28, 0))
         self.assertEqual(s["ponderado"], round(8 + 7381 * 1.25 + 141601 * 0.1 + 1843 * 5))
         self.assertEqual((s["costo_real"], s["cuota"], s["modelo_efectivo"]),
-                         ("SUSCRIPCION_SIN_CARGO_API", "NO_OBSERVADA", "claude-sonnet-5-5"))
+                         ("SIN_API_KEY_DECLARADA_FACTURA_NO_VERIFICADA", "NO_OBSERVADA", "claude-sonnet-5-5"))
         with tempfile.TemporaryDirectory() as d:
             p = Path(d) / "log.csv"
             lean.append_log(p, {"etiqueta": "T", **s})
@@ -423,6 +423,25 @@ class EconomiaTest(unittest.TestCase):
             p.write_text("fecha,etiqueta,total\n", encoding="utf-8")
             lean.append_log(p, {"fecha": "x", "etiqueta": "y", "total": 1, "proveedor": "z"})
             self.assertEqual(p.read_text(encoding="utf-8").splitlines()[1], "x,y,1")
+
+
+class FinalReadinessTest(unittest.TestCase):
+    def test_unknown_auth_does_not_claim_subscription(self):
+        for stream in ([], CODEX, [json.dumps({"type": "system", "subtype": "init"})],
+                       [json.dumps({"status": "SUCCESS", "response": "ok"})]):
+            self.assertEqual(lean.parse_stream(stream)["costo_real"], "NO_OBSERVADO")
+        explicit = [{"type": "system", "subtype": "init", "apiKeySource": "none"}]
+        self.assertEqual(lean.parse_stream([json.dumps(x) for x in explicit])["costo_real"],
+                         "SIN_API_KEY_DECLARADA_FACTURA_NO_VERIFICADA")
+
+    def test_unreadable_protected_file_blocks_inventory(self):
+        from unittest.mock import patch
+        with tempfile.TemporaryDirectory() as d:
+            root = Path(d)
+            (root / ".env").write_text("FIXTURE_ONLY", encoding="utf-8")
+            with patch.object(Path, "read_bytes", side_effect=PermissionError("fixture denied")):
+                with self.assertRaisesRegex(RuntimeError, "inventario de integridad incompleto"):
+                    lean.integrity_snapshot(root, CFG)
 
 
 if __name__ == "__main__":
