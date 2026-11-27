@@ -301,6 +301,32 @@ class RevisionV31Test(unittest.TestCase):
             self.assertIsNone(lean.resolve_exe("x", which=lambda p: "C:/npm/x.CMD"))
         self.assertEqual(lean.resolve_exe("x", which=lambda p: "C:/npm/x.EXE"), "C:/npm/x.EXE")
 
+    def test_context_file_paths_announced_to_neutral_worker(self):
+        with tempfile.TemporaryDirectory() as d:
+            (Path(d) / ".lean-ctx").mkdir()
+            (Path(d) / ".lean-ctx" / "extractos.md").write_text("x", encoding="utf-8")
+            task = Path(d) / "t.txt"
+            task.write_text("Redacta un caption", encoding="utf-8")
+            seen = {}
+
+            def fake_run(cmd, provider, task_text, cwd, env):
+                if provider == "codex":  # el respaldo claude trabaja en el cwd del proyecto, sin carpeta neutra
+                    seen.setdefault("task", task_text)
+                    seen.setdefault("cwd", cwd)
+                return lean.subprocess.CompletedProcess(cmd, 1, "", "")
+
+            orig_run, orig_git, orig_which = lean.run_provider, lean.git_info, lean.shutil.which
+            lean.run_provider = fake_run
+            lean.git_info = lambda _c: (Path(d).resolve(), "https://github.com/alvaradom1304/Altiora.git")
+            lean.shutil.which = lambda p: f"/bin/{p}"
+            try:
+                lean.main(["--project", "altiora", "--cwd", d, "--task-file", str(task), "--log", str(Path(d) / "l.csv"),
+                           "--task-id", "TCTX", "--provider", "codex", "--context-file", ".lean-ctx/extractos.md"])
+            finally:
+                lean.run_provider, lean.git_info, lean.shutil.which = orig_run, orig_git, orig_which
+            self.assertIn(".lean-ctx/extractos.md", seen["task"])
+            self.assertTrue((Path(seen["cwd"]) / ".lean-ctx" / "extractos.md").is_file())  # la ruta anunciada existe
+
     def test_limits_rechecked_before_each_attempt(self):
         with tempfile.TemporaryDirectory() as d:
             log = Path(d) / "log.csv"

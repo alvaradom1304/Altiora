@@ -650,9 +650,12 @@ def main(argv: list[str] | None = None) -> int:
     for provider in [p for p in report["provider_order"] if report["providers_available"].get(p)]:
         if a.allow_write and provider in ("codex", "agy"):
             continue  # tampoco como respaldo
-        run_cwd = a.cwd
+        run_cwd, run_task = a.cwd, task
         if a.context_file and provider in ("codex", "agy") and root:
             run_cwd = str(neutral_workspace(a.task_id, a.context_file, root))
+            # CINE01-CDX-01 y EXC-CDX-02 fallaron buscando el archivo en otra ruta: se anuncia la ruta real en la neutra.
+            run_task = task + "\n\n[Lanzador] Archivos disponibles, rutas relativas a la carpeta de trabajo: " + \
+                ", ".join(Path(f).as_posix() for f in a.context_file) + ". No hay otros archivos del proyecto."
         cmd = build_command(provider, prof, cfg, run_cwd, a.add_dir, a.mcp_config, a.allow_write, a.allow_exec,
                             False, a.det_cmd)
         if security_check(cmd, provider, cfg):  # el respaldo pasa los mismos controles
@@ -670,7 +673,7 @@ def main(argv: list[str] | None = None) -> int:
             except RuntimeError as exc:
                 print(json.dumps({"status": "BLOCKED", "task_id": a.task_id, "blocks": [str(exc)]}, ensure_ascii=False))
                 return 2
-            proc = run_provider(cmd, provider, task, run_cwd, env)
+            proc = run_provider(cmd, provider, run_task, run_cwd, env)
             try:
                 violations = integrity_diff(before, integrity_snapshot(root, cfg))
             except RuntimeError as exc:
