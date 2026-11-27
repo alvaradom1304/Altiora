@@ -88,8 +88,32 @@ def detect_project(cwd: Path, cfg: dict, git=git_info) -> str | None:
     return next((pid for pid, p in cfg["projects"].items() if p.get("kind") == "git" and p["remote"].lower() == slug), None)
 
 
+NESTED_SCAN_DEPTH, NESTED_SCAN_MAX_DIRS = 3, 5000
+
+
+def nested_repo(root: Path, depth: int = NESTED_SCAN_DEPTH, max_dirs: int = NESTED_SCAN_MAX_DIRS) -> str | None:
+    """Primer repositorio git dentro de root (sin contar root) hasta 'depth' niveles.
+    Devuelve su ruta, 'DEMASIADO_AMPLIA' si se supera max_dirs (falla cerrado) o None si no hay ninguno."""
+    level, seen = [str(root)], 0
+    for _ in range(depth):
+        nxt: list[str] = []
+        for d in level:
+            seen += 1
+            if seen > max_dirs:
+                return "DEMASIADO_AMPLIA"
+            try:
+                entries = list(os.scandir(d))
+            except OSError:
+                continue
+            if d != str(root) and any(e.name == ".git" for e in entries):
+                return d
+            nxt += [e.path for e in entries if e.name not in SKIP_DIRS and e.is_dir(follow_symlinks=False)]
+        level = nxt
+    return None
+
+
 def check_project(project: str, cwd: Path, add_dirs: list[str], allow_external: bool, cfg: dict,
-                  git=git_info) -> tuple[dict, list[str], Path | None]:
+                  git=git_info, find_repo=nested_repo) -> tuple[dict, list[str], Path | None]:
     """Aislamiento: el cwd pertenece al proyecto declarado y no se anaden carpetas de otro proyecto."""
     spec = cfg["projects"].get(project)
     if not spec:
@@ -106,7 +130,12 @@ def check_project(project: str, cwd: Path, add_dirs: list[str], allow_external: 
         registered = {p["remote"].lower() for p in cfg["projects"].values() if p.get("kind") == "git"}
         if slug in registered:
             blocks.append(f"proyecto carpeta '{project}' dentro del repo registrado {slug}: contexto ajeno")
+        elif top is None and (inner := find_repo(cwd)):
+            # Una carpeta padre (p. ej. el perfil de usuario) expondria repos de otros clientes como raiz del proyecto.
+            blocks.append(f"proyecto carpeta '{project}' con cwd que contiene otro repositorio ({inner}): "
+                          "usar la carpeta propia del proyecto como --cwd")
         root = cwd
+    info["writable"] = bool(root) and os.access(root, os.W_OK)
     for d in add_dirs:
         if root is not None and not is_within(Path(d), root):
             if allow_external:

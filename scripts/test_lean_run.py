@@ -82,7 +82,27 @@ class ProyectoTest(unittest.TestCase):
     def test_folder_project_inside_registered_repo_blocked(self):
         r = pf(args(project="currenda"))
         self.assertTrue(any("contexto ajeno" in b for b in r["blocks"]))
-        self.assertEqual(pf(args(project="currenda"), git=git_none)["status"], "READY")
+        with tempfile.TemporaryDirectory() as own:  # %TEMP% puede contener repos ajenos: carpeta propia
+            self.assertEqual(pf(args(project="currenda", cwd=own), git=git_none)["status"], "READY")
+
+    def test_folder_project_parent_of_other_repo_blocked(self):
+        # Defecto 2026-11-27: --cwd C:\Users\Usuario aceptaba 'currenda' con todo el perfil como raiz.
+        with tempfile.TemporaryDirectory() as parent:
+            (Path(parent) / "otro-cliente" / ".git").mkdir(parents=True)
+            r = pf(args(project="currenda", cwd=parent), git=git_none)
+            self.assertEqual(r["status"], "BLOCKED")
+            self.assertTrue(any("contiene otro repositorio" in b for b in r["blocks"]), r["blocks"])
+        with tempfile.TemporaryDirectory() as own:
+            (Path(own) / "produccion" / "c1").mkdir(parents=True)
+            r = pf(args(project="currenda", cwd=own), git=git_none)
+            self.assertEqual(r["status"], "READY", r["blocks"])
+            self.assertTrue(r["writable"])
+
+    def test_nested_scan_fails_closed_when_too_wide(self):
+        with tempfile.TemporaryDirectory() as wide:
+            for i in range(4):
+                (Path(wide) / f"d{i}").mkdir()
+            self.assertEqual(lean.nested_repo(Path(wide), max_dirs=2), "DEMASIADO_AMPLIA")
 
     def test_external_add_dir_blocked_unless_explicit(self):
         outside = str(Path(REPO.anchor) / "otro-proyecto")
