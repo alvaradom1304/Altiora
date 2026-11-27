@@ -101,8 +101,35 @@ class ProyectoTest(unittest.TestCase):
     def test_nested_scan_fails_closed_when_too_wide(self):
         with tempfile.TemporaryDirectory() as wide:
             for i in range(4):
-                (Path(wide) / f"d{i}").mkdir()
-            self.assertEqual(lean.nested_repo(Path(wide), max_dirs=2), "DEMASIADO_AMPLIA")
+                (Path(wide) / f"d{i}.txt").write_text("x")  # tambien cuentan los archivos, no solo carpetas
+            self.assertEqual(lean.nested_repo(Path(wide), max_entries=2), "DEMASIADO_AMPLIA")
+
+    def test_nested_scan_reaches_depth_three_like_profile_onedrive_desktop(self):
+        # Revision Codex 52dfc35: Usuario\OneDrive\Desktop\altiora\.git quedaba sin examinar (solo 2 niveles).
+        with tempfile.TemporaryDirectory() as home:
+            (Path(home) / "OneDrive" / "Desktop" / "altiora" / ".git").mkdir(parents=True)
+            self.assertTrue(lean.nested_repo(Path(home)).endswith("altiora"))
+            self.assertIsNone(lean.nested_repo(Path(home), depth=2))
+
+    def test_nested_scan_marker_case_and_file(self):
+        with tempfile.TemporaryDirectory() as home:
+            (Path(home) / "a").mkdir()
+            (Path(home) / "a" / ".GIT").write_text("gitdir: x")  # worktree: .git es archivo; mayusculas en Windows
+            self.assertTrue(lean.nested_repo(Path(home)).endswith("a"))
+
+    def test_nested_scan_unreadable_fails_closed(self):
+        with tempfile.TemporaryDirectory() as home:
+            real = lean.os.scandir
+            def deny(p):
+                if str(p) != home:
+                    raise PermissionError(p)
+                return real(p)
+            (Path(home) / "privada").mkdir()
+            lean.os.scandir = deny
+            try:
+                self.assertTrue(lean.nested_repo(Path(home)).startswith("NO_LEGIBLE"))
+            finally:
+                lean.os.scandir = real
 
     def test_external_add_dir_blocked_unless_explicit(self):
         outside = str(Path(REPO.anchor) / "otro-proyecto")

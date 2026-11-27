@@ -88,26 +88,40 @@ def detect_project(cwd: Path, cfg: dict, git=git_info) -> str | None:
     return next((pid for pid, p in cfg["projects"].items() if p.get("kind") == "git" and p["remote"].lower() == slug), None)
 
 
-NESTED_SCAN_DEPTH, NESTED_SCAN_MAX_DIRS = 3, 5000
+NESTED_SCAN_DEPTH, NESTED_SCAN_MAX_ENTRIES = 3, 50000
 
 
-def nested_repo(root: Path, depth: int = NESTED_SCAN_DEPTH, max_dirs: int = NESTED_SCAN_MAX_DIRS) -> str | None:
-    """Primer repositorio git dentro de root (sin contar root) hasta 'depth' niveles.
-    Devuelve su ruta, 'DEMASIADO_AMPLIA' si se supera max_dirs (falla cerrado) o None si no hay ninguno."""
+def nested_repo(root: Path, depth: int = NESTED_SCAN_DEPTH, max_entries: int = NESTED_SCAN_MAX_ENTRIES) -> str | None:
+    """Primer repositorio git en carpetas descendientes de root hasta 'depth' niveles (root no cuenta).
+    Falla cerrado: 'DEMASIADO_AMPLIA' si se enumeran mas de max_entries entradas y 'NO_LEGIBLE: <ruta>' si una
+    carpeta no se puede enumerar. Sigue symlinks y junctions (la profundidad acota los ciclos); '.git' sin
+    distinguir mayusculas, como archivo (worktree) o carpeta. Devuelve None si no hay ninguno."""
     level, seen = [str(root)], 0
-    for _ in range(depth):
+    for n in range(depth + 1):
         nxt: list[str] = []
         for d in level:
-            seen += 1
-            if seen > max_dirs:
-                return "DEMASIADO_AMPLIA"
+            entries = []
             try:
-                entries = list(os.scandir(d))
+                with os.scandir(d) as it:
+                    for e in it:
+                        seen += 1
+                        if seen > max_entries:
+                            return "DEMASIADO_AMPLIA"
+                        entries.append(e)
             except OSError:
-                continue
-            if d != str(root) and any(e.name == ".git" for e in entries):
+                return f"NO_LEGIBLE: {d}"
+            if n and any(e.name.lower() == ".git" for e in entries):
                 return d
-            nxt += [e.path for e in entries if e.name not in SKIP_DIRS and e.is_dir(follow_symlinks=False)]
+            if n == depth:
+                continue
+            for e in entries:
+                if e.name.lower() in SKIP_DIRS:
+                    continue
+                try:
+                    if e.is_dir():
+                        nxt.append(e.path)
+                except OSError:
+                    return f"NO_LEGIBLE: {e.path}"
         level = nxt
     return None
 
@@ -132,8 +146,8 @@ def check_project(project: str, cwd: Path, add_dirs: list[str], allow_external: 
             blocks.append(f"proyecto carpeta '{project}' dentro del repo registrado {slug}: contexto ajeno")
         elif top is None and (inner := find_repo(cwd)):
             # Una carpeta padre (p. ej. el perfil de usuario) expondria repos de otros clientes como raiz del proyecto.
-            blocks.append(f"proyecto carpeta '{project}' con cwd que contiene otro repositorio ({inner}): "
-                          "usar la carpeta propia del proyecto como --cwd")
+            blocks.append(f"proyecto carpeta '{project}' con cwd que contiene otro repositorio o no se pudo "
+                          f"inspeccionar por completo ({inner}): usar la carpeta propia del proyecto como --cwd")
         root = cwd
     info["writable"] = bool(root) and os.access(root, os.W_OK)
     for d in add_dirs:
