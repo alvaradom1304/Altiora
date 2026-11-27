@@ -57,7 +57,7 @@ Deterministas: `npm run routing:v2:test` → 11 + 12 + 21 OK; `test_orca_dispatc
 
 ### P1 Aislamiento
 - `--project auto` detecta el proyecto por el remote; el `task_id` se genera automáticamente y solo admite caracteres seguros.
-- `scripts\preambra.cmd` abre Claude CLI interactivo con el perfil (`--check` antes, sin consumo). La sesión interactiva no tiene presupuesto ni verificación de integridad automáticos: es una limitación de la plataforma, declarada.
+- `scripts\preambra.cmd` transmite todos sus argumentos a `lean_run.py` (LEAN por defecto); sin argumentos ejecuta `--check` (sin consumo) y conserva el código de salida. Solo abre Claude CLI interactivo con `--interactive --accept-interactive-limits`. La sesión interactiva no tiene presupuesto ni verificación de integridad automáticos: es una limitación de la plataforma, declarada.
 - **Claude Desktop: NO aislable** (no acepta banderas). Solo recibe las reglas nativas del proyecto, configuradas pero NO verificadas en Desktop.
 - Contexto inicial LEAN medido: 29.689 tokens para «Responde solo: OK» (V31-T7). Referencia: el prefijo de la sesión completa del piloto A era de 95.096 tokens, en condiciones distintas.
 

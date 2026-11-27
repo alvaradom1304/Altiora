@@ -1,8 +1,12 @@
 @echo off
-rem Lanzador PREAMBRA: sesion interactiva de Claude CLI con perfil LEAN (o --profile ...) y proyecto detectado por el remote.
-rem Uso: scripts\preambra.cmd [--profile standard] [--effort low]  -  revisar antes con: scripts\preambra.cmd --check
-if /I "%~1"=="--check" (
-  python "%~dp0lean_run.py" --check %2 %3 %4 %5 %6
+setlocal
+rem Lanzador PREAMBRA: transmite TODOS los argumentos a lean_run.py (perfil LEAN por defecto).
+rem Sin argumentos: --check (sin consumo de IA). Modo interactivo solo si se pide --interactive
+rem (el motor exige entonces --accept-interactive-limits). Conserva el codigo de salida.
+rem Uso: scripts\preambra.cmd [--check | --help | --dry-run --task-file X --log Y | --interactive --accept-interactive-limits ...]
+if "%~1"=="" (
+  python "%~dp0lean_run.py" --check
 ) else (
-  python "%~dp0lean_run.py" --interactive %*
+  python "%~dp0lean_run.py" %*
 )
+exit /b %ERRORLEVEL%
