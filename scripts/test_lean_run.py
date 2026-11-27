@@ -82,7 +82,54 @@ class ProyectoTest(unittest.TestCase):
     def test_folder_project_inside_registered_repo_blocked(self):
         r = pf(args(project="currenda"))
         self.assertTrue(any("contexto ajeno" in b for b in r["blocks"]))
-        self.assertEqual(pf(args(project="currenda"), git=git_none)["status"], "READY")
+        with tempfile.TemporaryDirectory() as own:  # %TEMP% puede contener repos ajenos: carpeta propia
+            self.assertEqual(pf(args(project="currenda", cwd=own), git=git_none)["status"], "READY")
+
+    def test_folder_project_parent_of_other_repo_blocked(self):
+        # Defecto 2026-11-27: --cwd %USERPROFILE% aceptaba 'currenda' con todo el perfil como raiz.
+        with tempfile.TemporaryDirectory() as parent:
+            (Path(parent) / "otro-cliente" / ".git").mkdir(parents=True)
+            r = pf(args(project="currenda", cwd=parent), git=git_none)
+            self.assertEqual(r["status"], "BLOCKED")
+            self.assertTrue(any("contiene otro repositorio" in b for b in r["blocks"]), r["blocks"])
+        with tempfile.TemporaryDirectory() as own:
+            (Path(own) / "produccion" / "c1").mkdir(parents=True)
+            r = pf(args(project="currenda", cwd=own), git=git_none)
+            self.assertEqual(r["status"], "READY", r["blocks"])
+            self.assertTrue(r["writable"])
+
+    def test_nested_scan_fails_closed_when_too_wide(self):
+        with tempfile.TemporaryDirectory() as wide:
+            for i in range(4):
+                (Path(wide) / f"d{i}.txt").write_text("x")  # tambien cuentan los archivos, no solo carpetas
+            self.assertEqual(lean.nested_repo(Path(wide), max_entries=2), "DEMASIADO_AMPLIA")
+
+    def test_nested_scan_reaches_depth_three_like_profile_onedrive_desktop(self):
+        # Revision Codex 52dfc35: %USERPROFILE%\OneDrive\Desktop\<carpeta>\.git quedaba sin examinar (solo 2 niveles).
+        with tempfile.TemporaryDirectory() as home:
+            (Path(home) / "OneDrive" / "Desktop" / "altiora" / ".git").mkdir(parents=True)
+            self.assertTrue(lean.nested_repo(Path(home)).endswith("altiora"))
+            self.assertIsNone(lean.nested_repo(Path(home), depth=2))
+
+    def test_nested_scan_marker_case_and_file(self):
+        with tempfile.TemporaryDirectory() as home:
+            (Path(home) / "a").mkdir()
+            (Path(home) / "a" / ".GIT").write_text("gitdir: x")  # worktree: .git es archivo; mayusculas en Windows
+            self.assertTrue(lean.nested_repo(Path(home)).endswith("a"))
+
+    def test_nested_scan_unreadable_fails_closed(self):
+        with tempfile.TemporaryDirectory() as home:
+            real = lean.os.scandir
+            def deny(p):
+                if str(p) != home:
+                    raise PermissionError(p)
+                return real(p)
+            (Path(home) / "privada").mkdir()
+            lean.os.scandir = deny
+            try:
+                self.assertTrue(lean.nested_repo(Path(home)).startswith("NO_LEGIBLE"))
+            finally:
+                lean.os.scandir = real
 
     def test_external_add_dir_blocked_unless_explicit(self):
         outside = str(Path(REPO.anchor) / "otro-proyecto")
@@ -253,6 +300,32 @@ class RevisionV31Test(unittest.TestCase):
         if lean.sys.platform == "win32":
             self.assertIsNone(lean.resolve_exe("x", which=lambda p: "C:/npm/x.CMD"))
         self.assertEqual(lean.resolve_exe("x", which=lambda p: "C:/npm/x.EXE"), "C:/npm/x.EXE")
+
+    def test_context_file_paths_announced_to_neutral_worker(self):
+        with tempfile.TemporaryDirectory() as d:
+            (Path(d) / ".lean-ctx").mkdir()
+            (Path(d) / ".lean-ctx" / "extractos.md").write_text("x", encoding="utf-8")
+            task = Path(d) / "t.txt"
+            task.write_text("Redacta un caption", encoding="utf-8")
+            seen = {}
+
+            def fake_run(cmd, provider, task_text, cwd, env):
+                if provider == "codex":  # el respaldo claude trabaja en el cwd del proyecto, sin carpeta neutra
+                    seen.setdefault("task", task_text)
+                    seen.setdefault("cwd", cwd)
+                return lean.subprocess.CompletedProcess(cmd, 1, "", "")
+
+            orig_run, orig_git, orig_which = lean.run_provider, lean.git_info, lean.shutil.which
+            lean.run_provider = fake_run
+            lean.git_info = lambda _c: (Path(d).resolve(), "https://github.com/alvaradom1304/Altiora.git")
+            lean.shutil.which = lambda p: f"/bin/{p}"
+            try:
+                lean.main(["--project", "altiora", "--cwd", d, "--task-file", str(task), "--log", str(Path(d) / "l.csv"),
+                           "--task-id", "TCTX", "--provider", "codex", "--context-file", ".lean-ctx/extractos.md"])
+            finally:
+                lean.run_provider, lean.git_info, lean.shutil.which = orig_run, orig_git, orig_which
+            self.assertIn(".lean-ctx/extractos.md", seen["task"])
+            self.assertTrue((Path(seen["cwd"]) / ".lean-ctx" / "extractos.md").is_file())  # la ruta anunciada existe
 
     def test_limits_rechecked_before_each_attempt(self):
         with tempfile.TemporaryDirectory() as d:

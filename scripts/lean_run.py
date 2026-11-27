@@ -88,8 +88,46 @@ def detect_project(cwd: Path, cfg: dict, git=git_info) -> str | None:
     return next((pid for pid, p in cfg["projects"].items() if p.get("kind") == "git" and p["remote"].lower() == slug), None)
 
 
+NESTED_SCAN_DEPTH, NESTED_SCAN_MAX_ENTRIES = 3, 50000
+
+
+def nested_repo(root: Path, depth: int = NESTED_SCAN_DEPTH, max_entries: int = NESTED_SCAN_MAX_ENTRIES) -> str | None:
+    """Primer repositorio git en carpetas descendientes de root hasta 'depth' niveles (root no cuenta).
+    Falla cerrado: 'DEMASIADO_AMPLIA' si se enumeran mas de max_entries entradas y 'NO_LEGIBLE: <ruta>' si una
+    carpeta no se puede enumerar. Sigue symlinks y junctions (la profundidad acota los ciclos); '.git' sin
+    distinguir mayusculas, como archivo (worktree) o carpeta. Devuelve None si no hay ninguno."""
+    level, seen = [str(root)], 0
+    for n in range(depth + 1):
+        nxt: list[str] = []
+        for d in level:
+            entries = []
+            try:
+                with os.scandir(d) as it:
+                    for e in it:
+                        seen += 1
+                        if seen > max_entries:
+                            return "DEMASIADO_AMPLIA"
+                        entries.append(e)
+            except OSError:
+                return f"NO_LEGIBLE: {d}"
+            if n and any(e.name.lower() == ".git" for e in entries):
+                return d
+            if n == depth:
+                continue
+            for e in entries:
+                if e.name.lower() in SKIP_DIRS:
+                    continue
+                try:
+                    if e.is_dir():
+                        nxt.append(e.path)
+                except OSError:
+                    return f"NO_LEGIBLE: {e.path}"
+        level = nxt
+    return None
+
+
 def check_project(project: str, cwd: Path, add_dirs: list[str], allow_external: bool, cfg: dict,
-                  git=git_info) -> tuple[dict, list[str], Path | None]:
+                  git=git_info, find_repo=nested_repo) -> tuple[dict, list[str], Path | None]:
     """Aislamiento: el cwd pertenece al proyecto declarado y no se anaden carpetas de otro proyecto."""
     spec = cfg["projects"].get(project)
     if not spec:
@@ -106,7 +144,12 @@ def check_project(project: str, cwd: Path, add_dirs: list[str], allow_external: 
         registered = {p["remote"].lower() for p in cfg["projects"].values() if p.get("kind") == "git"}
         if slug in registered:
             blocks.append(f"proyecto carpeta '{project}' dentro del repo registrado {slug}: contexto ajeno")
+        elif top is None and (inner := find_repo(cwd)):
+            # Una carpeta padre (p. ej. el perfil de usuario) expondria repos de otros clientes como raiz del proyecto.
+            blocks.append(f"proyecto carpeta '{project}' con cwd que contiene otro repositorio o no se pudo "
+                          f"inspeccionar por completo ({inner}): usar la carpeta propia del proyecto como --cwd")
         root = cwd
+    info["writable"] = bool(root) and os.access(root, os.W_OK)
     for d in add_dirs:
         if root is not None and not is_within(Path(d), root):
             if allow_external:
@@ -607,9 +650,12 @@ def main(argv: list[str] | None = None) -> int:
     for provider in [p for p in report["provider_order"] if report["providers_available"].get(p)]:
         if a.allow_write and provider in ("codex", "agy"):
             continue  # tampoco como respaldo
-        run_cwd = a.cwd
+        run_cwd, run_task = a.cwd, task
         if a.context_file and provider in ("codex", "agy") and root:
             run_cwd = str(neutral_workspace(a.task_id, a.context_file, root))
+            # CINE01-CDX-01 y EXC-CDX-02 fallaron buscando el archivo en otra ruta: se anuncia la ruta real en la neutra.
+            run_task = task + "\n\n[Lanzador] Archivos disponibles, rutas relativas a la carpeta de trabajo: " + \
+                ", ".join(Path(f).as_posix() for f in a.context_file) + ". No hay otros archivos del proyecto."
         cmd = build_command(provider, prof, cfg, run_cwd, a.add_dir, a.mcp_config, a.allow_write, a.allow_exec,
                             False, a.det_cmd)
         if security_check(cmd, provider, cfg):  # el respaldo pasa los mismos controles
@@ -627,7 +673,7 @@ def main(argv: list[str] | None = None) -> int:
             except RuntimeError as exc:
                 print(json.dumps({"status": "BLOCKED", "task_id": a.task_id, "blocks": [str(exc)]}, ensure_ascii=False))
                 return 2
-            proc = run_provider(cmd, provider, task, run_cwd, env)
+            proc = run_provider(cmd, provider, run_task, run_cwd, env)
             try:
                 violations = integrity_diff(before, integrity_snapshot(root, cfg))
             except RuntimeError as exc:

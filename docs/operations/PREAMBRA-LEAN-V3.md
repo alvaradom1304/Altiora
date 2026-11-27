@@ -193,3 +193,24 @@ Consumo: revisión Codex 571.258 tokens (251.520 en caché); prueba de permisos 
 - Inventario incompleto: si un archivo protegido no puede leerse, el lanzador bloquea. Antes dos lecturas denegadas podian producir una comparacion sin cambios; ahora se trata igual que un error de recorrido. Regresion sintetica: `FinalReadinessTest.test_unreadable_protected_file_blocks_inventory`.
 - Facturacion: ausencia de `init.apiKeySource` produce `NO_OBSERVADO`, no una afirmacion de suscripcion o ausencia de cargo. `apiKeySource=none` solo declara ausencia de clave: `SIN_API_KEY_DECLARADA_FACTURA_NO_VERIFICADA`; una fuente de clave declarada exige ver factura. Regresion: `FinalReadinessTest.test_unknown_auth_does_not_claim_subscription`. Los registros historicos no se reescriben ni sirven por si solos para certificar cargos reales.
 - Estas correcciones no cambian permisos, perfiles, proveedores ni secretos. Los limites de scripts autorizados, sesiones interactivas, Desktop y cuota no observable siguen vigentes.
+
+## Codex lean-first — medición (2026-11-27)
+
+Fuente: CSV y JSONL del lanzador en `%USERPROFILE%/preambra-recovery/20261127/lean-codex/` (`diagnostico.py`). Tokens totales incluyen caché: no son facturación; cuota y costo real NO_OBSERVADOS (suscripción).
+
+- Contexto fijo por llamada (sonda sin herramientas): repo 35.499; carpeta neutra 28.696 (−6,8 k = `AGENTS.md` del repo).
+- El consumo crece con cada llamada a herramienta: cada una reenvía toda la conversación (EXC-CDX-01: 7 comandos → 676.881 de entrada). Un solo `turn.completed` por ejecución: sin doble conteo.
+- Misma tarea (excepciones de publicación, gpt-6.1-sol, una ejecución por modo):
+
+| Modo | Tokens | Entrada sin caché | Salida/razonamiento | Tiempo | Comandos |
+|---|---|---|---|---|---|
+| Actual: repo, esfuerzo medium, Codex lee 32 archivos | 680.359 | 83.473 | 3.478 / 805 | 281 s | 7 |
+| Lean: extractos deterministas + `--context-file` + low | 65.366 | 28.437 | 705 / 46 | 58 s | 1 |
+
+  Calidad: mismas exclusiones y redacciones; el modo lean fue más estricto con menciones de clientes. n=1: indicio, no garantía. Un intento lean previo falló por una ruta mal indicada (537.178 tokens); de ahí el aviso de rutas.
+
+**Procedimiento:** 1) extraer con git/Python solo las excepciones; 2) `--context-file` con esa entrada; 3) esfuerzo `low` para decisiones acotadas, `medium` para código, `high` con motivo; 4) salida con tope de líneas; 5) revisiones incrementales sobre `git diff`, con la evidencia ya obtenida. El lanzador anuncia al trabajador las rutas reales de la carpeta neutra.
+
+**Modalidad preferente:** lean-first es el modo por defecto para tareas Codex compatibles: clasificar, revisar diffs, decidir excepciones o cambios acotados cuya entrada quepa en extractos. Usar el modo repo solo cuando la tarea necesite explorar código no localizable de antemano, y dejar escrito el motivo. No repetir benchmarks; medir con las filas del CSV de cada trabajo productivo (`total`, `segundos`, `num_turns`).
+
+**Límites:** `max_task_tokens` es un control previo y no corta una ejecución en curso. Evaluación 2026-11-27 sobre JSONL reales: Codex `--json` solo emite `usage` en el `turn.completed` final (INV-CDX-01, EXC-CDX-01 y REV-CDX-52dfc35: 1 evento por ejecución), así que no hay soporte efectivo para un corte por tokens; matar el proceso perdería la respuesta sin ahorrar lo ya gastado. Solo el respaldo `claude` emite `usage` intermedio. La prevención es el modo lean (menos comandos, contexto acotado). Además, el detector léxico bloquea extractos en línea con vocabulario comercial y `--context-file` no aplica al respaldo `claude`.
