@@ -214,3 +214,21 @@ Fuente: CSV y JSONL del lanzador en `%USERPROFILE%/preambra-recovery/20261127/le
 **Modalidad preferente:** lean-first es el modo por defecto para tareas Codex compatibles: clasificar, revisar diffs, decidir excepciones o cambios acotados cuya entrada quepa en extractos. Usar el modo repo solo cuando la tarea necesite explorar código no localizable de antemano, y dejar escrito el motivo. No repetir benchmarks; medir con las filas del CSV de cada trabajo productivo (`total`, `segundos`, `num_turns`).
 
 **Límites:** `max_task_tokens` es un control previo y no corta una ejecución en curso. Evaluación 2026-11-27 sobre JSONL reales: Codex `--json` solo emite `usage` en el `turn.completed` final (INV-CDX-01, EXC-CDX-01 y REV-CDX-52dfc35: 1 evento por ejecución), así que no hay soporte efectivo para un corte por tokens; matar el proceso perdería la respuesta sin ahorrar lo ya gastado. Solo el respaldo `claude` emite `usage` intermedio. La prevención es el modo lean (menos comandos, contexto acotado). Además, el detector léxico bloquea extractos en línea con vocabulario comercial y `--context-file` no aplica al respaldo `claude`.
+
+## Antigravity — correcciones operativas (2026-11-28)
+
+Fuente: sondas reales con agy 1.4.12 (gemini-3.8-flash, esfuerzo low) en carpetas temporales, y `scripts/test_lean_run.py`. Las sondas no se repiten: las regresiones las cubren las pruebas deterministas.
+
+| Punto | Evidencia | Corrección |
+|---|---|---|
+| `--mode plan` + `--disable-slash-commands` | agy aplica plan anteponiendo `/plan` al prompt (`lastUserInput` del hook). Con el flag, el prefijo desaparece y el agente intentó `write_file`, `run_command` y una escritura MCP; no escribió solo porque `-p` deniega sin aprobación | En plan no se pasa el flag; `security_check` bloquea la combinación y exige `--mode`. Un `/` inicial en la tarea se neutraliza con el prefijo `Tarea:` |
+| Error intermitente | `status: ERROR`, «empty conversation id», 0 tokens y exit 0, con o sin el flag. Con 8 s de espera falló 4 veces; con 30 s, éxito | Se registra como fallo con su motivo. Solo los fallos sin consumo se reintentan (esperas 20 s y 45 s, `max_retries` sin cambios). Un fallo que ya consumió tokens pasa al respaldo sin repetir |
+| Rutas absolutas en `.agents/hooks.json` | Apuntaba al checkout histórico `altiora-unificado`. El hook de agy corre con cwd = `.agents/` | Comando portable `python ../.altiora/system/scripts/guard.py --project ..`, generado por `manage.py`. El doctor deja de reportar Antigravity |
+| Permisos efectivos | El guard solo reconocía `write_to_file`/`TargetFile`; agy 1.4.12 usa `write_file`/`Path` y MCP `{ToolName, Arguments}`: **las escrituras de Antigravity no se protegían** | El guard reconoce ambos formatos y las escrituras MCP. E2E real en `accept-edits`: `ok.txt` creado y `.env.local` bloqueado |
+| Registro de consumo | `thinking_tokens` no se sumaba y los fallos de agy no dejaban motivo | `salida` incluye razonamiento y hay una columna nueva, `motivo` (`transitorio_sin_consumo` / `fallo_con_consumo`). Los CSV previos conservan su cabecera |
+
+**Ejecución autónoma de agy: desactivada por defecto.** Segunda sonda: en plan, agy no ejecutó una escritura por terminal (propuso un plan), pero antes había ejecutado `dir ..` sin aprobación. Lo decide el modelo, no una regla. `--sandbox` falló 3 de 3 y hay 3 MCP globales activos (`altiora-shared` escribe archivos, `chrome-devtools` controla un navegador, `altiora-graphify`), sin una opción para limitarlos por sesión. Como no se puede garantizar, el lanzador excluye agy (también como respaldo) salvo con `--accept-agy-limits`, una aceptación humana explícita.
+
+**Límites vigentes:** el guard no analiza comandos de terminal (`run_command`). agy carga los MCP globales (p. ej. `altiora-shared`), sin un equivalente a `--strict-mcp-config`. El modelo efectivo de agy no aparece en su JSON y sigue «(planeado)». Las cuotas y el costo real siguen sin observarse. Los hooks de Codex y Claude que el doctor marca son previos y quedan fuera de este cambio.
+
+Consumo de esta corrección: sondas agy ≈ 190 k tokens en total; revisión Codex lean (diff + `--context-file`, medium) 98.284 tokens (70.272 en caché), con 1 hallazgo medio corregido. Revisión incremental de Codex (delta, low) 60.017 tokens, con 1 hallazgo medio corregido (estado ERROR sin otras claves).

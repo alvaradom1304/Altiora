@@ -63,6 +63,10 @@ def wrapper(existing):
 
 
 def command(target, runtime, event):
+    if runtime == "antigravity":
+        # Portable: agy ejecuta el hook con cwd = carpeta de .agents/hooks.json (sonda agy 1.4.12, 2026-11-28),
+        # asi que el proyecto es '..' y el comando no depende del checkout ni del interprete de esta maquina.
+        return f"python ../.altiora/system/scripts/guard.py --runtime antigravity --project .. --event {event}"
     parts = [str(Path(sys.executable).resolve()), str(target / ".altiora/system/scripts/guard.py"),
              "--runtime", runtime, "--project", str(target), "--event", event]
     # Hook command is executed by the client's shell. Use forward slashes on Windows

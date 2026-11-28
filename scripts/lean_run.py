@@ -38,10 +38,18 @@ ROOT = Path(__file__).resolve().parents[1]
 PROFILES_FILE = ROOT / "team" / "profiles" / "profiles.json"
 LEAN_PROMPT = ROOT / "team" / "profiles" / "lean.md"
 CHAIN_ENV = "PREAMBRA_DELEGATION_CHAIN"
+CODE_MODE_ENV = "CLAUDE_CODE_EXPERIMENTAL_CODE_MODE"
 SKIP_DIRS = {".git", "node_modules", "graphify-out", ".next", "dist", "build", "__pycache__", ".venv", "venv"}
 FIELDS = ["fecha", "task_id", "etiqueta", "rol", "intento", "perfil", "proveedor", "modelo", "esfuerzo", "estado",
           "turnos", "segundos", "entrada", "cache_creada", "cache_leida", "salida", "total", "ponderado",
-          "costo_nocional_usd", "costo_real", "cuota", "herramientas", "mcp", "skills", "coordinacion", "calidad"]
+          "costo_nocional_usd", "costo_real", "cuota", "herramientas", "mcp", "skills", "coordinacion", "calidad",
+          "motivo"]
+# Sondas agy 1.4.12 (2026-11-28): en plan ejecuto 'dir ..' sin aprobacion (decide el modelo, no una regla),
+# --sandbox fallo 3/3 y carga los MCP globales (altiora-shared escribe archivos) sin opcion para limitarlos.
+AGY_LIMITS = ("agy desactivado por defecto: terminal y MCP globales sin restriccion garantizable "
+              "(exige --accept-agy-limits, aceptacion humana explicita)")
+# Espera entre reintentos de fallos sin consumo. Sonda agy 2026-11-28: 4 reintentos a 8 s fallaron; a 30 s, exito.
+RETRY_BACKOFF_S = (20, 45)
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from preambra_v2_routing import risk_signals  # noqa: E402
@@ -224,8 +232,11 @@ def build_command(provider: str, prof: dict, cfg: dict, cwd: str, add_dirs: list
                 *flags, "-m", model, "-c", f"model_reasoning_effort={eff}", "-C", cwd, "-"]
     if provider == "agy":
         mode = sec["agy_mode_write"] if allow_write else sec["agy_mode"]
-        cmd = ["agy", "--model", model, "--effort", eff, "--mode", mode, "--disable-slash-commands",
-               "--output-format", "json"]
+        # agy 1.4.12 aplica --mode plan anteponiendo el slash command '/plan' (sonda 2026-11-28: lastUserInput
+        # '/plan ...'); --disable-slash-commands lo elimina y el agente intento write_file/run_command sin plan.
+        # En plan no se pasa; la expansion accidental se neutraliza en run_provider (prompt sin '/' inicial).
+        cmd = ["agy", "--model", model, "--effort", eff, "--mode", mode,
+               *([] if mode == "plan" else ["--disable-slash-commands"]), "--output-format", "json"]
         for d in add_dirs:
             cmd += ["--add-dir", d]
         return cmd + ["-p"]  # el prompt se anade al final
@@ -248,6 +259,12 @@ def security_check(cmd: list[str], provider: str, cfg: dict, interactive: bool =
             blocks.append("falta presupuesto (--max-turns / --max-budget-usd)")
     if provider == "codex" and "-s" not in cmd:
         blocks.append("codex sin sandbox explicito")
+    if provider == "agy":
+        mode = cmd[cmd.index("--mode") + 1] if "--mode" in cmd and cmd.index("--mode") + 1 < len(cmd) else None
+        if mode is None:
+            blocks.append("agy sin --mode explicito")
+        elif mode == "plan" and "--disable-slash-commands" in cmd:
+            blocks.append("agy: --disable-slash-commands anula --mode plan (se implementa como '/plan')")
     if provider == "det" and not cmd:
         blocks.append("proveedor determinista sin --det-cmd")
     return blocks
@@ -324,7 +341,7 @@ def parse_stream(lines) -> dict:
             lines = [json.dumps(whole)]
     except ValueError:
         pass
-    init, result, usage, last_msg, model_seen = {}, {}, {}, "", None
+    init, result, usage, last_msg, model_seen, error = {}, {}, {}, "", None, ""
     for line in lines:
         try:
             obj = json.loads(line)
@@ -338,12 +355,19 @@ def parse_stream(lines) -> dict:
             result = obj
         if isinstance(obj.get("usage"), dict):
             usage = obj["usage"]
-        if obj.get("status") == "SUCCESS" and "response" in obj:  # Agy --output-format json
-            last_msg = str(obj["response"])
-            u2 = obj.get("usage", {})
-            usage = {"input_tokens": u2.get("input_tokens", 0), "output_tokens": u2.get("output_tokens", 0),
+        if "type" not in obj and (obj.get("status") == "ERROR" or  # Agy json (Claude/Codex llevan 'type')
+                                  (obj.get("status") == "SUCCESS" and {"response", "conversation_id"} & obj.keys())):
+            u2 = obj.get("usage") if isinstance(obj.get("usage"), dict) else {}
+            # thinking_tokens se factura como salida; antes se omitia del registro.
+            usage = {"input_tokens": u2.get("input_tokens", 0),
+                     "output_tokens": u2.get("output_tokens", 0) + u2.get("thinking_tokens", 0),
                      "cache_read_input_tokens": u2.get("cache_read_tokens", 0)}
-            result = {**result, "num_turns": obj.get("num_turns", 0), "duration_ms": obj.get("duration_seconds", 0) * 1000}
+            if obj["status"] == "SUCCESS":
+                last_msg = str(obj.get("response", ""))
+                result = {**result, "num_turns": obj.get("num_turns", 0),
+                          "duration_ms": obj.get("duration_seconds", 0) * 1000}
+            else:  # agy sale con 0 aunque falle: el estado manda
+                error = str(obj.get("error") or "ERROR sin detalle")
         item = obj.get("item") if isinstance(obj.get("item"), dict) else {}
         if item.get("type") == "agent_message" and item.get("text"):  # Codex --json
             last_msg = item["text"]
@@ -358,7 +382,10 @@ def parse_stream(lines) -> dict:
         entrada = u.get("input_tokens", 0)
     salida = u.get("output_tokens", 0)
     resultado = str(result.get("result", "") or last_msg)
-    ok = ((bool(result) and not result.get("is_error", False)) or (not result and bool(usage))) and bool(resultado.strip())
+    ok = ((bool(result) and not result.get("is_error", False)) or (not result and bool(usage))) and bool(resultado.strip()) \
+        and not error
+    if error:
+        resultado = "ERROR: " + error
     return {
         "turnos": result.get("num_turns", 0), "segundos": round(result.get("duration_ms", 0) / 1000),
         "entrada": entrada, "cache_creada": creada, "cache_leida": leida, "salida": salida,
@@ -431,6 +458,10 @@ def preflight(a, cfg: dict, which=None, git=None, env: dict | None = None) -> di
         available["det"] = True
     else:
         order = ([a.provider] if a.provider else []) + [p for p in prof["providers"] if p != a.provider]
+    if not getattr(a, "accept_agy_limits", False):
+        available["agy"] = False  # ni como respaldo: ver AGY_LIMITS
+        if a.provider == "agy":
+            blocks.append(AGY_LIMITS)
     chosen = next((p for p in order if available.get(p)), None)
     cmd: list[str] = []
     if chosen is None:
@@ -561,6 +592,8 @@ def run_provider(cmd: list[str], provider: str, task: str, cwd: str, env: dict) 
         raise RuntimeError(f"binario no resoluble sin shell: {cmd[0]}")
     cmd = [exe, *cmd[1:]]
     if provider == "agy":
+        if task.lstrip().startswith("/"):  # sin --disable-slash-commands, un '/' inicial invocaria un comando
+            task = "Tarea: " + task.lstrip()
         cmd, task = cmd + [task], ""  # argumento de proceso, sin interprete de shell
     if provider == "det":
         env = clean_env([x for x in env.get(CHAIN_ENV, "").split(",") if x])  # el script no hereda secretos del entorno
@@ -595,6 +628,8 @@ def parser(cfg: dict) -> argparse.ArgumentParser:
     ap.add_argument("--verify-cmd", help="Comprobacion determinista posterior; su exit code fija 'calidad'.")
     ap.add_argument("--accept-script-risk", action="store_true",
                     help="Acepta que los scripts autorizados corren sin sandbox (solo entorno limpio e integridad posterior).")
+    ap.add_argument("--accept-agy-limits", action="store_true",
+                    help="Acepta usar Antigravity sabiendo que su terminal y sus MCP globales no se pueden restringir.")
     ap.add_argument("--accept-interactive-limits", action="store_true",
                     help="Acepta que la sesion interactiva no aplica presupuesto ni integridad automaticos.")
     mode = ap.add_mutually_exclusive_group()
@@ -605,6 +640,11 @@ def parser(cfg: dict) -> argparse.ArgumentParser:
 
 
 def main(argv: list[str] | None = None) -> int:
+    for stream in (sys.stdout, sys.stderr):  # consola cp1252: una respuesta con '→' rompia el resumen (REV-CM-02)
+        try:
+            stream.reconfigure(errors="replace")
+        except (AttributeError, ValueError):
+            pass
     cfg = load_config()
     a = parser(cfg).parse_args(argv)
     a.cwd = str(Path(a.cwd).resolve())
@@ -660,8 +700,11 @@ def main(argv: list[str] | None = None) -> int:
                             False, a.det_cmd)
         if security_check(cmd, provider, cfg):  # el respaldo pasa los mismos controles
             continue
-        env = {**os.environ, CHAIN_ENV: ",".join(chain + [provider])}
-        for _ in range(cfg["limits"]["max_retries"] + 1):
+        # Code Mode es experimental y solo para la sesion interactiva del piloto: un trabajador delegado no lo hereda
+        # aunque el shell lo tenga activo ("0" lo mantiene apagado, docs oficiales).
+        env = {**os.environ, CHAIN_ENV: ",".join(chain + [provider]), CODE_MODE_ENV: "0"}
+        tries = cfg["limits"]["max_retries"] + 1
+        for n in range(tries):
             again = check_limits(a, prof, cfg, chain, provider, read_log(Path(a.log)))
             if again:  # presupuesto, coordinacion y duplicados se revalidan antes de cada intento y respaldo
                 print(json.dumps({"status": "BLOCKED", "task_id": a.task_id, "blocks": again}, ensure_ascii=False))
@@ -703,7 +746,9 @@ def main(argv: list[str] | None = None) -> int:
             row = {"fecha": time.strftime("%Y-%m-%d %H:%M"), "task_id": a.task_id, "etiqueta": a.label,
                    "rol": a.role, "intento": attempt, "perfil": a.profile, "proveedor": provider,
                    "modelo": stats["modelo_efectivo"] if stats["modelo_efectivo"] != "NO_OBSERVADO" else model_for(provider, prof["effort"], cfg) + " (planeado)",
-                   "esfuerzo": prof["effort"], "estado": estado, "coordinacion": len(chain) + 1, "calidad": calidad, **stats}
+                   "esfuerzo": prof["effort"], "estado": estado, "coordinacion": len(chain) + 1, "calidad": calidad, **stats,
+                   "motivo": "" if ok else (("transitorio_sin_consumo" if not stats["total"] else "fallo_con_consumo")
+                                            + ": " + (stats["resultado"] or proc.stderr.strip()[:120] or "sin salida"))}
             append_log(Path(a.log), row)
             print(json.dumps({**{k: row[k] for k in ("task_id", "proveedor", "modelo", "intento", "estado", "turnos", "total",
                                                     "calidad", "resultado")}, "violaciones": violations}, ensure_ascii=False))
@@ -714,6 +759,10 @@ def main(argv: list[str] | None = None) -> int:
             if ok:
                 return 0
             rc = proc.returncode or 1
+            if stats["total"]:
+                break  # fallo que ya consumio tokens: repetirlo igual gastaria lo mismo (caso Agy ~103 k); al respaldo
+            if n + 1 < tries:  # fallo transitorio sin consumo (p. ej. agy 'empty conversation id'): espera creciente
+                time.sleep(RETRY_BACKOFF_S[min(n, len(RETRY_BACKOFF_S) - 1)])
     return rc
 
 

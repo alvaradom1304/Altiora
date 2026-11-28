@@ -3,7 +3,7 @@
     "SessionStart": [
       {
         "type": "command",
-        "command": "C:/Users/Usuario/AppData/Local/Programs/Python/Python312/python.exe C:/Users/Usuario/orca/workspaces/Altiora-Immersive-Web-Lab/altiora-unificado/.altiora/system/scripts/guard.py --runtime antigravity --project C:/Users/Usuario/orca/workspaces/Altiora-Immersive-Web-Lab/altiora-unificado --event SessionStart",
+        "command": "python ../.altiora/system/scripts/guard.py --runtime antigravity --project .. --event SessionStart",
         "timeout": 10
       }
     ],
@@ -13,7 +13,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "C:/Users/Usuario/AppData/Local/Programs/Python/Python312/python.exe C:/Users/Usuario/orca/workspaces/Altiora-Immersive-Web-Lab/altiora-unificado/.altiora/system/scripts/guard.py --runtime antigravity --project C:/Users/Usuario/orca/workspaces/Altiora-Immersive-Web-Lab/altiora-unificado --event PreToolUse",
+            "command": "python ../.altiora/system/scripts/guard.py --runtime antigravity --project .. --event PreToolUse",
             "timeout": 10
           }
         ]
