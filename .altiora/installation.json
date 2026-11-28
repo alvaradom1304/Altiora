@@ -14,7 +14,7 @@
     ".altiora/system/roles/altiora-experience.md": "534f1cb1aa82693658f11da84358ed561a48d43d153dc333309354090f009252",
     ".altiora/system/roles/altiora-research.md": "e111722229a083002861e302ea06bc18da174e86103b683a6b34f4a0ba3d0b48",
     ".altiora/system/roles/altiora-review.md": "f6277fd0303c85cad116f7e5b88134f262958d5dd1fe7d27561e02d4e4dc9486",
-    ".altiora/system/scripts/guard.py": "631f14b32d44d698655f0b1ec163e4cea45399aba3ce308811e928472bfcdd9c",
+    ".altiora/system/scripts/guard.py": "7cefb412e1dc40ff63538678fbde6f8c02e2ddce3b682228f557244a1bee280d",
     ".altiora/system/scripts/manage.py": "5d5943c0b1afaf187491d97c2955d090eb8ed5e6857a09f97fc0e919e53aa896",
     ".altiora/system/scripts/package.py": "3c9023cc4e7c2129f07358f4176fba20491af1c4ecd8cf83ffb5f90e0f48032f",
     ".altiora/system/skills/altiora-runtime-bridge/SKILL.md": "ac5268ecb939c2010925c27f460896aa632e369443c9fde6e0f8109993cdade5",

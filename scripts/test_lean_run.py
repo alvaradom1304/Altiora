@@ -630,6 +630,14 @@ class AntigravityGuardTest(unittest.TestCase):
         self.assertEqual(guard({"toolCall": {"name": "write_to_file", "args": {"TargetFile": "a/id_rsa"}}})
                          ["decision"], "deny")
 
+    def test_invalid_write_args_fail_closed(self):  # regresion detectada por qa-reviewer frente a main
+        for args in (None, ["x/.env"], "x/.env"):
+            self.assertEqual(guard({"toolCall": {"name": "write_to_file", "args": args}})["decision"], "deny")
+            self.assertEqual(guard({"toolCall": {"name": "write_file", "args": args}})["decision"], "deny")
+        bad_mcp = {"toolCall": {"name": "call_mcp_tool", "args": {"ToolName": "write_file", "Arguments": "{\"path\": \".env\"}"}}}
+        self.assertEqual(guard(bad_mcp)["decision"], "deny")
+        self.assertEqual(guard({"toolCall": {"name": "read_file", "args": None}})["decision"], "allow")
+
     def test_mcp_write_denied_and_read_allowed(self):
         mcp = {"toolCall": {"name": "call_mcp_tool", "args": {"ServerName": "altiora-shared", "ToolName": "write_file",
                                                                "Arguments": {"path": "C:/p/.env.local"}}}}

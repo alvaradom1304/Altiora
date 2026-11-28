@@ -17,7 +17,12 @@ def write_paths(runtime, payload):
         call = payload.get("toolCall", {})
         name, args = call.get("name"), call.get("args", {})
         if not isinstance(args, dict):
+            if name in ANTIGRAVITY_WRITE_TOOLS or "mcp" in str(name or "").lower():
+                raise ValueError("args de escritura invalidos")  # fail-closed como main (revision qa-reviewer)
             return []
+        if "Arguments" in args and not isinstance(args["Arguments"], dict) and \
+                re.search(r"write|edit|replace|move|create|delete", str(args.get("ToolName") or "")):
+            raise ValueError("Arguments MCP de escritura invalidos")
         # agy 1.4.12 (sonda 2026-11-28): write_file{Path}; versiones previas: write_to_file{TargetFile}.
         # Llamadas MCP llegan como {ServerName, ToolName, Arguments{path}}: se inspecciona el nombre interno.
         inner = args.get("Arguments") if isinstance(args.get("Arguments"), dict) else None
