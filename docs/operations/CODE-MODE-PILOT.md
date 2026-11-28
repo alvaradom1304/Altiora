@@ -26,7 +26,7 @@ Tarea: consultas de solo lectura a `altiora-graphify` (`graph_stats`, `god_nodes
 |---|---|---|---|---|---|
 | A, sin Code Mode | 2.1.323 | 88 s | 477.032 | 154.988 | PASS |
 | B, con Code Mode (4 REPL aprobados, 20 llamadas MCP dentro) | 2.1.332 | 341 s, con aprobaciones humanas | 339.640 | 123.740 | PASS |
-| Fallos: B cancelada al relanzar, y otros tres intentos sin consumo | 2.1.323 | — | 63.872 | 80.293 | FAIL |
+| Fallos: B cancelada al relanzar, y otros dos intentos sin consumo | 2.1.323 | — | 63.872 | 80.293 | FAIL |
 
 - B frente a A: −28,8 % en total y −20,2 % en ponderado. Con el fallo de B: +31,6 % ponderado.
 - Calidad equivalente: mismos totales (21.510 nodos y 24.557 aristas, iguales a la referencia), nodos, grados y vecinos. 0 escrituras; las configuraciones tienen el mismo hash antes y después.
@@ -41,13 +41,13 @@ Tarea: consultas de solo lectura a `altiora-graphify` (`graph_stats`, `god_nodes
 
   ```powershell
   $env:CLAUDE_CODE_EXPERIMENTAL_CODE_MODE = '1'   # '0' en la variante sin Code Mode
-  & "$env:USERPROFILE\.local\bin\claude.exe" '<prompt fijo>' --model claude-sonnet-5-5 --effort medium --permission-mode default --strict-mcp-config --mcp-config <mcp-solo-lectura.json> --settings <ajustes-de-sesion.json> --allowedTools 'REPL,<herramientas MCP de lectura>' --disallowedTools 'Bash,Edit,Write,NotebookEdit,WebFetch,WebSearch'
+  & "$env:USERPROFILE\.local\bin\claude.exe" '<prompt fijo>' --model claude-sonnet-5-5 --effort medium --permission-mode default --strict-mcp-config --mcp-config <mcp-solo-lectura.json> --settings <ajustes-de-sesion.json> --allowedTools 'REPL,<herramientas MCP de lectura>' --disallowedTools 'Bash,Edit,Write,NotebookEdit,WebFetch,WebSearch,mcp__altiora-graphify__list_prs,mcp__altiora-graphify__triage_prs,mcp__altiora-graphify__get_pr_impact'
   ```
 
 - Medir cada sesión desde su transcript (`~/.claude/projects/<proyecto>/<sesion>.jsonl`):
-  `python scripts/transcript_usage.py --transcript <sesion.jsonl> --log <consumo.csv> --task-id CM-X --label <etiqueta> --calidad PASS|FAIL`
+  `python scripts/transcript_usage.py --transcript <sesion.jsonl> --log <consumo.csv> --task-id CM-X --label <etiqueta> --calidad PASS` (o `FAIL`)
 
 ## Hallazgos que siguen vigentes
 
-- **Reglas `Write(...)` de `.claude/settings.json`: no tienen efecto.** Prueba directa (2026-11-28, CLI 2.1.309 y 2.1.332, `-p`, `acceptEdits`): `deny: ["Write(**/*.probe)"]` **no** impidió que la herramienta Write creara el archivo; `deny: ["Edit(**/*.probe)"]` sí lo impidió («File is in a directory that is denied by your permission settings»). Las 13 reglas `Write(...)` del proyecto, y las del perfil LEAN, tienen gemela `Edit(...)`, que es la que protege. Eliminar las `Write(...)`, en un archivo protegido, corresponde a una persona. NO VERIFICADO: si las reglas `Edit(...)` relativas sin `**/` (p. ej. `team/profiles/profiles.json`) coinciden cuando la sesión se abre en una subcarpeta.
+- **Reglas `Write(...)` de `.claude/settings.json`: sin efecto en lo probado** (patrón `**/*.<ext>` con la herramienta Write; otros patrones y herramientas no se probaron). Prueba directa (2026-11-28, CLI 2.1.309 y 2.1.332, `-p`, `acceptEdits`): `deny: ["Write(**/*.probe)"]` **no** impidió que la herramienta Write creara el archivo; `deny: ["Edit(**/*.probe)"]` sí lo impidió («File is in a directory that is denied by your permission settings»). Las 13 reglas `Write(...)` del proyecto, y las del perfil LEAN, tienen gemela `Edit(...)`, que es la que protege. Eliminar las `Write(...)`, en un archivo protegido, corresponde a una persona. NO VERIFICADO: si las reglas `Edit(...)` relativas sin `**/` (p. ej. `team/profiles/profiles.json`) coinciden cuando la sesión se abre en una subcarpeta.
 - La CLI nativa se autoactualiza: fijar la versión antes de comparar.
