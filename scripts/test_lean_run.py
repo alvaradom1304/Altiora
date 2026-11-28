@@ -535,18 +535,27 @@ class AntigravityTest(unittest.TestCase):
         lean.shutil.which = lambda p: f"/bin/{p}"
         try:
             return lean.main(["--project", "altiora", "--cwd", d, "--task-file", str(task), "--log",
-                              str(Path(d) / "l.csv"), "--profile", "standard", *extra])
+                              str(Path(d) / "l.csv"), "--profile", "standard", "--accept-agy-limits", *extra])
         finally:
             lean.run_provider, lean.git_info, lean.shutil.which = orig_run, orig_git, orig_which
 
     def test_plan_mode_not_cancelled_by_slash_disable(self):
-        r = pf(args(profile="standard", provider="agy"))
+        r = pf(args(profile="standard", provider="agy", accept_agy_limits=True))
         self.assertEqual(r["status"], "READY", r["blocks"])
         self.assertEqual(r["command"][r["command"].index("--mode") + 1], "plan")
         self.assertNotIn("--disable-slash-commands", r["command"])
         bad = ["agy", "--mode", "plan", "--disable-slash-commands", "-p"]
         self.assertTrue(any("anula --mode plan" in b for b in lean.security_check(bad, "agy", CFG)))
         self.assertTrue(any("sin --mode" in b for b in lean.security_check(["agy", "-p"], "agy", CFG)))
+
+    def test_agy_disabled_without_explicit_acceptance(self):
+        r = pf(args(profile="standard", provider="agy"))
+        self.assertEqual(r["status"], "BLOCKED")
+        self.assertTrue(any("agy desactivado" in b for b in r["blocks"]))
+        only_agy = lambda p: "/bin/agy" if p == "agy" else None  # ni siquiera como unico respaldo
+        r2 = pf(args(profile="standard"), which=only_agy)
+        self.assertIsNone(r2["provider"])
+        self.assertFalse(r2["providers_available"]["agy"])
 
     def test_leading_slash_neutralized(self):
         from unittest.mock import patch
@@ -561,6 +570,8 @@ class AntigravityTest(unittest.TestCase):
         self.assertTrue(s["resultado"].startswith("ERROR: failed to start conversation"))
         bare = lean.parse_stream([json.dumps({"status": "ERROR", "error": "cuota"})])  # sin response/conversation_id
         self.assertEqual((bare["ok"], bare["resultado"]), (False, "ERROR: cuota"))
+        naked = lean.parse_stream([json.dumps({"status": "ERROR"})])
+        self.assertEqual((naked["ok"], naked["resultado"]), (False, "ERROR: ERROR sin detalle"))
         ok = lean.parse_stream([json.dumps({"conversation_id": "c", "status": "SUCCESS", "response": "ok",
                                             "usage": {"input_tokens": 10, "output_tokens": 2, "thinking_tokens": 5}})])
         self.assertEqual((ok["salida"], ok["total"]), (7, 17))

@@ -43,6 +43,10 @@ FIELDS = ["fecha", "task_id", "etiqueta", "rol", "intento", "perfil", "proveedor
           "turnos", "segundos", "entrada", "cache_creada", "cache_leida", "salida", "total", "ponderado",
           "costo_nocional_usd", "costo_real", "cuota", "herramientas", "mcp", "skills", "coordinacion", "calidad",
           "motivo"]
+# Sondas agy 1.4.12 (2026-11-28): en plan ejecuto 'dir ..' sin aprobacion (decide el modelo, no una regla),
+# --sandbox fallo 3/3 y carga los MCP globales (altiora-shared escribe archivos) sin opcion para limitarlos.
+AGY_LIMITS = ("agy desactivado por defecto: terminal y MCP globales sin restriccion garantizable "
+              "(exige --accept-agy-limits, aceptacion humana explicita)")
 # Espera entre reintentos de fallos sin consumo. Sonda agy 2026-11-28: 4 reintentos a 8 s fallaron; a 30 s, exito.
 RETRY_BACKOFF_S = (20, 45)
 
@@ -350,7 +354,8 @@ def parse_stream(lines) -> dict:
             result = obj
         if isinstance(obj.get("usage"), dict):
             usage = obj["usage"]
-        if obj.get("status") in ("SUCCESS", "ERROR") and ({"response", "conversation_id", "error"} & obj.keys()):  # Agy json
+        if "type" not in obj and (obj.get("status") == "ERROR" or  # Agy json (Claude/Codex llevan 'type')
+                                  (obj.get("status") == "SUCCESS" and {"response", "conversation_id"} & obj.keys())):
             u2 = obj.get("usage") if isinstance(obj.get("usage"), dict) else {}
             # thinking_tokens se factura como salida; antes se omitia del registro.
             usage = {"input_tokens": u2.get("input_tokens", 0),
@@ -452,6 +457,10 @@ def preflight(a, cfg: dict, which=None, git=None, env: dict | None = None) -> di
         available["det"] = True
     else:
         order = ([a.provider] if a.provider else []) + [p for p in prof["providers"] if p != a.provider]
+    if not getattr(a, "accept_agy_limits", False):
+        available["agy"] = False  # ni como respaldo: ver AGY_LIMITS
+        if a.provider == "agy":
+            blocks.append(AGY_LIMITS)
     chosen = next((p for p in order if available.get(p)), None)
     cmd: list[str] = []
     if chosen is None:
@@ -618,6 +627,8 @@ def parser(cfg: dict) -> argparse.ArgumentParser:
     ap.add_argument("--verify-cmd", help="Comprobacion determinista posterior; su exit code fija 'calidad'.")
     ap.add_argument("--accept-script-risk", action="store_true",
                     help="Acepta que los scripts autorizados corren sin sandbox (solo entorno limpio e integridad posterior).")
+    ap.add_argument("--accept-agy-limits", action="store_true",
+                    help="Acepta usar Antigravity sabiendo que su terminal y sus MCP globales no se pueden restringir.")
     ap.add_argument("--accept-interactive-limits", action="store_true",
                     help="Acepta que la sesion interactiva no aplica presupuesto ni integridad automaticos.")
     mode = ap.add_mutually_exclusive_group()
