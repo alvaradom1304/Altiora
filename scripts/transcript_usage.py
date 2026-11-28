@@ -52,7 +52,7 @@ def measure(lines) -> dict:
                 tools[b.get("name", "?")] = tools.get(b.get("name", "?"), 0) + 1
         key = msg.get("id") or obj.get("requestId") or obj.get("uuid")
         u = msg.get("usage")
-        if key in seen or not isinstance(u, dict):
+        if key in seen or not isinstance(u, dict) or msg.get("model") == "<synthetic>":  # mensajes locales, sin API
             continue
         seen.add(key)
         turnos += 1

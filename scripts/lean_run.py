@@ -640,6 +640,11 @@ def parser(cfg: dict) -> argparse.ArgumentParser:
 
 
 def main(argv: list[str] | None = None) -> int:
+    for stream in (sys.stdout, sys.stderr):  # consola cp1252: una respuesta con '→' rompia el resumen (REV-CM-02)
+        try:
+            stream.reconfigure(errors="replace")
+        except (AttributeError, ValueError):
+            pass
     cfg = load_config()
     a = parser(cfg).parse_args(argv)
     a.cwd = str(Path(a.cwd).resolve())

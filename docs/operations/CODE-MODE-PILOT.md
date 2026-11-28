@@ -1,6 +1,6 @@
 # Piloto experimental: Claude Code Mode (lectura MCP)
 
-**Estado (2026-11-28): PREPARADO, BLOQUEADO POR VERSIÓN.** La CLI instalada es `2.1.309 (Claude Code)` y Code Mode exige como mínimo **v2.1.323**. La actualización la autoriza el fundador; ninguna IA actualiza Claude Code ni cambia la configuración global.
+**Estado (2026-11-28): COMPARACIÓN INICIAL EJECUTADA. NO SE ADOPTA** (resultados al final). En el PATH aparece primero la CLI de npm, `2.1.309`; la compilación nativa `~/.local/bin/claude.exe` ya estaba en 2.1.323 y se autoactualizó durante el piloto a 2.1.332. Configuraciones sin cambios, verificado por hash.
 
 Fuente oficial: <https://code.claude.com/docs/en/code-mode>, leída el 2026-11-28. Code Mode es experimental y está apagado por defecto. Claude escribe JavaScript que hace varias llamadas a herramientas en un paso, mediante la herramienta `REPL`.
 
@@ -50,3 +50,27 @@ claude --model claude-sonnet-5-5 --effort medium --permission-mode default --str
 - **Se registra:** tokens (entrada, caché creada y leída, salida y total ponderado), tiempo de reloj (en B incluye las aprobaciones humanas), turnos, llamadas `REPL`/MCP, errores de herramienta y calidad. Costo real y cuota: NO_OBSERVADOS (suscripción).
 - **Decisión:** proponer la adopción solo si B reduce el total ponderado ≥ 30 % con la misma calidad y sin más errores. Con n = 1 es un indicio, no una garantía; una segunda tarea solo se ejecuta si el resultado es dudoso.
 - **Fuera del piloto:** escrituras, sesiones sin aprobación de `REPL`, Desktop, delegación con Code Mode y cualquier cambio en `~/.claude/settings.json`.
+
+## Resultado de la comparación inicial (2026-11-28, n = 1)
+
+Registro: `%USERPROFILE%\preambra-recovery61128\codemode\consumo.csv`, generado con `scripts/transcript_usage.py`. Git quedó sin cambios tras las dos sesiones, y `~/.claude/settings.json`, `.claude/settings.json`, `.mcp.json` y `.agents/hooks.json` tienen el mismo hash antes y después.
+
+| Ejecución | CLI | Turnos | Tiempo | Total tokens | Ponderado | Calidad | Herramientas |
+|---|---|---|---|---|---|---|---|
+| A, sin Code Mode | 2.1.323 | 6 | 88 s | 477.032 | 154.988 | PASS | 11 llamadas MCP directas y 2 ToolSearch |
+| B, con Code Mode | 2.1.332 | 5 | 341 s (incluye 4 aprobaciones humanas de REPL) | 339.640 | 123.740 | PASS | 4 REPL, con 20 llamadas MCP dentro del código |
+| Fallo B1: cancelado al relanzar | 2.1.323 | 1 | 12 s | 63.872 | 80.293 | FAIL | 1 REPL |
+| Fallo B0: cerrada antes del prompt | — | 0 | — | 0 | 0 | FAIL | — |
+| Fallo A0: `--disallowedTools` se tragó el prompt | 2.1.323 | — | — | 0 | 0 | FAIL | — |
+
+- **Reducción de B frente a A:** −28,8 % en total y −20,2 % en ponderado. Si se suma el fallo B1, B cuesta −15,4 % en total y **+31,6 %** en ponderado.
+- **Calidad:** las dos dan los mismos totales (iguales a la referencia), nodos, grados y vecinos. A omite la autollamada de `I()`; B la incluye y añade una nota de validación algo incoherente (acepta un desfase de 1 en `check()`/`scripts` y no en `n()`). Ninguna inventó datos ni tuvo errores de herramienta.
+- **Seguridad:** los 4 bloques de B solo llamaron a `searchTools` y a herramientas de `altiora-graphify`, todos con aprobación humana. Las reglas y los hooks funcionaron: 0 escrituras.
+- **Decisión: NO ADOPTAR ni preparar la integración.** No llega al umbral de −30 % ponderado, y la diferencia de versión de la CLI, la caché previa desigual y n = 1 impiden atribuir la causa. Revisión independiente de Codex LEAN (`REV-CM-02`, 88.937 tokens): «REPETIR_CONTROLADO». Una repetición controlada exigiría la misma versión de CLI en A y B, alternar el orden y que el fundador la autorice.
+
+**Hallazgos del piloto:**
+- La CLI 2.1.323 avisa de que las 14 reglas `Write(...)` de `.claude/settings.json` «never match» y recomienda `Edit(...)`. Las `Edit(...)` equivalentes existen, así que la protección se mantiene. Limpiar el archivo, que está protegido, corresponde a una persona.
+- `--disallowedTools` admite varios valores: el prompt debe ir antes de las banderas.
+- Los hooks `PreToolUse` tardaron más de 30 s en el primer paso de A.
+- La CLI nativa se autoactualiza: para comparar hay que fijar la versión.
+- `lean_run.py` fallaba al imprimir respuestas no ASCII en una consola cp1252; está corregido.
