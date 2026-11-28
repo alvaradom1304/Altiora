@@ -2,7 +2,7 @@
   "schema_version": 1,
   "project": "Altiora Visual Studio",
   "repository": "alvaradom1304/Altiora",
-  "snapshot_date": "2026-11-26",
+  "snapshot_date": "2026-11-28",
   "snapshot_kind": "repo_checkpoint_not_live_github_api",
   "description": "Estado reproducible para reanudar entre sesiones e IAs. No significa ejecución persistente ni conexión automática con software.",
   "completed_milestones": [
@@ -196,6 +196,26 @@
           "url": "https://github.com/alvaradom1304/Altiora/pull/34",
           "claim": "Rol/skill implementados; fuentes y compatibilidad revisadas; medidor y casos independientes probados, sin certificar escucha de cliente ni DAW"
         }
+      ]
+    },
+    {
+      "id": "PREAMBRA-OS-AGY-CM",
+      "name": "Cierre operativo PREAMBRA OS: Antigravity corregido y Code Mode en HOLD",
+      "result": "DONE",
+      "evidence": [
+        {
+          "url": "https://github.com/alvaradom1304/Altiora/pull/107",
+          "claim": "Fusionado en fbfc13f (head 462e4ea, CI 4/4, qa-reviewer APROBADO). Antigravity: modo plan efectivo, hooks portables, guard write_file/MCP fail-closed, reintentos solo sin consumo, agy desactivado salvo --accept-agy-limits. Code Mode: comparacion n=1 -20,2% ponderado (<30%), HOLD. Reglas Write(...) sin efecto probado; protegen las gemelas Edit(...). Detalle: docs/operations/PREAMBRA-LEAN-V3.md y CODE-MODE-PILOT.md"
+        }
+      ],
+      "operating_policy": [
+        "Opus 5.5 High orquesta; Codex LEAN-FIRST especialista tecnico",
+        "Antigravity solo con autorizacion explicita (--accept-agy-limits)",
+        "Code Mode en HOLD",
+        "Operaciones deterministas primero",
+        "Consumo medido por proveedor (CSV de lean_run y transcript_usage)",
+        "Separacion estricta de proyectos (LCQ intacto)",
+        "Siguiente mision: comercial, no infraestructura"
       ]
     }
   ],
