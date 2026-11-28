@@ -14,6 +14,7 @@ lean = importlib.util.module_from_spec(SPEC)
 SPEC.loader.exec_module(lean)
 CFG = lean.load_config()
 REPO = Path(tempfile.gettempdir()).resolve()
+lean.RETRY_BACKOFF_S = (0, 0)  # las pruebas no esperan entre reintentos
 
 STREAM = [
     json.dumps({"type": "system", "subtype": "init", "model": "claude-sonnet-5-5", "apiKeySource": "none",
@@ -515,6 +516,122 @@ class FinalReadinessTest(unittest.TestCase):
             with patch.object(Path, "read_bytes", side_effect=PermissionError("fixture denied")):
                 with self.assertRaisesRegex(RuntimeError, "inventario de integridad incompleto"):
                     lean.integrity_snapshot(root, CFG)
+
+
+AGY_ERROR = json.dumps({"conversation_id": "", "status": "ERROR", "response": "",
+                        "error": "failed to start conversation: backend returned an empty conversation id",
+                        "usage": {"input_tokens": 0, "output_tokens": 0, "thinking_tokens": 0, "cache_read_tokens": 0}})
+
+
+class AntigravityTest(unittest.TestCase):
+    """Correcciones Antigravity (sondas reales agy 1.4.12, 2026-11-28)."""
+
+    def _main(self, d, fake_run, *extra):
+        task = Path(d) / "t.txt"
+        task.write_text("Redacta un caption", encoding="utf-8")
+        orig_run, orig_git, orig_which = lean.run_provider, lean.git_info, lean.shutil.which
+        lean.run_provider = fake_run
+        lean.git_info = lambda _c: (Path(d).resolve(), "https://github.com/alvaradom1304/Altiora.git")
+        lean.shutil.which = lambda p: f"/bin/{p}"
+        try:
+            return lean.main(["--project", "altiora", "--cwd", d, "--task-file", str(task), "--log",
+                              str(Path(d) / "l.csv"), "--profile", "standard", *extra])
+        finally:
+            lean.run_provider, lean.git_info, lean.shutil.which = orig_run, orig_git, orig_which
+
+    def test_plan_mode_not_cancelled_by_slash_disable(self):
+        r = pf(args(profile="standard", provider="agy"))
+        self.assertEqual(r["status"], "READY", r["blocks"])
+        self.assertEqual(r["command"][r["command"].index("--mode") + 1], "plan")
+        self.assertNotIn("--disable-slash-commands", r["command"])
+        bad = ["agy", "--mode", "plan", "--disable-slash-commands", "-p"]
+        self.assertTrue(any("anula --mode plan" in b for b in lean.security_check(bad, "agy", CFG)))
+        self.assertTrue(any("sin --mode" in b for b in lean.security_check(["agy", "-p"], "agy", CFG)))
+
+    def test_leading_slash_neutralized(self):
+        from unittest.mock import patch
+        with patch.object(lean, "resolve_exe", return_value="agy.exe"), \
+                patch.object(lean.subprocess, "run", return_value=None) as run:
+            lean.run_provider(["agy", "--mode", "plan", "-p"], "agy", "  /deploy prod", ".", {})
+        self.assertEqual(run.call_args[0][0][-1], "Tarea: /deploy prod")
+
+    def test_agy_error_is_failure_with_reason_and_thinking_counted(self):
+        s = lean.parse_stream([AGY_ERROR])
+        self.assertFalse(s["ok"])
+        self.assertTrue(s["resultado"].startswith("ERROR: failed to start conversation"))
+        bare = lean.parse_stream([json.dumps({"status": "ERROR", "error": "cuota"})])  # sin response/conversation_id
+        self.assertEqual((bare["ok"], bare["resultado"]), (False, "ERROR: cuota"))
+        ok = lean.parse_stream([json.dumps({"conversation_id": "c", "status": "SUCCESS", "response": "ok",
+                                            "usage": {"input_tokens": 10, "output_tokens": 2, "thinking_tokens": 5}})])
+        self.assertEqual((ok["salida"], ok["total"]), (7, 17))
+
+    def test_transient_zero_token_failures_retried_then_fallback(self):
+        calls = []
+
+        def fake_run(cmd, provider, task_text, cwd, env):
+            calls.append(provider)
+            out = AGY_ERROR if provider == "agy" else json.dumps({"type": "result", "result": "ok", "num_turns": 1,
+                                                                   "usage": {"input_tokens": 3, "output_tokens": 1}})
+            return lean.subprocess.CompletedProcess(cmd, 0, out, "")
+
+        with tempfile.TemporaryDirectory() as d:
+            rc = self._main(d, fake_run, "--provider", "agy", "--task-id", "TAGY1")
+            rows = lean.read_log(Path(d) / "l.csv")
+        self.assertEqual(rc, 0)
+        self.assertEqual(calls, ["agy"] * (CFG["limits"]["max_retries"] + 1) + ["claude"])
+        self.assertTrue(rows[0]["motivo"].startswith("transitorio_sin_consumo: ERROR: failed to start"))
+        self.assertEqual(rows[-1]["motivo"], "")
+
+    def test_failure_with_consumption_not_retried(self):
+        calls = []
+
+        def fake_run(cmd, provider, task_text, cwd, env):
+            calls.append(provider)
+            out = json.dumps({"conversation_id": "c", "status": "SUCCESS", "response": "",
+                              "usage": {"input_tokens": 34000, "output_tokens": 1}})
+            return lean.subprocess.CompletedProcess(cmd, 0, out, "")
+
+        with tempfile.TemporaryDirectory() as d:
+            self._main(d, fake_run, "--provider", "agy", "--task-id", "TAGY2")
+            rows = lean.read_log(Path(d) / "l.csv")
+        self.assertEqual(calls.count("agy"), 1)  # sin reintento identico tras gastar tokens
+        self.assertTrue(rows[0]["motivo"].startswith("fallo_con_consumo"))
+
+
+GUARD = ROOT / ".altiora" / "system" / "scripts" / "guard.py"
+
+
+def guard(payload: dict, project: str = "..", cwd: Path = ROOT / ".agents") -> dict:
+    import subprocess
+    import sys
+    p = subprocess.run([sys.executable, str(GUARD), "--runtime", "antigravity", "--project", project,
+                        "--event", "PreToolUse"], input=json.dumps(payload), capture_output=True, text=True, cwd=cwd)
+    return json.loads(p.stdout)
+
+
+class AntigravityGuardTest(unittest.TestCase):
+    """Formato real de agy 1.4.12 capturado por sonda; el guard antes solo reconocia write_to_file/TargetFile."""
+
+    def test_write_file_to_secret_denied_with_relative_project(self):
+        self.assertEqual(guard({"toolCall": {"name": "write_file", "args": {"Path": "C:\\x\\.env", "Content": "a"}}})
+                         ["decision"], "deny")
+        self.assertEqual(guard({"toolCall": {"name": "write_file", "args": {"Path": "notas.md"}}})["decision"], "allow")
+        self.assertEqual(guard({"toolCall": {"name": "write_to_file", "args": {"TargetFile": "a/id_rsa"}}})
+                         ["decision"], "deny")
+
+    def test_mcp_write_denied_and_read_allowed(self):
+        mcp = {"toolCall": {"name": "call_mcp_tool", "args": {"ServerName": "altiora-shared", "ToolName": "write_file",
+                                                               "Arguments": {"path": "C:/p/.env.local"}}}}
+        self.assertEqual(guard(mcp)["decision"], "deny")
+        self.assertEqual(guard({"toolCall": {"name": "read_file", "args": {"Path": ".env"}}})["decision"], "allow")
+
+    def test_hooks_json_is_portable(self):
+        text = (ROOT / ".agents" / "hooks.json").read_text(encoding="utf-8")
+        self.assertNotRegex(text, r"[A-Za-z]:[/\\]")  # sin rutas absolutas de una maquina o checkout
+        cfg = json.loads(text)["altiora-agent-system"]
+        cmd = cfg["PreToolUse"][0]["hooks"][0]["command"]
+        self.assertIn("../.altiora/system/scripts/guard.py", cmd)
+        self.assertTrue((ROOT / ".agents" / ".." / ".altiora" / "system" / "scripts" / "guard.py").is_file())
 
 
 if __name__ == "__main__":

@@ -1,0 +1,31 @@
+{
+  "version": "1.3.0",
+  "managed": {
+    ".altiora/system/core/constitution.md": "92cdcb4ded1c99053b00704b589a8d1c0e9efb1f867a26f58c9c2cc3bc6a8611",
+    ".altiora/system/core/policy.json": "39839f2785c67601a9b9b857fb1b6ba0482fd9712bec28dfe9a0c54386e9e39a",
+    ".altiora/system/core/project.json": "4bf2cd35cb8dce4656ecc99cf78914ed4cff70e13d6b1bef9eecf5566814b845",
+    ".altiora/system/contracts/handoff.schema.json": "2cce203683f0e0a1f1e8d2743d9be7dc671bddc57e7aab89137f0fbf96453022",
+    ".altiora/system/contracts/result.schema.json": "4476b19e1287528be47b77a947913ff22c416afdc1641f4f9df09de8fbb2c03f",
+    ".altiora/system/contracts/task.schema.json": "54308e76cf6b7b765851a1d424f6ce41eada407162f9752731821522d1c79911",
+    ".altiora/system/docs/COMPATIBILITY.md": "f6689a98d504ad16515f6211517e3c40f6aab30ab7131eae37a2540d23f1bf5c",
+    ".altiora/system/docs/DESIGN.md": "0f4c792faaf124e2eba9ed03cc19822c6a58afc8c1249d4ae66357fbfcbf23a8",
+    ".altiora/system/docs/EVALUATION-CASES.md": "176bdc1b30240c9d6fa193480c22bb14712dcaa71a882b49b1186a042add0840",
+    ".altiora/system/roles/altiora-engineering.md": "21bfa0373ecb52577f54d3a298853847b19df84b6ae90cea4b5d519e950912e8",
+    ".altiora/system/roles/altiora-experience.md": "534f1cb1aa82693658f11da84358ed561a48d43d153dc333309354090f009252",
+    ".altiora/system/roles/altiora-research.md": "e111722229a083002861e302ea06bc18da174e86103b683a6b34f4a0ba3d0b48",
+    ".altiora/system/roles/altiora-review.md": "f6277fd0303c85cad116f7e5b88134f262958d5dd1fe7d27561e02d4e4dc9486",
+    ".altiora/system/scripts/guard.py": "099719c26909a4ef5b801b786bd678f91b7bc19842e6d5b116bcc28b119fdcc2",
+    ".altiora/system/scripts/manage.py": "afffa7db39a947efd3010cec589298a1c017e76a4791951a4303da7ad47f70cf",
+    ".altiora/system/scripts/package.py": "3c9023cc4e7c2129f07358f4176fba20491af1c4ecd8cf83ffb5f90e0f48032f",
+    ".altiora/system/skills/altiora-runtime-bridge/SKILL.md": "ac5268ecb939c2010925c27f460896aa632e369443c9fde6e0f8109993cdade5",
+    ".altiora/system/skills/altiora-session-handoff/SKILL.md": "434b16093d62fb1b62810a6ab4c227b7d5d0e4864efbf6794b87a6a786b88ae0",
+    ".codex/agents/altiora-engineering.toml": "8d4b09cb5ba52b5208d750afff4ab9c49201eee059b2ff2c0cad22de6376e011",
+    ".codex/agents/altiora-experience.toml": "f1b0677e97f29ec67a53ed020f5deb57a9c9fceaf87afef18ed343b4f16270d0",
+    ".codex/agents/altiora-research.toml": "3602362cda1656423adc79d07a446c559f91f06a61c18d73733150423e056e3a",
+    ".codex/agents/altiora-review.toml": "9fcb9d4981f79d4647c999a7ac35fc400121e5a84af35a0d29f3708378b12c4f",
+    ".altiora/system/skills/altiora-runtime-bridge/scripts/check_runtimes.py": "445d21977641042836db068a2b9619e026ad31b3f643a7811d9790f120ff1968",
+    ".altiora/system/roles/altiora-creative-analyst.md": "033b0df4e228dba7383824adef24ce1bfd4ab76cc76770e125587af920b10e26",
+    ".codex/agents/altiora-creative-analyst.toml": "20c6bf0c1fbf759424089377318d78acf069b31e635993deed38cfa28478a1c0",
+    ".claude/agents/altiora-creative-analyst.md": "42c1801402395e3755432a98ced38ed2efe70e25a60e478c6abf5116423b855c"
+  }
+}

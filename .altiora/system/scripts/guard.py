@@ -6,14 +6,25 @@ import re
 import sys
 from pathlib import Path
 
+ANTIGRAVITY_WRITE_TOOLS = {"write_file", "write_to_file", "replace_file_content", "multi_replace_file_content",
+                           "edit_file", "move_file", "delete_file"}
+PATH_KEYS = ("Path", "TargetFile", "path", "file_path", "source", "destination")
+
 
 def write_paths(runtime, payload):
     """Only parse known file-write protocols; shell strings are deliberately excluded."""
     if runtime == "antigravity":
         call = payload.get("toolCall", {})
         name, args = call.get("name"), call.get("args", {})
-        if name in {"write_to_file", "replace_file_content", "multi_replace_file_content"}:
-            return [args.get("TargetFile", "")]
+        if not isinstance(args, dict):
+            return []
+        # agy 1.4.12 (sonda 2026-11-28): write_file{Path}; versiones previas: write_to_file{TargetFile}.
+        # Llamadas MCP llegan como {ServerName, ToolName, Arguments{path}}: se inspecciona el nombre interno.
+        inner = args.get("Arguments") if isinstance(args.get("Arguments"), dict) else None
+        tool = str(args.get("ToolName") or "") if inner is not None else str(name or "")
+        fields = inner if inner is not None else args
+        if tool in ANTIGRAVITY_WRITE_TOOLS or (inner is not None and re.search(r"write|edit|replace|move|create|delete", tool)):
+            return [fields[k] for k in PATH_KEYS if isinstance(fields.get(k), str)] or [""]
         return []
     name, args = payload.get("tool_name"), payload.get("tool_input", {})
     if name in {"Write", "Edit", "MultiEdit", "NotebookEdit"}:
@@ -58,6 +69,7 @@ def main():
     p.add_argument("--project", type=Path, required=True)
     p.add_argument("--event", choices=["SessionStart", "PreToolUse"], required=True)
     a = p.parse_args()
+    a.project = a.project.resolve()  # Antigravity pasa '..' relativo a .agents/
     try:
         payload = json.load(sys.stdin)
         if not isinstance(payload, dict):
