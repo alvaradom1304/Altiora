@@ -53,7 +53,7 @@ claude --model claude-sonnet-5-5 --effort medium --permission-mode default --str
 
 ## Resultado de la comparación inicial (2026-11-28, n = 1)
 
-Registro: `%USERPROFILE%\preambra-recovery61128\codemode\consumo.csv`, generado con `scripts/transcript_usage.py`. Git quedó sin cambios tras las dos sesiones, y `~/.claude/settings.json`, `.claude/settings.json`, `.mcp.json` y `.agents/hooks.json` tienen el mismo hash antes y después.
+Registro: `%USERPROFILE%\preambra-recovery\20261128\codemode\consumo.csv`, generado con `scripts/transcript_usage.py`. Git quedó sin cambios tras las dos sesiones, y `~/.claude/settings.json`, `.claude/settings.json`, `.mcp.json` y `.agents/hooks.json` tienen el mismo hash antes y después.
 
 | Ejecución | CLI | Turnos | Tiempo | Total tokens | Ponderado | Calidad | Herramientas |
 |---|---|---|---|---|---|---|---|
