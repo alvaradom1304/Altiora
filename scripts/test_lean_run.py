@@ -645,5 +645,41 @@ class AntigravityGuardTest(unittest.TestCase):
         self.assertTrue((ROOT / ".agents" / ".." / ".altiora" / "system" / "scripts" / "guard.py").is_file())
 
 
+class CodeModePilotTest(unittest.TestCase):
+    """Piloto Code Mode: workers sin Code Mode y medicion de sesiones interactivas por transcript."""
+
+    def test_delegated_workers_force_code_mode_off(self):
+        seen = {}
+
+        def fake_run(cmd, provider, task_text, cwd, env):
+            seen["env"] = env.get(lean.CODE_MODE_ENV)
+            return lean.subprocess.CompletedProcess(cmd, 0, json.dumps({"type": "result", "result": "ok",
+                                                                        "usage": {"input_tokens": 1, "output_tokens": 1}}), "")
+
+        from unittest.mock import patch
+        with tempfile.TemporaryDirectory() as d, patch.dict(lean.os.environ, {lean.CODE_MODE_ENV: "1"}):
+            AntigravityTest._main(None, d, fake_run, "--task-id", "TCM1")
+        self.assertEqual(seen["env"], "0")
+
+    def test_transcript_measure_dedupes_messages_and_counts_tools(self):
+        spec = importlib.util.spec_from_file_location("transcript_usage", ROOT / "scripts" / "transcript_usage.py")
+        tu = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(tu)
+        u = {"input_tokens": 10, "cache_creation_input_tokens": 100, "cache_read_input_tokens": 1000, "output_tokens": 5}
+        lines = [json.dumps(x) for x in [
+            {"type": "user", "timestamp": "2026-11-28T10:00:00Z", "message": {"content": "tarea"}},
+            {"type": "assistant", "timestamp": "2026-11-28T10:00:05Z", "message": {"id": "m1", "model": "claude-sonnet-5-5",
+             "usage": u, "content": [{"type": "tool_use", "name": "REPL"}]}},
+            {"type": "assistant", "timestamp": "2026-11-28T10:00:06Z", "message": {"id": "m1", "model": "claude-sonnet-5-5",
+             "usage": u, "content": [{"type": "tool_use", "name": "mcp__altiora-graphify__god_nodes"}]}},
+            {"type": "user", "timestamp": "2026-11-28T10:00:20", "message": {"content": [{"type": "tool_result", "is_error": True}]}},
+            {"type": "assistant", "isSidechain": True, "message": {"id": "s1", "usage": u}},
+            "no es json"]]
+        m = tu.measure(lines)
+        self.assertEqual((m["total"], m["turnos"], m["segundos"]), (1115, 1, 20))
+        self.assertEqual((m["llamadas_repl"], m["llamadas_mcp"], m["errores_herramienta"]), (1, 1, 1))
+        self.assertEqual(m["modelo_efectivo"], "claude-sonnet-5-5")
+
+
 if __name__ == "__main__":
     unittest.main()

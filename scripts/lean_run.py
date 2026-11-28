@@ -38,6 +38,7 @@ ROOT = Path(__file__).resolve().parents[1]
 PROFILES_FILE = ROOT / "team" / "profiles" / "profiles.json"
 LEAN_PROMPT = ROOT / "team" / "profiles" / "lean.md"
 CHAIN_ENV = "PREAMBRA_DELEGATION_CHAIN"
+CODE_MODE_ENV = "CLAUDE_CODE_EXPERIMENTAL_CODE_MODE"
 SKIP_DIRS = {".git", "node_modules", "graphify-out", ".next", "dist", "build", "__pycache__", ".venv", "venv"}
 FIELDS = ["fecha", "task_id", "etiqueta", "rol", "intento", "perfil", "proveedor", "modelo", "esfuerzo", "estado",
           "turnos", "segundos", "entrada", "cache_creada", "cache_leida", "salida", "total", "ponderado",
@@ -694,7 +695,9 @@ def main(argv: list[str] | None = None) -> int:
                             False, a.det_cmd)
         if security_check(cmd, provider, cfg):  # el respaldo pasa los mismos controles
             continue
-        env = {**os.environ, CHAIN_ENV: ",".join(chain + [provider])}
+        # Code Mode es experimental y solo para la sesion interactiva del piloto: un trabajador delegado no lo hereda
+        # aunque el shell lo tenga activo ("0" lo mantiene apagado, docs oficiales).
+        env = {**os.environ, CHAIN_ENV: ",".join(chain + [provider]), CODE_MODE_ENV: "0"}
         tries = cfg["limits"]["max_retries"] + 1
         for n in range(tries):
             again = check_limits(a, prof, cfg, chain, provider, read_log(Path(a.log)))
